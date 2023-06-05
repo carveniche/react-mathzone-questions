@@ -1,0 +1,85 @@
+.grid {
+
+  display: grid;
+  box-sizing: border-box;
+  margin:auto;
+margin-top:1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  background-color: white;
+  box-shadow: 3px 2px 32px -9px rgba(0, 0, 0, 0.46);
+  padding: 10px;
+width: calc(4 * 100px + 30px + 32px)
+
+}
+.main {
+  outline: 1px black solid;
+  box-sizing: border-box;
+  
+  margin: auto;
+}
+.back {
+  height: 100px;
+  width: 100px;
+  background-color: yellow;
+  border-radius: 5px;
+  box-shadow: 12px 10px 24px -16px rgba(0, 0, 0, 0.59);
+}
+.front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100px;
+  width:100px;
+  
+  padding:1rem;
+  background-color: green;
+  border-radius: 5px;
+  box-shadow: 12px 10px 24px -16px rgba(0, 0, 0, 0.59);
+}
+.card {
+  position: relative;
+  /* width: 40%; */
+  /* outline: red solid; */
+}
+.card .front {
+  transform: rotateY(90deg);
+  transition: all ease-in 0.2s;
+  position: absolute;
+}
+.flipped .front {
+  transform: rotateY(0deg);
+  transition-delay: 0.2s;
+}
+.card .back {
+  transition: all ease-in 0.2s;
+  transition-delay: 0.2s;
+}
+.flipped .back {
+  transform: rotateY(90deg);
+  transition-delay: 0.2s;
+}
+.time {
+  font-size: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: lightblue;
+  margin-left: 20px;
+}
+.button {
+  border: 0;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  padding: 20px 70px;
+  border-radius: 20px;
+  background-color: orange;
+  font-size: 15px;
+  cursor: pointer;
+}
+.moves {
+ 
+  color: red;
+  font-size: 20px;
+  margin-left:20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

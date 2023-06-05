@@ -1,0 +1,74 @@
+.flex {
+    display: flex;
+  }
+  .flexDirectionRow {
+    flex-direction: row;
+  }
+  .flexGap2rem {
+    gap: 1rem;
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  
+  .flexDirectionColumn {
+    flex-direction: column;
+  }
+  .choiceType {
+    width: 60%;
+    height: 60px;
+    gap: 2rem;
+    border: 1px solid black;
+  }
+  .selectedChoiceType {
+    background-color: grey;
+  }
+  .wrongAnswer {
+    color: red;
+  }
+  .correctAnswer {
+    color: green;
+  }
+  .prevSelectionAnswerSelection {
+    background-color: white;
+  }
+  
+  .fadeOut {
+    opacity: 0;
+  }
+  .fadeIn {
+    opacity: 1;
+    transition: opacity 1s;
+  }
+  
+  .blackBorderContent {
+    border: 1px solid black;
+  }
+  .blackborder {
+    border: 1px solid black;
+  }
+  
+  .choiceTypeMultipleOption{
+    width: 150px;
+    height: 60px;
+    gap: 2rem;
+    border: 1px solid black;
+    justify-content: center;
+    display: flex;
+  
+  
+  }
+  .mainApp div{
+    margin:20px 0;
+  }
+  
+  .horizontalNotSymbols{
+  flex-wrap: wrap;
+  
+  }
+  .horizontalNotSymbols > div{
+    width:calc(40% - 2rem);
+    min-width:200px;
+    align-items: center;
+    
+  }

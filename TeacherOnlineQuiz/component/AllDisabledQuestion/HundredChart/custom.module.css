@@ -1,0 +1,97 @@
+.flex {
+    display: flex;
+    color: black;
+    /* outline: solid orange; */
+  }
+  .brown {
+    background-color: rgb(249, 249, 249);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(209, 210, 209);
+  }
+  .brown1 {
+    background-color: rgb(148, 148, 148);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(209, 210, 209);
+    color: white;
+    font-weight: bold;
+  }
+  .outer {
+    /* outline: yellow solid; */
+    
+
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .answer {
+    height: 50px;
+    width: 60%;
+    border: 1px solid black;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    cursor :pointer;
+    
+  }
+  .answer1 {
+    height: 50px;
+    width: 60%;
+    border: 1px solid black;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #EDEFFC
+    
+  
+  }
+  .flex_column {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .bottom {
+    margin-bottom: 10px;
+  }
+  .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: solid darkgray;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-left: 30px;
+    /* margin-top: 10px; */
+    cursor: pointer;
+  }
+  .ans {
+    margin-left: 20px;
+  }
+  .green {
+    color: green;
+    font-size: 20px;
+  }
+  .red {
+    color: red;
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px) {
+    .answer {
+      width: 90%;
+    }
+    .brown,
+    .brown1 {
+      height: 30px;
+      width: 30px;
+    }
+  }
+  

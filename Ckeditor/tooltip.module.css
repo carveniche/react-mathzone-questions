@@ -1,0 +1,60 @@
+/* div{
+    color:red;
+} */
+.App{
+    position: relative;
+}
+#mathToolbarContainer{
+    
+    width:300px;
+    height:auto;
+    padding-bottom:1rem;
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    border-radius: 7px;
+    position: fixed;
+    top:0px;
+    z-index:1;
+  }
+  
+  /* mathToolbarContainer */
+  #mathToolbar{
+    width:300px;
+    margin:0 1rem;
+    display:grid;
+    position: relative;
+    gap:1rem;
+    grid-template-columns: repeat(6,31px);
+    clear:both;
+  }
+  #mathToolbar > div{
+   word-break: break;;
+   height:30px;
+   font-size:10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  
+   
+   cursor:pointer;
+   
+  }
+  .testing{
+    color:none;
+  }
+  #tooltipTopBar{
+    color:white;
+  
+    cursor:pointer;
+  }
+  .tooltipClose{
+    float:right;
+    margin-bottom:5px;
+    margin-right: 10px;
+  }
+  #symbolsWidthHeight{
+    min-width:30px;
+    min-height:31px;
+  }
+  
