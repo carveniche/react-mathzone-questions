@@ -14,7 +14,8 @@ export default function VerticalKeyingChoiceType({
   const { isStudentAnswerResponse } = useContext(ValidationContext);
   const handleChange = (e, rows, cols) => {
     row[rows][cols].dropVal = e.target.value;
-    row[rows][cols].stringLength=e.target.value.length>5?e.target.value.length:5
+    row[rows][cols].stringLength =
+      e.target.value.length > 5 ? e.target.value.length : 5;
     if (e.target.value === "" && e.target.value === undefined)
       row[rows][cols].show = false;
     else row[rows][cols].show = true;
@@ -35,23 +36,31 @@ export default function VerticalKeyingChoiceType({
   }, []);
   inputRef.current = [...row];
   return row?.map((items, index) => (
-    <div className={`${styles.HorizontalPictureKeyingFlexBox} mathzone-color-indigo`} key={index} style={{gap:5}} >
+    <div
+      className={`${styles.HorizontalPictureKeyingFlexBox} mathzone-color-indigo`}
+      key={index}
+      style={{ gap: 5 }}
+    >
       {items?.map((item, i) =>
         item.isMissed === "false" ? (
           <Box key={i}>
-            <HtmlParserComponent value={"ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddditem?.value"} />
+            <HtmlParserComponent value={item?.value} />
           </Box>
         ) : (
           <div value={item.value} key={i}>
             <input
               style={InlineCss.Input}
-              value={isStudentAnswerResponse?item[student_answer]:row[index][i]?.dropVal}
+              value={
+                isStudentAnswerResponse
+                  ? item[student_answer]
+                  : row[index][i]?.dropVal
+              }
               onChange={(e) => {
                 if (isStudentAnswerResponse) return;
                 handleChange(e, index, i);
               }}
               disabled={hasAnswerSubmitted}
-              size={item?.stringLength||5}
+              size={item?.stringLength || 5}
             />
           </div>
         )
@@ -70,10 +79,9 @@ export const FlexBox = styled.div`
     justify-content: center;
   }
 `;
-export const Box=styled.div`
-overflow-wrap:anywhere;
-
-`
+export const Box = styled.div`
+  overflow-wrap: anywhere;
+`;
 const InlineCss = {
   Input: {
     height: "40px",
