@@ -11,7 +11,10 @@ import CompareTwoValue from "../compareTwoValue";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import { findSelectedValue,numberQuestionContentQuestionContent  } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import {
+  findSelectedValue,
+  numberQuestionContentQuestionContent,
+} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 const validationForKeyingType = (arr1, arr2) => {
   for (let item of arr2) {
     if (item?.isMissed == "true") {
@@ -68,7 +71,7 @@ export default function NumberBond({ obj, meter }) {
     setChoicesId,
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
-    setQuestionWithAnswer
+    setQuestionWithAnswer,
   } = useContext(ValidationContext);
   const inputRef = useRef();
 
@@ -88,10 +91,13 @@ export default function NumberBond({ obj, meter }) {
         setHasAnswerSubmitted,
         setRedAlert
       );
-      if(val!==0){
-        let result=numberQuestionContentQuestionContent(obj?.questionContent,inputRef.current)
-        console.log(result)
-        setQuestionWithAnswer({...obj,questionContent:result})
+      if (val !== 0) {
+        let result = numberQuestionContentQuestionContent(
+          obj?.questionContent,
+          inputRef.current
+        );
+        console.log(result);
+        setQuestionWithAnswer({ ...obj, questionContent: result });
       }
       return;
     } else if (obj?.choiceType == "selectchoice") {
@@ -105,9 +111,9 @@ export default function NumberBond({ obj, meter }) {
         setHasAnswerSubmitted,
         setRedAlert
       );
-      if(val!==0){
-        let value=findSelectedValue(inputRef?.current,"value")
-        setQuestionWithAnswer({...obj,[student_answer]:value})
+      if (val !== 0) {
+        let value = findSelectedValue(inputRef?.current, "value");
+        setQuestionWithAnswer({ ...obj, [student_answer]: value });
       }
       return;
     } else {
@@ -116,8 +122,8 @@ export default function NumberBond({ obj, meter }) {
   };
 
   return (
-    <div className={styles.MainTree} answerHasSelected={hasAnswerSubmitted}>
-     {!isStudentAnswerResponse&& <SolveButton onClick={handleSubmit} />}
+    <div className={styles.MainTree}>
+      {!isStudentAnswerResponse && <SolveButton onClick={handleSubmit} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         {String(obj?.questionName).trim() && (
@@ -134,7 +140,7 @@ export default function NumberBond({ obj, meter }) {
           </div>
         )}
         <div>
-          <ConditionOnProgressBar meter={meter}/>
+          <ConditionOnProgressBar meter={meter} />
         </div>
 
         {obj?.isTableView === "true" && (
@@ -157,7 +163,11 @@ export default function NumberBond({ obj, meter }) {
         {obj?.choiceType === "keying" ? (
           <NumberBondKeyingChoiceType datas={obj} inputRef={inputRef} />
         ) : obj?.choiceType === "selectchoice" ? (
-          <NumberBondSelctChoice datas={obj} inputRef={inputRef} studentAnswer={obj[student_answer]}/>
+          <NumberBondSelctChoice
+            datas={obj}
+            inputRef={inputRef}
+            studentAnswer={obj[student_answer]}
+          />
         ) : (
           <h1>Coming Soon...</h1>
         )}

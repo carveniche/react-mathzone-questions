@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import Ol from "./OL";
 import OlAnswered from "./OlAnswered";
 // const obj = {
@@ -11,18 +11,18 @@ import OlAnswered from "./OlAnswered";
 //     ],
 //     text:'<p>For example, 4, 9 are co-prime.</p>\r\n'
 //   };
-  export default function MainOl({obj2,meter,answer}){
-    let obj1={}
-    try{
-     obj1={
-      questionName:obj2?.question_data[0]?.question_text,
-      questionContent:[...obj2?.question_data[0]?.ol_data[0]?.response],
-      text:obj2?.question_data[0]?.after_question_text,
-      upload_file_name:obj2?.question_data[0]?.upload_file_name
-    }}
-    catch(e){
-      obj1={...obj2}
-      console.log('something happened...',e)
-    }
-      return answer?<OlAnswered obj={obj1} />:<Ol obj={obj1} meter={meter} />
+export default function MainOl({ obj2, meter, answer }) {
+  let obj1 = {};
+  try {
+    obj1 = {
+      questionName: obj2?.question_data[0]?.question_text,
+      questionContent: [...obj2?.question_data[0]?.ol_data[0]?.response],
+      text: obj2?.question_data[0]?.after_question_text,
+      upload_file_name: obj2?.question_data[0]?.upload_file_name,
+    };
+  } catch (e) {
+    obj1 = { ...obj2 };
+    console.log("something happened...", e);
   }
+  return answer ? <OlAnswered obj={obj1} /> : <Ol obj={obj1} meter={meter} />;
+}

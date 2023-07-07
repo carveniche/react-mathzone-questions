@@ -1,9 +1,9 @@
 import HTMLReactParser from "html-react-parser";
 import React, { useContext, useEffect, useRef } from "react";
-import {StaticMathField } from "../../ExternalPackages";
+import { StaticMathField } from "../../ExternalPackages";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import SolutionMultipleChoice from "../MultipleChoice/SolutionMultipleChoice";
-import styles from "../OnlineQuiz.module.css"
+import styles from "../OnlineQuiz.module.css";
 const disabledEditor = () => {
   let parent = document.getElementById("removeQuizEditor");
   let inputTag = parent.querySelectorAll("input");
@@ -15,7 +15,12 @@ const disabledEditor = () => {
     items.disabled = true;
   }
 };
-export default function CkEditorAnswer({ str, choiceData,upload_file_name }) {
+export default function CkEditorAnswer({
+  str,
+  choiceData,
+  upload_file_name,
+  hideSolutionText,
+}) {
   const inputRef1 = useRef([]);
   const { hasAnswerSubmitted } = useContext(ValidationContext);
   const optionSelect = {
@@ -38,14 +43,29 @@ export default function CkEditorAnswer({ str, choiceData,upload_file_name }) {
   }, []);
 
   return (
-<div>
-    <div style={{ clear: "both" }} id="removeQuizEditor" className={styles.ckeditor}>
-         {upload_file_name&&<div><img src={upload_file_name} alt="image not found"/></div>}
-  <div className={"ckEditorResetValue"}>    {<form>{HTMLReactParser(str, optionSelect)}</form>}</div>
-      {choiceData?.length > 0 && (
-        <SolutionMultipleChoice model={choiceData} type={"Ckeditor"} />
-      )}
+    <div>
+      <div
+        style={{ clear: "both" }}
+        id="removeQuizEditor"
+        className={styles.ckeditor}
+      >
+        {upload_file_name && (
+          <div>
+            <img src={upload_file_name} alt="image not found" />
+          </div>
+        )}
+        <div className={"ckEditorResetValue"}>
+          {" "}
+          {<form>{HTMLReactParser(str, optionSelect)}</form>}
+        </div>
+        {choiceData?.length > 0 && (
+          <SolutionMultipleChoice
+            model={choiceData}
+            type={"Ckeditor"}
+            hideSolutionText={hideSolutionText}
+          />
+        )}
+      </div>
     </div>
-</div>
   );
 }
