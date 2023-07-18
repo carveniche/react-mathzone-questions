@@ -4,7 +4,10 @@ import { useState } from "react";
 import Draggable from "react-draggable";
 import styles from "../../../OnlineQuiz.module.css";
 import HtmlParser from "react-html-parser";
-import { GridPlaceValueTable, HeaderRowPlaceValueTable } from "../PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
+import {
+  GridPlaceValueTable,
+  HeaderRowPlaceValueTable,
+} from "../PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
@@ -49,7 +52,6 @@ const updateState = (
   targetState[row][col].dropVal = sourceState[index]?.val?.value;
   targetState[row][col].show = true;
 
-
   updateTargetState([...targetState]);
   sourceState[index] = { ...sourceState[index], show: false };
 
@@ -75,10 +77,8 @@ const updateState2 = (
 export default function PlaceValueTableDragDrop({
   content,
   inputRef,
-  totalEmptyBox,
   hasAnswerSubmitted,
   questionHead,
-  totalCols,
   choices,
   totalRows,
 }) {
@@ -89,8 +89,8 @@ export default function PlaceValueTableDragDrop({
   const [xyPosition, setXyPosition] = useState([]);
   const currentDrop = useRef([-1, -1]);
   const [isDropActive, setIsDropActive] = useState(false);
-  const {isStudentAnswerResponse}=useContext(ValidationContext)
-  const [handleDrag,handleDragStart]=useScrollBar()
+  const { isStudentAnswerResponse } = useContext(ValidationContext);
+  const [handleDrag, handleDragStart] = useScrollBar();
   useEffect(() => {
     let arr = [];
     let n = Number(totalRows) || 0;
@@ -113,7 +113,7 @@ export default function PlaceValueTableDragDrop({
   }, []);
   const handleStop1 = (e, i) => {
     setIsDragActive(true);
-    let [x,y]=dragdropPointCordinate(e)
+    let [x, y] = dragdropPointCordinate(e);
     let temp = [...dragState];
     let position = [x, y];
     setXyPosition([...position]);
@@ -123,20 +123,18 @@ export default function PlaceValueTableDragDrop({
   };
   const handleStop2 = (e, row, col) => {
     dropState[row][col].show = false;
-    let value=dropState[row][col].dropVal
-    dropState[row][col].dropVal = '';
-    for(let item of dragState){
-      if(!item.show)
-      {
-          item.val.value=value
-          item.show=true
-        break
+    let value = dropState[row][col].dropVal;
+    dropState[row][col].dropVal = "";
+    for (let item of dragState) {
+      if (!item.show) {
+        item.val.value = value;
+        item.show = true;
+        break;
       }
     }
-    console.log(dragState)
+    console.log(dragState);
     setDropState([...dropState]);
     setDragState([...dragState]);
-   
   };
   useEffect(() => {
     if (xyPosition.length > 0 && isDragActive) {
@@ -189,62 +187,61 @@ export default function PlaceValueTableDragDrop({
     <>
       <div style={GridPlaceValueTable}>
         <div
-          totalCols={totalCols}
           className={styles.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox}
           style={HeaderRowPlaceValueTable}
         >
           {questionHead?.map((item, i) => (
-            <div
-              key={i}
-              style={{
-                width: `Calc(100% / ${totalCols})`,
-              }}
-            >
-             <HtmlParserComponent value={item?.value} />
+            <div key={i}>
+              <HtmlParserComponent value={item?.value} />
             </div>
           ))}
         </div>
         {dropState?.map((items, index) => (
           <div
             key={index}
-            totalCols={totalCols}
             className={styles.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox}
           >
             {items.map((item, i) =>
               item?.isMissed !== "true" ? (
-                <div
-                  key={i}
-                  style={{
-                    width: `Calc(100% / ${totalCols})`,
-                  }}
-                >
-                 <HtmlParserComponent value={item?.value} />
+                <div key={i}>
+                  <HtmlParserComponent value={item?.value} />
                 </div>
               ) : (
-                <div
-                  key={i}
-                  value={item.value}
-                  style={{
-                    width: `Calc(100% / ${totalCols})`,
-                  }}
-                >
+                <div key={i} value={item.value}>
                   <div
                     id={`${index} ${i}`}
                     className={`droppablepvt ${styles.PlaceValueTableSelectFlexBoxDragDropTypeBox}`}
                     bgColor={item.show}
                     style={{
-                      border:`${(item?.show||isStudentAnswerResponse)?0:1}px dashed black`
+                      border: `${
+                        item?.show || isStudentAnswerResponse ? 0 : 1
+                      }px dashed black`,
                     }}
                   >
-                    {(item.show||isStudentAnswerResponse) && (
+                    {(item.show || isStudentAnswerResponse) && (
                       <Draggable
                         onStop={(e) => handleStop2(e, index, i)}
-                        disabled={hasAnswerSubmitted||isStudentAnswerResponse}
-                        onDrag={handleDrag} onStart={handleDragStart}
+                        disabled={hasAnswerSubmitted || isStudentAnswerResponse}
+                        onDrag={handleDrag}
+                        onStart={handleDragStart}
                       >
-                        <div  style={{
-                  backgroundColor:`${(item?.show||isStudentAnswerResponse) ? "indigo" : "initial"}`
-                }}><HtmlParserComponent value={isStudentAnswerResponse?item[student_answer]:item.dropVal} /></div>
+                        <div
+                          style={{
+                            backgroundColor: `${
+                              item?.show || isStudentAnswerResponse
+                                ? "indigo"
+                                : "initial"
+                            }`,
+                          }}
+                        >
+                          <HtmlParserComponent
+                            value={
+                              isStudentAnswerResponse
+                                ? item[student_answer]
+                                : item.dropVal
+                            }
+                          />
+                        </div>
                       </Draggable>
                     )}
                   </div>
@@ -256,20 +253,28 @@ export default function PlaceValueTableDragDrop({
       </div>
       <div className={styles.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox2}>
         {dragState?.map((items, i) => (
-          <div id={`${i}`} className={`draggablepvt ${styles.PlaceValueTableSelectFlexBoxDragDropTypeBox}`} bgColor={items.show}
-          style={{
-            border:`${items?.show?0:1}px dashed black`
-          }}
+          <div
+            id={`${i}`}
+            className={`draggablepvt ${styles.PlaceValueTableSelectFlexBoxDragDropTypeBox}`}
+            bgColor={items.show}
+            style={{
+              border: `${items?.show ? 0 : 1}px dashed black`,
+            }}
           >
             {items.show && (
               <Draggable
                 onStop={(e) => handleStop1(e, i)}
-                disabled={hasAnswerSubmitted||isStudentAnswerResponse}
-                onDrag={handleDrag} onStart={handleDragStart}
+                disabled={hasAnswerSubmitted || isStudentAnswerResponse}
+                onDrag={handleDrag}
+                onStart={handleDragStart}
               >
-                <div style={{
-                  backgroundColor:`${items?.show ? "indigo" : "initial"}`
-                }}><HtmlParserComponent  value={items?.val?.value}/></div>
+                <div
+                  style={{
+                    backgroundColor: `${items?.show ? "indigo" : "initial"}`,
+                  }}
+                >
+                  <HtmlParserComponent value={items?.val?.value} />
+                </div>
               </Draggable>
             )}
           </div>
@@ -278,66 +283,3 @@ export default function PlaceValueTableDragDrop({
     </>
   );
 }
-
-const FlexBox = styled.div`
-  display: flex;
-
-  //justify-content:center;
-  align-items: center;
-
-  > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    min-height: 60px;
-    width: Calc(100% / ${(props) => props.totalCols});
-    height: auto;
-    word-break: break-word;
-  }
-  * input {
-    min-width: 80px;
-    width: auto;
-    min-height: 45px;
-    word-break: break-word;
-    text-align: center;
-  }
-`;
-const Grid = styled.div`
-  display: grid;
-`;
-const FlexBox2 = styled.div`
-  display: flex;
-  margin-top: 2rem;
- 
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-const Box = styled.div`
-  min-height: 50px;
-  height: auto;
-  width: auto;
-  text-align: center;
-  min-width: ${(props) => (!props.bgColor ? 96 : 80)}px;
-  color: black;
-  border: ${(props) => (props.bgColor ? "0" : "1")}px solid black;
-  > div {
-    background-color: ${(props) => (props.bgColor ? "indigo" : "initial")};
-    min-width: inherit;
-    min-height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    cursor: pointer;
-    padding: 1rem;
-    width: inherit;
-    height: inherit;
-  }
-`;

@@ -11,7 +11,7 @@ export default function ContentPlaceValueTableSelect({
   questionHead,
   totalCols,
   choices,
-  studentAnswer
+  studentAnswer,
 }) {
   let [choicesState, setChoicesState] = useState([]);
   let prev = useRef(0);
@@ -23,9 +23,10 @@ export default function ContentPlaceValueTableSelect({
     });
     setChoicesState([...arr]);
   }, []);
-  const { hasAnswerSubmitted,isStudentAnswerResponse } = useContext(ValidationContext);
+  const { hasAnswerSubmitted, isStudentAnswerResponse } =
+    useContext(ValidationContext);
   const handleChoiceSelection = (i) => {
-    if (hasAnswerSubmitted||isStudentAnswerResponse) return;
+    if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     choicesState[prev.current].show = false;
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
@@ -38,16 +39,10 @@ export default function ContentPlaceValueTableSelect({
         <div
           className={styles.PlaceValueTableSelectTypeSelectChoiceFlexBox}
           style={HeaderRowPlaceValueTable}
-
         >
           {questionHead?.map((item, i) => (
-            <div
-              key={i}
-              style={{
-                width: `Calc(100% / ${totalCols})`,
-              }}
-            >
-               <HtmlParserComponent value={item?.value} />
+            <div key={i}>
+              <HtmlParserComponent value={item?.value} />
             </div>
           ))}
         </div>
@@ -58,19 +53,12 @@ export default function ContentPlaceValueTableSelect({
           >
             {items.map((item, i) =>
               item?.isMissed !== "true" ? (
-                <div
-                  key={i}
-                  style={{
-                    width: `Calc(100% / ${totalCols})`,
-                  }}
-                >
-                 <HtmlParserComponent value={item?.value} />
+                <div key={i}>
+                  <HtmlParserComponent value={item?.value} />
                 </div>
               ) : (
-                <div  style={{
-                  width: `Calc(100% / ${totalCols})`,
-                }}>
-                  <input disabled={true} value="?"/>
+                <div>
+                  <input disabled={true} value="?" />
                 </div>
               )
             )}
@@ -80,8 +68,11 @@ export default function ContentPlaceValueTableSelect({
       <div className={styles.PlaceValueTableSelectTypeSelectChoiceFlexBox2}>
         {choicesState?.map((value, i) => (
           <div
-            className={`${styles.flex}  ${(isStudentAnswerResponse&&String(value?.value)?.trim()===String(studentAnswer)?.trim())?styles.selectedChoiceType:
-              value.show
+            className={`${styles.flex}  ${
+              isStudentAnswerResponse &&
+              String(value?.value)?.trim() === String(studentAnswer)?.trim()
+                ? styles.selectedChoiceType
+                : value.show
                 ? styles.selectedChoiceType
                 : styles.prevSelectionAnswerSelection
             }`}
@@ -101,13 +92,14 @@ export default function ContentPlaceValueTableSelect({
   );
 }
 
-
 export const GridPlaceValueTable = {
-  maxWidth:850,
-  display:"grid"
-}
+  maxWidth: 850,
+  display: "table",
+  width: "fit-content",
+  textAlign: "center",
+};
 
-export const HeaderRowPlaceValueTable={
-backgroundColor:'orange',
-color:"white"
-}
+export const HeaderRowPlaceValueTable = {
+  backgroundColor: "orange",
+  color: "white",
+};

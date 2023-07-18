@@ -1993,22 +1993,21 @@
 
 /* PlaceValueTableSelect SelectChoice */
 .PlaceValueTableSelectTypeSelectChoiceFlexBox {
-  display: flex;
+  display: table-row;
 
   align-items: center;
 }
 
 .PlaceValueTableSelectTypeSelectChoiceFlexBox > div {
-  display: flex;
+  display: table-cell;
   flex-direction: column;
   align-items: center;
-  padding: 0.2rem;
+  padding: 10px;
   gap: 0.7rem;
   justify-content: center;
   border: 1px solid orange;
-  min-height: 60px;
+
   height: 100%;
-  word-break: break-word;
 }
 
 .PlaceValueTableSelectTypeSelectChoiceFlexBox * {
@@ -2075,29 +2074,27 @@
 /* PlaceValueTableSelect DragDropType */
 
 .PlaceValueTableSelectFlexBoxDragDropTypeFlexBox {
-  display: flex;
+  display: table-row;
 
   align-items: center;
 }
 
 .PlaceValueTableSelectFlexBoxDragDropTypeFlexBox > div {
-  display: flex;
+  display: table-cell;
   align-items: center;
   justify-content: center;
   border: 1px solid orange;
-  min-height: 60px;
   gap: 0.7rem;
-  padding: 0.2rem;
+  padding: 10px;
   flex-direction: column;
   height: 100%;
-  word-break: break-word;
 }
 
 .PlaceValueTableSelectFlexBoxDragDropTypeFlexBox input {
   /* min-width: 80px; */
   width: 100%;
   min-height: 45px;
-  word-break: break-word;
+
   text-align: center;
 }
 
