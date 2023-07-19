@@ -7,14 +7,12 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { CkeditorVirtualKeyboard } from "./CkEditorVirtualKeyboard/CkeditorVirtualKeyboard";
 import SelectMultipleChoice from "../MultipleChoice/SelectMultipleChoice";
-import {
-  serializeResponse2,
-} from "../../CommonJSFiles/gettingResponse";
+import { serializeResponse2 } from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import compareLatexData from "../../CommonJSFiles/compareLatexData";
 
-const validateSelectChoice = (inputRef, setChoicesId,setChoices) => {
+const validateSelectChoice = (inputRef, setChoicesId, setChoices) => {
   let arr = inputRef.current;
   let n = arr?.length || 0;
   for (let i = 0; i < n; i++) {
@@ -29,7 +27,6 @@ const validateSelectChoice = (inputRef, setChoicesId,setChoices) => {
         return 1;
       }
     }
-    
   }
   return 0;
 };
@@ -200,8 +197,7 @@ const disabledAll = (id) => {
     item.disabled = true;
   }
 };
-function CkEditor({ str, meter, choiceData,upload_file_name }) {
-
+function CkEditor({ str, meter, choiceData, upload_file_name }) {
   meter = Number(meter) || 0;
   const [isAnswerCorrect] = useState(false);
   const [radioAnswer, setRadioAnswer] = useState([]);
@@ -326,8 +322,7 @@ function CkEditor({ str, meter, choiceData,upload_file_name }) {
     setSelectOptionAnswer([...temp2]);
     setState(false);
   }, []);
-  const [redAlert,setRedAlert]=useState(false)
-
+  const [redAlert, setRedAlert] = useState(false);
 
   const handleSubmit = () => {
     if (hasAnswerSelected) return;
@@ -340,24 +335,29 @@ function CkEditor({ str, meter, choiceData,upload_file_name }) {
     let totalAnswerVariable = {};
     //radio answer
     let temp = collectCheckedItem("radio");
-    totalAnswerVariable["radio"]={...temp}
-    injectValueOnCheckbox(temp,"radio")
-    let tempAnswer = compareArray(temp, radioAnswer,setRedAlert,setRedAlert);
+    totalAnswerVariable["radio"] = { ...temp };
+    injectValueOnCheckbox(temp, "radio");
+    let tempAnswer = compareArray(temp, radioAnswer, setRedAlert, setRedAlert);
     if (!tempAnswer) return;
     checkRadioAnswer = tempAnswer === "wrong" ? false : true;
 
     //checkbox answer
     temp = collectCheckedItem("checkbox");
-    injectValueOnCheckbox(temp,"checkbox")
-    totalAnswerVariable["checkbox"]={...temp}
-    tempAnswer = compareArray(temp, checkBoxAnswer,setRedAlert,setRedAlert);
+    injectValueOnCheckbox(temp, "checkbox");
+    totalAnswerVariable["checkbox"] = { ...temp };
+    tempAnswer = compareArray(temp, checkBoxAnswer, setRedAlert, setRedAlert);
     if (!tempAnswer) return;
     checkCheckBoxAnswer = tempAnswer === "wrong" ? false : true;
     //text answer
     temp = collectTextItem("text");
-    totalAnswerVariable["text"]={...temp}
-    injectTextValue(temp)
-    tempAnswer = compareTextAnswerArray(temp, textAnswer,setRedAlert,setRedAlert);
+    totalAnswerVariable["text"] = { ...temp };
+    injectTextValue(temp);
+    tempAnswer = compareTextAnswerArray(
+      temp,
+      textAnswer,
+      setRedAlert,
+      setRedAlert
+    );
     if (!tempAnswer) return;
     checkTextAnswer = tempAnswer === "wrong" ? false : true;
     //editable
@@ -368,15 +368,20 @@ function CkEditor({ str, meter, choiceData,upload_file_name }) {
       }
     }
     for (let key in correctAnswerEditor) {
-      if (!compareLatexData(value[key] , correctAnswerEditor[key])) {
+      if (!compareLatexData(value[key], correctAnswerEditor[key])) {
         editableAnswer = false;
         break;
       }
     }
     temp = collectSelectOpionData();
-    disabledSelectChoice(temp)
-    tempAnswer = compareSelectBoxArray(temp, selectOptionAnswer,setRedAlert,setRedAlert);
-    totalAnswerVariable["select"]={...temp}
+    disabledSelectChoice(temp);
+    tempAnswer = compareSelectBoxArray(
+      temp,
+      selectOptionAnswer,
+      setRedAlert,
+      setRedAlert
+    );
+    totalAnswerVariable["select"] = { ...temp };
     if (!tempAnswer) return;
     checkSelectBoxAnswer = tempAnswer === "wrong" ? false : true;
 
@@ -406,7 +411,12 @@ function CkEditor({ str, meter, choiceData,upload_file_name }) {
   const inputRef1 = useRef([]);
 
   return (
-    <div className={`${`${GenStyles.MainApp} ${GenStyles.ckeditor}`} ${GenStyles.ckeditor}`} id="parentIdQuizEditorOnline">
+    <div
+      className={`${`${GenStyles.MainApp} ${GenStyles.ckeditor} multipleChoiceStudentAnswerResponse`} ${
+        GenStyles.ckeditor
+      }`}
+      id="parentIdQuizEditorOnline"
+    >
       <SolveButton
         onClick={handleSubmit}
         hasAnswerSubmitted={hasAnswerSelected}
