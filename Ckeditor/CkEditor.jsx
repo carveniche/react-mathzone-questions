@@ -160,7 +160,7 @@ const removeAllSelectType = () => {
     item.value = "";
     item.checked = false;
   }
-  let selectOption = document.querySelectorAll("select");
+  let selectOption = parent.querySelectorAll("select");
   for (let select of selectOption) {
     for (let option of select) {
       option.selected = false;
