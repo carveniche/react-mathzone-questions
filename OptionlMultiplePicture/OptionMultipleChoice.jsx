@@ -1,22 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import HtmlParser from "react-html-parser";
 import { useState, useRef } from "react";
 import styles from "../OnlineQuiz.module.css";
 import SelectChoiceOptionMultiplePicture from "./SelectChoiceOptionMultiplePicture";
-import { Modal2, ProgressBorder } from "../../Modal2/modal2";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import oneDto2DStartWithSpecificRow, {
-  findSelectedValue,
-  insertDataOptionMultipleChoice,
-  manupulateDataSelectChoice,
-  optionMultiplePictureQuestionContent,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import oneDto2D, {
-  student_answer,
-} from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import parse from "html-react-parser";
 const validationForSelectMultipleSelect = (choices) => {
   let n = choices?.length || 0;

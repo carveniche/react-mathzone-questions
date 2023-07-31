@@ -4,6 +4,10 @@ import { useState, useRef } from "react";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import parse from "html-react-parser";
+const isDirectParse = (str) => {
+  let flag = str.includes("mq-selectable");
+  return !flag ? parse(str) : parse(str, optionSelectStaticMathField);
+};
 export default function SelectQuestionTextImage({
   choices,
   hasAnswerSubmitted,
@@ -54,7 +58,7 @@ export default function SelectQuestionTextImage({
           <div className="mathzone-circle-selectbox">
             <b>{String.fromCharCode(65 + i)}</b>
           </div>
-          <div>{parse(item.image,optionSelectStaticMathField)}</div>
+          <div>{isDirectParse(item.image)}</div>
         </div>
       ))}
     </div>

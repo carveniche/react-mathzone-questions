@@ -122,7 +122,7 @@ function ORC({ obj, question_text, meter }) {
   const currentDrop = useRef([-1, -1]);
   const [dragActive, setDragActive] = useState(false);
   const [dropActive, setDropActive] = useState(false);
-  const [handleDrag,handleDragStart]=useScrollBar()
+  const [handleDrag, handleDragStart] = useScrollBar();
   const {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
@@ -153,7 +153,7 @@ function ORC({ obj, question_text, meter }) {
   }, []);
   const draggableRef = useRef();
   const handleStop1 = (e, i) => {
-    let [x,y]=dragdropPointCordinate(e)
+    let [x, y] = dragdropPointCordinate(e);
     setDragActive(true);
     currentDrag.current = i;
     let temp = [...dragState];
@@ -166,7 +166,7 @@ function ORC({ obj, question_text, meter }) {
   const droppableRef = useRef([]);
   const handleStop2 = (e, row, col) => {
     setDropActive(true);
-    let [x,y]=dragdropPointCordinate(e)
+    let [x, y] = dragdropPointCordinate(e);
     let position = [x, y];
     setXyAxis([...position]);
     currentDrop.current = [row, col];
@@ -210,7 +210,10 @@ function ORC({ obj, question_text, meter }) {
     replace: (domNode) => {
       if (domNode?.attribs?.class) {
         let clsName = String(domNode?.attribs?.class);
-        if (clsName.includes("mathquill-rendered-math")) {
+        if (
+          clsName.includes("mathquill-rendered-math") ||
+          clsName.includes("mathImg")
+        ) {
           if (clsName.includes("mathquill-editable")) {
             let y = currentIndex;
             currentIndex = currentIndex + 1;
@@ -386,7 +389,7 @@ function ORC({ obj, question_text, meter }) {
     setValue({ ...value });
   };
   return (
-    <div >
+    <div>
       {
         <SolveButton
           onClick={handleSubmit}
@@ -413,7 +416,6 @@ function ORC({ obj, question_text, meter }) {
             {obj?.orc_oprc_data[0]?.column_headers &&
               obj?.orc_oprc_data[0]?.column_headers?.length > 0 && (
                 <div
-                  totalCols={obj?.orc_oprc_data[0]?.column_headers?.length}
                   className="mathzoneOrcGrid"
                   style={{
                     gridTemplateColumns: `repeat(${
@@ -428,7 +430,15 @@ function ORC({ obj, question_text, meter }) {
                         i == obj?.orc_oprc_data[0]?.column_headers?.length &&
                         "mathzoneEvenChild"
                       }`}
-                      style={{border:0,borderBottom:"1px solid black",borderRight:`${i<obj?.orc_oprc_data[0]?.column_headers?.length-1?1:0}px solid black`}}
+                      style={{
+                        border: 0,
+                        borderBottom: "1px solid black",
+                        borderRight: `${
+                          i < obj?.orc_oprc_data[0]?.column_headers?.length - 1
+                            ? 1
+                            : 0
+                        }px solid black`,
+                      }}
                     >
                       {parse(item, optionSelect)}
                     </div>
@@ -437,8 +447,15 @@ function ORC({ obj, question_text, meter }) {
                     <div
                       className={`droppableOrc mathzoneOrcDivBox`}
                       id={i}
+                      key={i}
                       ref={(el) => (droppableRef.current[i] = el)}
-                      style={{ paddingBottom: "6rem",border:0,borderRight:`${i<dropState?.length-1?1:0}px solid black` }}
+                      style={{
+                        paddingBottom: "6rem",
+                        border: 0,
+                        borderRight: `${
+                          i < dropState?.length - 1 ? 1 : 0
+                        }px solid black`,
+                      }}
                     >
                       {items?.map((item, index) => (
                         <Draggable
@@ -446,7 +463,8 @@ function ORC({ obj, question_text, meter }) {
                           defaultPosition={{ x: 0, y: 0 }}
                           axis="both"
                           disabled={hasAnswerSubmiited}
-                          onDrag={handleDrag} onStart={handleDragStart}
+                          onDrag={handleDrag}
+                          onStart={handleDragStart}
                         >
                           <div style={{ cursor: "pointer" }}>
                             {parse(item, optionSelect)}
@@ -470,7 +488,9 @@ function ORC({ obj, question_text, meter }) {
                     defaultPosition={{ x: 0, y: 0 }}
                     axis="both"
                     disabled={hasAnswerSubmiited}
-                    onDrag={handleDrag} onStart={handleDragStart}
+                    onDrag={handleDrag}
+                    onStart={handleDragStart}
+                    key={i}
                   >
                     <div style={{ cursor: "pointer" }} className="handle">
                       {parse(items, optionSelect)}

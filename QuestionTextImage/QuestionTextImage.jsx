@@ -1,14 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import HtmlParser from "react-html-parser/lib/HtmlParser";
+import React, { useContext } from "react";
 import ContentQuestionTextImage from "./ContentQuestionTextImage";
 import SelectQuestionTextImage from "./SelectQuestionTextImage";
 import { useRef, useState } from "react";
 import styles from "../OnlineQuiz.module.css";
-import { Modal2, ProgressBorder } from "../../Modal2/modal2";
-import OnlineQuizSolutionModel from "../OnlineQuizSolutionModel";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import parse from "html-react-parser";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
@@ -21,30 +17,28 @@ export default function QuestionTextImage({ state, meter }) {
   const {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
-    setIsAnswerCorrect,
-    setChoicesId,
-    setStudentAnswerQuestion,
     isStudentAnswerResponse,
-    setQuestionWithAnswer
+    setQuestionWithAnswer,
   } = useContext(ValidationContext);
-  const answerRef=useRef("")
+  const answerRef = useRef("");
   const handleSubmitAnswer = () => {
-    if (hasAnswerSubmitted)
-    return
-      if (!choosenAnswer) {
-        setRedAlert(true);
-        return;
-      }
-   setQuestionWithAnswer({...state,[student_answer]:answerRef.current})
+    if (hasAnswerSubmitted) return;
+    if (!choosenAnswer) {
+      setRedAlert(true);
+      return;
+    }
+    setQuestionWithAnswer({ ...state, [student_answer]: answerRef.current });
     setHasAnswerSubmitted(true);
   };
 
   return (
     <div>
-      {!isStudentAnswerResponse&&<SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>

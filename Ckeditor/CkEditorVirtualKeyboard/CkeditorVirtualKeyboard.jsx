@@ -1,19 +1,18 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react";
 import Draggable from "react-draggable";
-import styles from "../tooltip.module.css"
+import styles from "../tooltip.module.css";
 export const CkeditorVirtualKeyboard = ({
-    inputRef,
-    
-    currentVirtualKeyBoard,
+  inputRef,
+
+  currentVirtualKeyBoard,
   onClick,
-    currentInputBox,
-    setCurrentVirtualKeyBoard,
-    editableRef
-   
-  }) => {
-    const reference = useRef([]);
-    const calcRef = useRef();
-  const handlClick=(i)=>{
+  currentInputBox,
+  setCurrentVirtualKeyBoard,
+  editableRef,
+}) => {
+  const reference = useRef([]);
+  const calcRef = useRef();
+  const handlClick = (i) => {
     let symbolsArray = [
       "\\frac",
       "\\cdot",
@@ -28,20 +27,19 @@ export const CkeditorVirtualKeyboard = ({
       "\\nthroot",
       "_",
     ];
-    editableRef?.mathField.cmd(symbolsArray[i])
-    editableRef?.mathField.focus()
-
-  }
+    editableRef?.mathField.cmd(symbolsArray[i]);
+    editableRef?.mathField.focus();
+  };
   const handleClose = () => {
     setCurrentVirtualKeyBoard(-1);
   };
-  const ref=useRef([])
+  const ref = useRef([]);
   useEffect(() => {
     let parent = document
-        .getElementById("studentAnswerResponse")
-        ?.getBoundingClientRect();
-        let xPosition = parent.left || 0;
-        let yPosition = 0;
+      .getElementById("studentAnswerResponse")
+      ?.getBoundingClientRect();
+    let xPosition = parent.left || 0;
+    let yPosition = 0;
     if (currentVirtualKeyBoard > -1) {
       //
       // calcRef.current[currentVirtualKeyBoard].style=`left:${inputRef.current[currentInputBox].getBoundingClientRect().left-calcRef.current[currentVirtualKeyBoard].clientWidth}px; top:${inputRef.current[currentInputBox].getBoundingClientRect().top-calcRef.current[currentVirtualKeyBoard].clientHeight}px`;
@@ -49,18 +47,19 @@ export const CkeditorVirtualKeyboard = ({
 
       if (
         inputRef.current[currentInputBox].getBoundingClientRect().left -
-          calcRef.current.clientWidth  > parent?.left
-        -1
+          calcRef.current.clientWidth >
+        parent?.left - 1
       ) {
         xPosition =
           inputRef.current[currentInputBox].getBoundingClientRect().left -
-          calcRef.current.clientWidth  +parent?.left;;
+          calcRef.current.clientWidth +
+          parent?.left;
       }
       if (
         inputRef.current[currentInputBox].getBoundingClientRect().top -
           calcRef.current.clientHeight -
           4 >
-          parent?.top
+        parent?.top
       ) {
         yPosition =
           inputRef.current[currentInputBox].getBoundingClientRect().top -
@@ -68,17 +67,17 @@ export const CkeditorVirtualKeyboard = ({
           12;
       } else {
         yPosition =
-          inputRef.current[currentInputBox].getBoundingClientRect().bottom+2;
+          inputRef.current[currentInputBox].getBoundingClientRect().bottom + 2;
       }
-      
+
       calcRef.current.style = `left:${xPosition}px; top:${yPosition}px`;
     }
   }, [currentVirtualKeyBoard]);
-  useEffect(()=>{
-    onClick(editableRef?.props?.latex)
-  })
-    return (
-      <Draggable>
+  useEffect(() => {
+    onClick(editableRef?.props?.latex);
+  });
+  return (
+    <Draggable>
       <div
         id={styles.mathToolbarContainer}
         className="ui-draggable mathquill-rendered-math mathquill-rendered-math_position"
@@ -88,7 +87,12 @@ export const CkeditorVirtualKeyboard = ({
         <div className="tooltip-wrapper">
           <div className="tooltip-top-bar" id={styles.tooltipTopBar}>
             <span className="tooltip-handle">&nbsp;</span>
-            <span className={styles.tooltipClose} onClick={(e) => handleClose()} onTouchStart={(e) => handleClose()} on>
+            <span
+              className={styles.tooltipClose}
+              onClick={(e) => handleClose()}
+              onTouchStart={(e) => handleClose()}
+              on
+            >
               X&nbsp;
             </span>
           </div>
@@ -98,11 +102,13 @@ export const CkeditorVirtualKeyboard = ({
               title="\frac{ }{ }"
               onClick={() => handlClick(0)}
               onTouchStart={() => handlClick(0)}
-              
               ref={(el) => (reference.current[0] = el)}
             >
-              <img src="/assets/staticmedia/MathQuillSymbols/5.png" className="fraction" id={styles.symbolsWidthHeight} />
-          
+              <img
+                src="/assets/static/media/MathQuillSymbols/5.png"
+                className="fraction"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign"
@@ -111,8 +117,11 @@ export const CkeditorVirtualKeyboard = ({
               onTouchStart={() => handlClick(1)}
               ref={(el) => (reference.current[1] = el)}
             >
-              <img src="/assets/staticmedia/MathQuillSymbols/1.png" className="dot1" id={styles.symbolsWidthHeight}/>
-              
+              <img
+                src="/assets/static/media/MathQuillSymbols/1.png"
+                className="dot1"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign"
@@ -121,8 +130,11 @@ export const CkeditorVirtualKeyboard = ({
               onTouchStart={() => handlClick(2)}
               ref={(el) => (reference.current[2] = el)}
             >
-              <img src="/assets/staticmedia/MathQuillSymbols/4.png" className="divide" id={styles.symbolsWidthHeight}/>
-              
+              <img
+                src="/assets/static/media/MathQuillSymbols/4.png"
+                className="divide"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign"
@@ -131,8 +143,10 @@ export const CkeditorVirtualKeyboard = ({
               onTouchStart={() => handlClick(3)}
               ref={(el) => (reference.current[3] = el)}
             >
-              <img src="/assets/staticmedia/MathQuillSymbols/11.png" id={styles.symbolsWidthHeight} />
-             
+              <img
+                src="/assets/static/media/MathQuillSymbols/11.png"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign mathquill_cursor_cls"
@@ -141,8 +155,11 @@ export const CkeditorVirtualKeyboard = ({
               onTouchStart={() => handlClick(4)}
               ref={(el) => (reference.current[4] = el)}
             >
-              <img src="/assets/staticmedia/MathQuillSymbols/10.png" className="sqroot" id={styles.symbolsWidthHeight}/>
-          
+              <img
+                src="/assets/static/media/MathQuillSymbols/10.png"
+                className="sqroot"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign mathquill_cursor_cls"
@@ -151,22 +168,24 @@ export const CkeditorVirtualKeyboard = ({
               onClick={() => handlClick(5)}
               onTouchStart={() => handlClick(5)}
             >
-              <img src="/assets/staticmedia/MathQuillSymbols/12.png" className="exponent" id={styles.symbolsWidthHeight}/>
-            
+              <img
+                src="/assets/static/media/MathQuillSymbols/12.png"
+                className="exponent"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign"
               title="\le"
               onClick={() => handlClick(6)}
               onTouchStart={() => handlClick(6)}
-
               ref={(el) => (reference.current[6] = el)}
             >
               <img
-  src="/assets/staticmedia/MathQuillSymbols/6.png"
-  className="lessthanequal" id={styles.symbolsWidthHeight}
-  />
-          
+                src="/assets/static/media/MathQuillSymbols/6.png"
+                className="lessthanequal"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign"
@@ -176,10 +195,10 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[7] = el)}
             >
               <img
-  src="/assets/staticmedia/MathQuillSymbols/7.png"
-  className="greaterthanequal" id={styles.symbolsWidthHeight}
-  />
-         
+                src="/assets/static/media/MathQuillSymbols/7.png"
+                className="greaterthanequal"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign mathquill_cursor_cls"
@@ -188,8 +207,11 @@ export const CkeditorVirtualKeyboard = ({
               onTouchStart={() => handlClick(8)}
               ref={(el) => (reference.current[8] = el)}
             >
-              <img src="/assets/staticmedia/MathQuillSymbols/3.png" className="absolute" id={styles.symbolsWidthHeight}/>
-    
+              <img
+                src="/assets/static/media/MathQuillSymbols/3.png"
+                className="absolute"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign"
@@ -198,8 +220,11 @@ export const CkeditorVirtualKeyboard = ({
               onTouchStart={() => handlClick(9)}
               ref={(el) => (reference.current[9] = el)}
             >
-              <img  src="/assets/staticmedia/MathQuillSymbols/9.png" className="pi" id={styles.symbolsWidthHeight}/>
-      
+              <img
+                src="/assets/static/media/MathQuillSymbols/9.png"
+                className="pi"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign mathquill_cursor_cls"
@@ -208,8 +233,11 @@ export const CkeditorVirtualKeyboard = ({
               onTouchStart={() => handlClick(10)}
               ref={(el) => (reference.current[10] = el)}
             >
-              <img  src="/assets/staticmedia/MathQuillSymbols/8.png" className="nthroot" id={styles.symbolsWidthHeight}/>
-            
+              <img
+                src="/assets/static/media/MathQuillSymbols/8.png"
+                className="nthroot"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
             <div
               className="btn mathsign mathquill_cursor_cls"
@@ -218,12 +246,15 @@ export const CkeditorVirtualKeyboard = ({
               onTouchStart={() => handlClick(11)}
               ref={(el) => (reference.current[11] = el)}
             >
-              <img  src="/assets/staticmedia/MathQuillSymbols/2.png" className="xbase" id={styles.symbolsWidthHeight}/>
-          
+              <img
+                src="/assets/static/media/MathQuillSymbols/2.png"
+                className="xbase"
+                id={styles.symbolsWidthHeight}
+              />
             </div>
           </div>
         </div>
       </div>
-      </Draggable>
-    );
-  };
+    </Draggable>
+  );
+};
