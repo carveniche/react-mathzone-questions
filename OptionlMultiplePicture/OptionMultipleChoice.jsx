@@ -75,7 +75,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
           <div>
             <ConditionOnProgressBar meter={meter} />
           </div>
-          <div class={styles.contentParent}>
+          <div className={styles.contentParent}>
             {Boolean(totalRows) && (
               <SelectChoiceOptionMultiplePicture
                 totalRows={totalRows}

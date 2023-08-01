@@ -3039,7 +3039,7 @@
 
 .LongDivisonDragDropBox > div {
   min-width: inherit;
-  min-height: 50px;
+  min-height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -3057,4 +3057,14 @@
   span:global(.mq-math-mode)
   span:global(.mq-root-block) {
   display: contents;
+}
+
+.longDivisonTable {
+  vertical-align: top;
+}
+.longDivisonTable td {
+  text-align: center;
+  padding: 5px;
+  padding-top: 8px;
+  position: relative;
 }
