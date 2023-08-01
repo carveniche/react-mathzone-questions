@@ -12,12 +12,14 @@ export default function SelectChoice({
   inputRef,
   answerHasSelected,
   content,
-  totalRows,studentAnswer,choiceType
+  totalRows,
+  studentAnswer,
+  choiceType,
 }) {
   const [row, setRow] = useState([]);
   let [choicesState, setChoicesState] = useState([]);
- 
-  const {isStudentAnswerResponse}=useContext(ValidationContext)
+
+  const { isStudentAnswerResponse } = useContext(ValidationContext);
   let prev = useRef(0);
   useEffect(() => {
     let arr2 = [];
@@ -28,47 +30,52 @@ export default function SelectChoice({
 
     let arr = [];
     totalRows = Number(totalRows) || 0;
-  
+
     for (let i = 0; i < totalRows; i++) {
       let temp = [];
       content?.map((item) => {
-      
         item.row == i && temp.push(item);
       });
       arr.push(temp);
     }
     setRow([...arr]);
-    
+
     setChoicesState([...arr2]);
   }, []);
   const handleChoiceSelection = (i) => {
-    if (answerHasSelected||isStudentAnswerResponse) return;
+    if (answerHasSelected || isStudentAnswerResponse) return;
     choicesState[prev.current].show = false;
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
     prev.current = i;
   };
   inputRef.current = choicesState;
-  
+
   return (
     <>
-      {true?<HorizontalSelectChoice row={row}/>:row?.map((items, index) => (
-        <div
-          className={`${styles.HorizontalPictureSelectChoiceFlexBox} mathzone-color-indigo`}
-          key={index}
-          style={{gap:choiceType="horizontal_fill_ups"?5:18}}
-        >
-          {items?.map((item, i) =>
-            item.isMissed !== "true" ? (
-              <div key={i}><HtmlParserComponent value={item?.value}/></div>
-            ) : (
-              <div value={item.value} key={i}>
-                <input style={InlineCss.Input} disabled={true} value="?"/>
-              </div>
-            )
-          )}
-        </div>
-      ))}
+      {true ? (
+        <HorizontalSelectChoice row={row} />
+      ) : (
+        row?.map((items, index) => (
+          <div
+            className={`${styles.HorizontalPictureSelectChoiceFlexBox} mathzone-color-indigo`}
+            key={index}
+            style={{ gap: (choiceType = "horizontal_fill_ups" ? 5 : 18) }}
+          >
+            {items?.map((item, i) =>
+              item.isMissed !== "true" ? (
+                <div key={i}>
+                  <HtmlParserComponent value={item?.value} />
+                </div>
+              ) : (
+                <div value={item.value} key={i}>
+                  <input style={InlineCss.Input} disabled={true} value="?" />
+                </div>
+              )
+            )}
+          </div>
+        ))
+      )}
       <div
         className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}
       >
@@ -76,8 +83,11 @@ export default function SelectChoice({
           <div
             className={`${styles.flex} ${styles.choiceType} ${
               styles.selectChoicesFont
-            } ${(isStudentAnswerResponse&&String(value?.value)?.trim()==String(studentAnswer)?.trim())?styles.selectedChoiceType:
-              value.show
+            } ${
+              isStudentAnswerResponse &&
+              String(value?.value)?.trim() == String(studentAnswer)?.trim()
+                ? styles.selectedChoiceType
+                : value.show
                 ? styles.selectedChoiceType
                 : styles.prevSelectionAnswerSelection
             }`}
@@ -114,7 +124,7 @@ const InlineCss = {
     height: "50px",
     textAlign: "center",
     width: "80px",
-    fontSize:18,
-    fontWeight:"bold"
+    fontSize: 18,
+    fontWeight: "bold",
   },
 };

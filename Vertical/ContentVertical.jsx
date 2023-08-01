@@ -19,29 +19,24 @@ export default function ContentVertical({
   for (let i = 0; i < array2D?.length; i++) {
     array2D[i] = [...temp];
   }
-  const {isStudentAnswerResponse}=useContext(ValidationContext)
+  const { isStudentAnswerResponse } = useContext(ValidationContext);
   let focusRef = useRef([...array2D]);
 
   const handleChange = (e, rows, cols) => {
     let arr = ["Backspace"];
-   
-    if (isNaN(Number(e.key))&&!arr.includes(e.key)) {
+
+    if (isNaN(Number(e.key)) && !arr.includes(e.key)) {
       return;
     }
-    
+
     let prevStr = contentData[rows][cols]?.dropVal;
     if (e.keyCode == 8) {
-
-      contentData[rows][cols].dropVal = ""
-      contentData[rows][cols].show=false
-  }
-    else {
-  
-    
-      contentData[rows][cols].dropVal = e.key
-      contentData[rows][cols].show=true
-    
-    };
+      contentData[rows][cols].dropVal = "";
+      contentData[rows][cols].show = false;
+    } else {
+      contentData[rows][cols].dropVal = e.key;
+      contentData[rows][cols].show = true;
+    }
 
     if (prevStr == "" && e.keyCode == 8) {
       let temp = focusRef?.current;
@@ -67,7 +62,6 @@ export default function ContentVertical({
         let x = rows + 1;
         if (j != cols) x = 0;
         for (let i = x; i < n; i++) {
-    
           if (temp[i][j] !== undefined) {
             temp[i][j]?.children[0]?.focus();
             return;
@@ -77,20 +71,20 @@ export default function ContentVertical({
     }
   };
   let currentIndex = 0;
-  let [contentData,setContentData]=useState([])
-  useEffect(()=>{
-    contentData=content?.map(row=>row?.map(cols=>{
-      let items={...cols,dropVal:'',show:false}
-      return items
-    }))
-    setContentData([...contentData])
-    
-  },[])
+  let [contentData, setContentData] = useState([]);
   useEffect(() => {
-    if(contentData?.length>0)
-    firstTimeFocus();
+    contentData = content?.map((row) =>
+      row?.map((cols) => {
+        let items = { ...cols, dropVal: "", show: false };
+        return items;
+      })
+    );
+    setContentData([...contentData]);
+  }, []);
+  useEffect(() => {
+    if (contentData?.length > 0) firstTimeFocus();
   }, [contentData?.length]);
-  
+
   const firstTimeFocus = () => {
     let temp = focusRef?.current;
     let n = focusRef.current?.length || 0;
@@ -105,21 +99,22 @@ export default function ContentVertical({
     }
   };
 
-inputRef.current=[...contentData]
+  inputRef.current = [...contentData];
   return (
     <div className="mathzone-color-indigo">
       <div style={{ marginTop: "4rem" }}>
         {contentData?.map((items, index) => (
           <div
             key={index}
-            border={index === totalRows - 1 && "2px"}
-            totalWidth={totalCols}
             className={styles.VerticalKeyingFlexBox}
             style={{
-              borderTop: `${index === totalRows - 1 ? 2 : 0}px solid black`,
+              borderTop: `${
+                index === totalRows - 1 || index == 2 ? 2 : 0
+              }px solid black`,
               borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
               width: `${totalCols * 35}px`,
-              padding:`${index === totalRows - 1 ? 5 : 0}px 0`,
+              padding: `${index === totalRows - 1 || index === 2 ? 5 : 0}px 0`,
+              paddingBottom: `${index === 2 ? 0 : "initial"}px`,
             }}
           >
             {items?.map((item, i) =>
@@ -133,22 +128,24 @@ inputRef.current=[...contentData]
                   key={i}
                   ref={(el) => {
                     focusRef.current[index][i] = el;
-                    
+
                     if (currentIndex < totalEmptyBox - 1)
                       currentIndex = currentIndex + 1;
                   }}
                 >
-                 
                   <input
-                  
-                    value={isStudentAnswerResponse?item[student_answer]:contentData[index][i]?.dropVal}
+                    value={
+                      isStudentAnswerResponse
+                        ? item[student_answer]
+                        : contentData[index][i]?.dropVal
+                    }
                     onKeyUp={(e) => {
-                      if(isStudentAnswerResponse)return
+                      if (isStudentAnswerResponse) return;
                       handleChange(e, index, i);
                     }}
                     style={InlineCss.Input}
                     maxLength={1}
-                    disabled={hasAnswerSubmitted||isStudentAnswerResponse}
+                    disabled={hasAnswerSubmitted || isStudentAnswerResponse}
                   />
                 </div>
               )
