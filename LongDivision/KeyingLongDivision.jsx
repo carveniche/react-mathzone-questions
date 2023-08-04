@@ -78,6 +78,7 @@ export default function LongDivisionKeyingChoiceType({
                       <div>
                         {
                           <input
+                            maxLength={1}
                             type={"text"}
                             style={InlineCss.Input}
                             value={
@@ -116,6 +117,6 @@ const InlineCss = {
   Input: {
     height: "30px",
     textAlign: "center",
-    width: "15px",
+    width: "18px",
   },
 };

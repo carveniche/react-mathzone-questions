@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "GothamRnd-Book";
-  src: url("./fonts/GothamRounded-Book.woff") format("woff");
+  font-family: "GothamRnd-Book2";
+  src: url("fonts/GothamRounded-Book.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -2733,7 +2733,7 @@
 .bodyPage p {
   /* H3 Desktop 18 pt */
 
-  font-family: "GothamRnd-Book";
+  font-family: "GothamRnd-Book2";
   font-style: normal !important;
   font-weight: 700 !important;
   font-size: 18px;

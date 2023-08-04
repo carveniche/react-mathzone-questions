@@ -317,16 +317,16 @@ export default function LongDivisionDragAndDropType({
 
 export const RightPranthesis = styled.div`
   position: absolute;
-  top: 8px;
-  transform: scale(2.5, 3.1);
+  top: 6px;
+  transform: scale(1.8, 2.9);
   right: -1px;
+  color: indigo;
 `;
 export const TopBorder = styled.div`
   position: absolute;
-  top: 8px;
   width: 8px;
-  top: -2px;
+  top: -1px;
   height: 1px;
-  border-bottom: 3px solid indigo;
+  border-top: 3px solid indigo;
   right: 0;
 `;
