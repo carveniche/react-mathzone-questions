@@ -4,7 +4,11 @@ import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../OnlineQuiz.module.css";
-import { RightPranthesis, TopBorder } from "./DragDropLongDivision";
+import {
+  BottomBorder,
+  RightPranthesis,
+  TopBorder,
+} from "./DragDropLongDivision";
 export default function LongDivisionKeyingChoiceType({
   inputRef,
   content,
@@ -44,35 +48,30 @@ export default function LongDivisionKeyingChoiceType({
             <tr key={index}>
               {items?.map((item, i) =>
                 item.isMissed !== "true" ? (
-                  <td
-                    key={i}
-                    style={{
-                      borderTop: `${
-                        index == 1 && i !== 0 ? defaultBorderRef.current : 0
-                      }px solid indigo`,
-                    }}
-                  >
+                  <td key={i}>
                     <div>
                       <b>
                         <HtmlParserComponent value={item?.value} />
                       </b>
                     </div>
+                    {index % 2 === 1 && (
+                      <>
+                        <TopBorder width={i == 0 ? "8px" : "100%"}></TopBorder>
+                      </>
+                    )}
+                    {index == row.length - 1 && (
+                      <BottomBorder
+                        width={i == 0 ? "8px" : "100%"}
+                      ></BottomBorder>
+                    )}
                     {index == 1 && i == 0 && (
                       <>
-                        <TopBorder></TopBorder>
                         <RightPranthesis>)</RightPranthesis>
                       </>
                     )}
                   </td>
                 ) : (
-                  <td
-                    key={i}
-                    style={{
-                      borderTop: `${
-                        index == 1 && i !== 0 ? defaultBorderRef.current : 0
-                      }px solid indigo`,
-                    }}
-                  >
+                  <td key={i}>
                     <div>{HtmlParser(item.imgvalue)}</div>
                     <div>
                       <div>
@@ -96,9 +95,18 @@ export default function LongDivisionKeyingChoiceType({
                         }
                       </div>
                     </div>
+                    {index % 2 == 1 && (
+                      <>
+                        <TopBorder width={i == 0 ? "8px" : "100%"}></TopBorder>
+                      </>
+                    )}
+                    {index == row.length - 1 && (
+                      <BottomBorder
+                        width={i == 0 ? "8px" : "100%"}
+                      ></BottomBorder>
+                    )}
                     {index == 1 && i == 0 && (
                       <>
-                        <TopBorder></TopBorder>
                         <RightPranthesis>)</RightPranthesis>
                       </>
                     )}

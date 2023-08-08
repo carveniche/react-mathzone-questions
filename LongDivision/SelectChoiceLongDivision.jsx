@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styles from "../OnlineQuiz.module.css";
-import { RightPranthesis, TopBorder } from "./DragDropLongDivision";
+import {
+  BottomBorder,
+  RightPranthesis,
+  TopBorder,
+} from "./DragDropLongDivision";
 export default function LongDivisonSelectChoice({
   choices,
   inputRef,
@@ -66,9 +70,20 @@ export default function LongDivisonSelectChoice({
                             : item?.value}
                         </b>
                       </div>
+                      {index % 2 == 1 && (
+                        <>
+                          <TopBorder
+                            width={i == 0 ? "8px" : "100%"}
+                          ></TopBorder>
+                        </>
+                      )}
+                      {index == row.length - 1 && (
+                        <BottomBorder
+                          width={i == 0 ? "8px" : "100%"}
+                        ></BottomBorder>
+                      )}
                       {index == 1 && i == 0 && (
                         <>
-                          <TopBorder></TopBorder>
                           <RightPranthesis>)</RightPranthesis>
                         </>
                       )}
@@ -91,9 +106,20 @@ export default function LongDivisonSelectChoice({
                           />
                         }
                       </div>
+                      {index % 2 == 1 && (
+                        <>
+                          <TopBorder
+                            width={i == 0 ? "8px" : "100%"}
+                          ></TopBorder>
+                        </>
+                      )}
+                      {index == row.length - 1 && (
+                        <BottomBorder
+                          width={i == 0 ? "8px" : "100%"}
+                        ></BottomBorder>
+                      )}
                       {index == 1 && i == 0 && (
                         <>
-                          <TopBorder></TopBorder>
                           <RightPranthesis>)</RightPranthesis>
                         </>
                       )}

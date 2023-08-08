@@ -191,35 +191,32 @@ export default function LongDivisionDragAndDropType({
               <tr key={index}>
                 {items?.map((item, i) =>
                   item.isMissed !== "true" ? (
-                    <td
-                      key={i}
-                      style={{
-                        borderTop: `${
-                          index == 1 && i !== 0 ? defaultBorderRef.current : 0
-                        }px solid indigo`,
-                      }}
-                    >
+                    <td key={i}>
                       <div data-value={`rowssssssssss-${i}`}>
                         <b>
                           <HtmlParserComponent value={item?.value} />
                         </b>
                       </div>
+                      {index % 2 == 1 && (
+                        <>
+                          <TopBorder
+                            width={i == 0 ? "8px" : "100%"}
+                          ></TopBorder>
+                        </>
+                      )}
+                      {index == dropState.length - 1 && (
+                        <BottomBorder
+                          width={i == 0 ? "8px" : "100%"}
+                        ></BottomBorder>
+                      )}
                       {index == 1 && i == 0 && (
                         <>
-                          <TopBorder></TopBorder>
                           <RightPranthesis>)</RightPranthesis>
                         </>
                       )}
                     </td>
                   ) : (
-                    <td
-                      key={i}
-                      style={{
-                        borderTop: `${
-                          index == 1 && i !== 0 ? defaultBorderRef.current : 0
-                        }px solid indigo`,
-                      }}
-                    >
+                    <td key={i}>
                       <div
                         className={`droppablehfu ${styles.LongDivisonDragDropBox}`}
                         style={{
@@ -263,9 +260,20 @@ export default function LongDivisionDragAndDropType({
                           </Draggable>
                         )}
                       </div>
+                      {index % 2 == 1 && (
+                        <>
+                          <TopBorder
+                            width={i == 0 ? "8px" : "100%"}
+                          ></TopBorder>
+                        </>
+                      )}
+                      {index == dropState.length - 1 && (
+                        <BottomBorder
+                          width={i == 0 ? "8px" : "100%"}
+                        ></BottomBorder>
+                      )}
                       {index == 1 && i == 0 && (
                         <>
-                          <TopBorder></TopBorder>
                           <RightPranthesis>)</RightPranthesis>
                         </>
                       )}
@@ -317,16 +325,24 @@ export default function LongDivisionDragAndDropType({
 
 export const RightPranthesis = styled.div`
   position: absolute;
-  top: 6px;
+  top: 4px;
   transform: scale(1.8, 2.9);
   right: -1px;
   color: indigo;
 `;
 export const TopBorder = styled.div`
   position: absolute;
-  width: 8px;
-  top: -1px;
-  height: 1px;
-  border-top: 3px solid indigo;
+  width: ${(props) => props.width ?? "100px"};
+  top: -3px;
+  height: 3px;
   right: 0;
+  background: indigo;
+`;
+export const BottomBorder = styled.div`
+  position: absolute;
+  width: ${(props) => props.width ?? "100px"};
+  bottom: -3px;
+  height: 3px;
+  right: 0;
+  background: indigo;
 `;
