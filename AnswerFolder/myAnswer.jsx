@@ -13,10 +13,16 @@ import oldQuestionWithNoHtmlQuestion from "../../CommonJSFiles/oldQuestionWithNo
 import QuestionWithNoHtmlContent from "../../CommonJsxComponent/QuestionWithNoHtmlContent";
 import SkippedQuestionViewer from "./SkippedQuestionViewer";
 
-export default function MyAnswer({ obj, type, timerStatus,studentResponseData,questionData,showSkippedQuestion }) {
-  console.log(questionData)
+export default function MyAnswer({
+  obj,
+  type,
+  timerStatus,
+  studentResponseData,
+  questionData,
+  showSkippedQuestion,
+}) {
   let specailOldTypeQuestion = oldQuestionWithNoHtmlQuestion();
-  let responseAnswer={}
+  let responseAnswer = {};
   try {
     responseAnswer = JSON.parse(obj?.question_response);
   } catch (e) {
@@ -28,8 +34,7 @@ export default function MyAnswer({ obj, type, timerStatus,studentResponseData,qu
       {typeof obj === "undefined" ? (
         <div>
           <h1>Student has not answered this question.</h1>
-         {showSkippedQuestion&& <SkippedQuestionViewer obj={questionData}/>}
-
+          {showSkippedQuestion && <SkippedQuestionViewer obj={questionData} />}
         </div>
       ) : (
         obj?.correct !== undefined && (
@@ -74,12 +79,29 @@ export default function MyAnswer({ obj, type, timerStatus,studentResponseData,qu
           </div>
         )
       )}
-      {
-        obj&&(
-          specailOldTypeQuestion?.includes(type)?<ValidationContextProvider><QuestionWithNoHtmlContent type={type} obj={studentResponseData} choicesId={studentResponseData?.result_data&&studentResponseData?.result_data[0]?.choice_id
-          } studentResponse={obj?.question_response}/></ValidationContextProvider>:newTypeQuestionChecker(type)?<ValidationContextProvider><CommonStudentResponse data={responseAnswer} type={responseAnswer?.type}/></ValidationContextProvider>:<HtmlParserComponent value={obj?.question_response}/>
-        )
-      }
+      {obj &&
+        (specailOldTypeQuestion?.includes(type) ? (
+          <ValidationContextProvider>
+            <QuestionWithNoHtmlContent
+              type={type}
+              obj={studentResponseData}
+              choicesId={
+                studentResponseData?.result_data &&
+                studentResponseData?.result_data[0]?.choice_id
+              }
+              studentResponse={obj?.question_response}
+            />
+          </ValidationContextProvider>
+        ) : newTypeQuestionChecker(type) ? (
+          <ValidationContextProvider>
+            <CommonStudentResponse
+              data={responseAnswer}
+              type={responseAnswer?.type}
+            />
+          </ValidationContextProvider>
+        ) : (
+          <HtmlParserComponent value={obj?.question_response} />
+        ))}
     </div>
   );
 }
@@ -102,5 +124,3 @@ const AnswerBox = styled.div`
   margin-bottom: 2rem;
   border: ${(props) => (props.background ? 1 : 0)}px solid black;
 `;
-
-
