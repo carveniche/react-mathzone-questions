@@ -1,13 +1,7 @@
 import React from "react";
-import DisabledFlagQuestionView from "../../../FlagQuestion/FlagQuestionDisplayComponent/DisabledFlagQuestionView";
-import { CorrectAnswerViewer } from "../../../Miscellaneous/HomeWork/CorrectAnswerViewer";
-
 import styles from "../OnlineQuiz.module.css";
-export default function SkippedQuestionViewer({
-  obj,
-  identity,
-  resultView,
-}) {
+import AllFile from "../../AllFile";
+export default function SkippedQuestionViewer({ obj, identity, resultView }) {
   var temp = {};
   let operation = null;
   let arr = ["orc", "oprc", "ol", "ckeditor"];
@@ -29,26 +23,25 @@ export default function SkippedQuestionViewer({
         <>
           {arr.includes(obj?.question_data[0]?.question_type) ? (
             <div>
-              <DisabledFlagQuestionView
+              <AllFile
                 obj={obj}
-                type={obj?.question_data[0]?.question_type}
                 temp={temp}
+                type={obj?.question_data[0]?.question_type}
                 resultView={resultView}
               />
             </div>
           ) : (
             <section id={`${operation ? styles.mathZoneNextQuestion : ""}`}>
               <div>
-                <DisabledFlagQuestionView
+                <AllFile
                   obj={obj}
-                  type={obj?.question_data[0]?.question_type}
                   temp={temp}
+                  type={obj?.question_data[0]?.question_type}
                   resultView={resultView}
                 />
               </div>
             </section>
           )}
-          <CorrectAnswerViewer obj={obj}/>
         </>
       )}
     </>
