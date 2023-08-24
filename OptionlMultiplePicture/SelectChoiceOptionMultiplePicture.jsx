@@ -64,7 +64,7 @@ function SelectChoiceOptionMultiplePicture({
           <div
             key={i}
             style={{
-              gap: "4px",
+              gap: "2rem",
 
               display: "flex",
               cursor: "pointer",
@@ -74,6 +74,7 @@ function SelectChoiceOptionMultiplePicture({
               alignItems: "end",
               borderRadius: "5px",
               fontWeight: "bold",
+              alignItems: "center",
             }}
             onClick={() => selectOptionHandler(i)}
             className={`${
@@ -85,7 +86,20 @@ function SelectChoiceOptionMultiplePicture({
                 : styles.prevSelectionAnswerSelection
             }`}
           >
-            {HtmlParser(item.value)}
+            <div className="mathzone-circle-selectbox">
+              {" "}
+              <b>{String.fromCharCode(65 + i)}</b>
+            </div>
+            <div
+              style={{
+                flexWrap: "wrap",
+                gap: "4px",
+
+                display: "flex",
+              }}
+            >
+              {HtmlParser(item.value)}
+            </div>
           </div>
         ))}
       </div>

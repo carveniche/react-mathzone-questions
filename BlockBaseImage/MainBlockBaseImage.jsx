@@ -1,5 +1,5 @@
 import React from "react";
-import HtmlParser from "react-html-parser/lib/HtmlParser";
+
 import BlockBaseImage from "./BlockBaseImage";
 
 // let obj={
@@ -24,7 +24,7 @@ import BlockBaseImage from "./BlockBaseImage";
 //           }
 //        ],
 //        "sidebyside":[
-          
+
 //        ],
 //        "srows":null,
 //        "scols":null
@@ -39,7 +39,6 @@ import BlockBaseImage from "./BlockBaseImage";
 //     "choiceCount":4,
 //     "answer":"500"
 //  }
-export default function MainBlockBaseImage({obj,meter}){
-    
-    return <BlockBaseImage state={obj} totalRows={obj.rows} meter={meter}/>
+export default function MainBlockBaseImage({ obj, meter }) {
+  return <BlockBaseImage state={obj} totalRows={obj.rows} meter={meter} />;
 }

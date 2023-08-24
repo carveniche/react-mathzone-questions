@@ -12,14 +12,14 @@ export default function BlockBaseImageChoiceSelection({
   setIsAnswerCorrect,
   setHasOptionSelected,
   valueRef,
-  studentAnswer
+  studentAnswer,
 }) {
   const [prevSelect, setPrevSelect] = useState(0);
-  const {isStudentAnswerResponse}=useContext(ValidationContext)
+  const { isStudentAnswerResponse } = useContext(ValidationContext);
   const choicesBoxRef = useRef([]);
 
   const handleChoiceSelection = (i) => {
-    if (hasAnswerSubmitted||isStudentAnswerResponse) {
+    if (hasAnswerSubmitted || isStudentAnswerResponse) {
       return;
     }
     if (prevSelect > -1)
@@ -36,7 +36,7 @@ export default function BlockBaseImageChoiceSelection({
       setIsAnswerCorrect(true);
     } else setIsAnswerCorrect(false);
     setHasOptionSelected(true);
-    valueRef.current=String(choicesBoxRef.current[i].children[1].textContent)
+    valueRef.current = String(choicesBoxRef.current[i].children[1].textContent);
   };
   return (
     <>
@@ -46,9 +46,16 @@ export default function BlockBaseImageChoiceSelection({
             key={i}
             onClick={() => handleChoiceSelection(i)}
             ref={(el) => (choicesBoxRef.current[i] = el)}
-            className={`${(isStudentAnswerResponse&&String(value)?.trim()===String(studentAnswer)?.trim())?styles.selectedChoiceType:""}`}
+            className={`${
+              isStudentAnswerResponse &&
+              String(value)?.trim() === String(studentAnswer)?.trim()
+                ? styles.selectedChoiceType
+                : ""
+            }`}
           >
-            <div className="mathzone-circle-selectbox">{String.fromCharCode(65 + i)}</div>
+            <div className="mathzone-circle-selectbox">
+              {String.fromCharCode(65 + i)}
+            </div>
             <div key={i}>{HtmlParser(value)}</div>
           </div>
         ))}
@@ -56,52 +63,3 @@ export default function BlockBaseImageChoiceSelection({
     </>
   );
 }
-
-const FlexBox = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  width: 90%;
-  margin-top: 0.1rem;
-  cursor: pointer;
-  > div {
-    min-width: Calc(50% - 0.4rem);
-    max-width: Calc(50% - 0.4rem);
-
-    flex: 1;
-    display: flex;
-    font-family: Montserrat;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 24px;
-    letter-spacing: 0em;
-    text-align: left;
-    align-items: center;
-    padding-left: 18px;
-    color: #233584;
-    border-radius: 12px;
-    word-break: break;
-    min-height: auto;
-    height: 60px;
-
-    gap: 2rem;
-
-    border: 1px solid black;
-
-    height: auto;
-
-    padding: 1rem;
-  }
-  > div > div {
-    min-width: auto;
-    min-height: auto;
-  }
-  > div > div:nth-child(2) {
-    flex: 1;
-    display: flex;
-
-    flex-wrap: wrap;
-    word-break: break;
-  }
-`;
