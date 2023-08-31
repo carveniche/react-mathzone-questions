@@ -1,82 +1,44 @@
-import React from "react"
-import styled from "styled-components"
-import {useRef} from "react";
-import styles from "./../OnlineQuiz.module.css"
-function DisplayImageCard({className,images}) { 
-    return <div className={`${className??""} tensframe-image-container`}>
-        {images}
-        </div>;
+import React from "react";
+import styled from "styled-components";
+
+import styles from "./../OnlineQuiz.module.css";
+function DisplayImageCard({ className, images }) {
+  return (
+    <div className={`${className ?? ""} tensframe-image-container`}>
+      {images}
+    </div>
+  );
+}
+
+export default function TensframeContent({
+  totalColumns,
+  images,
+  currentIndex,
+}) {
+  let boxesArray = new Array(10).fill("");
+  for (let i = 0; i < 10; i++) {
+    if (i < currentIndex) boxesArray[i] = images;
   }
-
-export default function TensframeContent({totalColumns,images,currentIndex})
-{
-    let  boxesArray=new Array(10).fill('')
-for(let i=0;i<10;i++)
-{
-    if(i<currentIndex)
-    boxesArray[i]=images
-   
+  return (
+    <Grid
+      column={totalColumns}
+      className={styles.TensframeContentGrid}
+      style={{
+        gridTemplateColumns: `repeat(${totalColumns}, 1fr)`,
+      }}
+    >
+      {boxesArray.map((el, index) => (
+        <DisplayImageCard
+          key={index}
+          className={
+            index < totalColumns ? styles.upperBorder : styles.lowerBorder
+          }
+          images={el}
+        />
+      ))}
+    </Grid>
+  );
 }
-    return <Grid column={totalColumns} className={styles.TensframeContentGrid} style={{
-      gridTemplateColumns: `repeat(${totalColumns}, 1fr)`
-    }}>
-        {boxesArray.map((el,index)=><DisplayImageCard  key={index} className={index < totalColumns ? styles.upperBorder : styles.lowerBorder} images={el} />)}
-        </Grid>
-}
-
-
-
-
-
-
-
-// import React from 'react';
-// import { useEffect, useState } from "react";
-// import HtmlParser from "react-html-parser";
-
-// function DisplayImageCard({ images, indexs,className,totalImage,setImageLoaded }) {
-//   const [state, setState] = useState();
-//   useEffect(() => {
-//     let id = setTimeout(() => {
-      
-//       setState(images);
-//       if(totalImage-1===indexs)
-//       setImageLoaded(true)
-//     }, 1000 * indexs);
-//     return () => clearTimeout(id);
-//   }, []);
-//   return <div className={className}>{state}</div>;
-// }
-
-// function ContentCountTensframeQuiz({ content, totalRows,setImageLoaded }) {
-//   let rows = [];
-//   let totalImage=content.length
-
-//   for (let i = 1; i <= totalRows; i++) {
-//     let temp = [];
-//     content.map((item) => item.row === i && temp.push(HtmlParser(item.image)));
-//     rows.push(temp);
-//   }
-//   let totalColumns = rows[0]?.length;
-  
-
-//   return (
-
-//       {
-//         content.map((item, index) => (
-//           <DisplayImageCard
-//             key={index}
-//             images={HtmlParser(item.image)}
-//             indexs={index}
-//            
-//             totalImage={totalImage} setImageLoaded={setImageLoaded}
-//           />
-//         ))
-//       }
-
-//   );
-// }
-// export default ContentCountTensframeQuiz;
 
 const Grid = styled.div`
   display: grid;
