@@ -6,9 +6,9 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import CompareTwoValue from "../compareTwoValue";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-export default function FillInTheBlanks({ state, meter,choiceId }) {
+export default function FillInTheBlanks({ state, meter, choiceId }) {
   const [inputState, setInputState] = useState("");
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   meter = Number(meter) || 0;
   const handleChange = (e) => {
     setInputState(e.target.value);
@@ -18,24 +18,24 @@ export default function FillInTheBlanks({ state, meter,choiceId }) {
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setChoicesId,
-    setStudentAnswerQuestion,isStudentAnswerResponse
+    setStudentAnswerQuestion,
+    isStudentAnswerResponse,
   } = useContext(ValidationContext);
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
     if (String(inputState).trim() == "") {
-      setRedAlert(true)
+      setRedAlert(true);
       return;
     }
     let n = state?.choice_data?.length || 0;
     for (let i = 0; i < n; i++) {
-      if (
-        !CompareTwoValue(state?.choice_data[i]?.choices,inputState)
-      ) {
-        setChoicesId(inputState);
-        setIsAnswerCorrect(false);
-        setHasAnswerSubmitted(true);
-        return;
-      }
+      if (state?.choice_data[i]?.correct)
+        if (!CompareTwoValue(state?.choice_data[i]?.choices, inputState)) {
+          setChoicesId(inputState);
+          setIsAnswerCorrect(false);
+          setHasAnswerSubmitted(true);
+          return;
+        }
     }
     setChoicesId(inputState);
 
@@ -45,52 +45,57 @@ export default function FillInTheBlanks({ state, meter,choiceId }) {
   };
   return (
     <div>
-     {!isStudentAnswerResponse&& <SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
-       {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div className="mathzoneQuestionName" id="studentAnswerResponse">
         {state?.question_text && <div>{HtmlParser(state?.question_text)}</div>}
-        {state?.upload_file_name&&<div><img src={state?.upload_file_name} alt="Image not found" /></div>}
+        {state?.upload_file_name && (
+          <div>
+            <img src={state?.upload_file_name} alt="Image not found" />
+          </div>
+        )}
         <div>
-         <ConditionOnProgressBar meter={meter}/>
+          <ConditionOnProgressBar meter={meter} />
         </div>
         <div style={StylesInline.FlexBox}>
           {state?.fib_before_text && (
             <div>{HtmlParser(state?.fib_before_text)}</div>
           )}
-          <input style={StylesInline.Input}
+          <input
+            style={StylesInline.Input}
             type="text"
-            value={isStudentAnswerResponse?choiceId:inputState}
+            value={isStudentAnswerResponse ? choiceId : inputState}
             onChange={handleChange}
-            disabled={hasAnswerSubmitted||isStudentAnswerResponse}
+            disabled={hasAnswerSubmitted || isStudentAnswerResponse}
           />
           {state?.fib_text && <div>{HtmlParser(state?.fib_text)}</div>}
           {state?.after_question_text && (
             <div>{HtmlParser(state?.after_question_text)}</div>
           )}
-        </div >
+        </div>
       </div>
     </div>
   );
 }
 
-
-
-const StylesInline={
-  Input:{
+const StylesInline = {
+  Input: {
     width: "180px",
-  height: "fit-content",
-  minHeight: "40px",
-  textAlign: "center",
-  borderRadius:5
-  
+    height: "fit-content",
+    minHeight: "40px",
+    textAlign: "center",
+    borderRadius: 5,
   },
-  FlexBox:{
+  FlexBox: {
     display: "flex",
     gap: "1rem",
     flexWrap: "wrap",
     alignItems: "center",
-    width: "auto",}
-}
+    width: "auto",
+  },
+};
