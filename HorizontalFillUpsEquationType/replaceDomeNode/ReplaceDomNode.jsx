@@ -22,7 +22,20 @@ export const optionSelectStaticMathField = {
             )}
           </StaticMathField>
         );
-      else if (clsName.includes("mq-root-block mq-hasCursor")) return <></>;
+      else if (clsName.includes("mathquill-rendered-math")) {
+        return (
+          <StaticMathField
+            style={{
+              display: "inline-block",
+              cursor: "pointer",
+              fontSize: 16,
+              fontWeight: "bold",
+            }}
+          >
+            {String(domNode.children[0]?.data)}
+          </StaticMathField>
+        );
+      } else if (clsName.includes("mq-root-block mq-hasCursor")) return <></>;
     }
   },
 };

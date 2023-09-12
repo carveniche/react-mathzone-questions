@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { useState, useRef } from "react";
-import HtmlParser from "react-html-parser/lib/HtmlParser";
+import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
+import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 export default function SelectMultipleChoice({
   choices,
   inputRef,
@@ -53,7 +54,9 @@ export default function SelectMultipleChoice({
               </div>
               <div className={`mathzoneFlex mathzoneFlexDirectionColumn`}>
                 {value.choices && (
-                  <div key={i}>{HtmlParser(value.choices)}</div>
+                  <div key={i}>
+                    {parse(value.choices, optionSelectStaticMathField)}
+                  </div>
                 )}
                 {value?.choice_image && (
                   <div className="choiceImage">
