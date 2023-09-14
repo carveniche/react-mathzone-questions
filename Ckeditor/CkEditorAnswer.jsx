@@ -4,23 +4,24 @@ import { StaticMathField } from "../../ExternalPackages";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import SolutionMultipleChoice from "../MultipleChoice/SolutionMultipleChoice";
 import styles from "../OnlineQuiz.module.css";
-const disabledEditor = () => {
-  let parent = document.getElementById("removeQuizEditor");
-  let inputTag = parent.querySelectorAll("input");
+const disabledEditor = (parent) => {
+  let inputTag = parent.current.querySelectorAll("input");
   for (let items of inputTag) {
     items.disabled = true;
   }
-  inputTag = parent.querySelectorAll("select");
+  inputTag = parent.current.querySelectorAll("select");
   for (let items of inputTag) {
     items.disabled = true;
   }
 };
+
 export default function CkEditorAnswer({
   str,
   choiceData,
   upload_file_name,
   hideSolutionText,
 }) {
+  const parentRef = useRef();
   const inputRef1 = useRef([]);
   const { hasAnswerSubmitted } = useContext(ValidationContext);
   const optionSelect = {
@@ -39,7 +40,8 @@ export default function CkEditorAnswer({
     },
   };
   useEffect(() => {
-    disabledEditor();
+    console.log("idsabled");
+    disabledEditor(parentRef);
   }, []);
 
   return (
@@ -48,6 +50,7 @@ export default function CkEditorAnswer({
         style={{ clear: "both" }}
         id="removeQuizEditor"
         className={styles.ckeditor}
+        ref={parentRef}
       >
         {upload_file_name && (
           <div>

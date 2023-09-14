@@ -23,7 +23,7 @@ export const optionSelectStaticMathField = {
           </StaticMathField>
         );
       else if (clsName.includes("mathquill-rendered-math")) {
-        return (
+        return domNode.children[0]?.data ? (
           <StaticMathField
             style={{
               display: "inline-block",
@@ -34,6 +34,8 @@ export const optionSelectStaticMathField = {
           >
             {String(domNode.children[0]?.data)}
           </StaticMathField>
+        ) : (
+          ""
         );
       } else if (clsName.includes("mq-root-block mq-hasCursor")) return <></>;
     }
