@@ -71,7 +71,6 @@ function SelectChoiceOptionMultiplePicture({
               flexWrap: "wrap",
               border: " 1px solid black",
               padding: "1rem",
-              alignItems: "end",
               borderRadius: "5px",
               fontWeight: "bold",
               alignItems: "center",
