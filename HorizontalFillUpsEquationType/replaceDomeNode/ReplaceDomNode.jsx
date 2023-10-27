@@ -16,7 +16,7 @@ export const optionSelectStaticMathField = {
               fontWeight: "bold",
             }}
           >
-            {String(domNode.children[0].data).slice(
+            {String(domNode.children[0]?.data).slice(
               1,
               domNode?.children[0]?.data?.length - 1
             )}
