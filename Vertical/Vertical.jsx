@@ -12,8 +12,13 @@ import VerticalDragDrop from "./VerticalChoiceType/VerticalDragDrop/VerticalDrag
 import CompareTwoValue from "../compareTwoValue";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { validationForDragAndDrop } from "../HorizontalFillUps/HorizontalFillUps";
-import { findSelectedValue, manupulateDataSelectChoice, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import {
+  findSelectedValue,
+  manupulateDataSelectChoice,
+  manupulateQuestionContentHorizontal,
+} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 
 const validationForSelectChoice = (choices, questionContent) => {
   let val = null;
@@ -77,7 +82,7 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
     setChoicesId,
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
-    isStudentAnswerResponse
+    isStudentAnswerResponse,
   } = useContext(ValidationContext);
 
   const inputRef = useRef(new Array(totalEmptyBox));
@@ -85,7 +90,6 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
     if (state?.choiceType == "keying") {
-      
       let status = validationForDragAndDrop(inputRef, "");
       changeAnswerStatus(
         status,
@@ -93,13 +97,11 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
         setHasAnswerSubmitted,
         setStudentAnswerQuestion,
         setRedAlert
-      )
-      if(status!==0){
-        let result=manupulateQuestionContentHorizontal(inputRef.current)
-        state={...state,questionContent:result}
-        setQuestionWithAnswer({...state})
-
-
+      );
+      if (status !== 0) {
+        let result = manupulateQuestionContentHorizontal(inputRef.current);
+        state = { ...state, questionContent: result };
+        setQuestionWithAnswer({ ...state });
       }
     } else if (state?.choiceType == "selectchoice") {
       let status = validationForSelectChoice(
@@ -113,10 +115,10 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
         setStudentAnswerQuestion,
         setRedAlert
       );
-      if(status!==0){
-        let value=findSelectedValue(inputRef?.current,"val")
-        
-        setQuestionWithAnswer({...state,[student_answer]:value})
+      if (status !== 0) {
+        let value = findSelectedValue(inputRef?.current, "val");
+
+        setQuestionWithAnswer({ ...state, [student_answer]: value });
       }
     } else if (state?.choiceType == "dragdrop") {
       let status = validationForDragDrop(inputRef?.current);
@@ -128,22 +130,22 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
         setStudentAnswerQuestion,
         setRedAlert
       );
-      if(status!==0){
-        let result=manupulateQuestionContentHorizontal(inputRef.current)
-        state={...state,questionContent:result}
-        setQuestionWithAnswer({...state})
-
-
+      if (status !== 0) {
+        let result = manupulateQuestionContentHorizontal(inputRef.current);
+        state = { ...state, questionContent: result };
+        setQuestionWithAnswer({ ...state });
       }
     }
   };
 
   return (
     <div>
-      {!isStudentAnswerResponse&&<SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
@@ -154,10 +156,8 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
             <img src={state?.upload_file_name} alt="image not found" />
           </div>
         )}
-        <div className={styles.marginTopborder3}>
-          {!isStudentAnswerResponse&&<ProgressBorder meter={meter + 1}>
-            <div></div>
-          </ProgressBorder>}
+        <div>
+          <ConditionOnProgressBar meter={meter} />
         </div>
         <div className={styles.contentParent}>
           {state?.choiceType === "keying" ? (
