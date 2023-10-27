@@ -1041,3 +1041,14 @@ sup .fraction-root .fdn,
 .new_type_question_prev_wrap #studentAnswerResponse div {
   white-space: pre-wrap;
 }
+#studentAnswerResponse .fraction,
+#studentAnswerResponse .fraction * {
+  white-space: initial;
+}
+
+.fraction .fdn,
+.fraction .bar,
+.fraction .fup {
+  position: static !important;
+  padding-top: 0px !important;
+}
