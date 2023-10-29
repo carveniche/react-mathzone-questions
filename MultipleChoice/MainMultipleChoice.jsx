@@ -5,7 +5,6 @@ export default function MainMultipleChoice({ obj, meter, choiceId }) {
   let question_data = obj?.question_data || [];
   question_data = question_data[0] || {};
   studentAnswer = question_data?.studentAnswer;
-  console.log();
   return (
     <MultipleChoice
       state={obj?.question_data[0]}
