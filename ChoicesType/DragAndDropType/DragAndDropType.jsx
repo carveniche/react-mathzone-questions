@@ -88,7 +88,7 @@ export default function DragAndDropType({
   inputRef.current = dropState;
   return (
     <>
-      <table className="mathzone-color-indigo">
+      <table>
         <tbody>
           {dropState?.map((items, index) => (
             <tr className={styles.HorizontalPictureDragDropFlexBox} key={index}>
