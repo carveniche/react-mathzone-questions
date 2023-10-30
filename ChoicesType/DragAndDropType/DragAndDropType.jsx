@@ -20,7 +20,7 @@ export default function DragAndDropType({
   const [dragKey, setDragKey] = useState(0);
   const draggableContainerRef = useRef([]);
   const droppableContainerRef = useRef([]);
-  const [dropCoordinate] = useDropContainerSizeHook(
+  const [dropCoordinate, setDropCoordiante] = useDropContainerSizeHook(
     droppableContainerRef.current
   );
   const [dropState, setDropState] = useState([]);
@@ -57,17 +57,17 @@ export default function DragAndDropType({
   const handleStop1 = (e, i) => {
     let [x, y] = dragdropPointCordinate(e);
     const [row, col] = validateCoordiante(dropCoordinate, { x, y });
-    if (row > -1 && col > -1) {
-      if (
-        dropState[row][col].isMissed === "true" &&
-        !dropState[row][col].show
-      ) {
-        dropState[row][col].dropVal = dragState[i]?.val || "";
-        dragState[i].show = false;
-        dropState[row][col].show = true;
-        setDragState([...dragState]);
-        setDropState([...dropState]);
-      }
+    if (
+      row > -1 &&
+      col > -1 &&
+      dropState[row][col].isMissed === "true" &&
+      !dropState[row][col].show
+    ) {
+      dropState[row][col].dropVal = dragState[i]?.val || "";
+      dragState[i].show = false;
+      dropState[row][col].show = true;
+      setDragState([...dragState]);
+      setDropState([...dropState]);
     } else {
       setDragKey(Number(!dragKey));
     }
@@ -86,8 +86,10 @@ export default function DragAndDropType({
     setDragState([...dragState]);
     setDropState([...dropState]);
   };
+  useEffect(() => {
+    if (dropState.length) setDropCoordiante(droppableContainerRef.current);
+  }, [dropState.length]);
   inputRef.current = dropState;
-
   return (
     <>
       <table className="mathzone-color-indigo">

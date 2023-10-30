@@ -1009,10 +1009,7 @@ sup .fraction-root .fdn,
   border-radius: 50%;
   border: 1.5px solid lightgray;
 }
-.mathzone-color-indigo div,
-.mathzone-color-indigo {
-  color: #233584;
-}
+
 .tensframe-image-container img {
   height: fit-content;
   width: fit-content;

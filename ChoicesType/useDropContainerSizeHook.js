@@ -44,15 +44,13 @@ const recursevelyCall = (data) => {
     y1: 0,
   };
 };
-export default function useDropContainerSizeHook(data) {
+export default function useDropContainerSizeHook() {
   const [coordinate, setCoordiante] = useState([]);
   const calculateDropBoxSize = (dragData) => {
     let arr = recursevelyCall(dragData);
+    console.log(arr);
     setCoordiante([...arr]);
   };
 
-  useEffect(() => {
-    if (data.length) calculateDropBoxSize(data);
-  }, [data?.length]);
-  return [coordinate];
+  return [coordinate, calculateDropBoxSize];
 }
