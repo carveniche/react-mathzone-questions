@@ -7,7 +7,6 @@ import HtmlParserComponent from "../../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { dragdropPointCordinate } from "../../../../CommonFunction/dragdropPointCordinate";
 import { useScrollBar } from "../../../../CommonFunction/useScrollBar";
-import useDropContainerSizeHook from "../useDropContainerSizeHook";
 import { validateCoordiante } from "../validateCoordinates";
 export default function DragAndDropType({
   content,
@@ -20,9 +19,6 @@ export default function DragAndDropType({
   const [dragKey, setDragKey] = useState(0);
   const draggableContainerRef = useRef([]);
   const droppableContainerRef = useRef([]);
-  const [dropCoordinate, setDropCoordiante] = useDropContainerSizeHook(
-    droppableContainerRef.current
-  );
   const [dropState, setDropState] = useState([]);
   const [dragState, setDragState] = useState([]);
   const [handleDrag, handleDragStart] = useScrollBar();
@@ -56,7 +52,10 @@ export default function DragAndDropType({
   }, []);
   const handleStop1 = (e, i) => {
     let [x, y] = dragdropPointCordinate(e);
-    const [row, col] = validateCoordiante(dropCoordinate, { x, y });
+    const [row, col] = validateCoordiante(droppableContainerRef.current, {
+      x,
+      y,
+    });
     if (
       row > -1 &&
       col > -1 &&
@@ -86,9 +85,6 @@ export default function DragAndDropType({
     setDragState([...dragState]);
     setDropState([...dropState]);
   };
-  useEffect(() => {
-    if (dropState.length) setDropCoordiante(droppableContainerRef.current);
-  }, [dropState.length]);
   inputRef.current = dropState;
   return (
     <>

@@ -103,7 +103,7 @@ import MatchObjVertEqn from "./MatchObjVertEqn";
 //   choiceCount: 4,
 // };
 
-export default function MainMatchObjVertEqn({ obj,meter }) {
+export default function MainMatchObjVertEqn({ obj, meter }) {
   let totalRows = Number(obj?.rows) || 0;
 
   let arr = [];
