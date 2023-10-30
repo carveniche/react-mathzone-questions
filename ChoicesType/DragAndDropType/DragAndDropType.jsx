@@ -17,7 +17,6 @@ export default function DragAndDropType({
 }) {
   const { hasAnswerSubmitted } = useContext(ValidationContext);
   const [dragKey, setDragKey] = useState(0);
-  const draggableContainerRef = useRef([]);
   const droppableContainerRef = useRef([]);
   const [dropState, setDropState] = useState([]);
   const [dragState, setDragState] = useState([]);
@@ -41,9 +40,6 @@ export default function DragAndDropType({
       temp.push({ ...obj });
     });
     setDropState([...arr]);
-    draggableContainerRef.current = [...Array(temp.length)].map((item) =>
-      Array(temp[0].length)
-    );
     droppableContainerRef.current = [...Array(arr.length)].map((item) =>
       Array(arr[0].length)
     );
@@ -175,13 +171,6 @@ export default function DragAndDropType({
             key={i}
             className={`draggablehfu ${styles.HorizontalPictureDragDropBox}`}
             style={{ border: `${items?.show ? 0 : 1}px solid indigo` }}
-            ref={(el) =>
-              (draggableContainerRef.current[i] = {
-                el,
-                isMissed: true,
-                show: items.show,
-              })
-            }
           >
             {items.show && (
               <Draggable
