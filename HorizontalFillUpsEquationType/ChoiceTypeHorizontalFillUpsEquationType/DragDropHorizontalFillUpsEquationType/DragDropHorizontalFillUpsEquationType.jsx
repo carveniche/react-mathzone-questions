@@ -19,12 +19,7 @@ export default function ContentHorizontalFillUpsEquationType({
     useContext(ValidationContext);
   const [dropState, setDropState] = useState([]);
   const [dragState, setDragState] = useState([]);
-  const [isDragActive, setIsDragActive] = useState(false);
-  const currentDrag = useRef(-1);
   const [handleDrag, handleDragStart] = useScrollBar();
-  const [xyPosition, setXyPosition] = useState([]);
-  const currentDrop = useRef([-1, -1]);
-  const [isDropActive, setIsDropActive] = useState(false);
   const [dragKey, setDragKey] = useState(0);
   const droppableContainerRef = useRef([]);
   useEffect(() => {

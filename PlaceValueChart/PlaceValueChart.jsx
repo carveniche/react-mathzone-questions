@@ -11,8 +11,15 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import oneDto2D,{student_answer} from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import { findSelectedValue, manupulateDataSelectChoice, manupulateJsonData, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import oneDto2D, {
+  student_answer,
+} from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import {
+  findSelectedValue,
+  manupulateDataSelectChoice,
+  manupulateJsonData,
+  manupulateQuestionContentHorizontal,
+} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 
 const validationForDragAndDrop = (selectChoice) => {
   let n = selectChoice.length || 0;
@@ -36,14 +43,13 @@ const answerUpdationStatus = (
   setRedAlert
 ) => {
   if (val === 0) {
-    setRedAlert(true)
+    setRedAlert(true);
     return;
   } else if (val === 1) setAnswerCorrectStatus(false);
   else if (val === 2) setAnswerCorrectStatus(true);
-  let jsonData=serializeResponse("studentAnswerResponse")
-  setStudentAnswerQuestion(jsonData)
+  let jsonData = serializeResponse("studentAnswerResponse");
+  setStudentAnswerQuestion(jsonData);
   setAnswerSubmitStatus(true);
-
 };
 const validationForKeying = (selectChoice) => {
   let n = selectChoice.length || 0;
@@ -58,9 +64,7 @@ const validationForKeying = (selectChoice) => {
   }
   for (let i = 0; i < n; i++) {
     if (selectChoice[i].isMissed == "true") {
-      if (
-       !CompareTwoValue( selectChoice[i]?.dropVal,selectChoice[i]?.value)
-      )
+      if (!CompareTwoValue(selectChoice[i]?.dropVal, selectChoice[i]?.value))
         return 1;
     }
   }
@@ -82,8 +86,12 @@ const validationForSelectChoice = (choices, content) => {
     let m = content[i]?.length || 0;
     for (let j = 0; j < m; j++) {
       if (content[i][j].isMissed == "true") {
-        if (String(content[i][j].value)?.trim()?.toLowerCase() == String(val)?.trim()?.toLowerCase()) return 2;
-        return 1
+        if (
+          String(content[i][j].value)?.trim()?.toLowerCase() ==
+          String(val)?.trim()?.toLowerCase()
+        )
+          return 2;
+        return 1;
       }
     }
   }
@@ -102,12 +110,11 @@ export default function PlaceValueChart({
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
-    setChoicesId,
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
-    setQuestionWithAnswer
+    setQuestionWithAnswer,
   } = useContext(ValidationContext);
-  
+
   for (let i = 0; i < Number(totalRows); i++) {
     let temp = new Array(Number(state.cols));
     rows.push(temp);
@@ -120,60 +127,84 @@ export default function PlaceValueChart({
     }
     if (state?.choiceType == "dragdrop") {
       let val = validationForDragAndDrop(dropRef?.current);
-      answerUpdationStatus(setIsAnswerCorrect, setHasAnswerSubmitted, val,setStudentAnswerQuestion,setRedAlert);
-      if(val!==0)
-      {
-        let result=oneDto2D(dropRef.current)
-        result=manupulateQuestionContentHorizontal(result)
-        state=manupulateJsonData(state,{"numberSystem":"numberSystem"})
-        state={...state,questionContent:result}
-        setQuestionWithAnswer({...state})
-        
+      answerUpdationStatus(
+        setIsAnswerCorrect,
+        setHasAnswerSubmitted,
+        val,
+        setStudentAnswerQuestion,
+        setRedAlert
+      );
+      if (val !== 0) {
+        let result = oneDto2D(dropRef.current);
+        result = manupulateQuestionContentHorizontal(result);
+        state = manupulateJsonData(state, { numberSystem: "numberSystem" });
+        state = { ...state, questionContent: result };
+        setQuestionWithAnswer({ ...state });
       }
     } else if (state?.choiceType == "keying") {
       let val = validationForKeying(dropRef?.current);
-      answerUpdationStatus(setIsAnswerCorrect, setHasAnswerSubmitted, val,setStudentAnswerQuestion,setRedAlert);
-      if(val!==0){
-        let result=oneDto2D(dropRef.current)
-        result=manupulateQuestionContentHorizontal(result)
-        state=manupulateJsonData(state,{"numberSystem":"numberSystem"})
-        state={...state,questionContent:result}
-        setQuestionWithAnswer({...state})
+      answerUpdationStatus(
+        setIsAnswerCorrect,
+        setHasAnswerSubmitted,
+        val,
+        setStudentAnswerQuestion,
+        setRedAlert
+      );
+      if (val !== 0) {
+        let result = oneDto2D(dropRef.current);
+        result = manupulateQuestionContentHorizontal(result);
+        state = manupulateJsonData(state, { numberSystem: "numberSystem" });
+        state = { ...state, questionContent: result };
+        setQuestionWithAnswer({ ...state });
       }
     } else if (state?.choiceType == "selectchoice") {
       let val = validationForSelectChoice(
         dropRef?.current,
         state?.questionContent
       );
-      answerUpdationStatus(setIsAnswerCorrect, setHasAnswerSubmitted, val,setStudentAnswerQuestion,setRedAlert);
-      if(val!==0){
-      let value=findSelectedValue(dropRef.current)
-      state=manupulateJsonData(state,{"numberSystem":"numberSystem"})
-      state={...state,[student_answer]:value}
-      setQuestionWithAnswer({...state})
-    }
+      answerUpdationStatus(
+        setIsAnswerCorrect,
+        setHasAnswerSubmitted,
+        val,
+        setStudentAnswerQuestion,
+        setRedAlert
+      );
+      if (val !== 0) {
+        let value = findSelectedValue(dropRef.current);
+        state = manupulateJsonData(state, { numberSystem: "numberSystem" });
+        state = { ...state, [student_answer]: value };
+        setQuestionWithAnswer({ ...state });
+      }
     } else {
       console.log("unsupported file...");
       return;
     }
   };
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   return (
     <div>
-      {!isStudentAnswerResponse&&<SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
-       {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
           {HtmlParser(state.questionName)}
         </div>
-        {state?.upload_file_name&&<div><img src={state?.upload_file_name} alt="image not found"/></div>}
+        {state?.upload_file_name && (
+          <div>
+            <img src={state?.upload_file_name} alt="image not found" />
+          </div>
+        )}
         <div>
-         {!isStudentAnswerResponse&& <ProgressBorder meter={meter + 1}>
-            <div></div>
-          </ProgressBorder>}
+          {!isStudentAnswerResponse && (
+            <ProgressBorder meter={meter + 1}>
+              <div></div>
+            </ProgressBorder>
+          )}
         </div>
         <div>
           <div className={styles.contentParent}>
@@ -185,7 +216,6 @@ export default function PlaceValueChart({
                 dropRef={dropRef}
                 isAnswerSubmitted={hasAnswerSubmitted}
                 numberSystem={state?.numberSystem}
-                
               />
             )}
             {state?.choiceType == "keying" && (
@@ -211,7 +241,6 @@ export default function PlaceValueChart({
                 numberSystem={state?.numberSystem}
                 state={state}
                 studentAnswer={state[student_answer]}
-              
               />
             )}
           </div>

@@ -121,7 +121,6 @@ export default function LongDivsion({ state, totalRows, totalCols, meter }) {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
-    setChoicesId,
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,

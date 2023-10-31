@@ -8,65 +8,22 @@ import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { useScrollBar } from "../../../CommonFunction/useScrollBar";
 import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
-const elementFinds = (target, xyAxis, checkState) => {
-  
-  if (xyAxis[0] == undefined) return false;
-
-  let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
-
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      
-      const [val1,val2] = elem?.getAttribute("data-value")?.split(" ").map(Number);
-      console.log(val1)
-      if(!isNaN(val1)&&!isNaN(val2))
-      if (!checkState[val1][val2]?.show) return [val1,val2];
-    }
-    elem = elem.parentNode;
-  }
-
-  return false;
-};
-const updateState = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  targetIndex,
-  sourceIndex
-) => {
-  console.log(sourceState)
- setTimeout(()=>{
- 
-  targetState[targetIndex[0]][targetIndex[1]].dropValue = sourceState[sourceIndex]?.value;
-
-  targetState[targetIndex[0]][targetIndex[1]].show = true;
-
-  updateTargetState([...targetState]);
-  sourceState[sourceIndex].show = false;
-  sourceState[sourceIndex].value=""
-  updateSourceState([...sourceState]);
- },0)
-};
+import { validateCoordiante } from "../ChoicesType/validateCoordinates";
 export default function DropBoxesImageCompare({
   content,
   totalRows,
   state,
   isAnswerSubmitted,
-  dropRef,
   totalCols,
-  inputRef
+  inputRef,
 }) {
-  let [rows, setRows] = useState([]);
-  const {isStudentAnswerResponse}=useContext(ValidationContext)
+  const [dropState, setDropState] = useState([]);
+  const { isStudentAnswerResponse } = useContext(ValidationContext);
   const [dragState, setDragState] = useState([]);
   const dragRef = useRef([]);
-  const dragIndex = useRef(-1);
-  const dropIndex = useRef([-1, -1]);
-  const [dragActive, setDragActive] = useState(false);
-  const [xyPosition, setXyposition] = useState([]);
-  const [handleDrag,handleDragStart]=useScrollBar()
-  const currentDrag = useRef(-1);
+  const [handleDrag, handleDragStart] = useScrollBar();
+  const [dragKey, setDragKey] = useState(0);
+  const droppableContainerRef = useRef([]);
   useEffect(() => {
     let row = [];
     for (let i = 0; i < totalRows; i++) {
@@ -80,73 +37,51 @@ export default function DropBoxesImageCompare({
       );
       row.push(temp);
     }
-    setRows([...row]);
+    droppableContainerRef.current = [...Array(row.length)].map((item) =>
+      Array(row[0].length)
+    );
+    setDropState([...row]);
     let temp = [];
     state?.choices?.map((item) => temp.push({ value: item, show: true }));
     setDragState([...temp]);
   }, []);
-
-  useEffect(() => {
-
-    if (xyPosition.length > 0) {
-   
-      if( dragActive&&currentDrag.current>-1){
-      let id = setTimeout(() => {
-        let val = elementFinds("mainCompareDropBox", xyPosition, rows);
-
-   if(val!==false){
-    updateState(rows,dragState,setRows,setDragState,val,currentDrag?.current)
-   }
-        setXyposition([]);
-        currentDrag.current = -1;
-        setDragActive(false);
-        clearTimeout(id);
-      }, 0);}
-      
-        
-    } 
-   
-  }, [currentDrag.current,xyPosition.length]);
   //handling drag to drop1
-  const handleStop1 = (e, index) => {
-   let i=index
-    let [x,y]=dragdropPointCordinate(e)
-    setDragActive(true);
-    
-    let temp = [...dragState];
-    let position = [x, y];
-    
-    setXyposition([...position]);
-    
-    setDragState([]);
-    currentDrag.current = index;
-   
-    temp[index].show = true;
-    console.log('dkdkk')
-    console.log('temp')
-    setDragState([...temp]);
-   
+  const handleStop1 = (e, i) => {
+    let [x, y] = dragdropPointCordinate(e);
+    const [row, col] = validateCoordiante(droppableContainerRef.current, {
+      x,
+      y,
+    });
+    if (
+      row > -1 &&
+      col > -1 &&
+      dropState[row][col].isMissed === "true" &&
+      !dropState[row][col].show
+    ) {
+      dropState[row][col].dropValue = dragState[i]?.value || "";
+      dragState[i].show = false;
+      dropState[row][col].show = true;
+      setDragState([...dragState]);
+      setDropState([...dropState]);
+    } else {
+      setDragKey(Number(!dragKey));
+    }
   };
-
-
 
   //handling drop to drag
 
   const handleStop2 = (e, row, col) => {
-    let value=rows[row][col].dropValue
-    rows[row][col] = { ...rows[row][col], show: false };
-    for(let item of dragState){
-      if(!item.show)
-      {
-        item.value=value
-        item.show=true
+    let value = dropState[row][col].dropValue;
+    dropState[row][col] = { ...dropState[row][col], show: false };
+    for (let item of dragState) {
+      if (!item.show) {
+        item.value = value;
+        item.show = true;
         break;
       }
     }
-    setDragState([...dragState])
-    setRows([...rows]);
-   
- 
+    setDragState([...dragState]);
+    setDropState([...dropState]);
   };
   const InlineCss = {
     FlexBox2: {
@@ -169,37 +104,53 @@ export default function DropBoxesImageCompare({
       textAlign: "center",
     },
   };
-  inputRef.current=[...rows]
+  inputRef.current = [...dropState];
   return (
     <div>
       <div>
         {/* Droppable Part */}
-        {rows?.map((items, i) => (
-          <div key={i} totalRows={totalCols} className="comparisonOfImages">
+        {dropState?.map((items, i) => (
+          <div key={i} className="comparisonOfImages">
             {items?.map((item, index) =>
               item.isMissed === "false" ? (
                 <div
                   key={index}
-                  ref={(el) => (dropRef.current[i][index] = el)}
+                  ref={(el) =>
+                    (droppableContainerRef.current[i][index] = {
+                      el,
+                      isMissed: item.isMissed === "true",
+                      show: item?.show,
+                    })
+                  }
                   name={item.isMissed}
                   style={InlineCss.InsideDiv}
                 >
                   {HtmlParser(item.value)}
                 </div>
-              ) : (item?.show||isStudentAnswerResponse) ? (
+              ) : item?.show || isStudentAnswerResponse ? (
                 <div
-                  ref={(el) => (dropRef.current[i][index] = el)}
+                  ref={(el) =>
+                    (droppableContainerRef.current[i][index] = {
+                      el,
+                      isMissed: item.isMissed === "true",
+                      show: item?.show,
+                    })
+                  }
                   key={index}
-                  style={{ width: "auto", height: "auto",display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center" }}
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                  }}
                   name={item.value}
-                
                 >
                   <Draggable
-                    disabled={!isAnswerSubmitted||isStudentAnswerResponse}
+                    disabled={!isAnswerSubmitted || isStudentAnswerResponse}
                     onStop={(e) => handleStop2(e, i, index)}
-                    onDrag={handleDrag} onStart={handleDragStart}
+                    onDrag={handleDrag}
+                    onStart={handleDragStart}
                   >
                     <div
                       id="drop"
@@ -210,11 +161,17 @@ export default function DropBoxesImageCompare({
                         height: "50px",
                         maxWidth: "140px",
                         cursor: "pointer",
-                        color:"white"
+                        color: "white",
                       }}
                       className={styles.CompareOfImagesDragDropDragDropBoxes}
                     >
-                      <HtmlParserComponent value={isStudentAnswerResponse?item[student_answer]:item?.dropValue}/>
+                      <HtmlParserComponent
+                        value={
+                          isStudentAnswerResponse
+                            ? item[student_answer]
+                            : item?.dropValue
+                        }
+                      />
                     </div>
                   </Draggable>
                 </div>
@@ -230,8 +187,13 @@ export default function DropBoxesImageCompare({
                     maxWidth: "140px",
                   }}
                   data-value={`${i} ${index}`}
-                  ref={(el) => (dropRef.current[i][index] = el)}
-               
+                  ref={(el) =>
+                    (droppableContainerRef.current[i][index] = {
+                      el,
+                      isMissed: item.isMissed === "true",
+                      show: item?.show,
+                    })
+                  }
                   className={`${styles.CompareOfImagesDragDropDragDropBoxes} mainCompareDropBox`}
                 ></div>
               )
@@ -240,28 +202,24 @@ export default function DropBoxesImageCompare({
         ))}
 
         {/* Draggable Part */}
-        <div
-          backgroundColor="indigo"
-          color="white"
-          border="1px solid indigo"
-          contentWidth="140px"
-          contentHeight="50px"
-          className={styles.CompareOfImagesDragDropFlexBox}
-        >
+        <div className={styles.CompareOfImagesDragDropFlexBox} key={dragKey}>
           {dragState?.map((items, i) =>
             items.show ? (
               <Draggable
-                disabled={!isAnswerSubmitted||isStudentAnswerResponse}
+                disabled={!isAnswerSubmitted || isStudentAnswerResponse}
                 onStop={(e) => handleStop1(e, i)}
-                onDrag={handleDrag} onStart={handleDragStart}
+                onDrag={handleDrag}
+                onStart={handleDragStart}
+                key={i}
               >
                 <div
-                  style={{ cursor: "pointer", backgroundColor:`indigo`,
-                  color:'white' }}
+                  style={{
+                    cursor: "pointer",
+                    backgroundColor: `indigo`,
+                    color: "white",
+                  }}
                   ref={(el) => (dragRef.current[i] = el)}
                   id="drag"
-                  backgroundColor="indigo"
-                  color="white"
                   className={styles.CompareOfImagesDragDropDragDropBoxes}
                 >
                   <HtmlParserComponent value={items?.value} />
@@ -274,10 +232,11 @@ export default function DropBoxesImageCompare({
                 color="white"
                 className={styles.CompareOfImagesDragDropDragDropBoxes}
                 style={{
-                    backgroundColor:`initial`,
-                    color:'white',
-                    border:"1px solid black"
+                  backgroundColor: `initial`,
+                  color: "white",
+                  border: "1px solid black",
                 }}
+                key={i}
               ></div>
             )
           )}

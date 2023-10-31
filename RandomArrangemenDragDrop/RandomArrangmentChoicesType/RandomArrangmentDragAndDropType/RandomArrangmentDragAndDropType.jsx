@@ -8,87 +8,20 @@ import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../../../OnlineQuiz.module.css";
-
-const elementFinds = (target, xyAxis, dropState) => {
-  if (xyAxis[0] == undefined) return false;
-  let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      const [row, col] = elem?.getAttribute("id")?.split(" ").map(Number);
-      if (!dropState[row][col].show) return elem?.getAttribute("id");
-    }
-    elem = elem.parentNode;
-  }
-
-  return false;
-};
-const elementFinds2 = (target, xyAxis, dragState) => {
-  let elem = document?.elementFromPoint(xyAxis[0], xyAxis[1]);
-
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      const index = Number(elem?.getAttribute("id"));
-
-      if (!dragState[index].show) return index;
-    }
-    elem = elem.parentNode;
-  }
-
-  return false;
-};
-const updateState = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  index,
-  row,
-  col
-) => {
-  targetState[row][col].dropVal = sourceState[index].val;
-  targetState[row][col].show = true;
-  // console.log(targetState[row][col])
-
-  updateTargetState([...targetState]);
-  sourceState[index] = { ...sourceState[index], show: false };
-
-  updateSourceState([...sourceState]);
-};
-const updateState2 = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  row,
-  col,
-  index
-) => {
-  // targetState.push(sourceState[row][col]?.val);
-  targetState[index].val = sourceState[row][col].dropVal;
-  targetState[index].show = true;
-  sourceState[row][col].dropVal = "";
-  sourceState[row][col].show = false;
-  updateTargetState([...targetState]);
-  updateSourceState([...sourceState]);
-};
+import { validateCoordiante } from "../../../ChoicesType/validateCoordinates";
 export default function RandomArrangmentDragAndDropType({
   content,
   choices,
   inputRef,
-  totalEmptyBox,
   totalRows,
-  totalCols,
 }) {
-  const { hasAnswerSubmitted,isStudentAnswerResponse } = useContext(ValidationContext);
-  let currentIndex = 0;
+  const { hasAnswerSubmitted, isStudentAnswerResponse } =
+    useContext(ValidationContext);
   const [dropState, setDropState] = useState([]);
   const [dragState, setDragState] = useState([]);
-  const [isDragActive, setIsDragActive] = useState(false);
-  const currentDrag = useRef(-1);
-  const [xyPosition, setXyPosition] = useState([]);
-  const currentDrop = useRef([-1, -1]);
-  const [isDropActive, setIsDropActive] = useState(false);
-  const [handleDrag,handleDragStart]=useScrollBar()
+  const [handleDrag, handleDragStart] = useScrollBar();
+  const [dragKey, setDragKey] = useState(0);
+  const droppableContainerRef = useRef([]);
   useEffect(() => {
     let arr = [];
 
@@ -115,87 +48,53 @@ export default function RandomArrangmentDragAndDropType({
       let obj = { show: true, val: item };
       temp.push({ ...obj });
     });
+    droppableContainerRef.current = [...Array(arr.length)].map((item) =>
+      Array(arr[0].length)
+    );
     setDropState([...arr]);
     setDragState([...temp]);
   }, []);
 
   const handleStop1 = (e, i) => {
-    setIsDragActive(true);
-    let [x,y]=dragdropPointCordinate(e)
-    let temp = [...dragState];
-    let position = [x, y];
-    setXyPosition([...position]);
-    setDragState([]);
-    currentDrag.current = i;
-    setDragState([...temp]);
+    let [x, y] = dragdropPointCordinate(e);
+    const [row, col] = validateCoordiante(droppableContainerRef.current, {
+      x,
+      y,
+    });
+    if (
+      row > -1 &&
+      col > -1 &&
+      dropState[row][col].isMissed === "true" &&
+      !dropState[row][col].show
+    ) {
+      dropState[row][col].dropVal = dragState[i]?.val || "";
+      dragState[i].show = false;
+      dropState[row][col].show = true;
+      setDragState([...dragState]);
+      setDropState([...dropState]);
+    } else {
+      setDragKey(Number(!dragKey));
+    }
   };
-  useEffect(() => {
-    if (xyPosition.length > 0 && isDragActive) {
-      let id = setTimeout(() => {
-        let val = elementFinds("droppablehfu", xyPosition, dropState);
-        if (val !== false) {
-          const [row, col] = val.split(" ").map(Number);
-          updateState(
-            dropState,
-            dragState,
-            setDropState,
-            setDragState,
-            currentDrag.current,
-            row,
-            col
-          );
-        }
-        clearTimeout(id);
-        setXyPosition([]);
-        setIsDragActive(false);
-        currentDrag.current = -1;
-      }, 0);
-    }
-  }, [xyPosition.length]);
-
-  useEffect(() => {
-    if (xyPosition.length > 0 && isDropActive) {
-      let id = setTimeout(() => {
-        let val = elementFinds2("draggablehfu", xyPosition, dragState);
-        if (val !== false) {
-          updateState2(
-            dragState,
-            dropState,
-            setDragState,
-            setDropState,
-            currentDrop.current[0],
-            currentDrop.current[1],
-            val
-          );
-        }
-        clearTimeout(id);
-        currentDrop.current = [-1, -1];
-        setXyPosition([]);
-        setIsDropActive(false);
-      }, 0);
-    }
-  }, [isDropActive, xyPosition.length]);
-
   const handleStop2 = (e, row, col) => {
     dropState[row][col].show = false;
     setDropState([...dropState]);
-    setIsDropActive(true);
-    let value=dropState[row][col].dropVal;
-    dropState[row][col].dropVal = '';
-    for(let i=0;i<dragState.length;i++){
-      if(!dragState[i].show){
-        dragState[i].show=true
-        dragState[i].val=value
-        break
+    let value = dropState[row][col].dropVal;
+    dropState[row][col].dropVal = "";
+    for (let i = 0; i < dragState.length; i++) {
+      if (!dragState[i].show) {
+        dragState[i].show = true;
+        dragState[i].val = value;
+        break;
       }
     }
-    setDragState([...dragState])
+    setDragState([...dragState]);
     setDropState([...dropState]);
   };
   inputRef.current = dropState;
   const heightRef = useRef([]);
   const [currentHeight, setCurrentHeight] = useState(0);
-  const [currentWidth, setCurrentWidth] = useState(0);
+  const [_, setCurrentWidth] = useState(0);
   useEffect(() => {
     if (currentHeight == 0) {
       let divHeight = [];
@@ -217,35 +116,49 @@ export default function RandomArrangmentDragAndDropType({
       {dropState?.map((items, index) => (
         <div
           key={index}
-          totalRows={Number(totalCols)}
           className={styles.RandomArrangmentDragDropKeyingFlexBox}
         >
           {items?.map((item, i) =>
             item.isMissed === "false" ? (
-              <div className={styles.RandomArrangmentDragDropDragDropFlexBox3}>
+              <div
+                className={styles.RandomArrangmentDragDropDragDropFlexBox3}
+                key={i}
+              >
                 <div
                   className={styles.RandomArrangmentDragDropDragDropBoxImageBox}
                 >
                   {item.imageArray?.map((img, i) => (
-                    <div>{HtmlParser(img)}</div>
+                    <div key={i}> {HtmlParser(img)}</div>
                   ))}
                 </div>
-                <div>
-                  <b><HtmlParserComponent value={item?.count}/></b>
+                <div
+                  ref={(el) =>
+                    (droppableContainerRef.current[index][i] = {
+                      el,
+                      isMissed: item.isMissed === "true",
+                      show: item?.show,
+                    })
+                  }
+                >
+                  <b>
+                    <HtmlParserComponent value={item?.count} />
+                  </b>
                 </div>
               </div>
             ) : (
-              <div className={styles.RandomArrangmentDragDropDragDropFlexBox3}>
+              <div
+                className={styles.RandomArrangmentDragDropDragDropFlexBox3}
+                key={i}
+              >
                 <div
                   className={styles.RandomArrangmentDragDropDragDropBoxImageBox}
                 >
                   {item.imageArray?.map((img, i) => (
-                    <div>{HtmlParser(img)}</div>
+                    <div key={i}>{HtmlParser(img)}</div>
                   ))}
                 </div>
                 <div>
                   <div
-                    bgColor={item.show}
                     className="droppablehfu"
                     id={`${index} ${i}`}
                     value={item.count}
@@ -256,23 +169,31 @@ export default function RandomArrangmentDragAndDropType({
                       width: "auto",
                       textAlign: "center",
                       minWidth: "96px",
-                      border: `${item.show||isStudentAnswerResponse ? 0 : 1}px dashed black`,
-                    }} // ref={(el) => {
-                    //   inputRef.current[currentIndex] = el;
-                    //   if (currentIndex < totalEmptyBox - 1)
-                    //     currentIndex = currentIndex + 1;
-                    // }}
+                      border: `${
+                        item.show || isStudentAnswerResponse ? 0 : 1
+                      }px dashed black`,
+                    }}
+                    ref={(el) =>
+                      (droppableContainerRef.current[index][i] = {
+                        el,
+                        isMissed: item.isMissed === "true",
+                        show: item?.show,
+                      })
+                    }
                   >
-                    {(item.show||isStudentAnswerResponse) && (
+                    {(item.show || isStudentAnswerResponse) && (
                       <Draggable
                         onStop={(e) => handleStop2(e, index, i)}
-                        disabled={hasAnswerSubmitted||isStudentAnswerResponse}
-                        onDrag={handleDrag} onStart={handleDragStart}
+                        disabled={hasAnswerSubmitted || isStudentAnswerResponse}
+                        onDrag={handleDrag}
+                        onStart={handleDragStart}
                       >
                         <div
                           style={{
                             backgroundColor: `${
-                              (item.show||isStudentAnswerResponse) ? "indigo" : "initial"
+                              item.show || isStudentAnswerResponse
+                                ? "indigo"
+                                : "initial"
                             }`,
                             minWidth: "inherit",
                             minHeight: "50px",
@@ -284,7 +205,11 @@ export default function RandomArrangmentDragAndDropType({
                             padding: "1rem",
                           }}
                         >
-                          {isStudentAnswerResponse?<HtmlParserComponent value={item[student_answer]}/>:<HtmlParserComponent value={item?.dropVal}/>}
+                          {isStudentAnswerResponse ? (
+                            <HtmlParserComponent value={item[student_answer]} />
+                          ) : (
+                            <HtmlParserComponent value={item?.dropVal} />
+                          )}
                         </div>
                       </Draggable>
                     )}
@@ -295,12 +220,15 @@ export default function RandomArrangmentDragAndDropType({
           )}
         </div>
       ))}
-      <div className={styles.RandomArrangmentDragDropDragDropFlexBox2}>
+      <div
+        className={styles.RandomArrangmentDragDropDragDropFlexBox2}
+        key={dragKey}
+      >
         {dragState?.map((items, i) => (
           <div
             id={`${i}`}
             className="draggablehfu"
-            bgColor={items.show}
+            key={i}
             ref={(el) => (heightRef.current[i] = el)}
             style={{
               minHeight: "50px",
@@ -314,8 +242,9 @@ export default function RandomArrangmentDragAndDropType({
             {items.show && (
               <Draggable
                 onStop={(e) => handleStop1(e, i)}
-                disabled={hasAnswerSubmitted||isStudentAnswerResponse}
-                onDrag={handleDrag} onStart={handleDragStart}
+                disabled={hasAnswerSubmitted || isStudentAnswerResponse}
+                onDrag={handleDrag}
+                onStart={handleDragStart}
               >
                 <div
                   style={{

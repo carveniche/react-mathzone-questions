@@ -58,6 +58,6 @@ import Oprc from "./Oprc";
 //   question_no: 4,
 //   message: "next question added",
 // };
-export default function MainOprc({obj2,meter}) {
-  return <Oprc obj={obj2?.question_data[0]} meter={meter}/>;
+export default function MainOprc({ obj2, meter }) {
+  return <Oprc obj={obj2?.question_data[0]} meter={meter} />;
 }

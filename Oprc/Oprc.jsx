@@ -1,7 +1,7 @@
 import styles from "../OnlineQuiz.module.css";
 import parse from "html-react-parser";
 import { EditableMathField, StaticMathField } from "../../ExternalPackages";
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Draggable from "react-draggable";
 import SolveButton from "../SolveButton";
@@ -11,71 +11,13 @@ import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
-import { useScrollBar } from "../../../CommonFunction/useScrollBar";
-const elementFinds = (target, xyAxis, dropState) => {
-  if (xyAxis[0] == undefined) return false;
-  let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      const [row, col] = elem?.getAttribute("id")?.split(" ").map(Number);
-      if (!dropState[row][col].show) return elem?.getAttribute("id");
-    }
-    elem = elem.parentNode;
-  }
+import { validateCoordiante } from "../ChoicesType/validateCoordinates";
 
-  return false;
-};
-const updateState = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  index,
-  row,
-  col
-) => {
-  targetState[row][col].val = sourceState[index];
-  targetState[row][col].show = true;
-  updateTargetState({ ...targetState });
-  sourceState = sourceState.filter((item) => sourceState[index] != item);
-  updateSourceState([...sourceState]);
-};
-const elementFinds2 = (target, xyAxis) => {
-  let elem = document?.elementFromPoint(xyAxis[0], xyAxis[1]);
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      return true;
-    }
-    elem = elem.parentNode;
-  }
-  return false;
-};
-const updateState2 = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  row,
-  col
-) => {
-  targetState.push(sourceState[row][col]?.val);
-  sourceState[row][col].val = "";
-  sourceState[row][col].show = false;
-  updateTargetState([...targetState]);
-  updateSourceState({ ...sourceState });
-  console.log(sourceState[row][col]);
-};
 function Oprc({ obj, meter }) {
-
   let currentIndex = 0;
   const inputRef = useRef([]);
-  const {
-    hasAnswerSubmitted,
-    setHasAnswerSubmitted,
-    setIsAnswerCorrect,
-    setChoicesId,
-    setStudentAnswerQuestion,
-  } = useContext(ValidationContext);
+  const { hasAnswerSubmitted, setHasAnswerSubmitted, setIsAnswerCorrect } =
+    useContext(ValidationContext);
   let hasAnswerSubmit = hasAnswerSubmitted;
   let setHasAnswerSubmit = setHasAnswerSubmitted;
   let setIsAnsweredCorrect = setIsAnswerCorrect;
@@ -83,11 +25,16 @@ function Oprc({ obj, meter }) {
   const handleFocus = (i) => {};
   const handleChange = (e, i) => {};
   const [value, setValue] = useState({});
+  const [dragKey, setDragKey] = useState(0);
+  const droppableContainerRef = useRef([]);
   const optionSelect = {
     replace: (domNode) => {
       if (domNode?.attribs?.class) {
         let clsName = String(domNode?.attribs?.class);
-        if (clsName.includes("mathquill-rendered-math")||clsName.includes("mathImg")) {
+        if (
+          clsName.includes("mathquill-rendered-math") ||
+          clsName.includes("mathImg")
+        ) {
           if (clsName.includes("mathquill-editable")) {
             let y = currentIndex;
             currentIndex = currentIndex + 1;
@@ -137,85 +84,45 @@ function Oprc({ obj, meter }) {
       temp2[i] = temp;
     }
     setDropState({ ...temp2 });
+    droppableContainerRef.current = [...Array(Object.keys(temp2).length)].map(
+      (item) => Array(temp2[0].length)
+    );
   }, []);
-  const currentDrag = useRef(-1);
-  const [dragActive, setDragActive] = useState(false);
-  const [xyPosition, setXyposition] = useState([]);
-  const [dropActive, setDropActive] = useState(false);
-  const [handleDrag,handleDragStart]=useScrollBar()
-  const currentDrop = useRef([-1, -1]);
   const handleStop2 = (e, row, col) => {
-    let value=dropState[row][col].val
-    if(dropState[row][col].show){
-    dragState.push(value)
-    dropState[row][col].show = false;
-    dropState[row][col].val=""
-    setDragState([...dragState])
-   
-  }
-  
-  setDropState({ ...dropState });
-  };
-  const handleStop = (e, i) => {
-    setDragActive(true);
-    let [x,y]=dragdropPointCordinate(e)
-    let temp = [...dragState];
-    let position = [x, y];
-    setXyposition([...position]);
-    setDragState([]);
-    currentDrag.current = i;
-    setDragState([...temp]);
-  };
-  useEffect(() => {
-    if (xyPosition.length > 0 && dragActive) {
-      let id = setTimeout(() => {
-        let val = elementFinds("droppableOprc", xyPosition, dropState);
-        if (val !== false) {
-          const [row, col] = val.split(" ").map(Number);
-          updateState(
-            dropState,
-            dragState,
-            setDropState,
-            setDragState,
-            currentDrag.current,
-            row,
-            col
-          );
-        }
-        clearTimeout(id);
-        setXyposition([]);
-        setDragActive(false);
-        currentDrag.current = -1;
-      }, 0);
+    let value = dropState[row][col].val;
+    if (dropState[row][col].show) {
+      dragState.push(value);
+      dropState[row][col].show = false;
+      dropState[row][col].val = "";
+      setDragState([...dragState]);
     }
-  }, [xyPosition.length]);
-  useEffect(() => {
-    if (xyPosition.length > 0 && dropActive) {
-      let id = setTimeout(() => {
-        if (elementFinds2("draggableOprc", xyPosition) != false) {
-          updateState2(
-            dragState,
-            dropState,
-            setDragState,
-            setDropState,
-            currentDrop.current[0],
-            currentDrop.current[1]
-          );
-        }
-        clearTimeout(id);
-        currentDrop.current = [-1, -1];
-        setXyposition(false);
-        setDropActive(false);
-      }, 0);
+
+    setDropState({ ...dropState });
+  };
+  const handleStop1 = (e, i) => {
+    let [x, y] = dragdropPointCordinate(e);
+    const [row, col] = validateCoordiante(droppableContainerRef.current, {
+      x,
+      y,
+    });
+    if (row > -1 && col > -1 && !dropState[row][col].show) {
+      dropState[row][col].val = dragState[i];
+      dropState[row][col].show = true;
+      let temp = dragState.filter((_, index) => index != i);
+      setDragState([...temp]);
+      setDropState({ ...dropState });
+    } else {
+      setDragKey(Number(!dragKey));
     }
-  }, [xyPosition.length, dropActive]);
+  };
+
   const handleSubmit = () => {
     if (hasAnswerSubmit) return;
     let n = obj?.orc_oprc_data[0]?.row_headers?.length || 0;
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < dropState[i].length; j++) {
         if (!dropState[i][j].show) {
-          setRedAlert(true)
+          setRedAlert(true);
           return;
         }
       }
@@ -239,16 +146,20 @@ function Oprc({ obj, meter }) {
   };
 
   meter = Number(meter) || 0;
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   return (
     <div>
       <SolveButton onClick={handleSubmit} />
-      {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className="mathzoneQuestionName">
           {parse(obj?.question_text, optionSelect)}
         </div>
-        {obj?.upload_file_name&&<div><img src={obj?.upload_file_name} alt="image not found"/></div>}
+        {obj?.upload_file_name && (
+          <div>
+            <img src={obj?.upload_file_name} alt="image not found" />
+          </div>
+        )}
         <div>
           <ProgressBorder meter={meter + 1}>
             <div></div>
@@ -257,11 +168,6 @@ function Oprc({ obj, meter }) {
         <div className={`${styles.contentParent}`}>
           <div
             className="mathzoneOprcGrid"
-            totalCols={
-              obj?.orc_oprc_data[0]?.row_headers?.length > 0
-                ? obj?.orc_oprc_data[0]?.column_headers?.length + 1
-                : obj?.orc_oprc_data[0]?.column_headers?.length + 1
-            }
             style={{
               gridTemplateColumns: `repeat(${
                 Number(
@@ -275,6 +181,7 @@ function Oprc({ obj, meter }) {
             {obj.orc_oprc_data[0]?.row_headers?.length > 0 && <div></div>}
             {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => (
               <div
+                key={i}
                 className={`${
                   i + 1 == obj?.orc_oprc_data[0]?.column_headers?.length &&
                   "mathzoneLastChild"
@@ -284,38 +191,45 @@ function Oprc({ obj, meter }) {
               </div>
             ))}
             {obj?.orc_oprc_data[0]?.row_headers?.map((item, i) => (
-              <>
+              <React.Fragment key={i}>
                 <div>{parse(item, optionSelect)}</div>
                 {dropState[i]?.map((item, index) => (
                   <div
                     style={{ cursor: "pointer" }}
                     className={`droppableOprc mathzoneOprcGridDivBox`}
                     id={`${i} ${index}`}
+                    ref={(el) =>
+                      (droppableContainerRef.current[i][index] = {
+                        el,
+                        isMissed: true,
+                        show: item.show,
+                      })
+                    }
+                    key={index}
                   >
                     {item.show && (
                       <Draggable
                         onStop={(e) => handleStop2(e, i, index)}
                         disabled={hasAnswerSubmit}
-                        onDrag={handleDrag} onStart={handleDragStart}
                       >
                         <div>{parse(item.val, optionSelect)}</div>
                       </Draggable>
                     )}
                   </div>
                 ))}
-              </>
+              </React.Fragment>
             ))}
           </div>
           <div
             className={`draggableOprc mathzoneOprcGridDivBox2`}
             id="draggableOrc"
+            key={`dragKey${dragKey}`}
           >
             {dragState?.map((item, i) => (
-              <div>
+              <div key={i}>
                 <Draggable
-                  onStop={(e) => handleStop(e, i)}
+                  onStop={(e) => handleStop1(e, i)}
                   disabled={hasAnswerSubmit}
-                  onDrag={handleDrag} onStart={handleDragStart}
                 >
                   <div style={{ cursor: "pointer" }}>
                     {parse(item, optionSelect)}
@@ -326,7 +240,9 @@ function Oprc({ obj, meter }) {
           </div>
         </div>
       </div>
-      <div id={styles.fibAfterText}><HtmlParserComponent value={obj?.after_question_text} /></div>
+      <div id={styles.fibAfterText}>
+        <HtmlParserComponent value={obj?.after_question_text} />
+      </div>
     </div>
   );
 }
@@ -377,7 +293,7 @@ export const DivBox = styled.div`
     margin: 0.51rem;
 
     border: 1px solid black;
-    padding:5px;
+    padding: 5px;
     min-height: 30px;
     min-width: 30px;
     widht: auto;

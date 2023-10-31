@@ -100,14 +100,15 @@ const validationForKeying = (inputRef) => {
   }
   return 2;
 };
-const manupulateQuestionContent=(arr)=>{
- arr=manupulateQuestionContentHorizontal(arr)
- return arr.map((row)=>row?.map((col)=>{
-    delete col?.imageArray
-    return col
-  }))
-  
-}
+const manupulateQuestionContent = (arr) => {
+  arr = manupulateQuestionContentHorizontal(arr);
+  return arr.map((row) =>
+    row?.map((col) => {
+      delete col?.imageArray;
+      return col;
+    })
+  );
+};
 export default function RandomArrangmentDragDrop({
   state,
   totalRows,
@@ -123,9 +124,9 @@ export default function RandomArrangmentDragDrop({
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
-    setChoicesId,
     setStudentAnswerQuestion,
-    setQuestionWithAnswer,isStudentAnswerResponse
+    setQuestionWithAnswer,
+    isStudentAnswerResponse,
   } = useContext(ValidationContext);
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
 
@@ -142,7 +143,7 @@ export default function RandomArrangmentDragDrop({
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
 
-    if (state?.choiceType == "dragdrop"||1) {
+    if (state?.choiceType == "dragdrop" || 1) {
       let status = validationForDragAndDrop(inputRef, setIsAnswerCorrect);
       if (status === 0) {
         setRedAlert(true);
@@ -151,10 +152,9 @@ export default function RandomArrangmentDragDrop({
       else {
         setIsAnswerCorrect(true);
       }
-      let result=manupulateQuestionContent(inputRef.current)
-      state={...state,questionContent:result}
-      setQuestionWithAnswer({...state})
-      
+      let result = manupulateQuestionContent(inputRef.current);
+      state = { ...state, questionContent: result };
+      setQuestionWithAnswer({ ...state });
     } else if (state?.choiceType == "keying") {
       let status = validationForKeying(inputRef);
 
@@ -165,9 +165,9 @@ export default function RandomArrangmentDragDrop({
       else {
         setIsAnswerCorrect(true);
       }
-      let result=manupulateQuestionContent(inputRef.current)
-      state={...state,questionContent:result}
-      setQuestionWithAnswer({...state})
+      let result = manupulateQuestionContent(inputRef.current);
+      state = { ...state, questionContent: result };
+      setQuestionWithAnswer({ ...state });
     } else if (state?.choiceType == "selectchoice") {
       let val = validationForSelectChoice(inputRef, state?.questionContent);
       if (val === 0) {
@@ -196,10 +196,12 @@ export default function RandomArrangmentDragDrop({
 
   return (
     <div>
-     {!isStudentAnswerResponse&& <SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>{parse(state?.questionName)}</div>
@@ -209,9 +211,11 @@ export default function RandomArrangmentDragDrop({
           </div>
         )}
         <div className={styles.borderTopBottomMargin}>
-         {!isStudentAnswerResponse&& <ProgressBorder meter={meter + 1}>
-            <div></div>
-          </ProgressBorder>}
+          {!isStudentAnswerResponse && (
+            <ProgressBorder meter={meter + 1}>
+              <div></div>
+            </ProgressBorder>
+          )}
         </div>
         <div className={styles.contentParent}>
           <ContentRandomArrangmentDragDrop

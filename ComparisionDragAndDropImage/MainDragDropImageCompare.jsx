@@ -1,6 +1,5 @@
-import React from "react"
-import HtmlParser from "react-html-parser/lib/HtmlParser"
-import DragAndDropImageCompare from "./DragAndDropImageCompare"
+import React from "react";
+import DragAndDropImageCompare from "./DragAndDropImageCompare";
 // let obj={
 //    "operation":"addition",
 //    "type":"comparison_of_images",
@@ -36,7 +35,7 @@ import DragAndDropImageCompare from "./DragAndDropImageCompare"
 //          }
 //       ],
 //       "sidebyside":[
-         
+
 //       ],
 //       "srows":null,
 //       "scols":null
@@ -49,11 +48,15 @@ import DragAndDropImageCompare from "./DragAndDropImageCompare"
 //    "choiceType":"dragdrop",
 //    "choiceCount":3
 // }
-export default function MainDragDropImageCompare({obj,meter})
-{
-
-    return<>
-   
-    <DragAndDropImageCompare state={obj} totalRows={obj.rows} totalColumns={obj.cols} meter={meter}/>
+export default function MainDragDropImageCompare({ obj, meter }) {
+  return (
+    <>
+      <DragAndDropImageCompare
+        state={obj}
+        totalRows={obj.rows}
+        totalColumns={obj.cols}
+        meter={meter}
+      />
     </>
+  );
 }

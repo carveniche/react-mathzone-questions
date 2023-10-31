@@ -6,103 +6,28 @@ import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage
 import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { useScrollBar } from "../../../../../CommonFunction/useScrollBar";
-import { dragdropPointCordinate } from "../../../../../CommonFunction/dragdropPointCordinate"
-const elementFinds = (target, xyAxis, checkState) => {
-  if (xyAxis[0] == undefined) return false;
-
-  let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
-
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      const val = elem?.getAttribute("id")?.split(" ").map(Number);
-      if (checkState[val[0]][val[1]]?.show === false) {
-        return val;
-      }
-      // if (!checkState[val].show) return val;
-    }
-    elem = elem.parentNode;
-  }
-
-  return false;
-};
-const elementFinds2 = (target, xyAxis) => {
-  if (xyAxis[0] == undefined) return false;
-
-  let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      return true;
-      // if (!checkState[val].show) return val;
-    }
-    elem = elem.parentNode;
-  }
-
-  return true;
-};
-const updateState = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  targetIndex,
-  sourceIndex
-) => {
-  targetState[targetIndex[0]][targetIndex[1]].dropVal =
-    sourceState[sourceIndex].val;
-  targetState[targetIndex[0]][targetIndex[1]].show = true;
-  updateTargetState([...targetState]);
-  sourceState[sourceIndex].show = false;
-  sourceState = sourceState?.map((item, i) => {
-    if(i === sourceIndex)
-    return {...item,show:false}
-    return {...item}
-  });
-  updateSourceState([...sourceState]);
-};
-const updateState2 = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  sourceIndex
-) => {
-
-for(let item of targetState){
-  if(!item.show&&item.val===sourceState[sourceIndex[0]][sourceIndex[1]]?.dropVal)
-  {
-    item.show=true
-    break
-  }
-}
-  
-
-  updateTargetState([...targetState]);
-  sourceState[sourceIndex[0]][[sourceIndex[1]]].show = false;
-  sourceState[sourceIndex[0]][[sourceIndex[1]]].dropVal = "";
-  updateSourceState([...sourceState]);
-};
+import { dragdropPointCordinate } from "../../../../../CommonFunction/dragdropPointCordinate";
+import { validateCoordiante } from "../../../ChoicesType/validateCoordinates";
 export default function VerticalDragDrop({
   content,
   totalRows,
   totalCols,
- 
-  totalEmptyBox,
   inputRef,
   choices,
 }) {
-  const [isDragActive, setIsDragActive] = useState(false);
-  const [isDropActive, setIsDropActive] = useState(false);
-  let [choiceState, setChoicesState] = useState([]);
+  let [dragState, setDragState] = useState([]);
   const [dropState, setDropState] = useState([]);
-  const {hasAnswerSubmitted}=useContext(ValidationContext)
-  const [handleDrag,handleDragStart]=useScrollBar()
+  const { hasAnswerSubmitted } = useContext(ValidationContext);
+  const [handleDrag, handleDragStart] = useScrollBar();
+  const [dragKey, setDragKey] = useState(0);
+  const droppableContainerRef = useRef([]);
   useEffect(() => {
     let arr = [];
     choices?.map((item) => {
       let obj = { val: item, show: true };
       arr.push({ ...obj });
     });
-    setChoicesState([...arr]);
+    setDragState([...arr]);
     let temp = [...content];
     temp = temp.map((item) => {
       let arr = item?.map((items) => {
@@ -111,80 +36,51 @@ export default function VerticalDragDrop({
       });
       return arr;
     });
+    droppableContainerRef.current = [...Array(arr.length)].map((item) =>
+      Array(arr[0].length)
+    );
+
     setDropState([...temp]);
   }, []);
-  const currentDragIndex = useRef(-1);
-  const [position, setPosition] = useState([]);
-  inputRef.current = choiceState;
-  const handleMouseStop1 = (e, i) => { 
-    setIsDragActive(true);
-    let [x,y]=dragdropPointCordinate(e)
-    let mouseX = x;
-    let mouseY = y;
-    choiceState[i].show = false;
-    setChoicesState([...choiceState]);
-    currentDragIndex.current = i;
-    choiceState[i].show = true;
-    setChoicesState([...choiceState]);
-    let position = [mouseX, mouseY];
-    setPosition([...position]);
+  inputRef.current = dragState;
+  const handleStop1 = (e, i) => {
+    let [x, y] = dragdropPointCordinate(e);
+    const [row, col] = validateCoordiante(droppableContainerRef.current, {
+      x,
+      y,
+    });
+    if (
+      row > -1 &&
+      col > -1 &&
+      dropState[row][col].isMissed === "true" &&
+      !dropState[row][col].show
+    ) {
+      dropState[row][col].dropVal = dragState[i]?.val || "";
+      dragState[i].show = false;
+      dropState[row][col].show = true;
+      setDragState([...dragState]);
+      setDropState([...dropState]);
+    } else {
+      setDragKey(Number(!dragKey));
+    }
   };
-const {isStudentAnswerResponse}=useContext(ValidationContext)
-  const currentDropIndex = useRef([-1, -1]);
-  const handleMouseStop2 = (e, row, col) => {
-    setIsDropActive(true);
-    let [x,y]=dragdropPointCordinate(e)
-    let position = [x, y];
+  const { isStudentAnswerResponse } = useContext(ValidationContext);
+  const handleStop2 = (e, row, col) => {
+    let value = dropState[row][col].dropVal;
+    dropState[row][col].dropVal = "";
     dropState[row][col].show = false;
+    for (let i = 0; i < dragState.length; i++) {
+      if (!dragState[i].show) {
+        dragState[i].show = true;
+        dragState[i].val = value;
+        break;
+      }
+    }
+    setDragState([...dragState]);
     setDropState([...dropState]);
-    dropState[row][col].show = true;
-    currentDropIndex.current = [row, col];
-    setDropState([...dropState]);
-    setPosition([...position]);
   };
-  useEffect(() => {
-    if (isDropActive && position?.length > 1) {
-      let id = setTimeout(() => {
-        let val = elementFinds2("verticalDrop", position);
-        if (val) {
-          updateState2(
-            [...choiceState],
-            [...dropState],
-            setChoicesState,
-            setDropState,
-            [...currentDropIndex.current]
-          );
-        }
-        setIsDropActive(false);
-        currentDropIndex.current = [];
-        setPosition([]);
-        clearTimeout(id);
-      }, 0);
-    }
-  }, [position.length]);
-  useEffect(() => {
-    if (position.length > 0 && isDragActive) {
-      let id = setTimeout(() => {
-        let val = elementFinds("verticalDrop", position, dropState);
-        if (val) {
-          updateState(
-            dropState,
-            choiceState,
-            setDropState,
-            setChoicesState,
-            val,
-            currentDragIndex.current
-          );
-        }
-        setPosition([]);
 
-        currentDragIndex.current = -1;
-        setIsDragActive(false);
-        clearTimeout(id);
-      }, 0);
-    }
-  }, [position.length]);
-  inputRef.current=[...dropState]
+  inputRef.current = [...dropState];
   return (
     <div>
       <div style={{ marginTop: "4rem" }}>
@@ -197,22 +93,36 @@ const {isStudentAnswerResponse}=useContext(ValidationContext)
               borderTop: `${index === totalRows - 1 ? 2 : 0}px solid black`,
               borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
               width: `${totalCols * 80}px`,
-              maxWidth:'fit-content'
+              maxWidth: "fit-content",
             }}
             key={index}
-            border={index === totalRows - 1 && "2px"}
           >
             {items?.map((item, i) =>
               item.isMissed === "false" ? (
-                <div key={i} value={item.value}>
-                 <HtmlParserComponent value={item?.value}/>
+                <div
+                  key={i}
+                  value={item.value}
+                  ref={(el) =>
+                    (droppableContainerRef.current[index][i] = {
+                      el,
+                      isMissed: item.isMissed === "true",
+                      show: item?.show,
+                    })
+                  }
+                >
+                  <HtmlParserComponent value={item?.value} />
                 </div>
-              ) : isStudentAnswerResponse||item?.show ? (
-                <Draggable onStop={(e) => {
-                  if(isStudentAnswerResponse)
-                  return
-                  handleMouseStop2(e, index, i)
-                  }} disabled={hasAnswerSubmitted||isStudentAnswerResponse} onDrag={handleDrag} onStart={handleDragStart}>
+              ) : isStudentAnswerResponse || item?.show ? (
+                <Draggable
+                  onStop={(e) => {
+                    if (isStudentAnswerResponse) return;
+                    handleStop2(e, index, i);
+                  }}
+                  key={i}
+                  disabled={hasAnswerSubmitted || isStudentAnswerResponse}
+                  onDrag={handleDrag}
+                  onStart={handleDragStart}
+                >
                   <div
                     style={{
                       backgroundColor: "indigo",
@@ -220,9 +130,21 @@ const {isStudentAnswerResponse}=useContext(ValidationContext)
                       color: "white",
                       borderRadius: "50%",
                     }}
+                    ref={(el) =>
+                      (droppableContainerRef.current[index][i] = {
+                        el,
+                        isMissed: item.isMissed === "true",
+                        show: item?.show,
+                      })
+                    }
                   >
-                   
-                   <HtmlParserComponent value={isStudentAnswerResponse?item[student_answer]:item?.dropVal}/>
+                    <HtmlParserComponent
+                      value={
+                        isStudentAnswerResponse
+                          ? item[student_answer]
+                          : item?.dropVal
+                      }
+                    />
                   </div>
                 </Draggable>
               ) : (
@@ -230,27 +152,49 @@ const {isStudentAnswerResponse}=useContext(ValidationContext)
                   className={`${styles.verticalDropVal} verticalDropVal`}
                   style={{ border: "1px dashed black" }}
                   id={`${index} ${i}`}
+                  ref={(el) =>
+                    (droppableContainerRef.current[index][i] = {
+                      el,
+                      isMissed: item.isMissed === "true",
+                      show: item?.show,
+                    })
+                  }
+                  key={i}
                 ></div>
               )
             )}
           </div>
         ))}
       </div>
-      <div className={styles.questionName} style={{marginTop:"1rem"}}>Drag and Drop the answers.</div>
-      <div className={styles.VerticalDragDropFlexBox2} id="verticalDragVal" style={{flexWrap:'wrap'}}>
-        {choiceState?.map((value, i) =>
+      <div className={styles.questionName} style={{ marginTop: "1rem" }}>
+        Drag and Drop the answers.
+      </div>
+      <div
+        className={styles.VerticalDragDropFlexBox2}
+        id="verticalDragVal"
+        style={{ flexWrap: "wrap" }}
+        key={dragKey}
+      >
+        {dragState?.map((value, i) =>
           value?.show ? (
-            <Draggable onStop={(e) => {
-              if(isStudentAnswerResponse)
-              return
-              handleMouseStop1(e, i)
-              }} disabled={hasAnswerSubmitted||isStudentAnswerResponse} onDrag={handleDrag} onStart={handleDragStart}>
+            <Draggable
+              onStop={(e) => {
+                if (isStudentAnswerResponse) return;
+                handleStop1(e, i);
+              }}
+              disabled={hasAnswerSubmitted || isStudentAnswerResponse}
+              onDrag={handleDrag}
+              onStart={handleDragStart}
+              key={i}
+            >
               <div style={{ backgroundColor: "indigo", cursor: "pointer" }}>
-               <HtmlParserComponent value={value.val} />
+                <HtmlParserComponent value={value.val} />
               </div>
             </Draggable>
           ) : (
-            <div id={`${i}`} style={{ border:'1px solid indigo' }}>{1}</div>
+            <div id={`${i}`} style={{ border: "1px solid indigo" }} key={i}>
+              {1}
+            </div>
           )
         )}
       </div>

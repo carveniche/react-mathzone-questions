@@ -12,21 +12,9 @@ import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import HtmlParser from "react-html-parser";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { useScrollBar } from "../../../CommonFunction/useScrollBar";
 import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
+import { validateCoordiante } from "../ChoicesType/validateCoordinates";
 
-const ifElementFind = (target, xyAxis) => {
-  if (xyAxis[0] == undefined) return;
-  let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
-
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target))
-      return Number(elem?.getAttribute("id"));
-    elem = elem.parentNode;
-  }
-
-  return false;
-};
 const collectTextInputField = () => {
   let parent = document.getElementById("orcTextParent");
   if (!parent) {
@@ -46,53 +34,6 @@ const collectTextInputField = () => {
     temp.push(input.value);
   }
   return temp;
-};
-const ifElementFind2 = (target, xyAxis) => {
-  if (xyAxis[0]) return;
-  let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
-
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.getAttribute("id").includes(target)) return true;
-    elem = elem.parentNode;
-  }
-  return false;
-};
-const updateState1 = (
-  targetState,
-  sourceState,
-  setTargetState,
-  setSourceState,
-  index,
-  val
-) => {
-  targetState[val].push(sourceState[index]);
-  setTargetState([...targetState]);
-  sourceState = sourceState.filter((item) => sourceState[index] != item);
-  setSourceState([...sourceState]);
-};
-const updateState2 = (
-  targetState,
-  sourceState,
-  setTargetState,
-  setSourceState,
-  index
-) => {
-  targetState.push(sourceState[index[0]][index[1]]);
-  setTargetState([...targetState]);
-
-  let temp = [];
-  for (let i = 0; i < sourceState[index[0]].length; i++) {
-    if (sourceState[index[0]][i] != sourceState[index[0]][index[1]])
-      temp.push(sourceState[index[0]][i]);
-  }
-  sourceState[index[0]] = [...temp];
-  let arr2d = [];
-  for (let i = 0; i < sourceState.length; i++) {
-    let temp = sourceState[i].map((item) => item);
-    arr2d.push(temp);
-  }
-
-  setSourceState([...arr2d]);
 };
 const refreshPageLoad = (parent, setInputText) => {
   let inputBoxes = parent?.querySelectorAll("input");
@@ -117,19 +58,14 @@ function ORC({ obj, question_text, meter }) {
   const [redAlert, setRedAlert] = useState(false);
   let [dragState, setDragState] = useState([]);
   meter = Number(meter) || 0;
-  const [xyAxis, setXyAxis] = useState([]);
   let [dropState, setDropState] = useState([]);
-  const currentDrop = useRef([-1, -1]);
-  const [dragActive, setDragActive] = useState(false);
-  const [dropActive, setDropActive] = useState(false);
-  const [handleDrag, handleDragStart] = useScrollBar();
+  const [dragKey, setDragKey] = useState(0);
+  const droppableContainerRef = useRef([]);
   const {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
-    setChoicesId,
     setStudentAnswerQuestion,
-    studentAnswerQuestion,
   } = useContext(ValidationContext);
   useEffect(() => {
     let whitePage = document.getElementById("quizWhitePage");
@@ -149,53 +85,37 @@ function ORC({ obj, question_text, meter }) {
     setDragState([...temp]);
     temp = [];
     obj?.orc_oprc_data[0]?.column_headers?.map((item) => temp.push([]));
+
     setDropState([...temp]);
   }, []);
   const draggableRef = useRef();
   const handleStop1 = (e, i) => {
     let [x, y] = dragdropPointCordinate(e);
-    setDragActive(true);
-    currentDrag.current = i;
-    let temp = [...dragState];
-    let position = [x, y];
-    setXyAxis([...position]);
-    setDragState([]);
-    setDragState([...temp]);
+    const [row, col] = validateCoordiante(droppableContainerRef.current, {
+      x,
+      y,
+    });
+
+    if (row > -1 && col > -1) {
+      let value = dragState[i];
+
+      let temp = dragState.filter((item) => item != value);
+      setDragState([...temp]);
+      dropState[col].push(value);
+      setDropState([...dropState]);
+      setDragKey(Number(!dragKey));
+    } else {
+      setDragKey(Number(!dragKey));
+    }
   };
-  const currentDrag = useRef(-1);
-  const droppableRef = useRef([]);
   const handleStop2 = (e, row, col) => {
-    setDropActive(true);
-    let [x, y] = dragdropPointCordinate(e);
-    let position = [x, y];
-    setXyAxis([...position]);
-    currentDrop.current = [row, col];
-    setDropState([[]]);
+    let value = dropState[row][col];
+    dragState.push(value);
+    setDragState([...dragState]);
+    dropState[row] = dropState[row].filter((item) => item != value);
     setDropState([...dropState]);
   };
-  useEffect(() => {
-    var id;
-    if (xyAxis.length > 0 && dragActive) {
-      id = setTimeout(() => {
-        let val = ifElementFind("droppableOrc", xyAxis);
-        if (val !== false) {
-          updateState1(
-            dropState,
-            dragState,
-            setDropState,
-            setDragState,
-            currentDrag.current,
-            val
-          );
-        }
 
-        clearTimeout(id);
-        currentDrag.current = -1;
-      }, 0);
-      setDragActive(false);
-      setXyAxis([]);
-    }
-  }, [xyAxis.length]);
   const [value, setValue] = useState({});
   let currentIndex = 0;
   const handleChange = (e, i) => {
@@ -245,27 +165,6 @@ function ORC({ obj, question_text, meter }) {
   const calcRef = useRef([]);
   const ref = useRef([]);
 
-  useEffect(() => {
-    var id;
-    if (xyAxis.length > 0 && dropActive) {
-      id = setTimeout(() => {
-        let val = ifElementFind2("draggableOrc", xyAxis);
-        if (val !== false) {
-          updateState2(
-            dragState,
-            dropState,
-            setDragState,
-            setDropState,
-            currentDrop.current
-          );
-        }
-        currentDrop.current = [-1, -1];
-        setDropActive(false);
-        setXyAxis(0);
-        clearTimeout(id);
-      }, 0);
-    }
-  }, [xyAxis.length]);
   const [inputText, setInputText] = useState([]);
   useEffect(() => {
     let parent = document.getElementById("orcTextParent");
@@ -448,7 +347,13 @@ function ORC({ obj, question_text, meter }) {
                       className={`droppableOrc mathzoneOrcDivBox`}
                       id={i}
                       key={i}
-                      ref={(el) => (droppableRef.current[i] = el)}
+                      ref={(el) =>
+                        (droppableContainerRef.current[i] = {
+                          el,
+                          show: false,
+                          isMissed: true,
+                        })
+                      }
                       style={{
                         paddingBottom: "6rem",
                         border: 0,
@@ -463,8 +368,7 @@ function ORC({ obj, question_text, meter }) {
                           defaultPosition={{ x: 0, y: 0 }}
                           axis="both"
                           disabled={hasAnswerSubmiited}
-                          onDrag={handleDrag}
-                          onStart={handleDragStart}
+                          key={index}
                         >
                           <div style={{ cursor: "pointer" }}>
                             {parse(item, optionSelect)}
@@ -480,6 +384,7 @@ function ORC({ obj, question_text, meter }) {
                 id="draggableOrc"
                 ref={draggableRef}
                 className="mathzoneOrcDivBox2"
+                key={`drag${dragKey}`}
               >
                 {dragState?.map((items, i) => (
                   <Draggable
@@ -488,8 +393,6 @@ function ORC({ obj, question_text, meter }) {
                     defaultPosition={{ x: 0, y: 0 }}
                     axis="both"
                     disabled={hasAnswerSubmiited}
-                    onDrag={handleDrag}
-                    onStart={handleDragStart}
                     key={i}
                   >
                     <div style={{ cursor: "pointer" }} className="handle">

@@ -67,7 +67,7 @@ import HorizontalFillUpsEquationType from "./HorizontalFillUpsEquationType";
 //   choiceType: "keying",
 //   choiceCount: 4,
 // };
-export default function MainHorizontalFillUpsEquationType({ obj,meter }) {
+export default function MainHorizontalFillUpsEquationType({ obj, meter }) {
   return (
     <HorizontalFillUpsEquationType
       state={obj}

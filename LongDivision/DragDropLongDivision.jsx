@@ -7,84 +7,20 @@ import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../OnlineQuiz.module.css";
-const elementFinds = (target, xyAxis, dropState) => {
-  if (xyAxis[0] == undefined) return false;
-  let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      const [row, col] = elem?.getAttribute("id")?.split(" ").map(Number);
-      if (!dropState[row][col].show) return elem?.getAttribute("id");
-    }
-    elem = elem.parentNode;
-  }
+import { validateCoordiante } from "../ChoicesType/validateCoordinates";
 
-  return false;
-};
-const elementFinds2 = (target, xyAxis, dragState) => {
-  let elem = document?.elementFromPoint(xyAxis[0], xyAxis[1]);
-
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      const index = Number(elem?.getAttribute("id"));
-
-      if (!dragState[index].show) return index;
-    }
-    elem = elem.parentNode;
-  }
-
-  return false;
-};
-const updateState = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  index,
-  row,
-  col
-) => {
-  targetState[row][col].dropVal = sourceState[index].val;
-  targetState[row][col].show = true;
-
-  updateTargetState([...targetState]);
-  sourceState[index] = { ...sourceState[index], show: false };
-
-  updateSourceState([...sourceState]);
-};
-const updateState2 = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  row,
-  col,
-  index
-) => {
-  // targetState.push(sourceState[row][col]?.val);
-  targetState[index].val = sourceState[row][col].dropVal;
-  targetState[index].show = true;
-  sourceState[row][col].dropVal = "";
-  sourceState[row][col].show = false;
-  updateTargetState([...targetState]);
-  updateSourceState([...sourceState]);
-};
 export default function LongDivisionDragAndDropType({
   content,
   choices,
   inputRef,
-  totalRows,
 }) {
   const { hasAnswerSubmitted, isStudentAnswerResponse } =
     useContext(ValidationContext);
   const [dropState, setDropState] = useState([]);
   const [dragState, setDragState] = useState([]);
-  const [isDragActive, setIsDragActive] = useState(false);
-  const currentDrag = useRef(-1);
-  const [xyPosition, setXyPosition] = useState([]);
-  const currentDrop = useRef([-1, -1]);
-  const [isDropActive, setIsDropActive] = useState(false);
   const [handleDrag, handleDragStart] = useScrollBar();
-
+  const [dragKey, setDragKey] = useState(0);
+  const droppableContainerRef = useRef([]);
   useEffect(() => {
     let arr = [];
 
@@ -100,66 +36,34 @@ export default function LongDivisionDragAndDropType({
       let obj = { show: true, val: item };
       temp.push({ ...obj });
     });
+    droppableContainerRef.current = [...Array(arr.length)].map((item) =>
+      Array(arr[0].length)
+    );
     setDropState([...arr]);
     setDragState([...temp]);
   }, []);
 
   const handleStop1 = (e, i) => {
-    setIsDragActive(true);
     let [x, y] = dragdropPointCordinate(e);
-    let temp = [...dragState];
-    let position = [x, y];
-    setXyPosition([...position]);
-    setDragState([]);
-    currentDrag.current = i;
-    setDragState([...temp]);
+    const [row, col] = validateCoordiante(droppableContainerRef.current, {
+      x,
+      y,
+    });
+    if (
+      row > -1 &&
+      col > -1 &&
+      dropState[row][col].isMissed === "true" &&
+      !dropState[row][col].show
+    ) {
+      dropState[row][col].dropVal = dragState[i]?.val || "";
+      dragState[i].show = false;
+      dropState[row][col].show = true;
+      setDragState([...dragState]);
+      setDropState([...dropState]);
+    } else {
+      setDragKey(Number(!dragKey));
+    }
   };
-  useEffect(() => {
-    if (xyPosition.length > 0 && isDragActive) {
-      let id = setTimeout(() => {
-        let val = elementFinds("droppablehfu", xyPosition, dropState);
-        if (val !== false) {
-          const [row, col] = val.split(" ").map(Number);
-          updateState(
-            dropState,
-            dragState,
-            setDropState,
-            setDragState,
-            currentDrag.current,
-            row,
-            col
-          );
-        }
-        clearTimeout(id);
-        setXyPosition([]);
-        setIsDragActive(false);
-        currentDrag.current = -1;
-      }, 0);
-    }
-  }, [xyPosition.length]);
-
-  useEffect(() => {
-    if (xyPosition.length > 0 && isDropActive) {
-      let id = setTimeout(() => {
-        let val = elementFinds2("draggablehfu", xyPosition, dragState);
-        if (val !== false) {
-          updateState2(
-            dragState,
-            dropState,
-            setDragState,
-            setDropState,
-            currentDrop.current[0],
-            currentDrop.current[1],
-            val
-          );
-        }
-        clearTimeout(id);
-        currentDrop.current = [-1, -1];
-        setXyPosition([]);
-        setIsDropActive(false);
-      }, 0);
-    }
-  }, [isDropActive, xyPosition.length]);
 
   const handleStop2 = (e, row, col) => {
     let value = dropState[row][col].dropVal;
@@ -178,7 +82,6 @@ export default function LongDivisionDragAndDropType({
   inputRef.current = dropState;
   const heightRef = useRef([]);
 
-  let defaultBorderRef = useRef(3);
   return (
     <>
       <div>
@@ -191,7 +94,16 @@ export default function LongDivisionDragAndDropType({
               <tr key={index}>
                 {items?.map((item, i) =>
                   item.isMissed !== "true" ? (
-                    <td key={i}>
+                    <td
+                      key={i}
+                      ref={(el) =>
+                        (droppableContainerRef.current[index][i] = {
+                          el,
+                          isMissed: item.isMissed === "true",
+                          show: item?.show,
+                        })
+                      }
+                    >
                       <div data-value={`rowssssssssss-${i}`}>
                         <b>
                           <HtmlParserComponent value={item?.value} />
@@ -228,6 +140,13 @@ export default function LongDivisionDragAndDropType({
                         }}
                         id={`${index} ${i}`}
                         value={item.value}
+                        ref={(el) =>
+                          (droppableContainerRef.current[index][i] = {
+                            el,
+                            isMissed: item.isMissed === "true",
+                            show: item?.show,
+                          })
+                        }
                       >
                         {(item.show || isStudentAnswerResponse) && (
                           <Draggable
@@ -285,7 +204,10 @@ export default function LongDivisionDragAndDropType({
           </tbody>
         </table>
       </div>
-      <div className={styles.LongDivisonDragDropFlexBox2}>
+      <div
+        className={styles.LongDivisonDragDropFlexBox2}
+        key={`drag_key${dragKey}`}
+      >
         {dragState?.map((items, i) => (
           <div
             id={`${i}`}
