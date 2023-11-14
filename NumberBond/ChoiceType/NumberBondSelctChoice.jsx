@@ -40,15 +40,22 @@ const RenderBinaryTree = ({ node }) => {
       );
   }, []);
 
-  return (
-   element?.value? <div className={styles.root1} id={`root1row${element?.row}col${element?.col}`}>
+  return element?.value ? (
+    <div
+      className={styles.root1}
+      id={`root1row${element?.row}col${element?.col}`}
+    >
       <div className={styles.element}>
         <div
           id={`row${element?.row}col${element?.col}`}
           className={styles.circles1}
           style={{
             border: `${element?.value ? 1 : 0}px solid black`,
-            backgroundColor: `${element?.value&&element?.isMissed==="false" ? "indigo" : "initial"}`,
+            backgroundColor: `${
+              element?.value && element?.isMissed === "false"
+                ? "indigo"
+                : "initial"
+            }`,
             color: `${element?.isMissed === "true" ? "black" : "white"}`,
           }}
         >
@@ -61,7 +68,13 @@ const RenderBinaryTree = ({ node }) => {
             id={`bottom${element?.row}row${element?.col}col`}
           ></div>
           {element?.isMissed == "true" ? (
-            <input className={styles.InputBox} readOnly={true} type="text" value="?"/>
+            <input
+              className={styles.InputBox}
+              readOnly={true}
+              type="text"
+              value="?"
+              style={{ border: 0 }}
+            />
           ) : (
             element?.value
           )}
@@ -98,12 +111,15 @@ const RenderBinaryTree = ({ node }) => {
           right?.element?.value && (
             <div className={styles.fixed}>
               <canvas
-                id={`canva2${element?.row}row${element?.col}col`} className={`${element?.row}_${element?.col} ${right?.element?.row}_${right?.element?.col}`}
+                id={`canva2${element?.row}row${element?.col}col`}
+                className={`${element?.row}_${element?.col} ${right?.element?.row}_${right?.element?.col}`}
               ></canvas>
             </div>
           )}
       </>
-    </div>:""
+    </div>
+  ) : (
+    ""
   );
 };
 
@@ -125,7 +141,7 @@ function insertLevelOrder(arr, root, i) {
   }
   return { ...root };
 }
-function NumberBondSelctChoice({ datas, inputRef,studentAnswer }) {
+function NumberBondSelctChoice({ datas, inputRef, studentAnswer }) {
   let [obj3, setObj3] = useState({});
   const [line, setLine] = useState("");
   const [inputState, setInputState] = useState({});
@@ -166,11 +182,10 @@ function NumberBondSelctChoice({ datas, inputRef,studentAnswer }) {
       clearTimeout(id);
     }, 0);
   };
- 
+
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-   
-    
+
     let arr = [];
     datas?.choices?.map((item) => {
       let obj = { value: item, show: false };
@@ -179,19 +194,19 @@ function NumberBondSelctChoice({ datas, inputRef,studentAnswer }) {
     setChoicesState([...arr]);
     return () => {
       window.removeEventListener("resize", handleResize);
-     
     };
   }, []);
   const [choicesState, setChoicesState] = useState([]);
-  const { hasAnswerSubmitted,isStudentAnswerResponse } = useContext(ValidationContext);
+  const { hasAnswerSubmitted, isStudentAnswerResponse } =
+    useContext(ValidationContext);
   const handleChoiceSelection = (i) => {
-    if (hasAnswerSubmitted||isStudentAnswerResponse) return;
+    if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     choicesState[prev.current].show = false;
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
     prev.current = i;
   };
-  inputRef.current = [...choicesState ];
+  inputRef.current = [...choicesState];
   return (
     <div className={styles.tree} id="numberbondtree">
       {resize && Object.keys(obj3).length > 0 && (
@@ -200,8 +215,11 @@ function NumberBondSelctChoice({ datas, inputRef,studentAnswer }) {
       <div className={styles2.NumberBondSelectChoiceFlexBox2}>
         {choicesState?.map((value, i) => (
           <div
-            className={`${styles2.flex}  ${(isStudentAnswerResponse&&String(value?.value)?.trim()===String(studentAnswer))?styles2.selectedChoiceType:
-              value.show
+            className={`${styles2.flex}  ${
+              isStudentAnswerResponse &&
+              String(value?.value)?.trim() === String(studentAnswer)
+                ? styles2.selectedChoiceType
+                : value.show
                 ? styles2.selectedChoiceType
                 : styles2.prevSelectionAnswerSelection
             }`}

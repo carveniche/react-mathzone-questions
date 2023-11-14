@@ -5,7 +5,8 @@ import { makeBond } from "../GlobalBond/MakeBond";
 import styles from "../NumberBond.module.css";
 const RenderBinaryTree = ({ node, state, onClick }) => {
   const { left, right, element } = node;
-  const {hasAnswerSubmitted,isStudentAnswerResponse}=useContext(ValidationContext)
+  const { hasAnswerSubmitted, isStudentAnswerResponse } =
+    useContext(ValidationContext);
   const [line1, setLine1] = useState("");
   const [line2, setLine2] = useState("");
   //let [row,setRow]=useState([element?.row,element?.col])
@@ -44,15 +45,22 @@ const RenderBinaryTree = ({ node, state, onClick }) => {
       );
   }, []);
   let str = `${element?.row} ${element?.col}`;
-  return (
-   element?.value ?<div className={styles.root1} id={`root1row${element?.row}col${element?.col}`}>
+  return element?.value ? (
+    <div
+      className={styles.root1}
+      id={`root1row${element?.row}col${element?.col}`}
+    >
       <div className={styles.element}>
         <div
           id={`row${element?.row}col${element?.col}`}
           className={styles.circles1}
           style={{
             border: `${element?.value ? 1 : 0}px solid black`,
-            backgroundColor: `${element?.value&&element?.isMissed==="false" ? "indigo" : "initial"}`,
+            backgroundColor: `${
+              element?.value && element?.isMissed === "false"
+                ? "indigo"
+                : "initial"
+            }`,
             color: `${element?.isMissed === "true" ? "black" : "white"}`,
           }}
         >
@@ -67,10 +75,17 @@ const RenderBinaryTree = ({ node, state, onClick }) => {
           {element?.isMissed == "true" ? (
             <input
               className={styles.InputBox}
+              style={{ border: 0 }}
               type="text"
               onChange={(e) => onClick(e, element?.row, element?.col)}
-              value={isStudentAnswerResponse?element[student_answer]:state[str] ? String(state[str]).trim() : ""}
-              disabled={hasAnswerSubmitted||isStudentAnswerResponse}
+              value={
+                isStudentAnswerResponse
+                  ? element[student_answer]
+                  : state[str]
+                  ? String(state[str]).trim()
+                  : ""
+              }
+              disabled={hasAnswerSubmitted || isStudentAnswerResponse}
             />
           ) : (
             element?.value
@@ -116,7 +131,9 @@ const RenderBinaryTree = ({ node, state, onClick }) => {
             </div>
           )}
       </>
-    </div>:""
+    </div>
+  ) : (
+    ""
   );
 };
 
@@ -173,7 +190,7 @@ function NumberBondKeyingChoiceType({ datas, inputRef }) {
       restElement = [...firstFiveElement, ...restElement];
       let root = {};
       root = insertLevelOrder(restElement, root, 0);
-      console.log(root)
+      console.log(root);
       setObj3({ ...root });
     }
 
