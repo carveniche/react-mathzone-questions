@@ -990,7 +990,9 @@ sup .fraction-root .fdn,
     align-items: center;
   }
 }
-
+#multipleChoiceStudentAnswerResponse > #studentAnswerResponse div {
+  white-space: initial;
+}
 .mathzone-circle-selectbox {
   min-width: 40px;
   aspect-ratio: 1/1;
