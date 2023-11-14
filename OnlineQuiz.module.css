@@ -2940,6 +2940,7 @@
 
 .whitePage > div img {
   height: fit-content;
+  display: initial;
 }
 #newTypeQuestion .questionName img {
   width: auto !important;

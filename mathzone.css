@@ -606,6 +606,9 @@ sup .fraction-root .fdn,
 #studentAnswerResponse .react-draggable {
   cursor: move !important;
 }
+#studentAnswerResponse img {
+  display: initial;
+}
 .animationforquizchild {
   border: 1px solid black;
   display: block;
