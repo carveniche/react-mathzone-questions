@@ -29,7 +29,10 @@ const validationForKeyingChoiceType = (choices) => {
     let m = temp?.length || 0;
     for (let j = 0; j < m; j++) {
       if (temp[j].isMissed == "true") {
-        if (String(temp[j]?.dropValue).trim()?.toLowerCase() !== String(temp[j]?.value).trim()?.toLowerCase())
+        if (
+          String(temp[j]?.dropValue).trim()?.toLowerCase() !==
+          String(temp[j]?.value).trim()?.toLowerCase()
+        )
           return 1;
       }
     }
@@ -37,113 +40,133 @@ const validationForKeyingChoiceType = (choices) => {
   return 2;
 };
 const validationForSelectChoice = (choices) => {
-
   for (let items of choices) {
     if (items.show) {
-      if(String(items.show)!==items.selected)
-      return 1
-      else return 2
+      if (String(items.show) !== items.selected) return 1;
+      else return 2;
     }
   }
-  return 0
+  return 0;
 };
-const changeAnswerStatus=(val,setIsAnswerCorrect,setHasAnswerSubmitted,setStudentAnswerQuestion,setRedAlert)=>{
-  if(val===0)
-  {
-   setRedAlert(true)
-    return
-
-}
-else if(val===1)
-setIsAnswerCorrect(false)
-else
-setIsAnswerCorrect(true)
-let jsonData=serializeResponse("studentAnswerResponse")
-setStudentAnswerQuestion(jsonData)
-setHasAnswerSubmitted(true)
-
-
-}
-export default function DragAndDrop({ state, totalRows, totalColumns,meter }) {
-  meter=Number(meter)||0
-  const inputRef=useRef()
+const changeAnswerStatus = (
+  val,
+  setIsAnswerCorrect,
+  setHasAnswerSubmitted,
+  setStudentAnswerQuestion,
+  setRedAlert
+) => {
+  if (val === 0) {
+    setRedAlert(true);
+    return;
+  } else if (val === 1) setIsAnswerCorrect(false);
+  else setIsAnswerCorrect(true);
+  let jsonData = serializeResponse("studentAnswerResponse");
+  setStudentAnswerQuestion(jsonData);
+  setHasAnswerSubmitted(true);
+};
+export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
+  meter = Number(meter) || 0;
+  const inputRef = useRef();
   let rows = [];
-  const {hasAnswerSubmitted,setHasAnswerSubmitted,setIsAnswerCorrect,setChoicesId,setStudentAnswerQuestion,isStudentAnswerResponse,setQuestionWithAnswer}=useContext(ValidationContext)
+  const {
+    hasAnswerSubmitted,
+    setHasAnswerSubmitted,
+    setIsAnswerCorrect,
+    setChoicesId,
+    setStudentAnswerQuestion,
+    isStudentAnswerResponse,
+    setQuestionWithAnswer,
+  } = useContext(ValidationContext);
   for (let i = 0; i < Number(totalRows); i++) {
     let temp = new Array(Number(state.cols));
     rows.push(temp);
   }
   const dropRef = useRef(rows);
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   const handleSubmitAnswer = () => {
-    
     if (hasAnswerSubmitted) return;
-    if (state?.choiceType == "dragdrop"||1) {
-      for (let i = 0; i < Number(totalRows); i++) {
-        for (let j = 0; j < Number(state.cols); j++)
-          if (
-            String(dropRef.current[i][j]?.getAttribute("name")).trim() !==
-            "false"
-          ) {
-            if (!dropRef.current[i][j]?.textContent) {
-              setRedAlert(true)
+    if (state?.choiceType == "dragdrop" || 1) {
+      for (let i = 0; i < Number(inputRef.current?.length || 0); i++) {
+        for (let j = 0; j < Number(inputRef.current[i]?.length || 0); j++)
+          if (inputRef.current[i][j].isMissed === "true") {
+            if (!inputRef.current[i][j]?.dropValue) {
+              setRedAlert(true);
               return;
             }
           }
       }
-      for (let i = 0; i < Number(totalRows); i++) {
-        for (let j = 0; j < Number(state.cols); j++)
-          if (
-            String(dropRef.current[i][j]?.getAttribute("name")).trim() !==
-            "false"
-          ) {
+      for (let i = 0; i < Number(inputRef.current?.length || 0); i++) {
+        for (let j = 0; j < Number(inputRef.current[i]?.length || 0); j++)
+          if (inputRef.current[i][j]?.isMissed === "true") {
             if (
-              String(dropRef.current[i][j]?.textContent).trim()?.toLowerCase() !==
-              String(dropRef.current[i][j]?.getAttribute("value")).trim()?.toLowerCase()
+              String(inputRef.current[i][j]?.dropValue)
+                .trim()
+                ?.toLowerCase() !==
+              String(inputRef.current[i][j]?.value).trim()?.toLowerCase()
             ) {
-              let result=manupulateQuestionContent(inputRef.current,"dropValue")
-              state={...state,questionContent:result}
-              setQuestionWithAnswer({...state})
+              let result = manupulateQuestionContent(
+                inputRef.current,
+                "dropValue"
+              );
+              console.log(inputRef.current);
+              state = { ...state, questionContent: result };
+              setQuestionWithAnswer({ ...state });
               setHasAnswerSubmitted(true);
               setIsAnswerCorrect(false);
               return;
             }
           }
       }
-      let result=manupulateQuestionContent(inputRef.current,"dropValue")
-      state={...state,questionContent:result}
-      setQuestionWithAnswer({...state})
+      let result = manupulateQuestionContent(inputRef.current, "dropValue");
+      state = { ...state, questionContent: result };
+      setQuestionWithAnswer({ ...state });
       setIsAnswerCorrect(true);
       setHasAnswerSubmitted(true);
     } else if (state?.choiceType == "keying") {
-      let status=validationForKeyingChoiceType(dropRef)
-      console.log(status)
-      changeAnswerStatus(status,setIsAnswerCorrect,setHasAnswerSubmitted,setStudentAnswerQuestion,setRedAlert)
-    }  else if(state?.choiceType=="selectchoice")
-    {
-      let status=validationForSelectChoice(dropRef.current)
-      changeAnswerStatus(status,setIsAnswerCorrect,setHasAnswerSubmitted,setStudentAnswerQuestion,setRedAlert)
-   
+      let status = validationForKeyingChoiceType(dropRef);
+      console.log(status);
+      changeAnswerStatus(
+        status,
+        setIsAnswerCorrect,
+        setHasAnswerSubmitted,
+        setStudentAnswerQuestion,
+        setRedAlert
+      );
+    } else if (state?.choiceType == "selectchoice") {
+      let status = validationForSelectChoice(dropRef.current);
+      changeAnswerStatus(
+        status,
+        setIsAnswerCorrect,
+        setHasAnswerSubmitted,
+        setStudentAnswerQuestion,
+        setRedAlert
+      );
     }
   };
 
   return (
     <div>
-     {!isStudentAnswerResponse&& <SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
-       {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles?.questionName}>
           {HtmlParser(state?.questionName)}
         </div>
-        {state?.upload_file_name&&<div><img src={state?.upload_file_name} alt="image not found"/></div>}
+        {state?.upload_file_name && (
+          <div>
+            <img src={state?.upload_file_name} alt="image not found" />
+          </div>
+        )}
         <div>
-        <ConditionOnProgressBar meter={meter}/>
+          <ConditionOnProgressBar meter={meter} />
         </div>
         <div className={styles.contentParent}>
-          {(state?.choiceType == "dragdrop"||1) ? (
+          {state?.choiceType == "dragdrop" || 1 ? (
             <DropBoxes
               content={state.questionContent}
               totalRows={Number(totalRows)}
@@ -171,7 +194,7 @@ export default function DragAndDrop({ state, totalRows, totalColumns,meter }) {
               dropRef={dropRef}
               totalCols={Number(totalColumns)}
             />
-          ) :(
+          ) : (
             <h1>Unsupported file types ...</h1>
           )}
         </div>
