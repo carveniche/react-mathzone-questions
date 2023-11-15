@@ -139,75 +139,83 @@ const DropBoxRenderer = ({
 }) => {
   return (
     <>
-      {dropState?.map((items, index) => (
-        <div key={index}>
-          {items?.map((item, i) =>
-            item.isMissed === "false" ? (
-              <div className={styles.MatchObjectVerticalDragDropFlexBox3}>
-                <div
-                  className="fontSize"
-                  ref={(el) =>
-                    (droppableContainerRef.current[index][i] = {
-                      el,
-                      isMissed: item.isMissed === "true",
-                      show: item?.show,
-                    })
-                  }
-                >
-                  <HtmlParserComponent value={item?.numvalue} />
-                </div>
-                <div className="fontSize">{HtmlParser(item?.imgvalue)}</div>
-              </div>
-            ) : (
-              <div
-                className={styles.MatchObjectVerticalDragDropFlexBox3}
-                key={i}
-              >
-                <div className="fontSize">{HtmlParser(item.imgvalue)}</div>
-                <div>
-                  <div
-                    className={`droppablehfu ${styles.MatchObjectVerticalDragDropBox}`}
-                    id={`${index} ${i}`}
-                    value={item.value}
-                    key={i}
-                    style={{
-                      border: `${
-                        item.show || isStudentAnswerResponse ? 0 : 1
-                      }px dashed black`,
-                    }}
-                    ref={(el) =>
-                      (droppableContainerRef.current[index][i] = {
-                        el,
-                        isMissed: item.isMissed === "true",
-                        show: item?.show,
-                      })
-                    }
-                  >
-                    {(item.show || isStudentAnswerResponse) && (
-                      <Draggable
-                        onStop={(e) => handleStop2(e, index, i)}
-                        disabled={hasAnswerSubmitted || isStudentAnswerResponse}
-                        onDrag={handleDrag}
-                        onStart={handleDragStart}
-                      >
-                        <div>
-                          <HtmlParserComponent
-                            value={
-                              isStudentAnswerResponse
-                                ? item[student_answer]
-                                : item?.dropVal
-                            }
-                          />
-                        </div>
-                      </Draggable>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )
-          )}
-        </div>
-      ))}
+      <table>
+        {dropState?.map((items, index) => (
+          <React.Fragment key={index}>
+            {items?.map((item, i) =>
+              item.isMissed === "false" ? (
+                <tr>
+                  <td style={{ padding: 5 }}>
+                    <div
+                      className="fontSize"
+                      ref={(el) =>
+                        (droppableContainerRef.current[index][i] = {
+                          el,
+                          isMissed: item.isMissed === "true",
+                          show: item?.show,
+                        })
+                      }
+                    >
+                      <HtmlParserComponent value={item?.numvalue} />
+                    </div>
+                  </td>
+                  <td style={{ padding: 5 }}>
+                    {" "}
+                    <div className="fontSize">{HtmlParser(item?.imgvalue)}</div>
+                  </td>
+                </tr>
+              ) : (
+                <tr key={i}>
+                  <td style={{ padding: 5 }}>
+                    <div className="fontSize">{HtmlParser(item.imgvalue)}</div>
+                  </td>
+                  <td style={{ padding: 5 }}>
+                    <div
+                      className={`droppablehfu ${styles.MatchObjectVerticalDragDropBox}`}
+                      id={`${index} ${i}`}
+                      value={item.value}
+                      key={i}
+                      style={{
+                        border: `${
+                          item.show || isStudentAnswerResponse ? 0 : 1
+                        }px dashed black`,
+                      }}
+                      ref={(el) =>
+                        (droppableContainerRef.current[index][i] = {
+                          el,
+                          isMissed: item.isMissed === "true",
+                          show: item?.show,
+                        })
+                      }
+                    >
+                      {(item.show || isStudentAnswerResponse) && (
+                        <Draggable
+                          onStop={(e) => handleStop2(e, index, i)}
+                          disabled={
+                            hasAnswerSubmitted || isStudentAnswerResponse
+                          }
+                          onDrag={handleDrag}
+                          onStart={handleDragStart}
+                        >
+                          <div>
+                            <HtmlParserComponent
+                              value={
+                                isStudentAnswerResponse
+                                  ? item[student_answer]
+                                  : item?.dropVal
+                              }
+                            />
+                          </div>
+                        </Draggable>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              )
+            )}
+          </React.Fragment>
+        ))}
+      </table>
     </>
   );
 };

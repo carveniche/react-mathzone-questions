@@ -4,7 +4,7 @@ import styled from "styled-components";
 import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import styles from "../../../OnlineQuiz.module.css"
+import styles from "../../../OnlineQuiz.module.css";
 export default function VerticalKeyingChoiceType({
   inputRef,
   content,
@@ -13,7 +13,7 @@ export default function VerticalKeyingChoiceType({
   hasAnswerSubmitted,
 }) {
   const [row, setRow] = useState([]);
-  const {isStudentAnswerResponse}=useContext(ValidationContext)
+  const { isStudentAnswerResponse } = useContext(ValidationContext);
   const handleChange = (e, rows, cols) => {
     row[rows][cols].dropVal = e.target.value;
     if (row[rows][cols].dropVal == "") {
@@ -35,38 +35,61 @@ export default function VerticalKeyingChoiceType({
   }, []);
   inputRef.current = row;
 
-  return row?.map((items, index) => (
-    <div key={index} className={"mathzone-color-indigo"}>
-      {items?.map((item, i) =>
-        item.isMissed === "false" ? (
-          <div className={styles.MatchObjectVerticalKeyingFlexBox3}>
-            <div>{HtmlParser(item?.imgvalue)}</div>
-            <div><HtmlParserComponent value={item?.numvalue}/></div>
-          </div>
-        ) : (
-          <div className={styles.MatchObjectVerticalKeyingFlexBox3}>
-            <div>{HtmlParser(item.imgvalue)}</div>
-            <div>
-              <div>
-                {
-                  
-                  <input style={StylesInline.Input}
-                    value={isStudentAnswerResponse?item[student_answer]:row[index][i]?.dropVal}
-                    onChange={(e) => {
-                      if(isStudentAnswerResponse)
-                      return
-                      handleChange(e, index, i);
-                    }}
-                    disabled={hasAnswerSubmitted||isStudentAnswerResponse}
-                  />
-                }
-              </div>
-            </div>
-          </div >
-        )
-      )}
-    </div>
-  ));
+  return (
+    <>
+      <table>
+        {row?.map((items, index) => (
+          <React.Fragment key={index}>
+            {items?.map((item, i) =>
+              item.isMissed === "false" ? (
+                <tr className={"mathzone-color-indigo"}>
+                  <td style={{ padding: 5 }}>
+                    {" "}
+                    <div>{HtmlParser(item?.imgvalue)}</div>
+                  </td>
+                  <td style={{ padding: 5 }}>
+                    <div>
+                      <HtmlParserComponent value={item?.numvalue} />
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                <tr className={"mathzone-color-indigo"}>
+                  <td style={{ padding: 5 }}>
+                    {" "}
+                    <div>{HtmlParser(item.imgvalue)}</div>
+                  </td>
+                  <td style={{ padding: 5 }}>
+                    <div>
+                      <div>
+                        {
+                          <input
+                            style={StylesInline.Input}
+                            value={
+                              isStudentAnswerResponse
+                                ? item[student_answer]
+                                : row[index][i]?.dropVal
+                            }
+                            onChange={(e) => {
+                              if (isStudentAnswerResponse) return;
+                              handleChange(e, index, i);
+                            }}
+                            disabled={
+                              hasAnswerSubmitted || isStudentAnswerResponse
+                            }
+                          />
+                        }
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              )
+            )}
+          </React.Fragment>
+        ))}
+      </table>
+    </>
+  );
 }
 
 export const FlexBox = styled.div`
@@ -81,10 +104,6 @@ export const FlexBox = styled.div`
   }
 `;
 
-const StylesInline={
-  Input:{height: "50px",
-  textAlign: "center",
-  width: "100px",
-  }
-}
-
+const StylesInline = {
+  Input: { height: "50px", textAlign: "center", width: "100px" },
+};
