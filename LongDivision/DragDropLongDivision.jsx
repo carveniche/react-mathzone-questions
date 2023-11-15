@@ -248,7 +248,7 @@ export default function LongDivisionDragAndDropType({
 export const RightPranthesis = styled.div`
   position: absolute;
   top: 4px;
-  transform: scale(1.8, 2.9);
+  transform: scale(1.4, 2.65);
   right: -1px;
   color: indigo;
 `;
