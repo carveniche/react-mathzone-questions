@@ -9,68 +9,7 @@ import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/one
 import { dragdropPointCordinate } from "../../../../../CommonFunction/dragdropPointCordinate";
 import { useScrollBar } from "../../../../../CommonFunction/useScrollBar";
 import { validateCoordiante } from "../../../ChoicesType/validateCoordinates";
-const elementFinds = (target, xyAxis, dropState) => {
-  if (xyAxis[0] == undefined) return false;
-  let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      const [row, col] = elem?.getAttribute("id")?.split(" ").map(Number);
-      if (!dropState[row][col].show) return elem?.getAttribute("id");
-    }
-    elem = elem.parentNode;
-  }
 
-  return false;
-};
-const elementFinds2 = (target, xyAxis, dragState) => {
-  let elem = document?.elementFromPoint(xyAxis[0], xyAxis[1]);
-
-  while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
-    if (elem?.className.includes(target)) {
-      const index = Number(elem?.getAttribute("id"));
-
-      if (!dragState[index].show) return index;
-    }
-    elem = elem.parentNode;
-  }
-
-  return false;
-};
-const updateState = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  index,
-  row,
-  col
-) => {
-  targetState[row][col].dropVal = sourceState[index].val;
-  targetState[row][col].show = true;
-  // console.log(targetState[row][col])
-
-  updateTargetState([...targetState]);
-  sourceState[index] = { ...sourceState[index], show: false };
-
-  updateSourceState([...sourceState]);
-};
-const updateState2 = (
-  targetState,
-  sourceState,
-  updateTargetState,
-  updateSourceState,
-  row,
-  col,
-  index
-) => {
-  // targetState.push(sourceState[row][col]?.val);
-  targetState[index].val = sourceState[row][col].dropVal;
-  targetState[index].show = true;
-  sourceState[row][col].dropVal = "";
-  sourceState[row][col].show = false;
-  updateTargetState([...targetState]);
-  updateSourceState([...sourceState]);
-};
 export default function ChoiceDNDMatchObjVertEqn({
   content,
   choices,
@@ -81,14 +20,10 @@ export default function ChoiceDNDMatchObjVertEqn({
     useContext(ValidationContext);
   const [dropState, setDropState] = useState([]);
   const [dragState, setDragState] = useState([]);
-  const [isDragActive, setIsDragActive] = useState(false);
-  const currentDrag = useRef(-1);
-  const [xyPosition, setXyPosition] = useState([]);
-  const currentDrop = useRef([-1, -1]);
-  const [isDropActive, setIsDropActive] = useState(false);
   const [handleDrag, handleDragStart] = useScrollBar();
   const droppableContainerRef = useRef([]);
   const [dragKey, setDragKey] = useState(0);
+
   useEffect(() => {
     let arr = [];
 
@@ -134,53 +69,6 @@ export default function ChoiceDNDMatchObjVertEqn({
       setDragKey(Number(!dragKey));
     }
   };
-  useEffect(() => {
-    if (xyPosition.length > 0 && isDragActive) {
-      let id = setTimeout(() => {
-        let val = elementFinds("droppablehfu", xyPosition, dropState);
-        if (val !== false) {
-          const [row, col] = val.split(" ").map(Number);
-          updateState(
-            dropState,
-            dragState,
-            setDropState,
-            setDragState,
-            currentDrag.current,
-            row,
-            col
-          );
-        }
-        clearTimeout(id);
-        setXyPosition([]);
-        setIsDragActive(false);
-        currentDrag.current = -1;
-      }, 0);
-    }
-  }, [xyPosition.length]);
-
-  useEffect(() => {
-    if (xyPosition.length > 0 && isDropActive) {
-      let id = setTimeout(() => {
-        let val = elementFinds2("draggablehfu", xyPosition, dragState);
-        if (val !== false) {
-          console.log(val, "vlaue");
-          updateState2(
-            dragState,
-            dropState,
-            setDragState,
-            setDropState,
-            currentDrop.current[0],
-            currentDrop.current[1],
-            val
-          );
-        }
-        clearTimeout(id);
-        currentDrop.current = [-1, -1];
-        setXyPosition([]);
-        setIsDropActive(false);
-      }, 0);
-    }
-  }, [isDropActive, xyPosition.length]);
 
   const handleStop2 = (e, row, col) => {
     dropState[row][col].show = false;
@@ -251,104 +139,109 @@ const DropBoxRenderer = ({
 }) => {
   return (
     <>
-      {dropState?.map((items, index) => (
-        <div key={index}>
-          {items?.map((item, i) =>
-            item.isMissed !== "true" ? (
-              <div
-                className={styles.MatchObjectVerticalDragDropFlexBox3}
-                style={{ fontSize: 16, fontWeight: "bold" }}
-                key={i}
-              >
-                <div
-                  className="fontSize"
-                  style={{
-                    color: "black",
-                    fontSize: 16,
-                    fontWeight: "bold",
-                    gap: "1rem",
-                  }}
-                  ref={(el) =>
-                    (droppableContainerRef.current[index][i] = {
-                      el,
-                      isMissed: item.isMissed === "true",
-                      show: item?.show,
-                    })
-                  }
-                >
-                  {parse(item?.numvalue, optionSelectStaticMathField)}
-                </div>
-                <div
-                  className="fontSize"
-                  style={{
-                    color: "black",
-                    fontSize: 16,
-                    fontWeight: "bold",
-                    gap: "1rem",
-                  }}
-                >
-                  {parse(item?.imgvalue, optionSelectStaticMathField)}
-                </div>
-              </div>
-            ) : (
-              <div
-                className={styles.MatchObjectVerticalDragDropFlexBox3}
-                key={i}
-              >
-                <div
-                  className="fontSize"
-                  style={{
-                    color: "black",
-                    fontSize: 16,
-                    fontWeight: "bold",
-                    gap: "1rem",
-                  }}
-                >
-                  {parse(item.imgvalue, optionSelectStaticMathField)}
-                </div>
-                <div>
-                  <div
-                    className={`droppablehfu ${styles.MatchObjectVerticalDragDropBox}`}
-                    id={`${index} ${i}`}
-                    value={item.value}
-                    key={i}
-                    style={{
-                      border: `${
-                        item.show || isStudentAnswerResponse ? 0 : 1
-                      }px dashed black`,
-                    }}
-                    ref={(el) =>
-                      (droppableContainerRef.current[index][i] = {
-                        el,
-                        isMissed: item.isMissed === "true",
-                        show: item?.show,
-                      })
-                    }
-                  >
-                    {(item.show || isStudentAnswerResponse) && (
-                      <Draggable
-                        onStop={(e) => handleStop2(e, index, i)}
-                        disabled={hasAnswerSubmitted || isStudentAnswerResponse}
-                        onStart={handleDragStart}
-                        onDrag={handleDrag}
+      <table>
+        {dropState?.map((items, index) => (
+          <React.Fragment key={index}>
+            {items?.map((item, i) =>
+              item.isMissed !== "true" ? (
+                <tr key={i}>
+                  <td style={{ padding: 5 }}>
+                    <div
+                      className="fontSize"
+                      style={{
+                        color: "black",
+                        fontSize: 16,
+                        fontWeight: "bold",
+                        gap: "1rem",
+                      }}
+                      ref={(el) =>
+                        (droppableContainerRef.current[index][i] = {
+                          el,
+                          isMissed: item.isMissed === "true",
+                          show: item?.show,
+                        })
+                      }
+                    >
+                      {parse(item?.numvalue, optionSelectStaticMathField)}
+                    </div>
+                  </td>
+                  <td style={{ padding: 5 }}>
+                    <div
+                      className="fontSize"
+                      style={{
+                        color: "black",
+                        fontSize: 16,
+                        fontWeight: "bold",
+                        gap: "1rem",
+                      }}
+                    >
+                      {parse(item?.imgvalue, optionSelectStaticMathField)}
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                <tr key={i}>
+                  <td style={{ padding: 5 }}>
+                    <div
+                      className="fontSize"
+                      style={{
+                        color: "black",
+                        fontSize: 16,
+                        fontWeight: "bold",
+                        gap: "1rem",
+                      }}
+                    >
+                      {parse(item.imgvalue, optionSelectStaticMathField)}
+                    </div>
+                  </td>
+                  <td style={{ padding: 5 }}>
+                    <div>
+                      <div
+                        className={`droppablehfu ${styles.MatchObjectVerticalDragDropBox}`}
+                        id={`${index} ${i}`}
+                        value={item.value}
+                        key={i}
+                        style={{
+                          border: `${
+                            item.show || isStudentAnswerResponse ? 0 : 1
+                          }px dashed black`,
+                        }}
+                        ref={(el) =>
+                          (droppableContainerRef.current[index][i] = {
+                            el,
+                            isMissed: item.isMissed === "true",
+                            show: item?.show,
+                          })
+                        }
                       >
-                        <div>
-                          {parse(
-                            isStudentAnswerResponse
-                              ? item[student_answer]
-                              : item.dropVal,
-                            optionSelectStaticMathField
-                          )}
-                        </div>
-                      </Draggable>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )
-          )}
-        </div>
-      ))}
+                        {(item.show || isStudentAnswerResponse) && (
+                          <Draggable
+                            onStop={(e) => handleStop2(e, index, i)}
+                            disabled={
+                              hasAnswerSubmitted || isStudentAnswerResponse
+                            }
+                            onStart={handleDragStart}
+                            onDrag={handleDrag}
+                          >
+                            <div>
+                              {parse(
+                                isStudentAnswerResponse
+                                  ? item[student_answer]
+                                  : item.dropVal,
+                                optionSelectStaticMathField
+                              )}
+                            </div>
+                          </Draggable>
+                        )}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              )
+            )}
+          </React.Fragment>
+        ))}
+      </table>
     </>
   );
 };
