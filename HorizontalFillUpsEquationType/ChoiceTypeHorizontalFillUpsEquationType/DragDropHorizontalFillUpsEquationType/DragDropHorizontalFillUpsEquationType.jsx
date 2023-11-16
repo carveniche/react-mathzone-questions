@@ -89,7 +89,7 @@ export default function ContentHorizontalFillUpsEquationType({
     <>
       {dropState?.map((items, index) => (
         <div
-          className={`${styles.HorizontalPictureDragDropFlexBox} mathzone-color-indigo`}
+          className={`${styles.HorizontalPictureDragDropFlexBox} `}
           key={index}
           style={{ marginBottom: "1rem" }}
         >
