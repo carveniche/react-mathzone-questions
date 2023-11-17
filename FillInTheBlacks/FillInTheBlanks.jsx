@@ -28,14 +28,12 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
       return;
     }
     let n = state?.choice_data?.length || 0;
-    for (let i = 0; i < n; i++) {
-      if (state?.choice_data[i]?.correct)
-        if (!CompareTwoValue(state?.choice_data[i]?.choices, inputState)) {
-          setChoicesId(inputState);
-          setIsAnswerCorrect(false);
-          setHasAnswerSubmitted(true);
-          return;
-        }
+
+    if (!CompareTwoValue(state?.choice_data[0]?.choices, inputState)) {
+      setChoicesId(inputState);
+      setIsAnswerCorrect(false);
+      setHasAnswerSubmitted(true);
+      return;
     }
     setChoicesId(inputState);
 
