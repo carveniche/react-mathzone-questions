@@ -108,9 +108,11 @@ function Oprc({ obj, meter }) {
     if (row > -1 && col > -1 && !dropState[row][col].show) {
       dropState[row][col].val = dragState[i];
       dropState[row][col].show = true;
+
       let temp = dragState.filter((_, index) => index != i);
       setDragState([...temp]);
       setDropState({ ...dropState });
+      setDragKey(Number(!dragKey));
     } else {
       setDragKey(Number(!dragKey));
     }

@@ -14,7 +14,10 @@ export default function OrcAnswered({ obj, question_text }) {
     replace: (domNode) => {
       if (domNode?.attribs?.class) {
         let clsName = String(domNode?.attribs?.class);
-        if (clsName.includes("mathquill-rendered-math")) {
+        if (
+          clsName.includes("mathquill-rendered-math") ||
+          clsName.includes("mathImg")
+        ) {
           if (clsName.includes("mathquill-editable")) {
             return (
               <div>
