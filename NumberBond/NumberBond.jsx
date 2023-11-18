@@ -6,7 +6,6 @@ import NumberBondKeyingChoiceType from "./ChoiceType/NumberBondKeyingChoiceType"
 import NumberBondSelctChoice from "./ChoiceType/NumberBondSelctChoice";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { ProgressBorder } from "../../Modal2/modal2";
 import CompareTwoValue from "../compareTwoValue";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
