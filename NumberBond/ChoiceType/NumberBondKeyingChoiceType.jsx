@@ -7,8 +7,6 @@ const RenderBinaryTree = ({ node, state, onClick }) => {
   const { left, right, element } = node;
   const { hasAnswerSubmitted, isStudentAnswerResponse } =
     useContext(ValidationContext);
-  const [line1, setLine1] = useState("");
-  const [line2, setLine2] = useState("");
   //let [row,setRow]=useState([element?.row,element?.col])
 
   useEffect(() => {
