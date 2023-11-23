@@ -3074,3 +3074,17 @@
   padding-top: 8px;
   position: relative;
 }
+.skippedQuestionTitle {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.skippedQuestionTitle > h1 {
+  width: fit-content;
+  color: #828282;
+  margin: auto;
+  text-align: center;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}

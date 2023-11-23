@@ -20,6 +20,7 @@ export default function MyAnswer({
   studentResponseData,
   questionData,
   showSkippedQuestion,
+  showExtraDom,
 }) {
   let specailOldTypeQuestion = oldQuestionWithNoHtmlQuestion();
   let responseAnswer = {};
@@ -33,7 +34,9 @@ export default function MyAnswer({
     <div style={{ display: "flex", flexDirection: "column" }}>
       {typeof obj === "undefined" ? (
         <div>
-          <h1>Student has not answered this question.</h1>
+          <div className={styles.skippedQuestionTitle}>
+            <h1> {showExtraDom}Student has not answered this question.</h1>
+          </div>
           {showSkippedQuestion && <SkippedQuestionViewer obj={questionData} />}
         </div>
       ) : (
