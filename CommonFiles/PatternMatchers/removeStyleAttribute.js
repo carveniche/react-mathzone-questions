@@ -1,15 +1,6 @@
 const filterString = (str) => {
   if (typeof str === "string") {
-    let patterns = [
-      /\sstyle="[^"]*"(.*?)/g,
-      /\sstyle = "[^"]*"(.*?)/g,
-      /\sstyle= "[^"]*"(.*?)/g,
-      /\sstyle ="[^"]*"(.*?)/g,
-      /\sstyle='[^']*'(.*?)/g,
-      /\sstyle = '[^']*'(.*?)/g,
-      /\sstyle ='[^']*'(.*?)/g,
-      /\sstyle= '[^']*'(.*?)/g,
-    ];
+    let patterns = [/\sstyle\s?=\s?"[^"]*"(.*?)|\sstyle\s?=\s?'[^']*'(.*?)/g];
     patterns.forEach((pattern) => {
       str = str.replaceAll(pattern, "");
     });
