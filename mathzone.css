@@ -1066,3 +1066,7 @@ sup .fraction-root .fdn,
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+
+#multipleChoiceStudentAnswerResponse > #studentAnswerResponse div {
+  white-space: initial;
+}
