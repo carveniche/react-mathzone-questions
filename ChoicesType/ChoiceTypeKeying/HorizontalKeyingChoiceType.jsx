@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useState } from "react";
 import HtmlParserComponent from "../../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
+import styles from "../../OnlineQuiz.module.css";
 export default function HorizontalKeyingChoiceType({
   inputRef,
   content,
@@ -39,7 +40,10 @@ export default function HorizontalKeyingChoiceType({
   inputRef.current = [...row];
 
   return (
-    <Table sx={{ border: 0, maxWidth: "100%", width: "fit-content" }}>
+    <Table
+      sx={{ border: 0, maxWidth: "100%", width: "fit-content" }}
+      className={styles.horizontalTable}
+    >
       <TableBody>
         {row?.map((items, index) => (
           <TableRow key={index}>

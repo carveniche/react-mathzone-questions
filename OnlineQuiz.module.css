@@ -2746,6 +2746,7 @@
 .bodyPage span:global(.mq-sup) sup {
   font-size: 12px !important;
 }
+
 .bodyPage span:global(.mq-math-mode) sup:global(.mq-nthroot) {
   margin-right: -0.4em;
 }
@@ -3087,4 +3088,14 @@
   border: 1px solid gray;
   border-radius: 0.25rem;
   padding: 0.5rem;
+}
+.horizontalTable td {
+  text-align: center;
+}
+
+.bodyPage2.old_question_type *:global(.top-new) {
+  font-size: 12px;
+}
+.old_question_type {
+  padding-top: 10px;
 }
