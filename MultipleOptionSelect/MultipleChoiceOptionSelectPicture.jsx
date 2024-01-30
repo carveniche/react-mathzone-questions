@@ -91,12 +91,14 @@ console.log('show status',rows[i].show)
             onClick={() => selectOptionHandler(i)}
             className={`${
               isStudentAnswerResponse &&
-              String(item?.value)?.trim() === String(studentAnswer)?.trim()
+              Array.isArray(studentAnswer) &&
+              studentAnswer.includes(String(item?.value)?.trim())
                 ? styles.selectedChoiceType
                 : item.show
                 ? styles.selectedChoiceType
                 : styles.prevSelectionAnswerSelection
             }`}
+            
           >
             <div className="mathzone-circle-selectbox">
               {" "}
