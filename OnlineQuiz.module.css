@@ -3099,3 +3099,6 @@
 .old_question_type {
   padding-top: 10px;
 }
+.bodyPage2:global(.old_question_type) div:global(.eq-c) {
+  display: inline-block;
+}
