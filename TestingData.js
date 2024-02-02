@@ -4,30 +4,30 @@ export default function jsonDataTesting() {
     "question_no": 1,
     "total": 10,
     "question_data": [
-        {
-            "question_id": 97543,
-            "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"matchobjectshorizontal\",\"rows\":\"1\",\"cols\":\"3\",\"questionName\":\"Match the following rational numbers with their simplified form.\\ndrag and drop.\\n\",\"questionContent\":[[{\"row\":0,\"col\":0,\"imgvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}+\\\\frac{1}{2}$</span>\",\"numvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{2}$</span> = <span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}+\\\\frac{1}{2}$</span> \",\"isMissed\":\"false\"},{\"row\":0,\"col\":1,\"imgvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{4}+\\\\frac{1}{4}$</span>\",\"numvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}$</span>\",\"isMissed\":\"true\"},{\"row\":0,\"col\":2,\"imgvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{3}+\\\\frac{1}{3}$</span>\",\"numvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{3}$</span>\",\"isMissed\":\"false\"}]],\"solution\":{\"model\":[{\"val\":\"2/2 = 1\"},{\"val\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{4}$</span>  \"},{\"val\":\"sedrftg\\n\\n<span class=\\\"mq-selectable\\\">$\\\\frac{2}{6}$</span> \\nsdfghjkldfghjk 3456789op.\\n\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{2}$</span> = <span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}+\\\\frac{1}{2}$</span> \",\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}$</span>\",\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{3}$</span>\",\"<span id=\\\"902\\\" class=\\\"mq-replacable mq-math-mode\\\"><span class=\\\"mq-selectable\\\">$1\\\\frac{1}{2}$</span><span class=\\\"mq-root-block mq-hasCursor\\\" mathquill-block-id=\\\"317\\\"><span mathquill-command-id=\\\"318\\\">1</span><span class=\\\"mq-fraction mq-non-leaf\\\" mathquill-command-id=\\\"320\\\"><span class=\\\"mq-numerator\\\" mathquill-block-id=\\\"322\\\"><span mathquill-command-id=\\\"321\\\">1</span></span><span class=\\\"mq-denominator\\\" mathquill-block-id=\\\"324\\\"><span mathquill-command-id=\\\"323\\\">2</span></span><span style=\\\"display:inline-block;width:0\\\">​</span></span><span class=\\\"mq-cursor\\\">​</span></span></span>&nbsp;\"],\"choiceType\":\"keying\",\"choiceCount\":4}",
-            "question_type": "matchobjectshorizontal",
-            "upload_file_name": "",
-            "level": "level1",
-            "fib_text": null,
-            "fib_before_text": null,
-            "after_question_text": null,
-            "choice_data": [],
-            "orc_oprc_data": [],
-            "ol_data": []
-        }
+      {
+        "question_id": 97543,
+        "operation": "addition",
+        "question_text": '{"operation":"addition","type":"short_division","rows":3,"cols":4,"questionName":"checking final","questionContent":[[{"row":0,"col":0},{"row":0,"col":1,"value":"7","isMissed":"true"},{"row":0,"col":2,"value":"5","isMissed":"false"},{"row":0,"col":3,"value":"1","isMissed":"true"},{"row":0,"col":4,"value":"R"},{"row":0,"col":5,"value":"5","isMissed":"true"}],[{"row":1,"col":0,"value":"4","isMissed":"true"},{"row":1,"col":1,"value":"4","isMissed":"true"},{"row":1,"col":2,"value":"1","isMissed":"false"},{"row":1,"col":3,"value":"7","isMissed":"false"},{"row":1,"col":4},{"row":1,"col":5}],[{"row":2,"col":0},{"row":2,"col":1,"re_value":"1","re_isMissed":"false"},{"row":2,"col":2,"re_value":"7","re_isMissed":"false"},{"row":2,"col":3,"re_value":"8","re_isMissed":"true"},{"row":2,"col":4},{"row":2,"col":5}]],"solution":{"model":[{"val":"solution is working"}],"sidebyside":[],"srows":null,"scols":null},"choices":["7","4","4","5","1","8"],"choiceType":"dragdrop","choiceCount":6}',
+        "question_type": "short_division",
+        "upload_file_name": "",
+        "level": "level1",
+        "fib_text": null,
+        "fib_before_text": null,
+        "after_question_text": null,
+        "choice_data": [],
+        "orc_oprc_data": [],
+        "ol_data": []
+      }
     ],
     "lice_class_id": 4,
     "tag_id": 1458,
     "level": "level1",
     "live_class_practice_id": null,
     "message": "Quiz started successfully"
-};
-let obj2 = {
+  };
+  let obj2 = {
     operation: "addition",
-    type: "matchobjectsvertical",
+    type: "short_division",
     rows: "2",
     cols: "1",
     questionName:
@@ -74,7 +74,10 @@ let obj2 = {
     choiceType: "keying",
     choiceCount: 4,
   };
-//  obj.question_data[0].question_type=obj2.type
-//  obj.question_data[0].question_text=JSON.stringify(obj2)
+
+
+  
+  //  obj.question_data[0].question_type=obj2.type
+  //  obj.question_data[0].question_text=JSON.stringify(obj2)
   return { ...obj };
 }

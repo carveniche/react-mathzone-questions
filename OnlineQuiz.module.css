@@ -1001,7 +1001,7 @@
   width: 85%;
   margin: 1rem 0;
   display: flex;
-  column-column-gap: 4rem;
+  column-gap: 4rem;
   row-gap: 0.6rem;
   flex-wrap: wrap;
   row-gap: 0.6rem;
@@ -3087,4 +3087,23 @@
   border: 1px solid gray;
   border-radius: 0.25rem;
   padding: 0.5rem;
+}
+
+.row_1{
+  position: relative;
+  top:40px;
+}
+.row_2{
+  position: relative;
+  top: -57px;
+  left: 25px;
+}
+.keyrow_1{
+  position: relative;
+  top:28px;
+}
+.keyrow_2{
+  position: relative;
+  top: -80px;
+  left: 25px;
 }
