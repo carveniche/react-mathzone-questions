@@ -6,17 +6,19 @@ import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 
 function OptMultPicChoiceSelectEqn({
+  multipicselect,
   choices,
   isAnswerSelected,
   totalRows,
   inputRef,
   studentAnswer,
 }) {
+
   const [flag, setFlag] = useState();
   let prevRef = useRef(0);
   const [rows, setRows] = useState([]);
   const { isStudentAnswerResponse } = useContext(ValidationContext);
-
+ 
   useEffect(() => {
     let flag = false;
     let rows = [];
@@ -38,12 +40,24 @@ function OptMultPicChoiceSelectEqn({
   }, []);
 
   const selectOptionHandler = (i) => {
+    console.log('this is multipicselect',multipicselect);
     if (isAnswerSelected || isStudentAnswerResponse) return;
+    if(!multipicselect){
     rows[prevRef.current].show = false;
     rows[i].show = true;
     prevRef.current = i;
     setRows([...rows]);
+    }else{
+// Toggle the show property
+rows[i].show = !rows[i].show;
+console.log('show status',rows[i].show)
+    prevRef.current = i;
+    setRows([...rows]);
+    }
   };
+
+ console.log('this is studentAnswer',studentAnswer);
+ console.log('this is row',rows);
   inputRef.current = rows;
   return (
     <div className="mathzone-color-indigo">
@@ -59,6 +73,7 @@ function OptMultPicChoiceSelectEqn({
       >
         {rows?.map((item, i) => (
           <div
+          key={i}
             style={{
               gap: "2rem",
               cursor: "pointer",
@@ -73,7 +88,11 @@ function OptMultPicChoiceSelectEqn({
             onClick={() => selectOptionHandler(i)}
             className={`${styles.mathquill_mathzone_questionname} ${
               isStudentAnswerResponse &&
-              String(item?.value)?.trim() == String(studentAnswer)?.trim()
+              ((!multipicselect &&
+                String(item?.value)?.trim() == String(studentAnswer)?.trim()) ||
+                (multipicselect &&
+                  Array.isArray(studentAnswer) &&
+                  studentAnswer.includes(String(item?.value)?.trim())))
                 ? styles.selectedChoiceType
                 : item.show
                 ? styles.selectedChoiceType

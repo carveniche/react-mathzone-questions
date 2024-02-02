@@ -7,8 +7,8 @@ export default function jsonDataTesting() {
         {
             "question_id": 97543,
             "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"matchobjectshorizontal\",\"rows\":\"1\",\"cols\":\"3\",\"questionName\":\"Match the following rational numbers with their simplified form.\\ndrag and drop.\\n\",\"questionContent\":[[{\"row\":0,\"col\":0,\"imgvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}+\\\\frac{1}{2}$</span>\",\"numvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{2}$</span> = <span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}+\\\\frac{1}{2}$</span> \",\"isMissed\":\"false\"},{\"row\":0,\"col\":1,\"imgvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{4}+\\\\frac{1}{4}$</span>\",\"numvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}$</span>\",\"isMissed\":\"true\"},{\"row\":0,\"col\":2,\"imgvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{3}+\\\\frac{1}{3}$</span>\",\"numvalue\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{3}$</span>\",\"isMissed\":\"false\"}]],\"solution\":{\"model\":[{\"val\":\"2/2 = 1\"},{\"val\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{4}$</span>  \"},{\"val\":\"sedrftg\\n\\n<span class=\\\"mq-selectable\\\">$\\\\frac{2}{6}$</span> \\nsdfghjkldfghjk 3456789op.\\n\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{2}$</span> = <span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}+\\\\frac{1}{2}$</span> \",\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}$</span>\",\"<span class=\\\"mq-selectable\\\">$\\\\frac{2}{3}$</span>\",\"<span id=\\\"902\\\" class=\\\"mq-replacable mq-math-mode\\\"><span class=\\\"mq-selectable\\\">$1\\\\frac{1}{2}$</span><span class=\\\"mq-root-block mq-hasCursor\\\" mathquill-block-id=\\\"317\\\"><span mathquill-command-id=\\\"318\\\">1</span><span class=\\\"mq-fraction mq-non-leaf\\\" mathquill-command-id=\\\"320\\\"><span class=\\\"mq-numerator\\\" mathquill-block-id=\\\"322\\\"><span mathquill-command-id=\\\"321\\\">1</span></span><span class=\\\"mq-denominator\\\" mathquill-block-id=\\\"324\\\"><span mathquill-command-id=\\\"323\\\">2</span></span><span style=\\\"display:inline-block;width:0\\\">​</span></span><span class=\\\"mq-cursor\\\">​</span></span></span>&nbsp;\"],\"choiceType\":\"keying\",\"choiceCount\":4}",
-            "question_type": "matchobjectshorizontal",
+            "question_text": '{"operation":"addition","type":"options_select_multiple_pictures","questionName":"<span class=\\"mq-selectable\\">$\\\\sqrt{5}$</span><span class=\\"mq-selectable\\">$\\\\sqrt{7}$</span>","row":1,"col":3,"questionContent":[[{"row":1,"col":1,"value":"<span class=\\"mq-selectable\\">$\\\\sqrt{9}$</span>","selected":"true"},{"row":1,"col":2,"value":"<span class=\\"mq-selectable\\">$\\\\sqrt{3}4$</span>","selected":"true"},{"row":1,"col":3,"value":"<span class=\\"mq-selectable\\">$\\\\sqrt{7}8$</span>","selected":"false"}]],"solution":{"model":[],"sidebyside":[],"srows":"","scols":""},"answer":"true","upload_file_name":"","studentAnswer":["<span class=\\"mq-selectable\\">$\\\\sqrt{9}$</span>","<span class=\\"mq-selectable\\">$\\\\sqrt{3}4$</span>"]}',
+            "question_type": "options_select_multiple_pictures",
             "upload_file_name": "",
             "level": "level1",
             "fib_text": null,
@@ -25,6 +25,7 @@ export default function jsonDataTesting() {
     "live_class_practice_id": null,
     "message": "Quiz started successfully"
 };
+return obj
 let obj2 = {
     operation: "addition",
     type: "matchobjectsvertical",

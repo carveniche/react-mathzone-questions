@@ -74,10 +74,10 @@ import OptMultPicEqn from "./OptMultPicEqn";
 //   },
 //   answer: "true",
 // };
-export default function MainOptMultPicEqn({ obj,meter }) {
+export default function MainOptMultPicEqn({ obj,meter,multipicselect }) {
   return (
     <>
-      <OptMultPicEqn state={obj} totalRows={obj.row} meter={meter} />
+      <OptMultPicEqn state={obj} totalRows={obj.row} meter={meter} multipicselect={multipicselect} />
     </>
   );
 }
