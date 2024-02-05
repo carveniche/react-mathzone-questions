@@ -3089,8 +3089,10 @@
   border-radius: 0.25rem;
   padding: 0.5rem;
 }
-.horizontalTable td {
-  text-align: center;
+
+.row_1 {
+  position: relative;
+  top: 43px;
 }
 
 .bodyPage2.old_question_type *:global(.top-new) {
@@ -3111,10 +3113,10 @@
 }
 .keyrow_1 {
   position: relative;
-  top: 28px;
+  top: 43px;
 }
 .keyrow_2 {
   position: relative;
-  top: -80px;
+  top: -50px;
   left: 25px;
 }
