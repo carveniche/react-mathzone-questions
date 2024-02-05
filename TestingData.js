@@ -8,8 +8,8 @@ export default function jsonDataTesting() {
         question_id: 97543,
         operation: "addition",
         question_text:
-          '{"operation":"addition","type":"short_division","rows":3,"cols":4,"questionName":"checking final","questionContent":[[{"row":0,"col":0},{"row":0,"col":1,"value":"7","isMissed":"true"},{"row":0,"col":2,"value":"5","isMissed":"false"},{"row":0,"col":3,"value":"1","isMissed":"true"},{"row":0,"col":4,"value":"R"},{"row":0,"col":5,"value":"5","isMissed":"true"}],[{"row":1,"col":0,"value":"4","isMissed":"true"},{"row":1,"col":1,"value":"4","isMissed":"true"},{"row":1,"col":2,"value":"1","isMissed":"false"},{"row":1,"col":3,"value":"7","isMissed":"false"},{"row":1,"col":4},{"row":1,"col":5}],[{"row":2,"col":0},{"row":2,"col":1,"re_value":"1","re_isMissed":"false"},{"row":2,"col":2,"re_value":"7","re_isMissed":"false"},{"row":2,"col":3,"re_value":"8","re_isMissed":"true"},{"row":2,"col":4},{"row":2,"col":5}]],"solution":{"model":[{"val":"solution is working"}],"sidebyside":[],"srows":null,"scols":null},"choices":["7","4","4","5","1","8"],"choiceType":"dragdrop","choiceCount":6}',
-        question_type: "short_division",
+          '{"operation":"addition","type":"options_select_multiple_pictures","questionName":"<span class=\\"mq-selectable\\">$\\\\sqrt{5}$</span><span class=\\"mq-selectable\\">$\\\\sqrt{7}$</span>","row":1,"col":3,"questionContent":[[{"row":1,"col":1,"value":"<span class=\\"mq-selectable\\">$\\\\sqrt{9}$</span>","selected":"true"},{"row":1,"col":2,"value":"<span class=\\"mq-selectable\\">$\\\\sqrt{3}4$</span>","selected":"true"},{"row":1,"col":3,"value":"<span class=\\"mq-selectable\\">$\\\\sqrt{7}8$</span>","selected":"false"}]],"solution":{"model":[],"sidebyside":[],"srows":"","scols":""},"answer":"true","upload_file_name":"","studentAnswer":["<span class=\\"mq-selectable\\">$\\\\sqrt{9}$</span>","<span class=\\"mq-selectable\\">$\\\\sqrt{3}4$</span>"]}',
+        question_type: "options_select_multiple_pictures",
         upload_file_name: "",
         level: "level1",
         fib_text: null,
@@ -26,6 +26,7 @@ export default function jsonDataTesting() {
     live_class_practice_id: null,
     message: "Quiz started successfully",
   };
+  return obj;
   let obj2 = {
     operation: "addition",
     type: "short_division",

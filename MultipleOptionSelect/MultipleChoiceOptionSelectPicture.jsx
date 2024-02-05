@@ -1,29 +1,33 @@
-import React, { useContext } from "react";
-import { useRef, useState, useEffect } from "react";
-import HtmlParser from "react-html-parser/lib/HtmlParser";
+import React, { useContext, useEffect, useState } from 'react'
+import { ValidationContext } from '../../MainOnlineQuiz/MainOnlineQuizPage';
+import { useRef } from 'react';
 import styles from "../OnlineQuiz.module.css";
+import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styled from "styled-components";
-import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 
-function SelectChoiceOptionMultiplePicture({
-  choices,
+function MultipleChoiceOptionSelectPicture (
+  {choices,
   setIsAnswerCorrect,
   setanswerHasSelected,
   isAnswerSelected,
   totalRows,
   totalColumns,
   inputRef,
-  studentAnswer,
-}) {
-  const [flag, setFlag] = useState();
+  studentAnswer}
+){
+  console.log('this is totalrows',totalRows);
+ console.log('this is demo choices',choices);
+  const [flag, setFlag]=useState();
+
   const { isStudentAnswerResponse } = useContext(ValidationContext);
-  let prevRef = useRef(0);
+  let prevRef= useRef(0);
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
     let flag = false;
     let rows = [];
+    console.log('inside useeffect',totalRows)
     for (let i = 0; i < Number(totalRows); i++) {
       choices[i]?.map((item, j) => {
         item.row == i + 1 &&
@@ -34,33 +38,42 @@ function SelectChoiceOptionMultiplePicture({
           flag = true;
         }
       });
+  
     }
+ 
     setFlag(flag);
-console.log('this is row',rows);
+console.log('this is rows',rows);
     setRows([...rows]);
   }, []);
 
   const selectOptionHandler = (i) => {
     if (isAnswerSelected || isStudentAnswerResponse) return;
-    rows[prevRef.current].show = false;
-    rows[i].show = true;
+   // rows[prevRef.current].show = false;
+   // rows[i].show = true;
+
+ // Toggle the show property
+ rows[i].show = !rows[i].show;
+console.log('show status',rows[i].show)
     prevRef.current = i;
     setRows([...rows]);
   };
-  inputRef.current = rows;
+
+
+ inputRef.current = rows;
   return (
     <div>
+      
       <div
-        style={{
-          display: "grid",
-          width: "90%",
-          marginTop: "1rem",
-          gap: "1rem",
-          position: "relative",
-          gridTemplateColumns: `repeat(${flag ? 1 : 2},1fr)`,
-        }}
+       style={{
+        display: "grid",
+        width: "90%",
+        marginTop: "1rem",
+        gap: "1rem",
+        position: "relative",
+        gridTemplateColumns: `repeat(${flag ? 1 : 2},1fr)`,
+      }}
       >
-        {rows?.map((item, i) => (
+         {rows?.map((item, i) => (
           <div
             key={i}
             style={{
@@ -78,12 +91,14 @@ console.log('this is row',rows);
             onClick={() => selectOptionHandler(i)}
             className={`${
               isStudentAnswerResponse &&
-              String(item?.value)?.trim() === String(studentAnswer)?.trim()
+              Array.isArray(studentAnswer) &&
+              studentAnswer.includes(String(item?.value)?.trim())
                 ? styles.selectedChoiceType
                 : item.show
                 ? styles.selectedChoiceType
                 : styles.prevSelectionAnswerSelection
             }`}
+            
           >
             <div className="mathzone-circle-selectbox">
               {" "}
@@ -101,8 +116,10 @@ console.log('this is row',rows);
             </div>
           </div>
         ))}
+
       </div>
     </div>
   );
 }
-export default SelectChoiceOptionMultiplePicture;
+
+export default MultipleChoiceOptionSelectPicture;
