@@ -74,7 +74,7 @@ export default function ShortDivisionKeyingChoiceType({
                   item.isMissed !== "true" 
                   ? (
             
-                  <td key={i} className="one" style={index ==1 ?InlineCss.Inputheight:InlineCss.Input}>
+                  <td key={i} className="one" >
                     <div>
                       <b>
                         <HtmlParserComponent value={item?.value} />
@@ -91,12 +91,14 @@ export default function ShortDivisionKeyingChoiceType({
                   
                     {index == 1 && i == 0 && (
                       <>
-                       <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p>
+                      <RightPranthesis transform={content.length > 2 ? 'scale(0.2, 5.02)' : 'scale(1.4, 2.65)'}
+                           style={{top:content.length > 2 ?'-1px':'18px'}}>|</RightPranthesis>
+                       {/* <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p> */}
                       </>
                     )}
                   </td>
                 ) : (
-                  <td key={i} className="two" style={index ==1 ?InlineCss.Inputheight:InlineCss.Input}>
+                  <td key={i} className="two" >
                     <div>{HtmlParser(item.imgvalue)}</div>
                     {console.log(item[student_answer])}
                     <div>
@@ -129,7 +131,8 @@ export default function ShortDivisionKeyingChoiceType({
                   
                     {index == 1 && i == 0 && (
                       <>
-                      <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p>
+                       <RightPranthesis transform={content.length > 2 ? 'scale(0.2, 5.02)' : 'scale(1.4, 2.65)'}
+                           style={{top:content.length > 2 ?'-1px':'18px'}}>|</RightPranthesis>
                       </>
                     )}
                   </td>
@@ -208,25 +211,6 @@ export default function ShortDivisionKeyingChoiceType({
     </div>
   );
 }
-const StraightPranthesisSmall={
-  background: 'indigo',
-  position: 'absolute',
-  height: '57px',
-  width: '2px',
-  top: '-6px',
-  right: '-2px',
-  scale:'1.4',
-}
-const StraightPranthesis={
-  background: 'indigo',
-  position: 'absolute',
-  height: '70px',
-  width: '2px',
-  top: '-32px',
-  right: '-2px',
-  scale:'1.4',
-
-}
 
 
 const InlineCss = {
@@ -241,11 +225,7 @@ const InlineCss = {
     width: "30px",
   },
 
-  Inputheight:{
-    height: "70px",
-    textAlign: "center",
-    width: "40px",
-  },
+  
 
 
 

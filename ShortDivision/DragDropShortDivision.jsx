@@ -173,7 +173,12 @@ const rehandleStop2 =(e, row, col)=>{
                    
                       {index == 1 && i == 0 && (
                         <>
-                            <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p>
+                       <RightPranthesis transform={content.length > 2 ? 'scale(0.2, 5.02)' : 'scale(1.4, 2.65)'}
+                           style={{top:content.length > 2 ?'0px':'18px'}}>
+
+                          |
+                        </RightPranthesis>
+                            {/* <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p> */}
                         </>
                       )}
                     </td>
@@ -239,7 +244,12 @@ const rehandleStop2 =(e, row, col)=>{
                      
                       {index == 1 && i == 0 && (
                         <>
-                             <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p>
+                           <RightPranthesis transform={content.length > 2 ? 'scale(0.2, 5.02)' : 'scale(1.4, 2.65)'}
+                           style={{top:content.length > 2 ?'0px':'18px'}}>
+
+                          |
+                        </RightPranthesis>
+                             {/* <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p> */}
                         </>
                       )}
                     </td>
@@ -394,7 +404,7 @@ const rehandleStop2 =(e, row, col)=>{
 export const RightPranthesis = styled.div`
   position: absolute;
   top: 4px;
-  transform: scale(1.4, 2.65);
+  transform: ${(props) => props.transform ?? 'scale(1.5, 2.65)'};
   right: -1px;
   color: indigo;
 `;
@@ -414,22 +424,22 @@ export const BottomBorder = styled.div`
   right: 0;
   background: indigo;
 `;
-const StraightPranthesis={
-  background: 'indigo',
-  position: 'absolute',
-  height: '70px',
-  width: '2px',
-  top: '-43px',
-  right: '-2px',
-  scale:'1.4',
-}
+// const StraightPranthesis={
+//   background: 'indigo',
+//   position: 'absolute',
+//   height: '70px',
+//   width: '2px',
+//   top: '-43px',
+//   right: '-2px',
+//   scale:'1.4',
+// }
 
-const StraightPranthesisSmall={
-  background: 'indigo',
-  position: 'absolute',
-  height: '46px',
-  width: '2px',
-  top: '-8px',
-  right: '-2px',
-  scale:'1.4',
-}
+// const StraightPranthesisSmall={
+//   background: 'indigo',
+//   position: 'absolute',
+//   height: '46px',
+//   width: '2px',
+//   top: '-8px',
+//   right: '-2px',
+//   scale:'1.4',
+// }
