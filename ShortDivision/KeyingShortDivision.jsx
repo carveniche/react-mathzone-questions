@@ -91,8 +91,8 @@ export default function ShortDivisionKeyingChoiceType({
                   
                     {index == 1 && i == 0 && (
                       <>
-                      <RightPranthesis transform={content.length > 2 ? 'scale(0.2, 5.02)' : 'scale(1.4, 2.65)'}
-                           style={{top:content.length > 2 ?'-1px':'18px'}}>|</RightPranthesis>
+                      <RightPranthesis transform={content.length > 2 ? 'scale(1.4, 5.02)' : 'scale(1.4, 2.65)'}
+                           style={{top:content.length > 2 ?'-16px':'9px'}}>|</RightPranthesis>
                        {/* <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p> */}
                       </>
                     )}
@@ -131,8 +131,8 @@ export default function ShortDivisionKeyingChoiceType({
                   
                     {index == 1 && i == 0 && (
                       <>
-                       <RightPranthesis transform={content.length > 2 ? 'scale(0.2, 5.02)' : 'scale(1.4, 2.65)'}
-                           style={{top:content.length > 2 ?'-1px':'18px'}}>|</RightPranthesis>
+                       <RightPranthesis transform={content.length > 2 ? 'scale(1.4, 5.02)' : 'scale(1.4, 2.65)'}
+                           style={{top:content.length > 2 ?'-16px':'9px'}}>|</RightPranthesis>
                       </>
                     )}
                   </td>

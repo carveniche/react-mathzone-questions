@@ -173,8 +173,8 @@ const rehandleStop2 =(e, row, col)=>{
                    
                       {index == 1 && i == 0 && (
                         <>
-                       <RightPranthesis transform={content.length > 2 ? 'scale(0.2, 5.02)' : 'scale(1.4, 2.65)'}
-                           style={{top:content.length > 2 ?'0px':'18px'}}>
+                        <RightPranthesis transform={content.length > 2 ? 'scale(1.4, 5.02)' : 'scale(1.4, 2.65)'}
+                           style={{top:content.length > 2 ?'-16px':'9px'}}>
 
                           |
                         </RightPranthesis>
@@ -244,11 +244,9 @@ const rehandleStop2 =(e, row, col)=>{
                      
                       {index == 1 && i == 0 && (
                         <>
-                           <RightPranthesis transform={content.length > 2 ? 'scale(0.2, 5.02)' : 'scale(1.4, 2.65)'}
-                           style={{top:content.length > 2 ?'0px':'18px'}}>
+                            <RightPranthesis transform={content.length > 2 ? 'scale(1.4, 5.02)' : 'scale(1.4, 2.65)'}
+                           style={{top:content.length > 2 ?'-16px':'9px'}}>|</RightPranthesis>
 
-                          |
-                        </RightPranthesis>
                              {/* <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p> */}
                         </>
                       )}
