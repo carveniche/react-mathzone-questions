@@ -5,20 +5,19 @@ export default function jsonDataTesting() {
     total: 10,
     question_data: [
       {
-        question_id: 97543,
-        operation: "addition",
-        question_text:
-          '{"operation":"addition","type":"short_division","rows":3,"cols":"111","questionName":"checkief","questionContent":[[{"row":0,"col":0},{"row":0,"col":1,"value":"1","isMissed":"false"},{"row":0,"col":2,"value":"5","isMissed":"false"},{"row":0,"col":3,"value":"9","isMissed":"true"},{"row":0,"col":4,"value":"R"},{"row":0,"col":5,"value":"2","isMissed":"true"}],[{"row":1,"col":0,"value":"8","isMissed":"false"},{"row":1,"col":1,"value":"5","isMissed":"false"},{"row":1,"col":2,"value":"2","isMissed":"true"},{"row":1,"col":3,"value":"3","isMissed":"false"},{"row":1,"col":4},{"row":1,"col":5}],[{"row":2,"col":0},{"row":2,"col":1,"re_value":"1","re_isMissed":"false"},{"row":2,"col":2,"re_value":"1","re_isMissed":"true"},{"row":2,"col":3,"re_value":"1","re_isMissed":"false"},{"row":2,"col":4},{"row":2,"col":5}]],"solution":{"model":[{"val":"fghjk"}],"sidebyside":[],"srows":null,"scols":null},"choices":["2","9","1","2"],"choiceType":"dragdrop","choiceCount":2,"re_istrue":"true"}',
-        question_type: "short_division",
-        upload_file_name: "",
-        level: "level1",
-        fib_text: null,
-        fib_before_text: null,
-        after_question_text: null,
-        choice_data: [],
-        orc_oprc_data: [],
-        ol_data: [],
-      },
+        "question_id": 97543,
+        "operation": "addition",
+        "question_text": '{"operation":"addition","type":"short_division","rows":3,"cols":"111","questionName":"checkief","questionContent":[[{"row":0,"col":0},{"row":0,"col":1,"value":"1","isMissed":"false"},{"row":0,"col":2,"value":"5","isMissed":"false"},{"row":0,"col":3,"value":"9","isMissed":"true"},{"row":0,"col":4,"value":"R"},{"row":0,"col":5,"value":"2","isMissed":"true"}],[{"row":1,"col":0,"value":"8","isMissed":"false"},{"row":1,"col":1,"value":"5","isMissed":"false"},{"row":1,"col":2,"value":"2","isMissed":"true"},{"row":1,"col":3,"value":"3","isMissed":"false"},{"row":1,"col":4},{"row":1,"col":5}],[{"row":2,"col":0},{"row":2,"col":1,"re_value":"1","re_isMissed":"false"},{"row":2,"col":2,"re_value":"1","re_isMissed":"true"},{"row":2,"col":3,"re_value":"1","re_isMissed":"false"},{"row":2,"col":4},{"row":2,"col":5}]],"solution":{"model":[{"val":"fghjk"}],"sidebyside":[],"srows":null,"scols":null},"choices":["2","9","1","2"],"choiceType":"keying","choiceCount":2,"re_istrue":"true"}',
+        "question_type": "short_division",
+        "upload_file_name": "",
+        "level": "level1",
+        "fib_text": null,
+        "fib_before_text": null,
+        "after_question_text": null,
+        "choice_data": [],
+        "orc_oprc_data": [],
+        "ol_data": []
+      }
     ],
     lice_class_id: 4,
     tag_id: 1458,

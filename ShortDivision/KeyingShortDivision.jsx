@@ -74,7 +74,7 @@ export default function ShortDivisionKeyingChoiceType({
                   item.isMissed !== "true" 
                   ? (
             
-                  <td key={i} className="one" >
+                  <td key={i} style={{width:'40px',height:'55px'}} >
                     <div>
                       <b>
                         <HtmlParserComponent value={item?.value} />
@@ -98,7 +98,7 @@ export default function ShortDivisionKeyingChoiceType({
                     )}
                   </td>
                 ) : (
-                  <td key={i} className="two" >
+                  <td key={i} className="two" style={{width:'40px',height:'55px'}}>
                     <div>{HtmlParser(item.imgvalue)}</div>
                     {console.log(item[student_answer])}
                     <div>
@@ -152,7 +152,7 @@ export default function ShortDivisionKeyingChoiceType({
                   item.re_isMissed !== "true" 
                   ? (
             
-                  <td key={i} className="one" style={InlineCss.re_Input}>
+                  <td key={i} className="one" style={{width:'40px',height:'50px'}}>
                     <div>
                       <b>
                         <HtmlParserComponent value={item?.re_value} />
@@ -166,7 +166,7 @@ export default function ShortDivisionKeyingChoiceType({
                   
                   </td>
                 ) : (
-                  <td key={i} className="two">
+                  <td key={i} className="two" style={{width:'40px',height:'50px'}}>
                     <div>{HtmlParser(item.imgvalue)}</div>
                     {console.log(item[student_answer])}
                     <div>
@@ -215,14 +215,14 @@ export default function ShortDivisionKeyingChoiceType({
 
 const InlineCss = {
   Input: {
-    height: "35px",
+    height: "40px",
     textAlign: "center",
-    width: "35px",
+    width: "40px",
   }, 
   re_Input: {
-    height: "30px",
+    height: "38px",
     textAlign: "center",
-    width: "30px",
+    width: "40px",
   },
 
   
