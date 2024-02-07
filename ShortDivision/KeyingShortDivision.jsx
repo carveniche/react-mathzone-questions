@@ -229,7 +229,8 @@ const InlineCss = {
     zIndex:"1",
     display:'flex',
     justifyContent:'center',
-    alignItem:'center'
+    alignItem:'center',
+    margin:'0px'
 
   }, 
   re_Input: {
