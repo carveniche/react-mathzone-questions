@@ -77,10 +77,10 @@ export default function ShortDivisionKeyingChoiceType({
             
                   <td key={i} style={{width:'40px',height:'40px',paddingLeft:'25px'}} >
                     <div>
-                      <b style={InlineCss.Input}>
+                      <p style={InlineCss.Input}>
                         <HtmlParserComponent value={item?.value} />
                    
-                      </b>
+                      </p>
                      
                     </div>
            
@@ -226,7 +226,11 @@ const InlineCss = {
     textAlign: "center",
     width: "38px",
     position:"relative",
-    zIndex:"1"
+    zIndex:"1",
+    display:'flex',
+    justifyContent:'center',
+    alignItem:'center'
+
   }, 
   re_Input: {
     height: "18px",
