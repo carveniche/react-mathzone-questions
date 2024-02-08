@@ -7,8 +7,8 @@ export default function jsonDataTesting() {
       {
         "question_id": 97543,
         "operation": "addition",
-        "question_text":'{"operation":"addition","type":"short_division","rows":3,"cols":"555","questionName":"checking","questionContent":[[{"row":0,"col":0},{"row":0,"col":1,"value":"1","isMissed":"false"},{"row":0,"col":2,"value":"5","isMissed":"false"},{"row":0,"col":3,"value":"5","isMissed":"false"},{"row":0,"col":4,"value":"R"},{"row":0,"col":5,"value":"5","isMissed":"false"}],[{"row":1,"col":0,"value":"7","isMissed":"false"},{"row":1,"col":1,"value":"8","isMissed":"false"},{"row":1,"col":2,"value":"1","isMissed":"false"},{"row":1,"col":3,"value":"5","isMissed":"false"},{"row":1,"col":4},{"row":1,"col":5}],[{"row":2,"col":0},{"row":2,"col":1,"re_value":"1","re_isMissed":"true"},{"row":2,"col":2,"re_value":"2","re_isMissed":"false"},{"row":2,"col":3},{"row":2,"col":4},{"row":2,"col":5}]],"solution":{"model":[{"val":"this is checking coming or not "}],"sidebyside":[],"srows":null,"scols":null},"choices":["1"],"choiceType":"keying","choiceCount":1,"re_istrue":"true"}',
-        "question_type": "short_division",
+        "question_text":'{"operation":"addition","type":"long_division","rows":55,"cols":55,"questionName":"5sdrty","questionContent":[[{"row":0,"col":0},{"row":0,"col":1,"value":"5","isMissed":"false"},{"row":0,"col":2,"value":"5","isMissed":"false"}],[{"row":1,"col":0,"value":"","isMissed":"false"},{"row":1,"col":1,"value":"5","isMissed":"false"},{"row":1,"col":2,"value":"5","isMissed":"false"}],[{"row":2,"col":0,"value":"-","isMissed":"-"},{"row":2,"col":1,"value":"5","isMissed":"true"},{"row":2,"col":2,"value":"6","isMissed":"false"}],[{"row":3,"col":0},{"row":3,"col":1,"value":"1","isMissed":"false"},{"row":3,"col":2,"value":"2","isMissed":"false"}]],"solution":{"model":[{"val":"dfghjkl/"}],"sidebyside":[],"srows":null,"scols":null},"choices":["5"],"choiceType":"dragdrop","choiceCount":1}',
+        "question_type": "long_division",
         "upload_file_name": "",
         "level": "level1",
         "fib_text": null,
