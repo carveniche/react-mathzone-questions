@@ -204,8 +204,7 @@ export function MainVerticalCorrectAnswer({ data }) {
             style={{
               display: "flex",
               alignItems: "center",
-              borderTop: `${index === 2 ? 2 : 0}px solid black`,
-              borderBottom: `${index === 2 ? 2 : 0}px solid black`,
+              borderBottom:"2px solid black",
               width: '100%',
               maxWidth: "fit-content",
             }}
