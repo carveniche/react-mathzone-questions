@@ -3104,9 +3104,10 @@
 }
 .keyrow_2{
   position: absolute;
-  top: 60px;
-  left: 72px;
+  top: 48px;
+  left: 68px;
   display: flex;
-  gap: 44px;
+  grid-gap: 44px;
+  gap: 46px;
   justify-content: left;
 }
