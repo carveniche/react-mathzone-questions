@@ -148,7 +148,7 @@ const rehandleStop2 =(e, row, col)=>{
                 {items?.map((item, i) =>
                 
                   item.isMissed !== "true" ? (
-                    <td style={{width:'40px',height:'40px'}}
+                    <td style={{width:'40px',height:'55px'}}
                       key={i}
                       ref={(el) =>
                         (droppableContainerRef.current[index][i] = {
@@ -274,7 +274,7 @@ const rehandleStop2 =(e, row, col)=>{
                           show: item?.show,
                         })
                       }
-                      style={{width:'40px',height:'40px'}}
+                      style={{width:'40px',height:'50px'}}
                     >
                       <div data-value={`rowssssssssss-${i}`}>
                         <b>
@@ -284,7 +284,7 @@ const rehandleStop2 =(e, row, col)=>{
                     
                     </td>
                   ) : (
-                    <td key={i}>
+                    <td key={i} style={{width:'40px',height:'50px'}}>
                       <div
                         className={`droppablehfu ${styles.LongDivisonDragDropBox}`}
                         style={{
@@ -422,22 +422,3 @@ export const BottomBorder = styled.div`
   right: 0;
   background: indigo;
 `;
-// const StraightPranthesis={
-//   background: 'indigo',
-//   position: 'absolute',
-//   height: '70px',
-//   width: '2px',
-//   top: '-43px',
-//   right: '-2px',
-//   scale:'1.4',
-// }
-
-// const StraightPranthesisSmall={
-//   background: 'indigo',
-//   position: 'absolute',
-//   height: '46px',
-//   width: '2px',
-//   top: '-8px',
-//   right: '-2px',
-//   scale:'1.4',
-// }

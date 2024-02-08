@@ -4,6 +4,7 @@ import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../OnlineQuiz.module.css";
+import styled from "styled-components";
 import {
   BottomBorder,
   RightPranthesis,
@@ -63,23 +64,23 @@ export default function ShortDivisionKeyingChoiceType({
         style={{ borderCollapse: "collapse",position:"relative" }}
         className={styles.longDivisonTable}
       >
-        <tbody>
+        <tbody style={{position:"relative"}}>
           {row?.map((items, index) => {
             
      if(index !==2){
       return(
-            <tr key={index} className={content.length >2? (index ===1 ? `${styles.keyrow_1}` : ''):"" }>
+            <tr key={index}  >
               {items?.map((item, i) =>
 
                   item.isMissed !== "true" 
                   ? (
             
-                  <td key={i} className="one" >
+                  <td key={i} style={{width:'40px',height:'40px',paddingLeft:'25px'}} >
                     <div>
-                      <b>
+                      <p  style={InlineCss.Input}>
                         <HtmlParserComponent value={item?.value} />
                    
-                      </b>
+                      </p>
                      
                     </div>
            
@@ -91,14 +92,12 @@ export default function ShortDivisionKeyingChoiceType({
                   
                     {index == 1 && i == 0 && (
                       <>
-                      <RightPranthesis transform={content.length > 2 ? 'scale(1.4, 5.02)' : 'scale(1.4, 2.65)'}
-                           style={{top:content.length > 2 ?'-16px':'9px'}}>|</RightPranthesis>
-                       {/* <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p> */}
+                     <KeyRightPranthesis>)</KeyRightPranthesis>
                       </>
                     )}
                   </td>
                 ) : (
-                  <td key={i} className="two" >
+                  <td key={i} className="two" style={{width:'40px',height:'40px',paddingLeft:'25px'}}>
                     <div>{HtmlParser(item.imgvalue)}</div>
                     {console.log(item[student_answer])}
                     <div>
@@ -131,8 +130,7 @@ export default function ShortDivisionKeyingChoiceType({
                   
                     {index == 1 && i == 0 && (
                       <>
-                       <RightPranthesis transform={content.length > 2 ? 'scale(1.4, 5.02)' : 'scale(1.4, 2.65)'}
-                           style={{top:content.length > 2 ?'-16px':'9px'}}>|</RightPranthesis>
+                     <KeyRightPranthesis>)</KeyRightPranthesis>
                       </>
                     )}
                   </td>
@@ -152,9 +150,9 @@ export default function ShortDivisionKeyingChoiceType({
                   item.re_isMissed !== "true" 
                   ? (
             
-                  <td key={i} className="one" style={InlineCss.re_Input}>
+                  <td key={i} className="one" style={{width:'20px',height:'20px'}}>
                     <div>
-                      <b>
+                      <b style={{marginLeft:'10px',fontSize:'15px'}}>
                         <HtmlParserComponent value={item?.re_value} />
                    
                       </b>
@@ -166,7 +164,7 @@ export default function ShortDivisionKeyingChoiceType({
                   
                   </td>
                 ) : (
-                  <td key={i} className="two">
+                  <td key={i} className="two" style={{width:'20px',height:'20px'}}>
                     <div>{HtmlParser(item.imgvalue)}</div>
                     {console.log(item[student_answer])}
                     <div>
@@ -212,17 +210,36 @@ export default function ShortDivisionKeyingChoiceType({
   );
 }
 
+export const KeyRightPranthesis = styled.div`
+position: absolute;
+top: 16px;
+transform: scale(1.5,3.65);
+right: -6px;
+color: indigo;
+`;
+
+
 
 const InlineCss = {
   Input: {
-    height: "35px",
+    height: "38px",
     textAlign: "center",
-    width: "35px",
+    width: "38px",
+    position:"relative",
+    zIndex:"1",
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    margin:'0px'
+
   }, 
   re_Input: {
-    height: "30px",
+    height: "18px",
     textAlign: "center",
-    width: "30px",
+    width: "18px",
+    position:"relative",
+    zIndex:"1",
+    fontSize:'15px'
   },
 
   

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Vertical from "./Vertical";
+import styles from "../../component/OnlineQuiz.module.css";
+import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 
 // let obj={
 //     "operation":"addition",
@@ -179,4 +181,54 @@ export default function MainVertical({ obj, meter }) {
       meter={meter}
     />
   );
+}
+
+export function MainVerticalCorrectAnswer({ data }) {
+  const [row, setRow] = useState([])
+  let totalCols=1
+  useEffect(() => {
+    let arr = []
+    arr = data?.questionContent
+    setRow([...arr])
+
+  }, [])
+  return (
+    <div className={styles.correctAnswerBox}>
+    <div className={`${styles.correctAnswer} ${styles.correctAnswer2}`}>
+      <h6>The correct answer is:</h6>
+    <div>
+      <div style={{ marginTop: "4rem" }}>
+        {row?.map((items, index) => (
+          <div
+            className={styles.VerticalDragDropFlexBox}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              borderBottom:"2px solid black",
+              width: '100%',
+              maxWidth: "fit-content",
+            }}
+            key={index}
+          >
+            {items?.map((item, i) =>
+
+              <div
+                key={i}
+                value={item.value}
+              style={{background:item.isMissed==='true'?'#CDDC39':'',
+                     borderRadius:'100%'}}
+              >
+                <HtmlParserComponent value={item?.value} />
+              </div>
+
+            )}
+          </div>
+        ))}
+      </div>
+
+    </div>
+    </div>
+    </div>
+  );
+
 }
