@@ -3105,9 +3105,9 @@
 .keyrow_2{
   position: absolute;
   top: 48px;
-  left: 68px;
+  left: 67px;
   display: flex;
   grid-gap: 44px;
-  gap: 46px;
+  gap: 48px;
   justify-content: left;
 }
