@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react'
 import LongDivision from './LongDivision'
-import Solution from "../../MainOnlineQuiz/Solution.module.css";
+// import Solution from "../../MainOnlineQuiz/Solution.module.css";
 import styles from "../OnlineQuiz.module.css";
 import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 
@@ -29,8 +29,8 @@ export function CorrectLongDvision2({data}){
  },[])
 
   return (
-    <div className={Solution.correctAnswerBox}>
-    <div className={`${Solution.correctAnswer} ${Solution.correctAnswer2}`}>
+    <div className={styles.correctAnswerBox}>
+    <div className={`${styles.correctAnswer} ${styles.correctAnswer2}`}>
     <h6>The correct answer is:</h6>
 
     <div style={{ width: "fit-content" }}>
@@ -46,10 +46,10 @@ export function CorrectLongDvision2({data}){
             <tr key={index}>
               {items?.map((item, i) =>
                
-                  <td key={i} style={{backgroundColor:item.isMissed==="true"?'#8BC34A':''}}>
-                    <div >
+                  <td key={i} style={{padding:'5px'}}>
+                    <div style={{width:'22px',height:'22px',padding:'5px',backgroundColor:item.isMissed==="true"?'#8BC34A':''}}>
                     <b >   
-                                         <HtmlParserComponent value={item?.value} />
+                        <HtmlParserComponent value={item?.value} />
                       </b>
                     </div>
                     {index % 2 === 1 && (
