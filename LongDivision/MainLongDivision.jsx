@@ -47,7 +47,7 @@ export function CorrectLongDvision2({data}){
               {items?.map((item, i) =>
                
                   <td key={i} style={{padding:'5px'}}>
-                    <div style={{width:'22px',height:'22px',padding:'5px',backgroundColor:item.isMissed==="true"?'#8BC34A':''}}>
+                    <div style={{padding:'6px 10px ',backgroundColor:item.isMissed==="true"?'#8BC34A':''}}>
                     <b >   
                         <HtmlParserComponent value={item?.value} />
                       </b>
