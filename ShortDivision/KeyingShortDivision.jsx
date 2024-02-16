@@ -5,11 +5,7 @@ import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D"
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../OnlineQuiz.module.css";
 import styled from "styled-components";
-import {
-  BottomBorder,
-  RightPranthesis,
-  TopBorder,
-} from "./DragDropShortDivision";
+
 export default function ShortDivisionKeyingChoiceType({
   inputRef, 
   content,
@@ -40,7 +36,7 @@ export default function ShortDivisionKeyingChoiceType({
     } else row[rows][cols].re_show = true;
     
     setRow([...row]);
-    console.log(row,"dbvjh")
+
   };
 
   useEffect(() => {
@@ -55,7 +51,6 @@ export default function ShortDivisionKeyingChoiceType({
     setRow([...arr]);
     console.log(arr.length,"arr")
   }, []);
-
   inputRef.current = row;
   let defaultBorderRef = useRef(3);
   return (
@@ -66,16 +61,16 @@ export default function ShortDivisionKeyingChoiceType({
       >
         <tbody style={{position:"relative"}}>
           {row?.map((items, index) => {
-            
+         
      if(index !==2){
       return(
-            <tr key={index}  >
+            <tr key={index}  className={styles.tdspace}>
               {items?.map((item, i) =>
 
                   item.isMissed !== "true" 
                   ? (
             
-                  <td key={i} style={{width:'40px',height:'40px',paddingLeft:'25px'}} >
+                  <td key={i} style={{width:'40px',height:'40px'}} >
                     <div>
                       <p  style={InlineCss.Input}>
                         <HtmlParserComponent value={item?.value} />
@@ -97,14 +92,14 @@ export default function ShortDivisionKeyingChoiceType({
                     )}
                   </td>
                 ) : (
-                  <td key={i} className="two" style={{width:'40px',height:'40px',paddingLeft:'25px'}}>
+                  <td key={i} className="two" style={{width:'40px',height:'40px'}}>
                     <div>{HtmlParser(item.imgvalue)}</div>
                     {console.log(item[student_answer])}
                     <div>
                       <div>
                         {
                           <input
-                            maxLength={1}
+                            maxLength={items.length-1==i?3:1}
                             type={"text"}
                             style={InlineCss.Input}
                             value={
@@ -214,10 +209,18 @@ export const KeyRightPranthesis = styled.div`
 position: absolute;
 top: 16px;
 transform: scale(1.5,3.65);
-right: -6px;
+right: -8px;
 color: indigo;
 `;
 
+export const BottomBorder = styled.div`
+  position: absolute;
+  width: ${(props) => props.width ?? "100px"};
+  bottom: -3px;
+  height: 3px;
+  right: -8;
+  background: indigo;
+`;
 
 
 const InlineCss = {

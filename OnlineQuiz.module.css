@@ -3159,3 +3159,17 @@
 .correctAnswer2 > h6 {
   font-weight: bold;
 }
+
+.tdspace td{
+  padding-left: 25px;
+}
+.tdspace td:nth-last-child(1) {
+  padding-left: 0 !important;
+  left: -10px;
+}
+.tdspace td:nth-last-child(2) {
+  padding-left: 0 !important;
+}
+.tdspace td:nth-child(1){
+  left: 9px;
+}
