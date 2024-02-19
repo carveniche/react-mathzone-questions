@@ -1,86 +1,103 @@
-import React, { useContext, useEffect } from "react";
-import HtmlParser from "react-html-parser/lib/HtmlParser";
-import ContentPlaceValueTableSelect from "./ContentPlaceValueTableSelect";
-import { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from 'react'
+import { ValidationContext } from '../../MainOnlineQuiz/MainOnlineQuizPage';
+import SolveButton from '../SolveButton';
+import CustomAlertBoxMathZone from '../../CommonJSFiles/CustomAlertBoxMathZone';
 import styles from "../OnlineQuiz.module.css";
-import SolveButton from "../SolveButton";
-import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import PlaceValueTableDragDrop from "./PlaceValueTableChoiceType/PlaceValueTableDragDrop/PlaceValueTableDragDrop";
-import { ProgressBorder } from "../../Modal2/modal2";
+import parse from "html-react-parser";
+import { optionSelectStaticMathField } from '../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode';
+import ConditionOnProgressBar from '../../CommonJsxComponent/ConditionOnProgressBar';
+import ContentPlaceValueTableSelect from './ContentPlaceValueTableSelect';
+import PlaceValueTableDragDrop from './PlaceValueTableChoiceType/PlaceValueTableDragDrop/PlaceValueTableDragDrop';
+import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import PlaceValueTableSelectChoice from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
+import { findSelectedValue, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import { findSelectedValue, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+
+
 const changeAnswerStatus = (
-  val,
-  setIsAnswerCorrect,
-  setHasAnswerSubmitted,
-  setStudentAnswerQuestion,
-  setRedAlert
-) => {
-  if (val === 0) {
-    setRedAlert(true);
-    return;
-  } else if (val === 1) setIsAnswerCorrect(false);
-  else setIsAnswerCorrect(true);
-  let jsonData = serializeResponse("studentAnswerResponse");
-  setStudentAnswerQuestion(jsonData);
-  setHasAnswerSubmitted(true);
-};
+    val,
+    setIsAnswerCorrect,
+    setHasAnswerSubmitted,
+    setStudentAnswerQuestion,
+    setRedAlert
+  ) => {
+    if (val === 0) {
+      setRedAlert(true);
+      return;
+    } else if (val === 1) setIsAnswerCorrect(false);
+    else setIsAnswerCorrect(true);
+    let jsonData = serializeResponse("studentAnswerResponse");
+    setStudentAnswerQuestion(jsonData);
+    setHasAnswerSubmitted(true);
+  };
+
 const ValidationForDragDrop = (content) => {
-  for (let rows of content) {
-    for (let items of rows) {
-      if (items.isMissed == "true") {
-        if (!items.show) return 0;
+    for (let rows of content) {
+      for (let items of rows) {
+        if (items.isMissed == "true") {
+          if (!items.show) return 0;
+        }
       }
     }
-  }
-  for (let rows of content) {
-    for (let items of rows) {
-      if (items.isMissed == "true") {
-        if (String(items.dropVal).trim() != String(items.value).trim())
-          return 1;
+    for (let rows of content) {
+      for (let items of rows) {
+        if (items.isMissed == "true") {
+          if (String(items.dropVal).trim() != String(items.value).trim())
+            return 1;
+        }
       }
     }
-  }
-  return 2;
-};
+    return 2;
+  };
+
 const ValidationForSelectChoice = (choices) => {
-  let val = null;
-  for (let items of choices) {
-    if (items?.show) {
+    let val = null;
+    for (let items of choices) {
       if (items?.show) {
-        if (items?.option == "true") return 2;
-        else return 1;
+        if (items?.show) {
+          if (items?.option == "true") return 2;
+          else return 1;
+        }
       }
     }
-  }
-  return 0;
-};
-export default function PlaceValueTableSelect({ state, totalRows, meter }) {
-  meter = Number(meter) || 0;
-  let totalEmptyBox = 0;
-  state.questionContent?.map((items) =>
-    items.map((item) => item.isMissed !== "false" && totalEmptyBox++)
-  );
-  const inputRef = useRef(new Array(totalEmptyBox));
-  const {
+    return 0;
+  };
+export default function PlaceValueTableEquation({state,totalRows,meter}){
+    meter=Number(meter) || 0;
+    let totalEmptyBox = 0;
+      console.log('this is state',state);
+
+
+      state.questionContent?.map((items) =>
+      items.map((item) => item.isMissed !== "false" && totalEmptyBox++)
+    );
+
+    const inputRef=useRef(new Array(totalEmptyBox));
+    const inputRefs=useRef([]);
+ const{
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setChoicesId,
     setStudentAnswerQuestion,
     setQuestionWithAnswer, isStudentAnswerResponse
-  } = useContext(ValidationContext);
-  const input2Ref=useRef()
+ }=useContext(ValidationContext);
+  const input2Ref=useRef();
+
   const handleSubmitAnswer = () => {
+    
     if(hasAnswerSubmitted)return
     if (state?.choiceType == "keying") {
-      console.log('this is inputr current',inputRef.current);
       
+      console.log("inside keying")
+         
+      console.log("input refs",inputRefs.current)
+      console.log("input refs length",inputRefs.current.length);
+
+
+
+      console.log("input ref",inputRef.current)
       for (let i = 0; i < inputRef.current?.length; i++)
         if (!String(inputRef.current[i].children[0].value).trim()) {
           setRedAlert(true);
@@ -101,9 +118,7 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
       setIsAnswerCorrect(true);
       setHasAnswerSubmitted(true);
       return;
-    } 
-    
-    else if (state?.choiceType == "dragdrop") {
+    } else if (state?.choiceType == "dragdrop") {
       let val = ValidationForDragDrop(inputRef?.current);
       changeAnswerStatus(
         val,
@@ -133,18 +148,21 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
      }
     }
   };
-  const [redAlert, setRedAlert] = useState(false);
 
-  return (
+ const[redAlert,setRedAlert]=useState(false);
+
+    return (
+        
     <div>
-     { !isStudentAnswerResponse&& <SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
+     
+      {!isStudentAnswerResponse &&<SolveButton
+       onClick={handleSubmitAnswer}
+       answerHasSelected={hasAnswerSubmitted}
       />}
-      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
+{redAlert && !hasAnswerSubmitted &&<CustomAlertBoxMathZone /> }
+     <div id="studentAnswerResponse">
         <div className={styles.questionName}>
-          {HtmlParser(state.questionName)}
+        {parse(state?.questionName, optionSelectStaticMathField)}
         </div>
         {state?.upload_file_name && (
           <div>
@@ -152,11 +170,12 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
           </div>
         )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
+            <ConditionOnProgressBar meter={meter}/>
         </div>
-        <div className={styles.contentParent}>
-          {state?.choiceType == "keying" ? (
+         <div className={styles.contentParent}>
+         {state?.choiceType == "keying" ? (
             <ContentPlaceValueTableSelect
+              inputRefs={inputRefs}
               content={state.questionContent}
               totalRows={Number(totalRows)}
               inputRef={inputRef}
@@ -193,7 +212,8 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
             <h1>Coming soon</h1>
           )}
         </div>
-      </div>
+     </div>
     </div>
+ 
   );
 }

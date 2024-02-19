@@ -1,5 +1,6 @@
 import React from "react";
 import PlaceValueTableSelect from "./PlaceValueTableSelect";
+import  PlaceValueTableEquation  from "./PlaceValueTableEquation";
 // let obj={
 //     "operation":"addition",
 //     "type":"place_value_table_select",
@@ -99,5 +100,8 @@ import PlaceValueTableSelect from "./PlaceValueTableSelect";
 
 export default function MainValueTableSelect({obj,meter})
 {
-    return <PlaceValueTableSelect state={obj} totalRows={obj?.rows} meter={meter}/>
+    let str=JSON.stringify(obj)
+   // return  <PlaceValueTableSelect state={obj} totalRows={obj?.rows} meter={meter}/>
+    return str.includes("mq-selectable")?<PlaceValueTableEquation  totalRows={obj?.rows} state={obj} meter={meter}/>: <PlaceValueTableSelect state={obj} totalRows={obj?.rows} meter={meter}/>
+  
 }
