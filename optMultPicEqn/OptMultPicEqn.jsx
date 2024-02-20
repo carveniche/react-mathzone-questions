@@ -10,10 +10,28 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import  { findSelectedValue,  } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-const validationForSelectMultipleSelect=(choices)=>{
+
+const validationForSelectMultipleSelect=(choices,multipicselect)=>{
 let n=choices?.length||0
-for(let i=0;i<n;i++)
-{
+if(multipicselect){
+  let result = 0;
+  console.log('choices to validate',choices);
+  let flagitem=true;
+    for (let i = 0; i < n; i++) {  
+        if (String(choices[i].show).trim() !== String(choices[i].selected).trim()) {
+          flagitem=false;
+        } 
+    }
+    if(flagitem){
+      result = 2;
+    }else{
+      result = 1;
+    }
+    return result;
+    }
+else{
+     for(let i=0;i<n;i++)
+    {
   if(choices[i].show==true)
   {
     if(String(choices[i].show).trim()==String(choices[i].selected).trim())
@@ -21,10 +39,12 @@ for(let i=0;i<n;i++)
     else 
     return 1
   }
+   }
+  return 0
 }
-return 0
+
 }
-function OptMultPicEqn({ state, totalRows,meter,response=false }) {
+function OptMultPicEqn({ state, totalRows,meter,response=false,multipicselect }) {
   meter=Number(meter)||0
   
   const [redAlert,setRedAlert]=useState(false)
@@ -35,7 +55,7 @@ function OptMultPicEqn({ state, totalRows,meter,response=false }) {
     const handleSubmitAnswer = () => {
      if(showAnswer)
      return
-      let val=validationForSelectMultipleSelect(inputRef?.current)
+      let val=validationForSelectMultipleSelect(inputRef?.current,multipicselect)
       if(val==0)
       {
         setRedAlert(true)
@@ -45,13 +65,34 @@ function OptMultPicEqn({ state, totalRows,meter,response=false }) {
       setIsAnswerCorrect(false)
       else if(val==2)
       setIsAnswerCorrect(true)
-      let value=findSelectedValue(inputRef.current,"value")
-      
+
+
+      let value;
+
+      if(multipicselect){
+        value = findSelectedValuesall(inputRef.current,"value");
+      }else{
+        value=findSelectedValue(inputRef.current,"value")
+      }
+      console.log('value',value);
+     
+  
       setQuestionWithAnswer({...state,[student_answer]:value})
       setShowAnswer(true);
     };
    
     
+    const findSelectedValuesall = (choices, keys = "value") => {
+      const selectedValues = [];
+    
+      for (let item of choices) {
+        if (item?.show === true) {
+          selectedValues.push(item[keys]);
+        }
+      }
+    
+      return selectedValues;
+    };
     return <>
     
     
@@ -65,9 +106,10 @@ function OptMultPicEqn({ state, totalRows,meter,response=false }) {
          <div>
           <ConditionOnProgressBar meter={meter} />
         </div>
-        <div class={styles.contentParent} >
+        <div className={styles.contentParent} >
         {Boolean(totalRows) && (
             <OptMultPicChoiceSelectEqn
+            multipicselect={multipicselect}
               totalRows={totalRows}
               choices={state?.questionContent}
               totalColumns={state.col} 
