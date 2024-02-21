@@ -13,6 +13,7 @@ import PlaceValueTableSelectChoice from "./PlaceValueTableChoiceType/PlaceValueT
 import { findSelectedValue, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
+import ContentPlaceValueTableSelectEquation from './ContentPlaceValueTableSelectEquation';
 
 
 const changeAnswerStatus = (
@@ -63,6 +64,7 @@ const ValidationForSelectChoice = (choices) => {
     }
     return 0;
   };
+  
 export default function PlaceValueTableEquation({state,totalRows,meter}){
     meter=Number(meter) || 0;
     let totalEmptyBox = 0;
@@ -174,7 +176,7 @@ export default function PlaceValueTableEquation({state,totalRows,meter}){
         </div>
          <div className={styles.contentParent}>
          {state?.choiceType == "keying" ? (
-            <ContentPlaceValueTableSelect
+            <ContentPlaceValueTableSelectEquation
               inputRefs={inputRefs}
               content={state.questionContent}
               totalRows={Number(totalRows)}
