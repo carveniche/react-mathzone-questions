@@ -24,11 +24,13 @@ export default function ContentPlaceValueTableSelectEquation({
   questionHead,
   totalCols,
   input2Ref,
+  equationKeyingRef,
 }) {
   console.log('inputref2',input2Ref);
+ 
   const ref = useRef([]);
   let [inputState, setInputState] = useState({});
-  const [equetionState,setEquationState]=useState({});
+  const [equationObj,setEquationObj]=useState({});
   const [currentVirtualKeyBoard, setCurrentVirtualKeyBoard] = useState(-1);
   const currentBoxRef = useRef([]);
   const currentElement = useRef([]);
@@ -38,7 +40,7 @@ export default function ContentPlaceValueTableSelectEquation({
   let array = temp.map((item) => {
     item = [];
     let temp2 = new Array(totalCols).fill(0);
-    console.log('this is temp2',temp2);
+    //console.log('this is temp2',temp2);
     item.push(temp2);
     return item;
   });
@@ -57,8 +59,10 @@ export default function ContentPlaceValueTableSelectEquation({
         return item;
       })
     );
+
      console.log('this is useeffect',arr);
     setRowsData([...arr]);
+    
   }, []);
 
   const ref1 = useRef({});
@@ -90,16 +94,22 @@ export default function ContentPlaceValueTableSelectEquation({
    
   };
 
-  const handleChange = (value, rows, cols) => {
-  
-    let str = "" + rows + cols;
-    setState({ ...state, [str]: value });
-    rowsData[rows][cols][student_answer] = value;
-    console.log('thisi is handchangevd', rowsData[rows][cols][student_answer])
-    console.log('thisi is handchage',rowsData);
-    size.current[str] = value?.length > 2 ? value.length : 2;
-    setRowsData([...rowsData]);
-    
+  const handleChange = (value, rows, cols,status = false) => {
+    if (hasAnswerSubmitted || isStudentAnswerResponse) return;
+    if (status && currentVirtualKeyBoard > -1) setCurrentVirtualKeyBoard(-1);
+
+    //let str = "" + rows + cols;
+    let str = "" +rows+"row"+cols+"col";
+    inputState = { ...inputState, [str]: value };
+    console.log('this is inputstate,gdf',inputState);
+    if(!status){
+      setEquationObj({ ...equationObj, [str]: value });
+      console.log('this is equationinputobj',equationObj);
+    }
+
+    setInputState({...inputState});
+
+
   };
   
 
@@ -109,7 +119,11 @@ export default function ContentPlaceValueTableSelectEquation({
   useEffect(()=>{
     console.log('inputBoxRef',inputBoxRef)
   },[])
+  console.log(inputState)
 
+  inputRef.current={...inputState };
+  equationKeyingRef.current={...equationObj}
+  
   return (
     <div style={GridPlaceValueTable}>
       <div
@@ -143,9 +157,9 @@ export default function ContentPlaceValueTableSelectEquation({
                 {mathQuilEditorChecker(item?.value)?(
                 <input 
                   type="text"
-                  value={isStudentAnswerResponse? item[student_answer]: state[`${index}${i}`]? state[`${index}${i}`]: ""}
+                  value={isStudentAnswerResponse? item[student_answer]: inputState[`${index}row${i}col`]? inputState[`${index}row${i}col`]: ""}
                   onChange={(e) => {
-                    handleChange(e.target.value, index, i);
+                    handleChange(e.target.value, item.row, item.col,true);
                   }}
                   disabled={hasAnswerSubmitted || isStudentAnswerResponse}
                   style={{ width: 100  }}
@@ -220,8 +234,8 @@ export default function ContentPlaceValueTableSelectEquation({
           currentVirtualKeyBoard={currentVirtualKeyBoard}
           currentRow={currentElement.current[0]}
           currentCol={currentElement.current[1]}
-          inputState={inputState}
-          setInputState={setInputState}
+          inputState={{}}
+          setInputState={()=>{}}
           ref2={
             ref1.current[
               `${currentBoxRef.current[0]}${currentBoxRef.current[1]}`

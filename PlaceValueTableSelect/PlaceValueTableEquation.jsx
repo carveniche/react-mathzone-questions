@@ -15,6 +15,10 @@ import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
 import ContentPlaceValueTableSelectEquation from './ContentPlaceValueTableSelectEquation';
 
+import { useEffect } from 'react';
+import { collectDataAtCompileTimed } from './CollectAnswerdataplacevalueequation';
+import compareLatexData from '../../CommonJSFiles/compareLatexData';
+
 
 const changeAnswerStatus = (
     val,
@@ -66,6 +70,9 @@ const ValidationForSelectChoice = (choices) => {
   };
   
 export default function PlaceValueTableEquation({state,totalRows,meter}){
+  const equationKeyingRef=useRef({});
+  const[newData,setNewData]=useState({});
+  
     meter=Number(meter) || 0;
     let totalEmptyBox = 0;
       console.log('this is state',state);
@@ -87,31 +94,93 @@ export default function PlaceValueTableEquation({state,totalRows,meter}){
  }=useContext(ValidationContext);
   const input2Ref=useRef();
 
+
+  const validationForKeying = (newData, choices,equationObj) => {
+    console.log('this is equationtype',equationObj)
+    for (let key in newData) {
+      if (newData[key]) {
+        if (!choices[key]) return 0;
+      }
+    }
+    for (let key in newData) {
+      if (newData[key]) {
+        if (!choices[key]) return 0;
+        else if (
+        equationObj?.hasOwnProperty(key)
+        )
+          {
+            
+            if(!compareLatexData( String(newData[key]).trim()?.toLowerCase() ,
+            String(equationObj[key]).trim()?.toLowerCase()))
+            return 1
+          }
+          else if( String(newData[key]).trim()?.toLowerCase() !==
+          String(choices[key]).trim()?.toLowerCase()){
+            return 1
+          }
+      }
+    }
+    return 2;
+  };
+
+  const changeStateAfterValidation = (
+    setHasAnswerSubmitted,
+    setIsAnswerCorrect,
+    val,setRedAlert
+  ) => {
+    if (val === 0) {
+      setRedAlert(true);
+      return;
+    } else if (val === 1) {
+      setIsAnswerCorrect(false);
+    } else setIsAnswerCorrect(true);
+    setHasAnswerSubmitted(true);
+  };
+
+
+
+  function removeFalseValues(obj) {
+    const newObj = {}; // Create a new object to store filtered key-value pairs
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key) && obj[key] !== false) {
+            newObj[key] = obj[key]; // Copy key-value pair to new object if value is not false
+        }
+    }
+    return newObj; // Return the new object with filtered key-value pairs
+}
+
   const handleSubmitAnswer = () => {
     
     if(hasAnswerSubmitted)return
     if (state?.choiceType == "keying") {
-      
-      console.log("inside keying")
-         
-      console.log("input refs",inputRefs.current)
-      console.log("input refs length",inputRefs.current.length);
+      console.log("inside keying")     
+      console.log("this is actual new Data",newData);
+      console.log("input ref",inputRef.current) 
+      console.log('equationkeyingref',equationKeyingRef.current);
+      const filteredData = removeFalseValues(newData);
+      console.log('thisi is filterdata',filteredData);
+
+     let newDataLength = Object.keys(newData).length;
+let filteredDataLength = Object.keys(filteredData).length;
+
+// if (newDataLength !== filteredDataLength) {
+//   setRedAlert(true);
+//   return;
+// }
 
 
+       let status = validationForKeying(newData, inputRef.current,equationKeyingRef.current);
+       console.log('this is status',status);
 
-      console.log("input ref",inputRef.current)
-      for (let i = 0; i < inputRef.current?.length; i++)
-        if (!String(inputRef.current[i].children[0].value).trim()) {
-          setRedAlert(true);
-          return;
-        }
-      for (let i = 0; i < inputRef.current?.length; i++)
-        if (
-          !CompareTwoValue(
-            inputRef.current[i]?.children[0]?.value,
-            inputRef.current[i]?.getAttribute("value")
-          )
-        ) {
+        changeStateAfterValidation(
+          setHasAnswerSubmitted,
+          setIsAnswerCorrect,
+          status,setRedAlert
+        );
+
+        {
+
+          console.log('this is input2Ref.current ',input2Ref.current);
           setHasAnswerSubmitted(true);
          setQuestionWithAnswer({...state,questionContent:input2Ref.current})
           return;
@@ -120,7 +189,9 @@ export default function PlaceValueTableEquation({state,totalRows,meter}){
       setIsAnswerCorrect(true);
       setHasAnswerSubmitted(true);
       return;
-    } else if (state?.choiceType == "dragdrop") {
+    } 
+    
+    else if (state?.choiceType == "dragdrop") {
       let val = ValidationForDragDrop(inputRef?.current);
       changeAnswerStatus(
         val,
@@ -151,7 +222,17 @@ export default function PlaceValueTableEquation({state,totalRows,meter}){
     }
   };
 
+
+
  const[redAlert,setRedAlert]=useState(false);
+
+
+ useEffect(() => {
+  let arr = collectDataAtCompileTimed(state?.questionContent);
+console.log('this is  new data ',arr);
+  setNewData({ ...arr });
+}, []);
+
 
     return (
         
@@ -186,6 +267,7 @@ export default function PlaceValueTableEquation({state,totalRows,meter}){
               questionHead={state.questiontbHead}
               totalCols={Number(state?.cols)}
               input2Ref={input2Ref}
+              equationKeyingRef={equationKeyingRef}
             />
           ) : state?.choiceType == "dragdrop" ? (
             <PlaceValueTableDragDrop
