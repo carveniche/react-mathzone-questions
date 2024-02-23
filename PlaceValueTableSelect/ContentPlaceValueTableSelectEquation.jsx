@@ -209,7 +209,9 @@ export default function ContentPlaceValueTableSelectEquation({
                     }}
                   >
                      {isStudentAnswerResponse?parse(item[student_answer],optionSelectStaticMathField): <StaticMathField>
-                      {item[student_answer]??""}
+                      {inputState[`${item.row}row${item.col}col`]
+                                  ? inputState[`${item.row}row${item.col}col`]
+                                  : ""}
                     </StaticMathField>}
                   </div>
                 )

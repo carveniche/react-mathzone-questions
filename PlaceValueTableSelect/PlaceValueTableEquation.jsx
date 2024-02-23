@@ -10,7 +10,7 @@ import ContentPlaceValueTableSelect from './ContentPlaceValueTableSelect';
 import PlaceValueTableDragDrop from './PlaceValueTableChoiceType/PlaceValueTableDragDrop/PlaceValueTableDragDrop';
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import PlaceValueTableSelectChoice from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
-import { findSelectedValue, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { findSelectedValue, manupulateEquationTypeQuestion1D, manupulateEquationTypeQuestion1Darr, manupulateQuestionContent1Darray, manupulateQuestionContent1Darrayed, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
 import ContentPlaceValueTableSelectEquation from './ContentPlaceValueTableSelectEquation';
@@ -150,24 +150,41 @@ export default function PlaceValueTableEquation({state,totalRows,meter}){
 }
 
   const handleSubmitAnswer = () => {
-    
+
     if(hasAnswerSubmitted)return
+    setRedAlert(false);
+
     if (state?.choiceType == "keying") {
       console.log("inside keying")     
       console.log("this is actual new Data",newData);
       console.log("input ref",inputRef.current) 
       console.log('equationkeyingref',equationKeyingRef.current);
       const filteredData = removeFalseValues(newData);
-      console.log('thisi is filterdata',filteredData);
+      console.log('this is filterdata',filteredData);
 
-     let newDataLength = Object.keys(newData).length;
+     let inputslengths = Object.keys(inputRef.current).length;
 let filteredDataLength = Object.keys(filteredData).length;
 
-// if (newDataLength !== filteredDataLength) {
-//   setRedAlert(true);
-//   return;
-// }
 
+if (inputslengths !== filteredDataLength) {
+  setRedAlert(true);
+  return;
+}
+
+let isValid = true;
+// Check if every key has a non-empty value
+for (const key in inputRef.current) {
+    if (inputRef.current.hasOwnProperty(key)) {
+        if (inputRef.current[key].trim() === "") { 
+            isValid = false;
+            break;
+        }
+    }
+}
+if (!isValid) {
+    setRedAlert(true);
+    return;
+}
 
        let status = validationForKeying(newData, inputRef.current,equationKeyingRef.current);
        console.log('this is status',status);
@@ -178,13 +195,31 @@ let filteredDataLength = Object.keys(filteredData).length;
           status,setRedAlert
         );
 
-        {
 
-          console.log('this is input2Ref.current ',input2Ref.current);
-          setHasAnswerSubmitted(true);
-         setQuestionWithAnswer({...state,questionContent:input2Ref.current})
+        if(status!=0){
+          console.log('this is state',state)
+          console.log('this is state questioncontent',JSON.parse(JSON.stringify(state?.questionContent)));
+          console.log('this is state questioncontent old',state?.questionContent);
+          
+          console.log('this is inputRef current',inputRef?.current);
+    
+          let result=manupulateEquationTypeQuestion1Darr(state?.questionContent,inputRef?.current,"value")
+          console.log('this is first result',result);
+          result= manupulateQuestionContent1Darrayed(result)
+    
+          console.log('this is second result',result)
+          setQuestionWithAnswer({...state,questionContent:result})
+         }
+
+
+        {
+        //  console.log('this is input2Ref.current ',input2Ref.current);
+        setHasAnswerSubmitted(true);
+       // setQuestionWithAnswer({...state,questionContent:input2Ref.current})
           return;
         }
+
+
       setQuestionWithAnswer({...state,questionContent:input2Ref.current})
       setIsAnswerCorrect(true);
       setHasAnswerSubmitted(true);
