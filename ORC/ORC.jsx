@@ -133,7 +133,8 @@ function ORC({ obj, question_text, meter }) {
     if (row > -1 && col > -1) {
       let value = dragState[i];
 
-      let temp = dragState.filter((item) => item != value);
+      let index = dragState.findIndex((item) => item == value);
+      let temp = dragState.filter((item, i) => index != i);
       setDragState([...temp]);
       dropState[col].push(value);
       setDropState([...dropState]);
@@ -146,7 +147,8 @@ function ORC({ obj, question_text, meter }) {
     let value = dropState[row][col];
     dragState.push(value);
     setDragState([...dragState]);
-    dropState[row] = dropState[row].filter((item) => item != value);
+    let index = dropState.findIndex((item) => item === value);
+    dropState[row] = dropState[row].filter((_, i) => i !== index);
     setDropState([...dropState]);
   };
 
@@ -344,7 +346,7 @@ function ORC({ obj, question_text, meter }) {
             <div></div>
           </ProgressBorder>
         </div>
-        <div className={styles.contentParent}>
+        <div className={`${styles.contentParent} ${styles.orc_dragdrop}`}>
           <>
             {obj?.orc_oprc_data[0]?.column_headers &&
               obj?.orc_oprc_data[0]?.column_headers?.length > 0 && (

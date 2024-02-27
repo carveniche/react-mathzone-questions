@@ -3176,3 +3176,9 @@
 .tdspace td:nth-child(1) {
   left: 9px;
 }
+.contentParent img {
+  user-select: none;
+}
+.orc_dragdrop img {
+  pointer-events: none;
+}
