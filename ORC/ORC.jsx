@@ -133,8 +133,7 @@ function ORC({ obj, question_text, meter }) {
     if (row > -1 && col > -1) {
       let value = dragState[i];
 
-      let index = dragState.findIndex((item) => item == value);
-      let temp = dragState.filter((item, i) => index != i);
+      let temp = dragState.filter((_, index) => index != i);
       setDragState([...temp]);
       dropState[col].push(value);
       setDropState([...dropState]);
@@ -147,8 +146,7 @@ function ORC({ obj, question_text, meter }) {
     let value = dropState[row][col];
     dragState.push(value);
     setDragState([...dragState]);
-    let index = dropState.findIndex((item) => item === value);
-    dropState[row] = dropState[row].filter((_, i) => i !== index);
+    dropState[row] = dropState[row].filter((_, i) => i !== col);
     setDropState([...dropState]);
   };
 
