@@ -10,7 +10,7 @@ import ContentPlaceValueTableSelect from './ContentPlaceValueTableSelect';
 import PlaceValueTableDragDrop from './PlaceValueTableChoiceType/PlaceValueTableDragDrop/PlaceValueTableDragDrop';
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import PlaceValueTableSelectChoice from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
-import { findSelectedValue, manupulateEquationTypeQuestion1D, manupulateEquationTypeQuestion1Darr, manupulateQuestionContent1Darray, manupulateQuestionContent1Darrayed, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { findSelectedValue, manupulateEquationTypeQuestion1D, manupulateEquationTypeQuestion1Darr, manupulateEquationTypeQuestion2Darr, manupulateQuestionContent1Darray, manupulateQuestionContent1Darrayed, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
 import ContentPlaceValueTableSelectEquation from './ContentPlaceValueTableSelectEquation';
@@ -203,7 +203,7 @@ if (!isValid) {
           
           console.log('this is inputRef current',inputRef?.current);
     
-          let result=manupulateEquationTypeQuestion1Darr(state?.questionContent,inputRef?.current,"value")
+          let result=manupulateEquationTypeQuestion2Darr(state?.questionContent,inputRef?.current,"value")
           console.log('this is first result',result);
           result= manupulateQuestionContent1Darrayed(result)
     
