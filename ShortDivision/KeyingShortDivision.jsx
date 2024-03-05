@@ -64,7 +64,8 @@ export default function ShortDivisionKeyingChoiceType({
          
      if(index !==2){
       return(
-            <tr key={index}  className={styles.tdspace}>
+        <tr key={index} className={items?.some(item => item?.value === 'R') ? styles.tdspace : styles.tdspace_pd}>
+
               {items?.map((item, i) =>
 
                   item.isMissed !== "true" 
@@ -218,7 +219,7 @@ export const BottomBorder = styled.div`
   width: ${(props) => props.width ?? "100px"};
   bottom: -3px;
   height: 3px;
-  right: -8;
+  right: -8px;
   background: indigo;
 `;
 
