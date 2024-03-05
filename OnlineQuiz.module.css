@@ -3101,6 +3101,9 @@
 .old_question_type {
   padding-top: 10px;
 }
+.bodyPage2:global(.old_question_type) div:global(.eq-c) {
+  display: inline-block;
+}
 
 .row_1 {
   position: relative;
@@ -3164,7 +3167,7 @@
   font-weight: bold;
 }
 
-.tdspace td{
+.tdspace td {
   padding-left: 25px;
 }
 .tdspace td:nth-last-child(1) {
@@ -3174,7 +3177,7 @@
 .tdspace td:nth-last-child(2) {
   padding-left: 0 !important;
 }
-.tdspace td:nth-child(1){
+.tdspace td:nth-child(1) {
   left: 9px;
 }
 .tdspace_pd td:nth-child(1){
@@ -3182,4 +3185,10 @@
 }
 .tdspace_pd td{
   padding-left: 25px;
+}
+.contentParent img {
+  user-select: none;
+}
+.orc_dragdrop img {
+  pointer-events: none;
 }

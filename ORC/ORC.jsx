@@ -54,6 +54,36 @@ const compareArrayText = (arr1, arr2) => {
   }
   return true;
 };
+const disabledSelectChoice = (arr) => {
+  let parents = document.querySelector("#orc_question_type");
+  let selectBox = parents?.querySelectorAll("select");
+  for (let i = 0; i < selectBox.length; i++) {
+    let options = selectBox[i]?.querySelectorAll("option");
+    for (let j = 0; j < options.length; j++) {
+      let values = options[j]?.value;
+      if (arr[i]?.includes(values)) {
+        options[j].setAttribute("selected", "true");
+      } else {
+        options[j]?.removeAttribute("selected");
+      }
+    }
+  }
+};
+const disabledCkeditor = () => {
+  let parents = document.querySelector("#orc_question_type");
+  let inputBox = parents?.querySelectorAll("select") || [];
+  for (let item of inputBox) {
+    if (item) {
+      item.setAttribute("disabled", true);
+    }
+  }
+  inputBox = parents?.querySelectorAll("input") || [];
+  for (let item of inputBox) {
+    if (item) {
+      item.setAttribute("disabled", true);
+    }
+  }
+};
 function ORC({ obj, question_text, meter }) {
   const [redAlert, setRedAlert] = useState(false);
   let [dragState, setDragState] = useState([]);
@@ -74,6 +104,10 @@ function ORC({ obj, question_text, meter }) {
     } catch (e) {
       console.log(e);
     }
+  }, []);
+  useEffect(() => {
+    disabledSelectChoice();
+    disabledCkeditor();
   }, []);
   useEffect(() => {
     let temp = [];
@@ -99,7 +133,7 @@ function ORC({ obj, question_text, meter }) {
     if (row > -1 && col > -1) {
       let value = dragState[i];
 
-      let temp = dragState.filter((item) => item != value);
+      let temp = dragState.filter((_, index) => index != i);
       setDragState([...temp]);
       dropState[col].push(value);
       setDropState([...dropState]);
@@ -112,7 +146,7 @@ function ORC({ obj, question_text, meter }) {
     let value = dropState[row][col];
     dragState.push(value);
     setDragState([...dragState]);
-    dropState[row] = dropState[row].filter((item) => item != value);
+    dropState[row] = dropState[row].filter((_, i) => i !== col);
     setDropState([...dropState]);
   };
 
@@ -297,7 +331,7 @@ function ORC({ obj, question_text, meter }) {
       }
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className="mathzoneQuestionName">
+        <div className="mathzoneQuestionName" id="orc_question_type">
           {parse(question_text, optionSelect)}
         </div>
         {obj?.upload_file_name && (
@@ -310,7 +344,7 @@ function ORC({ obj, question_text, meter }) {
             <div></div>
           </ProgressBorder>
         </div>
-        <div className={styles.contentParent}>
+        <div className={`${styles.contentParent} ${styles.orc_dragdrop}`}>
           <>
             {obj?.orc_oprc_data[0]?.column_headers &&
               obj?.orc_oprc_data[0]?.column_headers?.length > 0 && (
