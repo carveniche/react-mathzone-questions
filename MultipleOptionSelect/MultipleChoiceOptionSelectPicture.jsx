@@ -81,7 +81,7 @@ console.log('show status',rows[i].show)
 
               display: "flex",
               cursor: "pointer",
-              flexWrap: "wrap",
+            //  flexWrap: "wrap",
               border: " 1px solid black",
               padding: "1rem",
               borderRadius: "5px",
