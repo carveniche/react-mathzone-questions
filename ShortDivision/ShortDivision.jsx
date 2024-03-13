@@ -47,21 +47,31 @@ const validationForSelectChoice = (inputRef, content) => {
   return 2;
 };
 const validationForDragAndDrop = (inputRef) => {
+
   let n = inputRef?.current?.length || 0;
   let arr = inputRef.current;
   for (let i = 0; i < n; i++) {
     let m = arr[i]?.length || 0;
     for (let j = 0; j < m; j++) {
-      if (arr[i][j].isMissed == "true") {
+      if (arr[i][j].isMissed == "true" || arr[i][j].re_isMissed == "true") {
         if (!arr[i][j].show) return 0; //not selected
       }
+     
     }
   }
+
   for (let i = 0; i < n; i++) {
     let m = arr[i]?.length || 0;
     for (let j = 0; j < m; j++) {
-      if (arr[i][j].isMissed == "true")
-        if (arr[i][j].value != arr[i][j].dropVal) return 1; //not selected}
+      if (arr[i][j].isMissed == "true"){
+        
+        if (arr[i][j].value != arr[i][j].dropVal) return 1 //not selected}
+      }
+      if (arr[i][j].re_isMissed == "true"){
+        if (arr[i][j].re_value != arr[i][j].dropVal) return 1 
+        }
+
+       
     }
   }
   return 2;
@@ -91,7 +101,7 @@ const validationForKeying = (inputRef) => {
   for (let i = 0; i < n; i++) {
     let m = arr[i]?.length || 0;
     for (let j = 0; j < m; j++) {
-      if (arr[i][j].isMissed === "true")
+      if (arr[i][j].isMissed === "true" || arr[i][j].re_isMissed === "true")
         if (
           !arr[i][j].show ||
           arr[i][j].dropVal == "" ||
@@ -103,12 +113,20 @@ const validationForKeying = (inputRef) => {
   for (let i = 0; i < n; i++) {
     let m = arr[i]?.length || 0;
     for (let j = 0; j < m; j++) {
-      if (arr[i][j].isMissed === "true")
+      if (arr[i][j].isMissed === "true"){
         if (
           String(arr[i][j]?.dropVal).trim()?.toLowerCase() !=
           String(arr[i][j]?.value).trim()?.toLowerCase()
         )
           return 1;
+        }
+        if (arr[i][j].re_isMissed === "true"){
+          if (
+            String(arr[i][j]?.dropVal).trim()?.toLowerCase() !=
+            String(arr[i][j]?.re_value).trim()?.toLowerCase()
+          )
+            return 1;
+          }
     }
   }
   return 2;
