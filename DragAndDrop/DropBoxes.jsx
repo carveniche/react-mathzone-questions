@@ -8,7 +8,8 @@ import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D"
 import { useScrollBar } from "../../../CommonFunction/useScrollBar";
 import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
-
+import parse from "html-react-parser";
+import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 export default function DropBoxes({
   content,
   totalRows,
@@ -105,7 +106,7 @@ export default function DropBoxes({
                     })
                   }
                 >
-                  <HtmlParserComponent value={item?.value} />
+                  <HtmlParserComponent value={parse(item?.value, optionSelectStaticMathField)} />
                 </div>
               ) : item?.show || isStudentAnswerResponse ? (
                 <Draggable
@@ -125,7 +126,7 @@ export default function DropBoxes({
                     name={item.isMissed}
                     key={index}
                     id={`${i}-${index}`}
-                    className={`mainCompareDropBox ${styles.DropBoxes}`}
+                    className={`mainCompareDropBox ${styles.DropBoxes} ${styles.roundcard_empty}`}
                     ref={(el) =>
                       (droppableContainerRef.current[i][index] = {
                         el,
@@ -134,13 +135,13 @@ export default function DropBoxes({
                       })
                     }
                   >
-                    <HtmlParserComponent
-                      value={
-                        isStudentAnswerResponse
-                          ? item[student_answer]
-                          : item?.dropValue
-                      }
-                    />
+                  <HtmlParserComponent
+  value={
+    isStudentAnswerResponse
+      ? parse(item[student_answer], optionSelectStaticMathField)
+      : parse(item?.dropValue, optionSelectStaticMathField)
+  }
+/>
                   </div>
                 </Draggable>
               ) : (
@@ -156,7 +157,7 @@ export default function DropBoxes({
                   value={item?.value}
                   name={item.isMissed}
                   key={index}
-                  className={`${styles.missedBox} mainCompareDropBox`}
+                  className={`${styles.missedBox} mainCompareDropBox ${styles.roundcard_empty}`}
                   id={`${i}-${index}`}
                 ></div>
               )
@@ -164,7 +165,7 @@ export default function DropBoxes({
           </div>
         ))}
         <div
-          className={styles.CompareDragOperatorDragDropFlexBox}
+          className={`${styles.CompareDragOperatorDragDropFlexBox} ${styles.roundcard_empty}`}
           key={dragKey}
         >
           {/* drag field */}
@@ -181,10 +182,10 @@ export default function DropBoxes({
                   <div
                     ref={(el) => (dragRef.current[i] = el)}
                     key={i}
-                    className={styles.bgIndigo}
+                    className={styles.bgIndigo_roundcard}
                     style={{ cursor: "pointer" }}
                   >
-                    {<HtmlParserComponent value={dragState[i]?.value} />}
+                    <HtmlParserComponent value={parse(dragState[i]?.value, optionSelectStaticMathField)} />
                   </div>
                 </Draggable>
               ) : (
@@ -194,9 +195,9 @@ export default function DropBoxes({
               <div
                 ref={(el) => (dragRef.current[i] = el)}
                 key={i}
-                className={styles.bgIndigo}
+                className={styles.bgIndigo_roundcard}
               >
-                <HtmlParserComponent value={dragState[i]?.value} />
+                <HtmlParserComponent value={parse(dragState[i]?.value, optionSelectStaticMathField)} />
               </div>
             ) : (
               <div ref={(el) => (dragRef.current[i] = el)} key={i}></div>
