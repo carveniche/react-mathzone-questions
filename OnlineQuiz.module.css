@@ -3136,13 +3136,17 @@
 .keyrow_2 {
   position: absolute;
   top: 48px;
-  left: 67px;
+  left: 76px;
   display: flex;
-  grid-gap: 44px;
-  gap: 48px;
+ gap:0px !important;
   justify-content: left;
 }
-
+.keyrow_2 td:nth-child(1){
+ display: none !important;
+}
+.keyrow_2 td{
+  padding-left: 63px;
+}
 .quizCorrectInorrect {
   font-family: "GothamRnd-Medium";
   clear: both;
@@ -3183,13 +3187,19 @@
 }
 .tdspace td:nth-last-child(1) {
   padding-left: 0 !important;
-  left: -10px;
+  left: -35px;
 }
 .tdspace td:nth-last-child(2) {
   padding-left: 0 !important;
 }
 .tdspace td:nth-child(1) {
   left: 9px;
+}
+.tdspace_pd td:nth-child(1){
+  left: 9px;
+}
+.tdspace_pd td{
+  padding-left: 25px;
 }
 .contentParent img {
   user-select: none;

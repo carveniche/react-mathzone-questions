@@ -27,24 +27,14 @@ export default function ShortDivisionKeyingChoiceType({
     console.log(row,"row")
   };
   
-  const handleChange1 = (e, rows, cols) => {
-    
-    row[rows][cols].dropVal = e.target.value;
-  
-    if (row[rows][cols].dropVal == "") {
-      row[rows][cols].re_show = false;
-    } else row[rows][cols].re_show = true;
-    
-    setRow([...row]);
-
-  };
+ 
 
   useEffect(() => {
     let arr = [];
     arr = Object.assign([], content);
     arr = arr.map((item) => {
       return item?.map((items) => {
-        return { ...items, show: false,re_show:false };
+        return { ...items, show: false};
       });
     });
 
@@ -64,7 +54,8 @@ export default function ShortDivisionKeyingChoiceType({
          
      if(index !==2){
       return(
-            <tr key={index}  className={styles.tdspace}>
+        <tr key={index} className={items?.some(item => item?.value === 'R') ? styles.tdspace : styles.tdspace_pd}>
+
               {items?.map((item, i) =>
 
                   item.isMissed !== "true" 
@@ -175,7 +166,7 @@ export default function ShortDivisionKeyingChoiceType({
                                 : row[index][i]?.dropVal
                             }
                             onChange={(e) => {
-                              handleChange1(e, index, i);
+                              handleChange(e, index, i);
                             }}
                             disabled={
                               hasAnswerSubmitted || isStudentAnswerResponse
@@ -218,7 +209,7 @@ export const BottomBorder = styled.div`
   width: ${(props) => props.width ?? "100px"};
   bottom: -3px;
   height: 3px;
-  right: -8;
+  right: -8px;
   background: indigo;
 `;
 
