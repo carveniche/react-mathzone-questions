@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import parse from "html-react-parser";
 import { useRef } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import DropBoxes from "./DropBoxes";
@@ -12,6 +13,7 @@ import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { manupulateQuestionContent } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 const validationForKeyingChoiceType = (choices) => {
   let arr = choices?.current;
   let n = arr?.length || 0;
@@ -155,7 +157,7 @@ export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles?.questionName}>
-          {HtmlParser(state?.questionName)}
+        {parse(state?.questionName, optionSelectStaticMathField)}
         </div>
         {state?.upload_file_name && (
           <div>
