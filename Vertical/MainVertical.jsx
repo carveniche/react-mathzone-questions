@@ -173,6 +173,7 @@ import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 // };
 
 export default function MainVertical({ obj, meter }) {
+
   return (
     <Vertical
       state={obj}
@@ -184,8 +185,10 @@ export default function MainVertical({ obj, meter }) {
 }
 
 export function MainVerticalCorrectAnswer({ data }) {
+
   const [row, setRow] = useState([])
-  let totalCols=1
+  let totalCols=data.cols
+  let totalRows=data.rows
   useEffect(() => {
     let arr = []
     arr = data?.questionContent
@@ -199,17 +202,19 @@ export function MainVerticalCorrectAnswer({ data }) {
     <div>
       <div style={{ marginTop: "4rem" }}>
         {row?.map((items, index) => (
-          <div
-            className={styles.VerticalDragDropFlexBox}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              borderBottom:"2px solid black",
-              width: '100%',
-              maxWidth: "fit-content",
-            }}
-            key={index}
-          >
+           <div
+           key={index}
+           className={styles.VerticalKeyingFlexBox}
+           style={{
+             borderTop: `${
+               index === totalRows - 1 || index == 2 ? 2 : 0
+             }px solid black`,
+             borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
+             width: `${totalCols * 35}px`,
+             padding: `${index === totalRows - 1 || index === 2 ? 5 : 0}px 0`,
+             paddingBottom: `${index === 2 ? 0 : "initial"}px`,
+           }}
+         >
             {items?.map((item, i) =>
 
               <div
@@ -232,3 +237,4 @@ export function MainVerticalCorrectAnswer({ data }) {
   );
 
 }
+
