@@ -153,6 +153,7 @@ export default function ContentPlaceValueTableSelectEquation({
             ) : (
               <div key={i} ref={(el) => (inputBoxRef.current[index][i] = el)}
                 value={item.value}
+                
               >
                 {mathQuilEditorChecker(item?.value)?(
                 <input 
@@ -161,8 +162,8 @@ export default function ContentPlaceValueTableSelectEquation({
                   onChange={(e) => {
                     handleChange(e.target.value, item.row, item.col,true);
                   }}
-                  disabled={hasAnswerSubmitted || isStudentAnswerResponse}
-                  style={{ width: 100  }}
+                  readOnly={hasAnswerSubmitted || isStudentAnswerResponse}
+                  style={{ width: 120 , minHeight: 50, }}
 
                  
                 />
@@ -172,13 +173,15 @@ export default function ContentPlaceValueTableSelectEquation({
                     item?.student_answer??""
                   }
                   style={{
-                    minWidth: "120px",
-                    width: "auto",
-                    minHeight: "50px",
-                    height: "auto",
-                    textAlign: "center",
-                    borderRadius: 5,
-                    outline: 0,
+                    minWidth: 120,
+                      minHeight: 50,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 5,
+                      width: "auto",
+                      height:"auto",
+                      outline: 0,
                     "&focus": {
                       border: 0,
                       boxShadow: 0,
