@@ -153,6 +153,7 @@ export default function ContentPlaceValueTableSelectEquation({
             ) : (
               <div key={i} ref={(el) => (inputBoxRef.current[index][i] = el)}
                 value={item.value}
+                
               >
                 {mathQuilEditorChecker(item?.value)?(
                 <input 
@@ -163,8 +164,6 @@ export default function ContentPlaceValueTableSelectEquation({
                   }}
                   readOnly={hasAnswerSubmitted || isStudentAnswerResponse}
                   style={{ width: 115  }}
-
-                 
                 />
                 ):(!hasAnswerSubmitted &&!isStudentAnswerResponse)?(
                   <EditableMathField
@@ -172,13 +171,15 @@ export default function ContentPlaceValueTableSelectEquation({
                     item?.student_answer??""
                   }
                   style={{
-                    minWidth: "120px",
-                    width: "auto",
-                    minHeight: "50px",
-                    height: "auto",
-                    textAlign: "center",
-                    borderRadius: 5,
-                    outline: 0,
+                    minWidth: 120,
+                      minHeight: 50,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 5,
+                      width: "auto",
+                      height:"auto",
+                      outline: 0,
                     "&focus": {
                       border: 0,
                       boxShadow: 0,
