@@ -163,7 +163,9 @@ export default function ContentPlaceValueTableSelectEquation({
                     handleChange(e.target.value, item.row, item.col,true);
                   }}
                   readOnly={hasAnswerSubmitted || isStudentAnswerResponse}
-                  style={{ width: 115  }}
+                  style={{ width: 120 , minHeight: 50, }}
+
+                 
                 />
                 ):(!hasAnswerSubmitted &&!isStudentAnswerResponse)?(
                   <EditableMathField
