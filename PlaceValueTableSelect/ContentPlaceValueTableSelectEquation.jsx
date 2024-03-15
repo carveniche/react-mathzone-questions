@@ -161,8 +161,8 @@ export default function ContentPlaceValueTableSelectEquation({
                   onChange={(e) => {
                     handleChange(e.target.value, item.row, item.col,true);
                   }}
-                  disabled={hasAnswerSubmitted || isStudentAnswerResponse}
-                  style={{ width: 100  }}
+                  readOnly={hasAnswerSubmitted || isStudentAnswerResponse}
+                  style={{ width: 115  }}
 
                  
                 />
