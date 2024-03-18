@@ -68,7 +68,7 @@ console.log('show status',rows[i].show)
           marginTop: "1rem",
           gap: "1rem",
           position: "relative",
-          gridTemplateColumns: `repeat(${flag ? 1 : 2},1fr)`,
+          gridTemplateColumns: `repeat(${flag ? 2 : 2},1fr)`,
         }}
       >
         {rows?.map((item, i) => (
