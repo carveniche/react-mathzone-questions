@@ -49,7 +49,9 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
           answerHasSelected={hasAnswerSubmitted}
         />
       )}
-      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
+      {redAlert && !hasAnswerSubmitted && (
+        <CustomAlertBoxMathZone msg={"Please answer the question"} />
+      )}
       <div className="mathzoneQuestionName" id="studentAnswerResponse">
         {state?.question_text && <div>{HtmlParser(state?.question_text)}</div>}
         {state?.upload_file_name && (
