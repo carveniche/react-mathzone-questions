@@ -50,7 +50,7 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && (
-        <CustomAlertBoxMathZone msg={"Please answer the question"} />
+        <CustomAlertBoxMathZone msg={"Please answer the question..."} />
       )}
       <div className="mathzoneQuestionName" id="studentAnswerResponse">
         {state?.question_text && <div>{HtmlParser(state?.question_text)}</div>}
