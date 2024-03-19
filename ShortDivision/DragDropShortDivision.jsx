@@ -87,7 +87,7 @@ export default function ShortDivisionDragAndDropType({
       dropState[row][col].re_isMissed === "true" &&
       !dropState[row][col].show) {
 
-        dropState[row][col].re_dropVal = dragState[i]?.val || "";
+        dropState[row][col].dropVal = dragState[i]?.val || "";
         dragState[i].show = false;
         dropState[row][col].show = true;
         
@@ -99,20 +99,7 @@ export default function ShortDivisionDragAndDropType({
       setDragKey(Number(!dragKey));
     }
   };
-const rehandleStop2 =(e, row, col)=>{
-  let value = dropState[row][col].re_dropVal;
-  dropState[row][col].re_dropVal = "";
-  for (let item of dragState) {
-    if (!item?.show) {
-      item.show = true;
-      item.val = value;
-      break;
-    }
-  }
-  dropState[row][col].show = false;
-  setDropState([...dropState]);
-  setDragState([...dragState]);
-};
+
   const handleStop2 = (e, row, col) => {
     let value = dropState[row][col].dropVal;
     dropState[row][col].dropVal = "";
@@ -306,7 +293,7 @@ const rehandleStop2 =(e, row, col)=>{
                       >
                         {(item.show || isStudentAnswerResponse) && (
                           <Draggable
-                            onStop={(e) => rehandleStop2(e, index, i)}
+                            onStop={(e) => handleStop2(e, index, i)}
                             disabled={
                               hasAnswerSubmitted || isStudentAnswerResponse
                             }
@@ -327,7 +314,7 @@ const rehandleStop2 =(e, row, col)=>{
                                   value={
                                     isStudentAnswerResponse
                                       ? item[student_answer]
-                                      : item?.re_dropVal
+                                      : item?.dropVal
                                   }
                                 />
                               }
