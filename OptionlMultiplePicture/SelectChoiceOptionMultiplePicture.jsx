@@ -68,7 +68,7 @@ console.log('this is row',rows);
 
               display: "flex",
               cursor: "pointer",
-              flexWrap: "wrap",
+             // flexWrap: "wrap",
               border: " 1px solid black",
               padding: "1rem",
               borderRadius: "5px",
