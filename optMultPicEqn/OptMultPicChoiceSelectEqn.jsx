@@ -13,12 +13,11 @@ function OptMultPicChoiceSelectEqn({
   inputRef,
   studentAnswer,
 }) {
-
   const [flag, setFlag] = useState();
   let prevRef = useRef(0);
   const [rows, setRows] = useState([]);
   const { isStudentAnswerResponse } = useContext(ValidationContext);
- 
+
   useEffect(() => {
     let flag = false;
     let rows = [];
@@ -34,30 +33,30 @@ function OptMultPicChoiceSelectEqn({
         }
       });
     }
-    setFlag(flag);
+    // setFlag(flag);
 
     setRows([...rows]);
   }, []);
 
   const selectOptionHandler = (i) => {
-    console.log('this is multipicselect',multipicselect);
+    console.log("this is multipicselect", multipicselect);
     if (isAnswerSelected || isStudentAnswerResponse) return;
-    if(!multipicselect){
-    rows[prevRef.current].show = false;
-    rows[i].show = true;
-    prevRef.current = i;
-    setRows([...rows]);
-    }else{
-// Toggle the show property
-rows[i].show = !rows[i].show;
-console.log('show status',rows[i].show)
-    prevRef.current = i;
-    setRows([...rows]);
+    if (!multipicselect) {
+      rows[prevRef.current].show = false;
+      rows[i].show = true;
+      prevRef.current = i;
+      setRows([...rows]);
+    } else {
+      // Toggle the show property
+      rows[i].show = !rows[i].show;
+      console.log("show status", rows[i].show);
+      prevRef.current = i;
+      setRows([...rows]);
     }
   };
 
- console.log('this is studentAnswer',studentAnswer);
- console.log('this is row',rows);
+  console.log("this is studentAnswer", studentAnswer);
+  console.log("this is row", rows);
   inputRef.current = rows;
   return (
     <div className="mathzone-color-indigo">
@@ -73,7 +72,7 @@ console.log('show status',rows[i].show)
       >
         {rows?.map((item, i) => (
           <div
-          key={i}
+            key={i}
             style={{
               gap: "2rem",
               cursor: "pointer",

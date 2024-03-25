@@ -35,8 +35,7 @@ function SelectChoiceOptionMultiplePicture({
         }
       });
     }
-    setFlag(flag);
-console.log('this is row',rows);
+
     setRows([...rows]);
   }, []);
 
