@@ -10,7 +10,7 @@ function DisplayImageCard({ images, indexs,className,totalImage,setImageLoaded,c
       setState(images);
       if(totalImage-1===indexs)
       setImageLoaded(true)
-    }, 1000 * indexs);
+    }, 250 * indexs);
     return () => clearTimeout(id);
   }, []);
   return <div className={`${className} ${className2}`}>{state}</div>;
