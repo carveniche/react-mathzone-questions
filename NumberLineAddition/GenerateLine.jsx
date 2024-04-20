@@ -17,28 +17,29 @@ export default function GenerateLine({question, meter }){
     isStudentAnswerResponse,
   } = useContext(ValidationContext);
   const [studAns, setStudAnswers] = useState([]);
+  const [answered, setAnswered] = useState(false)
   const [redAlert, setRedAlert] = useState(false) 
   var isDecimal = (parseFloat( question.interval)%1)>0 &&  (parseFloat(question.interval)%1)<1 ;  
-  var start = isDecimal ? parseFloat(question.start): parseInt(start)
-  var end = isDecimal ? parseFloat(question.end): parseInt(end)
-  var interval = isDecimal ? parseFloat(question.interval): parseInt(interval)
+  var start = isDecimal ? parseFloat(question.start): parseInt(question.start)
+  var end = isDecimal ? parseFloat(question.end): parseInt(question.end)
+  var interval = isDecimal ? parseFloat(question.interval): parseInt(question.interval)
   const [lines, setLines] = useState([])  
   var answers=[] ;
   function handleSubmitAnswer(){ 
-    var isCorrect = false; 
+    var isWrong = false; 
     var empty = false
     if(choiceType=="keying") {
       answers = Array.from(document.getElementsByClassName("answers"))
       const solution = answers.map(ans => isDecimal?parseFloat(ans.value):parseInt(ans.value));
       for(var i = 0; i<question.ansArray.length ;i++){ 
         if(isNaN(solution[i])) empty=true
-        if(solution[i] !=question.ansArray[i] ) isCorrect=true
+        if(solution[i] !=question.ansArray[i] ) isWrong=true
       }
     }else{  
       if(studAns.length!=2) empty = true;
         studAns.forEach(ans=>{ 
           if(!question.ansArray.includes(ans)){
-            isCorrect = true;
+            isWrong = true;
           }
         })
     } 
@@ -48,10 +49,11 @@ export default function GenerateLine({question, meter }){
     }
     else setRedAlert(false) 
     if (hasAnswerSubmitted) return;
-    // {empty? setRedAlert(true): isCorrect ? alert("Wrong answer") : alert("Correct answer")}
-    if(isCorrect) setIsAnswerCorrect(true)
-    else setIsAnswerCorrect(false)
+    // {empty? setRedAlert(true): isWrong ? alert("Wrong answer") : alert("Correct answer")}
+    if(isWrong) setIsAnswerCorrect(false)
+    else setIsAnswerCorrect(true)
     setHasAnswerSubmitted(true); 
+    setAnswered(true)
     setQuestionWithAnswer({...question,[student_answer]:studAns}) 
   }
   
@@ -59,7 +61,7 @@ function setSelected(e){
   var idOpt = e.target.dataset.option;
   var pointer = document.getElementById(`pBox_${idOpt}`)   
   var ansVal = document.getElementById(`pValBox_${idOpt}`)   
- {choiceType == "mapping" &&  Array.from(pointer.classList).forEach(cla=>{  
+ {choiceType == "mapping" && !answered&& Array.from(pointer.classList).forEach(cla=>{  
   cla.includes("vertBar") ?  pointer.classList.add(`${styles.selected}`)  : pointer.classList.add(`${styles.vertBar}`) 
   pointer.classList.remove(cla); 
 })  }
@@ -71,19 +73,21 @@ function setSelected(e){
   }  
   setStudAnswers(answers)
 }  
-  useEffect(()=>{  
+  useEffect(()=>{   
     var lineBlocks = []; 
     var index = 0; 
     var inp = 0; 
     for(var mark = (isDecimal?( start+.1):( start+1)); mark< end; (isDecimal ? mark+= parseFloat(interval):mark++ )){
       var idddd = `pBox_${index}`;  
       var idddd2 = `pValBox_${index}`;  
-        if(isDecimal){
+      var num = isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark)
+      var ansSelected = studAns.includes(num);  
+        if(isDecimal){ 
             var ptick = <>
             <div className={styles.botline}> 
               </div>
                <div className={styles.ticktext}  >
-                <div  className={choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  data-option={index} id={idddd} onClick={(e)=>setSelected(e)}></div>
+                <div  className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  data-option={index} id={idddd} onClick={(e)=>setSelected(e)}></div>
                  
               {question.questionContent[index] ? 
                   choiceType === "keying" 
@@ -96,14 +100,12 @@ function setSelected(e){
               if(choiceType === "keying" ) inp++;
               lineBlocks.push(ptick) 
               index++;
-        }else if(mark %  interval == 0 && !isDecimal){
-          
+        }else if(mark %  interval == 0 && !isDecimal){ 
         var ptick = <>
           <div className={styles.botline}> 
               </div>
              <div className={styles.ticktext}  >
-              <div   className={choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  data-option={index} value="" id={idddd} onClick={(e)=>setSelected(e)}></div>
-              
+             <div  className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  data-option={index} id={idddd} onClick={(e)=>setSelected(e)}></div>              
               {question.questionContent[index] ? 
                   choiceType === "keying" 
                     ? <input className={`${styles.checkNumLine}  answers`}    id={`pBox_${index}`} type="text"/>
@@ -112,7 +114,7 @@ function setSelected(e){
                 }
 
           </div>  
-          </>
+          </> 
               if(choiceType === "keying" ) inp++;
               lineBlocks.push(ptick) 
               index++;
@@ -120,7 +122,7 @@ function setSelected(e){
 }
 setLines(lineBlocks)
  
-     },[]) 
+     },[answered]) 
 
     return <div >  
     {!isStudentAnswerResponse && (
@@ -140,18 +142,18 @@ setLines(lineBlocks)
         )}
         <div className={styles.borderTopBottomMargin}>
           <ConditionOnProgressBar meter={meter} />
-        </div>
+        </div> 
         <div className={styles.contentParent}> 
           <div className={styles.hori}  >
               <div id={styles.horizontal_line} >
                   <div  id="xline" className={styles.xline}> 
-                  <p className={styles.start} >{start}</p>   
+                  <p className={styles.start} >{question.start}</p>   
                       {lines.map((line,index)=>{  
                         return <div className={styles.section}   
-                        style={{width: `${(window.innerWidth) /  interval }px`}}  
+                        style={{width: `${(window.innerWidth) /  question.interval }px`}}  
                         key={index} >{line}</div>  
                       })} 
-                  <p className={styles.end} >{end}</p>  
+                  <p className={styles.end} >{question.end}</p>  
                   </div>
               </div> 
           </div> 
