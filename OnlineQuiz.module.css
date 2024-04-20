@@ -3191,18 +3191,30 @@
 .orc_dragdrop img {
   pointer-events: none;
 }
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 .checkNumLine{
   width: 35px;
-  height: 20px;
-  margin: 15px 0;
+  height: 30px; 
+  font-family: "GothamRnd-Book2";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
 }
  .xline{
   display: flex;
   width: 100%;
  }
 .botline {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #888888;
   /* margin-top: -9px; */
 }
 .start,.end{
@@ -3213,16 +3225,30 @@
 }
 .vertBar, .keyVertBar, .answeredVertBar{
 width:2px;
-background-color: black;
-height:20px;
-position:relative;
+background-color: #888888;
+height:15px; 
+position:relative; 
 /* left:50%; */
-top:-13px;
-border:1px solid black
+top:-10px;
+border:1px solid #888888
+}
+.mapBox{
+  margin: 10px; 
+}
+.arrowLeft,.arrowRight{
+  width: fit-content; 
+  /* left:-20px; */
+  left:-2rem;
+  top: -17px;
+  position: relative;
+}
+.arrowLeft{
+  /* left: 30px; */
+  left: 2rem;
 }
 .ticktext{
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   align-items: center;
 }
 #horizontal_line{
@@ -3231,7 +3257,7 @@ min-width: 10%;
 display: flex;
 }
 .hori{ 
-display: flex;
+display: flex; 
 justify-content:center;
 width: 90%;
 padding: 4rem 0;
@@ -3243,19 +3269,42 @@ border-radius:50%;
 background-color:blue;
 width:20px;
 height:20px;
-position:relative; 
-top:-13px;
+position:relative;
+top:-10px;
 border:1px solid black;
 }
+
 .selected:hover{ 
   cursor: pointer;
   scale: 1.1;
 }
+.section{
+  margin: 0;
+}
 
-.vertBar:hover{
+.section:hover {
+  cursor: pointer;
+}
+.section:hover  .vertBar {
   width:20px;
+  height: 20px;
   cursor: pointer; 
-  scale: 1.1;
-  background-color:red;
-  border-radius:50%; 
+  transform: scale(1.1);
+  background-color:red; 
+  border-radius:50%;     
+}
+
+.animation {
+  animation: hoverAnimation 5s linear 1;
+}
+
+@keyframes hoverAnimation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(10);
+    opacity: 0;
+  }
 }
