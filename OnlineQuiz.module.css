@@ -3191,3 +3191,70 @@
 .orc_dragdrop img {
   pointer-events: none;
 }
+
+.checkNumLine{
+  width: 25px;
+  margin:   15px 0;
+}
+ .xline{
+  display: flex;
+  width: 100%;
+ }
+.botline {
+  border-bottom: 2px solid black;
+  /* margin-top: -9px; */
+}
+.start,.end{
+  font-size :40px;
+  position:relative;
+  top:-15px;
+  padding: 0 10px
+}
+.vertBar, .keyVertBar{
+width:2px;
+background-color: black;
+height:20px;
+position:relative;
+/* left:50%; */
+top:-13px;
+border:1px solid black
+}
+.ticktext{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#horizontal_line{
+max-width: 100%;
+min-width: 10%;    
+display: flex;
+}
+.hori{ 
+display: flex;
+justify-content:center;
+width: 90%;
+padding: 4rem 0;
+margin: auto;
+}
+
+.selected{ 
+border-radius:50%;
+background-color:blue;
+width:20px;
+height:20px;
+position:relative; 
+top:-13px;
+border:1px solid black;
+}
+.selected:hover{ 
+  cursor: pointer;
+  scale: 1.1;
+}
+
+.vertBar:hover{
+  width:20px;
+  cursor: pointer; 
+  scale: 1.1;
+  background-color:red;
+  border-radius:50%; 
+}
