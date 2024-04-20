@@ -36,7 +36,7 @@ export default function GenerateLine({question, meter }){
         if(solution[i] !=question.ansArray[i] ) isWrong=true
       }
     }else{  
-      if(studAns.length!=2) empty = true;
+      if(studAns.length!=question.ansArray.length) empty = true;
         studAns.forEach(ans=>{ 
           if(!question.ansArray.includes(ans)){
             isWrong = true;
@@ -59,8 +59,10 @@ export default function GenerateLine({question, meter }){
   
 function setSelected(e){   
   var idOpt = e.target.dataset.option;
+  console.log(idOpt)
   var pointer = document.getElementById(`pBox_${idOpt}`)   
-  var ansVal = document.getElementById(`pValBox_${idOpt}`)   
+  var ansVal = document.getElementById(`pValBox_${idOpt}`)  
+  ansVal.classList.toggle("animation");
  {choiceType == "mapping" && !answered&& Array.from(pointer.classList).forEach(cla=>{  
   cla.includes("vertBar") ?  pointer.classList.add(`${styles.selected}`)  : pointer.classList.add(`${styles.vertBar}`) 
   pointer.classList.remove(cla); 
@@ -83,32 +85,33 @@ function setSelected(e){
       var num = isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark)
       var ansSelected = studAns.includes(num);  
         if(isDecimal){ 
+          console.log(mark,"------",parseFloat(mark).toFixed(1).length)
             var ptick = <>
             <div className={styles.botline}> 
               </div>
-               <div className={styles.ticktext}  >
+               <div className={styles.ticktext} data-option={index} onClick={(e)=>setSelected(e)}>
                 <div  className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  data-option={index} id={idddd} onClick={(e)=>setSelected(e)}></div>
                  
               {question.questionContent[index] ? 
                   choiceType === "keying" 
-                    ? <input className={`${styles.checkNumLine}  answers`}      id={`pBox_${index}`} type="text"/>
+                    ? <input inputmode="numeric"  maxLength={parseFloat(mark).toFixed(1).length} className={`${styles.checkNumLine}  answers`}      id={`pBox_${index}`} type="text"/>
                     : <p   value={mark} className={styles.mapBox} id={idddd2}>{isDecimal ? parseFloat(mark).toFixed(1) : parseInt(mark)}</p>
-                  : <p className={styles.mapBox}  id={idddd2}>{isDecimal ? parseFloat(mark).toFixed(1) : parseInt(mark)}</p>
+                  : <p className={`${styles.mapBox} animation`}  id={idddd2}>{isDecimal ? parseFloat(mark).toFixed(1) : parseInt(mark)}</p>
               } 
                </div>  
                </>
               if(choiceType === "keying" ) inp++;
               lineBlocks.push(ptick) 
               index++;
-        }else if(mark %  interval == 0 && !isDecimal){ 
+        }else if(mark %  interval == 0 && !isDecimal){  
         var ptick = <>
           <div className={styles.botline}> 
               </div>
-             <div className={styles.ticktext}  >
-             <div  className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  data-option={index} id={idddd} onClick={(e)=>setSelected(e)}></div>              
+             <div className={styles.ticktext}   data-option={index} onClick={(e)=>setSelected(e)}>
+             <div className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  data-option={index} id={idddd} onClick={(e)=>setSelected(e)}></div>              
               {question.questionContent[index] ? 
                   choiceType === "keying" 
-                    ? <input className={`${styles.checkNumLine}  answers`}    id={`pBox_${index}`} type="text"/>
+                    ? <input inputmode="numeric" maxLength={mark.toString().length} className={`${styles.checkNumLine}  answers`}    id={`pBox_${index}`} type="text"/>
                     : <p  value={mark} className={styles.mapBox} id={idddd2}>{isDecimal ? parseFloat(mark).toFixed(1) : parseInt(mark)}</p>
                   : <p className={styles.mapBox} id={idddd2}>{isDecimal ? parseFloat(mark).toFixed(1) : parseInt(mark)}</p>
                 }
@@ -143,17 +146,28 @@ setLines(lineBlocks)
         <div className={styles.borderTopBottomMargin}>
           <ConditionOnProgressBar meter={meter} />
         </div> 
+        
         <div className={styles.contentParent}> 
           <div className={styles.hori}  >
               <div id={styles.horizontal_line} >
-                  <div  id="xline" className={styles.xline}> 
-                  <p className={styles.start} >{question.start}</p>   
-                      {lines.map((line,index)=>{  
-                        return <div className={styles.section}   
-                        style={{width: `${(window.innerWidth) /  question.interval }px`}}  
-                        key={index} >{line}</div>  
-                      })} 
-                  <p className={styles.end} >{question.end}</p>  
+                  <div  id="xline"  className={styles.xline}> 
+                    <div className={styles.arrowLeft} >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 36" width="60" height="36">
+                        <path fill="none" d="M0 0h60v36H0z"/>
+                        <path   d="M45 18H15M15 18l15-10M15 18l15 10" stroke="#888888" stroke-width="2"/>
+                      </svg> 
+                    </div>  
+                    {lines.map((line,index)=>{  
+                      return <div className={styles.section}   
+                      style={{width: `${(window.innerWidth) /  question.interval }px`}}  
+                      key={index} >{line}</div>  
+                    })} 
+                    <div className={styles.arrowRight} >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 36" width="60" height="36">
+                        <path fill="none" d="M0 0h60v36H0z"/>
+                        <path transform="rotate(180 30 18)" d="M45 18H15M15 18l15-10M15 18l15 10" stroke="#888888" stroke-width="2"/>
+                      </svg> 
+                    </div>  
                   </div>
               </div> 
           </div> 
