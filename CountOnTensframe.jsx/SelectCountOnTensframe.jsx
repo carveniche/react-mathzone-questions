@@ -23,9 +23,10 @@ export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer
     });
     setChoicesState([...arr]);
   }, []);
+  console.log("----------------")
   inputRef.current = choicesState;
   return (
-    <div>
+    < >
       <div className={styles.CountOnTensframeSelectFlexBox}>
         {choicesState?.map((value, i) => (
           <div
@@ -46,7 +47,7 @@ export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 

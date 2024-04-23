@@ -3308,3 +3308,24 @@ border:1px solid black;
     opacity: 0;
   }
 }
+
+.gridBox{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+  border-collapse: collapse;
+  width: fit-content;
+  border: 1px solid black;
+}
+
+.box{
+  width: 80px;
+  height: 80px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imgggg{
+  margin: auto;
+}
