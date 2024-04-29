@@ -3197,12 +3197,14 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 .checkNumLine{
-  width: 35px;
+  width: 50px;
   height: 30px; 
+  padding: 5px;
   font-family: "GothamRnd-Book2";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
+  text-align: center;
   input::-webkit-outer-spin-button,
             input::-webkit-inner-spin-button {
                 -webkit-appearance: none;
@@ -3226,11 +3228,21 @@ input::-webkit-inner-spin-button {
 .vertBar, .keyVertBar, .answeredVertBar{
 width:2px;
 background-color: #888888;
-height:15px; 
+height:10px; 
 position:relative; 
 /* left:50%; */
-top:-10px;
+top:-7px;
 border:1px solid #888888
+}
+.section:hover  .vertBar {
+  width:10px;
+  height:10px;
+  cursor: pointer; 
+  transform: scale(1.1);
+  background-color:red; 
+  border-radius:50%;  
+  top:-6px   ;
+  /* display:none; */
 }
 .mapBox{
   margin: 10px; 
@@ -3241,6 +3253,8 @@ border:1px solid #888888
   left:-2rem;
   top: -17px;
   position: relative;
+  width: fit-content;
+  height: fit-content;
 }
 .arrowLeft{
   /* left: 30px; */
@@ -3267,31 +3281,24 @@ margin: auto;
 .selected, .ansSelected{ 
 border-radius:50%;
 background-color:blue;
-width:20px;
-height:20px;
+width:10px;
+height:10px;
 position:relative;
-top:-10px;
+top:-6px;
 border:1px solid black;
 }
 
-.selected:hover{ 
+/* .selected:hover, .ticktext:hover .selected{ 
   cursor: pointer;
   scale: 1.1;
-}
+} */
 .section{
   margin: 0;
+  max-width: 125px;
 }
 
 .section:hover {
   cursor: pointer;
-}
-.section:hover  .vertBar {
-  width:20px;
-  height: 20px;
-  cursor: pointer; 
-  transform: scale(1.1);
-  background-color:red; 
-  border-radius:50%;     
 }
 
 .animation {
@@ -3328,4 +3335,22 @@ border:1px solid black;
 }
 .imgggg{
   margin: auto;
+}
+
+.strikethrough {
+  position: relative;
+}
+.strikethrough:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  right: 0;
+  border-top: 1px solid;
+  border-color: inherit;
+  -webkit-transform: rotate(-15deg);
+  -moz-transform: rotate(-20deg);
+  -ms-transform: rotate(-20deg);
+  -o-transform: rotate(-20deg);
+  transform: rotate(-20deg);
 }
