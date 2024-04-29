@@ -8,7 +8,7 @@ import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar"; 
 export default function MultipleChoice({ state, meter, choiceId }) {
   meter = Number(meter) || 0;
   const inputRef = useRef();
@@ -52,7 +52,8 @@ export default function MultipleChoice({ state, meter, choiceId }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div
-          className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
+          className={`mathzoneQuestionName mathzoneMultipleChoicequestionName  `}
+           
           style={{ whiteSpace: "initial" }}
         >
           {parse(state?.question_text)}
