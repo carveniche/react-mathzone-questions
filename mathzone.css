@@ -673,6 +673,15 @@ sup .fraction-root .fdn,
   max-width: fit-content;
   max-height: fit-content;
 }
+
+
+.ckEditorResetValue td, 
+.ckEditorResetValue table, 
+.ckEditorResetValue tr {
+  border:1px solid black
+}
+
+
 .ckEditorResetValue p {
   display: block;
   margin-block-start: 1em;
@@ -1082,4 +1091,21 @@ sup .fraction-root .fdn,
 
 #multipleChoiceStudentAnswerResponse > #studentAnswerResponse div {
   white-space: initial;
+}
+
+.strikethrough {
+  position: relative;
+}
+.strikethrough:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  right: 0;
+  border-top: 1px solid; 
+  -webkit-transform: rotate(-15deg);
+  -moz-transform: rotate(-20deg);
+  -ms-transform: rotate(-20deg);
+  -o-transform: rotate(-20deg);
+  transform: rotate(-20deg);
 }
