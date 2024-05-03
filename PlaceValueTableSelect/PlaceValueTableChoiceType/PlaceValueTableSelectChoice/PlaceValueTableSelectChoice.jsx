@@ -18,7 +18,9 @@ export default function ContentPlaceValueTableSelect({
   useEffect(() => {
     let arr = [];
     choices?.map((item) => {
-      let obj = { ...item, show: false };
+      let obj = { ...item, show: false }; 
+      obj.value = obj.value?.replaceAll("\n","");
+      obj.value = obj.value?.replaceAll(" ","");
       arr.push({ ...obj });
     });
     setChoicesState([...arr]);
@@ -33,6 +35,7 @@ export default function ContentPlaceValueTableSelect({
     prev.current = i;
   };
   inputRef.current = [...choicesState];
+ 
   return (
     <div>
       <div style={GridPlaceValueTable}>
