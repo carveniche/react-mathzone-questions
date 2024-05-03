@@ -164,6 +164,9 @@ export default function DropBoxes({
             )}
           </div>
         ))}
+        <div className={styles.questionName} style={{ marginTop: "1rem" }}>
+        Drag and Drop the answers.
+      </div>
         <div
           className={`${styles.CompareDragOperatorDragDropFlexBox} ${styles.roundcard_empty}`}
           key={dragKey}
