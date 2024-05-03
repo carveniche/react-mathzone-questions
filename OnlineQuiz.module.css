@@ -3197,19 +3197,16 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 .checkNumLine{
-  width: 50px;
+  /* width: 50px; */
   height: 30px; 
-  padding: 5px;
+  min-width: 25px;
+  padding: 5px 0;
+  margin: 18px 0;
   font-family: "GothamRnd-Book2";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
-  text-align: center;
-  input::-webkit-outer-spin-button,
-            input::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
+  text-align: center; 
 }
  .xline{
   display: flex;
@@ -3218,6 +3215,17 @@ input::-webkit-inner-spin-button {
 .botline {
   border-bottom: 2px solid #888888;
   /* margin-top: -9px; */
+}
+.arrowBotline{
+  border-bottom: 2px solid #888888;
+  top: -19px;
+  left: 15px;
+  width: 25px;
+  position: relative;
+}
+
+.arrowRight .arrowBotline{ 
+  left: 19px; 
 }
 .start,.end{
   font-size :40px;
@@ -3231,7 +3239,7 @@ background-color: #888888;
 height:10px; 
 position:relative; 
 /* left:50%; */
-top:-7px;
+top:-6px;
 border:1px solid #888888
 }
 .section:hover  .vertBar {
@@ -3245,7 +3253,7 @@ border:1px solid #888888
   /* display:none; */
 }
 .mapBox{
-  margin: 10px; 
+  margin: 20px 0; 
 }
 .arrowLeft,.arrowRight{
   width: fit-content; 
@@ -3258,13 +3266,16 @@ border:1px solid #888888
 }
 .arrowLeft{
   /* left: 30px; */
-  left: 2rem;
+  left:2rem;
 }
 .ticktext{
   display: flex;
   flex-direction: column; 
   align-items: center;
-}
+  width: fit-content;
+  min-width: 40px;
+  /* padding: 0 .5rem; */
+} 
 #horizontal_line{
 max-width: 100%;
 min-width: 10%;    
@@ -3272,10 +3283,9 @@ display: flex;
 }
 .hori{ 
 display: flex; 
-justify-content:center;
+/* justify-content:center; */
 width: 90%;
-padding: 4rem 0;
-margin: auto;
+padding: 4rem 0; 
 }
 
 .selected, .ansSelected{ 
@@ -3294,7 +3304,8 @@ border:1px solid black;
 } */
 .section{
   margin: 0;
-  max-width: 125px;
+  /* max-width: 125px;
+  min-width: 90px;  */
 }
 
 .section:hover {
