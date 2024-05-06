@@ -20,7 +20,7 @@ export default function ContentPlaceValueTableSelect({
     choices?.map((item) => {
       let obj = { ...item, show: false }; 
       obj.value = obj.value?.replaceAll("\n","");
-      obj.value = obj.value?.replaceAll(" ","");
+      obj.value = obj.value?.replaceAll("  ","");
       arr.push({ ...obj });
     });
     setChoicesState([...arr]);
