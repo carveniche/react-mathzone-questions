@@ -456,6 +456,21 @@
   color: white;
 }
 
+.bgIndigo_roundcard{
+  background-color: indigo;
+  color: white;
+  min-width: 45px!important;
+    border-radius: 50%!important;
+}
+.roundcard_empty{
+  min-width: 45px!important;
+  border-radius: 50%!important;
+}
+
+.roundcard_empty > div{
+  min-width: 45px!important;
+  border-radius: 50%!important;
+}
 .questionContent {
   font-size: 16px;
   font-style: normal;

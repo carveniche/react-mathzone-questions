@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useRef } from "react";
+import parse from "html-react-parser";
 
 import { useState } from "react";
 import styles from "../../../OnlineQuiz.module.css";
 import HtmlParser from "react-html-parser";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
+import { optionSelectStaticMathField } from "../../../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 export default function ContentPlaceValueTableSelect({
   content,
   inputRef,
@@ -13,6 +15,7 @@ export default function ContentPlaceValueTableSelect({
   choices,
   studentAnswer,
 }) {
+
   let [choicesState, setChoicesState] = useState([]);
   let prev = useRef(0);
   useEffect(() => {
@@ -43,11 +46,13 @@ export default function ContentPlaceValueTableSelect({
           className={styles.PlaceValueTableSelectTypeSelectChoiceFlexBox}
           style={HeaderRowPlaceValueTable}
         >
-          {questionHead?.map((item, i) => (
-            <div key={i}>
-              <HtmlParserComponent value={item?.value} />
-            </div>
-          ))}
+       {questionHead?.map((item, i) => (
+  <div key={i}>
+    {JSON.stringify(item?.value).includes("mq-selectable") ? 
+      parse(item?.value, optionSelectStaticMathField) : 
+      <HtmlParserComponent value={item?.value} />}
+  </div>
+))}
         </div>
         {content?.map((items, index) => (
           <div
@@ -57,7 +62,9 @@ export default function ContentPlaceValueTableSelect({
             {items.map((item, i) =>
               item?.isMissed !== "true" ? (
                 <div key={i}>
-                  <HtmlParserComponent value={item?.value} />
+                  {JSON.stringify(item?.value).includes("mq-selectable") ? 
+      parse(item?.value, optionSelectStaticMathField) : 
+      <HtmlParserComponent value={item?.value} />}
                 </div>
               ) : (
                 <div>
@@ -87,7 +94,13 @@ export default function ContentPlaceValueTableSelect({
               {" "}
               <b>{String.fromCharCode(65 + i)}</b>
             </div>
-            <div>{<div key={i}>{HtmlParser(value?.value)}</div>}</div>
+            <div>{<div key={i}>
+             
+
+              {JSON.stringify(value?.value).includes("mq-selectable") ? 
+      parse(value?.value, optionSelectStaticMathField) : 
+      HtmlParser(value?.value)}
+              </div>}</div>
           </div>
         ))}
       </div>
