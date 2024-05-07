@@ -36,6 +36,9 @@ export default function KeyingHorizontalFillUpsEquationType({
   const [row, setRow] = useState([]);
   const {isStudentAnswerResponse}=useContext(ValidationContext)
   const handleChange = (e, rows, cols, status = false) => {
+    
+    row[rows][cols].stringLength=e.length >5?e.length:5;
+
     if (hasAnswerSubmitted||isStudentAnswerResponse) return;
     if (status && currentVirtualKeyBoard > -1) setCurrentVirtualKeyBoard(-1);
 
@@ -83,108 +86,100 @@ export default function KeyingHorizontalFillUpsEquationType({
   equationKeyingRef.current={...equetionState}
   inputRef.current = { ...inputState };
   return (
-    <div>
-      {row?.map((items, index) => (
-        <div className={`${styles.HorizontalPictureKeyingFlexBox} mathzone-color-indigo`} key={index} style={{gap:2}}>
-          {items?.map((item, i) =>
-            item.isMissed !== "true" ? (
-              <div
-                key={i}
-                style={{ fontSize: 16, fontWeight: "bold" }}
-              >
-                {parse(item.value, optionSelectStaticMathField)}
-              </div>
-            ) : (
-              <div ref={(el) => (inputBoxRef.current[index][i] = el)}>
-                {mathQuilEditorChecker(item?.value) ? (
-                  <input
-                    readOnly={hasAnswerSubmitted}
-                    style={InlineCss.Input}
-                    value={isStudentAnswerResponse?item[student_answer]:inputState[`${item.row}row${item.col}col`]}
-                    onChange={(e) => {
-                      handleChange(e.target.value, item.row, item.col, true);
-                    }}
-                    onFocus={() => handleFocus(index, i, true)}
-                  />
-                ) : (!hasAnswerSubmitted&&!isStudentAnswerResponse) ? (
-                  <EditableMathField
-                    latex={
-                      inputState[`${item.row}row${item.col}col`]
-                        ? inputState[`${item.row}row${item.col}col`]
-                        : ""
-                    }
-                    style={{
-                      minWidth: "120px",
-                      width: "auto",
-                      minHeight: "50px",
-                      height: "auto",
-                      textAlign: "center",
-                      borderRadius: 5,
-                      outline: 0,
-                      "&focus": {
-                        border: 0,
-                        boxShadow: 0,
-                      },
-                    }}
-                    onFocus={() =>
-                      handleFocus(index, i, false, item.row, item.col)
-                    }
-                    onChange={(e) =>
-                      handleChange(e.latex(), item.row, item.col, false)
-                    }
-                    ref={(el) => (ref1.current[`${index}${i}`] = el)}
-                  />
+  <div className={`${styles.HorizontalPictureKeyingFlexBox} mathzone-color-indigo`} style={{ gap: 2 }}>
+      <table>
+        <tbody>
+        {row?.map((items, index) => (
+       <tr key={index} >
+            {items?.map((item, i) => (
+              <td key={i} style={{ textAlign: 'center', padding: '2px 5px' }}>
+                {item.isMissed !== "true" ? (
+                  <div style={{ fontSize: 16, fontWeight: "bold" }}>
+                    {parse(item.value, optionSelectStaticMathField)}
+                  </div>
                 ) : (
-                  <div
-                    style={{
-                      minWidth: 120,
-                      minHeight: 50,
-                      border: "1px solid black",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: 5,
-                      width: "auto",
-                    }}
-                  >
-                   {isStudentAnswerResponse?parse(item[student_answer],optionSelectStaticMathField): <StaticMathField>
-                      {inputState[`${item.row}row${item.col}col`]
-                        ? inputState[`${item.row}row${item.col}col`]
-                        : ""}
-                    </StaticMathField>}
+                  <div ref={(el) => (inputBoxRef.current[index][i] = el)}>
+                    {mathQuilEditorChecker(item?.value) ? (
+                         
+                      <input
+                        readOnly={hasAnswerSubmitted}
+                        style={InlineCss.Input}
+                        value={isStudentAnswerResponse ? item[student_answer] : inputState[`${item.row}row${item.col}col`]}
+                        onChange={(e) => {
+                          handleChange(e.target.value, item.row, item.col, true);
+                        }}
+                        onFocus={() => handleFocus(index, i, true)}
+                        size={item?.stringLength || 5}
+                      />
+                  
+                    ) : (!hasAnswerSubmitted && !isStudentAnswerResponse) ? (
+                      <EditableMathField
+                        latex={inputState[`${item.row}row${item.col}col`] ? inputState[`${item.row}row${item.col}col`] : ""}
+                        style={{
+                          minWidth: "75px",
+                          width: "auto",
+                          minHeight: "50px",
+                          height: "auto",
+                          textAlign: "center",
+                          borderRadius: 5,
+                          outline: 0,
+                          "&focus": {
+                            border: 0,
+                            boxShadow: 0,
+                          },
+                        }}
+                        onFocus={() => handleFocus(index, i, false, item.row, item.col)}
+                        onChange={(e) => handleChange(e.latex(), item.row, item.col, false)}
+                        ref={(el) => (ref1.current[`${index}${i}`] = el)}
+                      />
+                    ) : (
+                      <div style={{
+                        minWidth: "75px",
+                        minHeight: 50,
+                        border: "1px solid black",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: 5,
+                        width: "auto",
+                      }}>
+                        {isStudentAnswerResponse ? parse(item[student_answer], optionSelectStaticMathField) :
+                          <StaticMathField>
+                            {inputState[`${item.row}row${item.col}col`] ? inputState[`${item.row}row${item.col}col`] : ""}
+                          </StaticMathField>}
+                      </div>
+                    )}
                   </div>
                 )}
-              </div>
-            )
-          )}
-        </div>
-      ))}
-      {currentVirtualKeyBoard > -1 &&
-        currentBoxRef.current.length > 1 &&
-        !hasAnswerSubmitted && (
-          <VirtualKeyboard
-            inputRef={
-              inputBoxRef.current[currentBoxRef.current[0]][
-                currentBoxRef.current[1]
-              ]
-            }
-            reference={ref}
-            setCurrentVirtualKeyBoard={setCurrentVirtualKeyBoard}
-            currentBox={currentBoxRef}
-            currentVirtualKeyBoard={currentVirtualKeyBoard}
-            currentRow={currentElement.current[0]}
-            currentCol={currentElement.current[1]}
-            inputState={inputState}
-            setInputState={setInputState}
-            ref2={
-              ref1.current[
-                `${currentBoxRef.current[0]}${currentBoxRef.current[1]}`
-              ]
-            }
-          />
-        )}
-    </div>
-  );
+              </td>
+            ))}
+          </tr>
+     
+    ))}
+
+</tbody>
+      </table>
+    {currentVirtualKeyBoard > -1 &&
+      currentBoxRef.current.length > 1 &&
+      !hasAnswerSubmitted && (
+        <VirtualKeyboard
+          inputRef={
+            inputBoxRef.current[currentBoxRef.current[0]][currentBoxRef.current[1]]
+          }
+          reference={ref}
+          setCurrentVirtualKeyBoard={setCurrentVirtualKeyBoard}
+          currentBox={currentBoxRef}
+          currentVirtualKeyBoard={currentVirtualKeyBoard}
+          currentRow={currentElement.current[0]}
+          currentCol={currentElement.current[1]}
+          inputState={inputState}
+          setInputState={setInputState}
+          ref2={ref1.current[`${currentBoxRef.current[0]}${currentBoxRef.current[1]}`]}
+        />
+      )}
+  </div>
+);
+
 }
 
 export const FlexBox = styled.div`
@@ -205,7 +200,8 @@ const InlineCss = {
   Input: {
     height: "50px",
     textAlign: "center",
-    width: "120px",
+    minWidth: "75px",
     borderRadius: 5,
+    border: "1px solid gray",
   },
 };

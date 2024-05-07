@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useRef } from "react";
 import styled from "styled-components";
 import HtmlParserComponent from "../../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
@@ -35,38 +35,40 @@ export default function VerticalKeyingChoiceType({
     setRow([...arr]);
   }, []);
   inputRef.current = [...row];
-  return row?.map((items, index) => (
-    <div
-      className={`${styles.HorizontalPictureKeyingFlexBox} mathzone-color-indigo`}
-      key={index}
-      style={{ gap: 5 }}
-    >
-      {items?.map((item, i) =>
-        item.isMissed === "false" ? (
-          <Box key={i}>
-            <HtmlParserComponent value={item?.value} />
-          </Box>
-        ) : (
-          <div value={item.value} key={i}>
-            <input
-              style={InlineCss.Input}
-              value={
-                isStudentAnswerResponse
-                  ? item[student_answer]
-                  : row[index][i]?.dropVal
-              }
-              onChange={(e) => {
-                if (isStudentAnswerResponse) return;
-                handleChange(e, index, i);
-              }}
-              disabled={hasAnswerSubmitted}
-              size={item?.stringLength || 5}
-            />
-          </div>
-        )
-      )}
-    </div>
-  ));
+ 
+  return (
+  <table className={`${styles.HorizontalPictureKeyingFlexBox} mathzone-color-indigo`} style={{ gap: 5 }}>
+    <tbody>
+      {row?.map((items, index) => (
+        <tr key={index}>
+          {items?.map((item, i) => (
+       <td key={i} style={{ textAlign: 'center', padding: '2px 5px' }}>
+              {item.isMissed === "false" ? (
+                <Box>
+                  <HtmlParserComponent value={item?.value} />
+                </Box>
+              ) : (
+                <div value={item.value}>
+                <input
+                  style={InlineCss.Input}
+                  value={isStudentAnswerResponse ? item[student_answer] : row[index][i]?.dropVal}
+                  onChange={(e) => {
+                    if (isStudentAnswerResponse) return;
+                    handleChange(e, index, i);
+                  }}
+                  disabled={hasAnswerSubmitted}
+                  size={item?.stringLength || 5}
+                />
+                </div>
+              )}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
+
 }
 
 export const FlexBox = styled.div`
