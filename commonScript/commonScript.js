@@ -1,4 +1,3 @@
-export const manupulateEquationTypeQuestion2Darr = () => {};
 export const manupulateQuestionContent1Darrayed = (arr) => {
   return arr?.map((innerArr) => {
     return innerArr?.map((item) => {
