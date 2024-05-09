@@ -37,7 +37,8 @@ export default function KeyingHorizontalFillUpsEquationType({
   const {isStudentAnswerResponse}=useContext(ValidationContext)
   const handleChange = (e, rows, cols, status = false) => {
     
-    row[rows][cols].stringLength=e.length >5?e.length:5;
+    // row[rows][cols].stringLength=e.length >5?e.length:5;
+    row[rows][cols].stringLength=e.length >1?e.length:1;
 
     if (hasAnswerSubmitted||isStudentAnswerResponse) return;
     if (status && currentVirtualKeyBoard > -1) setCurrentVirtualKeyBoard(-1);
@@ -109,14 +110,14 @@ export default function KeyingHorizontalFillUpsEquationType({
                           handleChange(e.target.value, item.row, item.col, true);
                         }}
                         onFocus={() => handleFocus(index, i, true)}
-                        size={item?.stringLength || 5}
+                        size={item?.stringLength || 1}
                       />
                   
                     ) : (!hasAnswerSubmitted && !isStudentAnswerResponse) ? (
                       <EditableMathField
                         latex={inputState[`${item.row}row${item.col}col`] ? inputState[`${item.row}row${item.col}col`] : ""}
                         style={{
-                          minWidth: "75px",
+                          minWidth: "35px",
                           width: "auto",
                           minHeight: "50px",
                           height: "auto",
@@ -134,7 +135,7 @@ export default function KeyingHorizontalFillUpsEquationType({
                       />
                     ) : (
                       <div style={{
-                        minWidth: "75px",
+                        minWidth: "35px",
                         minHeight: 50,
                         border: "1px solid black",
                         display: "flex",
@@ -200,7 +201,7 @@ const InlineCss = {
   Input: {
     height: "50px",
     textAlign: "center",
-    minWidth: "75px",
+    minWidth: "35px",
     borderRadius: 5,
     border: "1px solid gray",
   },

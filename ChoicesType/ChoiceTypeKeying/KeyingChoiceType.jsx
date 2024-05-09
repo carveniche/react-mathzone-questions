@@ -12,10 +12,10 @@ export default function VerticalKeyingChoiceType({
 }) {
   const [row, setRow] = useState([]);
   const { isStudentAnswerResponse } = useContext(ValidationContext);
-  const handleChange = (e, rows, cols) => {
+  const handleChange = (e, rows, cols,item) => {
     row[rows][cols].dropVal = e.target.value;
     row[rows][cols].stringLength =
-      e.target.value.length > 5 ? e.target.value.length : 5;
+      e.target.value.length > 1 ? e.target.value.length : 1;
     if (e.target.value === "" && e.target.value === undefined)
       row[rows][cols].show = false;
     else row[rows][cols].show = true;
@@ -54,10 +54,10 @@ export default function VerticalKeyingChoiceType({
                   value={isStudentAnswerResponse ? item[student_answer] : row[index][i]?.dropVal}
                   onChange={(e) => {
                     if (isStudentAnswerResponse) return;
-                    handleChange(e, index, i);
+                    handleChange(e, index, i,item);
                   }}
                   disabled={hasAnswerSubmitted}
-                  size={item?.stringLength || 5}
+                  size={item?.stringLength || 1}
                 />
                 </div>
               )}
@@ -88,6 +88,6 @@ const InlineCss = {
   Input: {
     height: "40px",
     textAlign: "center",
-    minWidth: "50px",
+    minWidth: "30px",
   },
 };
