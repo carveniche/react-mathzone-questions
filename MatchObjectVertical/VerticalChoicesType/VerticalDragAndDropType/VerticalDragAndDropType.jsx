@@ -96,6 +96,9 @@ export default function VerticalDragAndDropType({
           hasAnswerSubmitted={hasAnswerSubmitted}
         />
       )}
+            <div className={styles.questionName} style={{ marginTop: "1rem" }}>
+        Drag and Drop the answers.
+      </div>
       <div
         className={styles.MatchObjectVerticalDragDropBoxFlexBox2}
         key={dragKey}

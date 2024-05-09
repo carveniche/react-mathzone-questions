@@ -79,6 +79,7 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
   const handleSubmitAnswer = () => {
     if(hasAnswerSubmitted)return
     if (state?.choiceType == "keying") {
+      console.log('this is inputr current',inputRef.current);
       
       for (let i = 0; i < inputRef.current?.length; i++)
         if (!String(inputRef.current[i].children[0].value).trim()) {
@@ -100,7 +101,9 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
       setIsAnswerCorrect(true);
       setHasAnswerSubmitted(true);
       return;
-    } else if (state?.choiceType == "dragdrop") {
+    } 
+    
+    else if (state?.choiceType == "dragdrop") {
       let val = ValidationForDragDrop(inputRef?.current);
       changeAnswerStatus(
         val,
@@ -131,6 +134,7 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
     }
   };
   const [redAlert, setRedAlert] = useState(false);
+
   return (
     <div>
      { !isStudentAnswerResponse&& <SolveButton
