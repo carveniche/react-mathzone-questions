@@ -416,9 +416,9 @@ function setSelected(e){
         <div className={styles.borderTopBottomMargin}>
           <ConditionOnProgressBar meter={meter} />
         </div>  
-        <div   style={{fontSize:16,fontWeight:"bold",gap:"1rem"}}>
+        {/* <div   style={{fontSize:16,fontWeight:"bold",gap:"1rem"}}>
                 {parse("sadkjc", optionSelectStaticMathField)}
-              </div>
+              </div> */}
         <div className={styles.contentParent}> 
           <div className={styles.hori}  >
               <div id={styles.horizontal_line} >
