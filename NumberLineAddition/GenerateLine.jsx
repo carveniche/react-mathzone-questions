@@ -29,31 +29,14 @@ export default function GenerateLine({question, meter }){
   var end = isDecimal ? parseFloat(question.end): parseInt(question.end)
   var interval = isDecimal ? parseFloat(question.interval): parseInt(question.interval)
   var choices = question.choices  ;
-  // var choices =  [
-  //   "<span id=\"580\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$5\\frac{5}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"178\"><span mathquill-command-id=\"179\">5</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"181\"><span class=\"mq-numerator\" mathquill-block-id=\"183\"><span mathquill-command-id=\"182\">5</span></span><span class=\"mq-denominator\" mathquill-block-id=\"185\"><span mathquill-command-id=\"184\">4</span></span><span>​</span></span><span class=\"mq-cursor\">​</span></span> </span>",
-  //   "<span class=\"mq-selectable\">$5\\frac{5}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"196\"><span mathquill-command-id=\"197\">5</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"199\"><span class=\"mq-numerator\" mathquill-block-id=\"201\"><span mathquill-command-id=\"200\">5</span></span><span class=\"mq-denominator\" mathquill-block-id=\"203\"><span mathquill-command-id=\"202\">4</span></span><span>​</span></span><span class=\"mq-cursor\">​</span></span> ",
-  //   "<span class=\"mq-selectable\">$5\\frac{5}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"214\"><span mathquill-command-id=\"215\">5</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"217\"><span class=\"mq-numerator\" mathquill-block-id=\"219\"><span mathquill-command-id=\"218\">5</span></span><span class=\"mq-denominator\" mathquill-block-id=\"221\"><span mathquill-command-id=\"220\">4</span></span><span>​</span></span><span class=\"mq-cursor\">​</span></span> ",
-  //   "3 1 3"
-  // ]
-  
-  // var choices = (question.isFraction ? question.choices.map((choic)=>{
-  //   console.log(choic)
-  //   var choiceOpt = <StaticMathField   >{choic}</StaticMathField>
-  //   return choiceOpt
-  // })   :question.choices) 
    
-  // var chosidnc = question.choices.map((choic)=>{
-  //   console.log(choic)
-  //   var choiceOpt = <StaticMathField   >{choic}</StaticMathField>
-  //   return choiceOpt
-  // })
-  // choices = chosidnc
-  const [lines, setLines] = useState([])  
-  var answers=[] ;
+const [lines, setLines] = useState([])  
+var answers=[] ;
 
-  const inputRef = useRef(new Array(totalEmptyBox));
-  var numsDisplayed = question.numbersDisplayed;
-  function handleSubmitAnswer(){ 
+const inputRef = useRef(new Array(totalEmptyBox));
+var numsDisplayed = question.numbersDisplayed;
+
+function handleSubmitAnswer(){ 
     var isWrong = false; 
     var isEmpty = false;  
     if(choiceType=="keying" && !isWrong && !isEmpty) {
@@ -63,8 +46,9 @@ export default function GenerateLine({question, meter }){
         var studFracInts = document.getElementsByClassName("ansFracInts") 
         var answers = [];
         for(var ansCount=0;ansCount<question.ansArray.length;ansCount++){ 
-          if(studFracNums[ansCount].value=="" || studFracStarts[ansCount].value=="" || studFracInts[ansCount].value == "") isEmpty = true
-          answers.push(`${studFracNums[ansCount].value} ${studFracStarts[ansCount].value} ${studFracInts[ansCount].value}`)
+          // if(studFracNums[ansCount].value=="" || studFracStarts[ansCount].value=="" || studFracInts[ansCount].value == "") isEmpty = true
+          // answers.push(`${studFracNums[ansCount].value} ${studFracStarts[ansCount].value} ${studFracInts[ansCount].value}`)
+          answers.push(`${studFracNums[ansCount].value || 0} ${studFracStarts[ansCount].value || 0} ${studFracInts[ansCount].value || interval}`)
         } 
         console.log({studAns})
         setStudAnswers(answers)
@@ -128,12 +112,6 @@ export default function GenerateLine({question, meter }){
     setHasAnswerSubmitted(true); 
     setAnswered(true)
     setQuestionWithAnswer({...question,[student_answer]:studAns}) 
-  }
-  function fractionOptions(data) { 
-    // MQ.StaticMath(data) 
-    // <StaticMathField  />
-    return data;
-
 } 
  
 function setFractionsSelected(e){  
@@ -190,7 +168,7 @@ function setSelected(e){
   pointer.classList.remove(cla); 
 })  }
   var sol = isDecimal ? parseFloat(ansVal.textContent):parseInt(ansVal.textContent)
-  console.log(sol)
+  console.log({sol})
   if(answers.includes(sol)){ 
     answers = answers.filter(ans => ans!=sol)
   }else{ 
@@ -271,8 +249,8 @@ function setSelected(e){
         var fracId = `pBox_${mark } 0 ${fracInterval}`;   
       // console.log("-------------------------------------------------------",fracId) 
       // console.log({asasdsfsa, fracId}) 
-      // question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) ))
-        var ptick = <div className={` ${`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`}`} style={{minWidth:"50px"}} data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval}   onClick={(e)=>setFractionsSelected(e)} key={index} >
+      console.log("INCLUDES",question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) )))
+        var ptick = <div className={` ${`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`}`} style={{minWidth:`${(fracStart==0?40:45)}px`}} data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval}   onClick={(e)=>setFractionsSelected(e)} key={index} >
                           <div className={styles.botline}  data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval}></div>
                           <div className={styles.ticktext} 
                           style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
@@ -281,8 +259,8 @@ function setSelected(e){
                               { (question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) ))
                                 ? choiceType === "keying" 
                                 ? <input readOnly={hasAnswerSubmitted}   style={{ width: `${(ansLength * 14 )}px` }}      maxLength={ansLength} className={`${styles.checkNumLine}  answers`}   id={idddd2} type="text"/>
-                                : choiceType == "selectchoice" ? <p className={styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.numMapBox }   style={{display:`${numsDisplayed || mark == start ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}     id={idddd2}>{mark}</p>
-                                : <p className={styles.numMapBox}   style={{display:`${numsDisplayed || mark == start   ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}    id={idddd2}    >{mark}</p>
+                                : choiceType == "selectchoice" ? <p className={styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.numMapBox }   style={{display:`${numsDisplayed || mark == start ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}     id={idddd2}> <StaticMathField   >{mark}</StaticMathField></p>
+                                : <p className={styles.numMapBox}   style={{display:`${numsDisplayed || mark == start   ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}    id={idddd2}    ><StaticMathField   >{mark}</StaticMathField></p>
                               
                                 )} 
                           </div>  
@@ -297,12 +275,12 @@ function setSelected(e){
         
       if(fracNum == fracInterval){  
         fracStart++;   
-        fracSection = fractionOptions(`${fracStart==0?"":fracStart}`) 
+        fracSection = `${fracStart==0?"":fracStart}`;
         whole = 0;
         indentity = `${fracStart} ${whole} ${fracInterval}`;
         idddd = `pBox_${indentity}`; 
       }else{ 
-        fracSection =  fractionOptions(`${fracStart==0?"":fracStart} \\frac{${fracNum}}{${fracInterval}}`);
+        fracSection =  `${fracStart==0?"":fracStart} \\frac{${fracNum}}{${fracInterval}}`;
         indentity = `${fracStart} ${fracNum} ${fracInterval}`;
         // idddd = `pBox_${fracStart}${fracNum}${fracInterval}`; 
         idddd = `pBox_${indentity}`; 
@@ -315,7 +293,7 @@ function setSelected(e){
       // console.log(typeof question.ansArray[0])
       // fractions.push(`${fracStart}  ${fracNum}  ${fracInterval  }`)  
       console.log("dsffgdedfsg",fracNum%fracInterval, fracNum==0)
-      var ptick = <div  className={`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`} style={{minWidth:"50px"}} data-fracnum={fracNum%fracInterval} data-fracstart={fracStart} data-fracinterval={fracInterval}  onClick={(e)=>{setFractionsSelected(e)}}   key={index} >
+      var ptick = <div  className={`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`} style={{minWidth:`${(fracStart==0?40:question.ansArray.includes(indentity)?70:45)}px`}} data-fracnum={fracNum%fracInterval} data-fracstart={fracStart} data-fracinterval={fracInterval}  onClick={(e)=>{setFractionsSelected(e)}}   key={index} >
                     <div className={styles.botline}  data-fracnum={fracNum%fracInterval} data-fracstart={fracStart} data-fracinterval={fracInterval}></div>
                     <div className={styles.ticktext} 
                     style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
@@ -324,11 +302,11 @@ function setSelected(e){
                         { (question.ansArray.includes(indentity)
                           ? choiceType === "keying" 
                           ? <div className={styles.answerNum} >
-                                <input readOnly={hasAnswerSubmitted} style={{ width: `${(startLength * 14 )}px`,minWidth: "30px", height:"30px",paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px" }}   maxLength={startLength} className={`answers ansFracNums`}   id={"ansFracNum"} type="text"/>
-                              <div className={styles.answerFrac} >
-                                <input readOnly={hasAnswerSubmitted} style={{ width: `${(numLength * 14 )}px`,minWidth: "30px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={numLength} className={`answers ansFracStarts`}   id={"ansFracStart"} type="text"/>
+                                <input readOnly={hasAnswerSubmitted} style={{ width: `${(startLength * 14 )}px`, display:(fracStart==0 ? "none":"block"), minWidth: "25px", height:"30px",paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px" }}   maxLength={startLength} className={`answers ansFracNums`}   id={"ansFracNum"} type="text"/>
+                              <div className={styles.answerFrac} style={{display:(fracNum%fracInterval==0 ? "none":"")}}  >
+                                <input readOnly={hasAnswerSubmitted} style={{ width: `${(numLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={numLength} className={`answers ansFracStarts`}   id={"ansFracStart"} type="text"/>
                                 <span style={{border:"1px solid #858585", width:"-webkit-fill-available"}} ></span>
-                                <input readOnly={hasAnswerSubmitted} style={{ width: `${(intLength * 14 )}px`,minWidth: "30px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={intLength} className={`answers ansFracInts`}   id={"ansFracInt"} type="text"/>
+                                <input readOnly={hasAnswerSubmitted} style={{ width: `${(intLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={intLength} className={`answers ansFracInts`}   id={"ansFracInt"} type="text"/>
                               </div>
                            </div>
                           :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={`${fracNum == 0 ? styles.numMapBox : styles.mapBox}       `}    style={{display:`${numsDisplayed || fracStart ==end || fracNum%fracInterval == 0  ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}} id={idddd2}><StaticMathField  >{fracSection}</StaticMathField></p>
@@ -340,8 +318,11 @@ function setSelected(e){
     fracNum++;  
     }    
     }else{
+      console.log("MARK", mark) 
+      console.log("MARK float",  parseFloat(mark).toFixed(1).length*10)
+      console.log("MARK int ",  parseInt(mark).toString().length*10)
       if((isDecimal ? parseFloat(mark).toFixed(1) : parseInt(mark)) == (isDecimal ? parseFloat(end).toFixed(1) : parseInt(end)))  endIsThere = true;
-      var ptick = <div  className={`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`} style={{minWidth:"40px"}} data-option={index}  onClick={(e)=>setSelected(e)}  key={index} >
+      var ptick = <div  className={`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`} style={{minWidth:"45px"}} data-option={index}  onClick={(e)=>setSelected(e)}  key={index} >
                       <div className={styles.botline}  data-option={index}></div>
                       <div className={styles.ticktext} 
                        style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
@@ -350,9 +331,8 @@ function setSelected(e){
                           { (question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) ))
                             ? choiceType === "keying" 
                             ? <input readOnly={hasAnswerSubmitted} style={{ width: `${(ansLength * 14 )}px` }}   data-option={index} maxLength={ansLength} className={`${styles.checkNumLine}  answers`}   id={idddd2} type="text"/>
-                            :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.mapBox}  data-option={index} style={{display:`${numsDisplayed || index == 0 ?"block":"none"}`}} id={idddd2}>{isDecimal ? parseFloat(mark).toFixed(1) : parseInt(mark)}</p>
-                            : <p className={styles.mapBox}  data-option={index}  id={idddd2} style={{display:`${numsDisplayed || index == 0 || Number(mark.toFixed(1)) == (isDecimal?Number(parseFloat(end).toFixed(1)):parseInt(end))?"block":"none"}`}}   >{isDecimal ? parseFloat(mark).toFixed(1) : parseInt(mark)}</p>
-                          
+                            :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.mapBox}  data-option={index} style={{display:`${numsDisplayed || index == 0 ?"block":"none"}`}} id={idddd2}>{isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark)}</p>
+                            : <p className={styles.mapBox}  data-option={index}  id={idddd2} style={{display:`${numsDisplayed || index == 0 || Number(mark.toFixed(1)) == (isDecimal?Number(parseFloat(end).toFixed(1)):parseInt(end))?"block":"none"}`}}   >{isDecimal ? (Number(parseFloat(mark).toFixed(1))) : parseInt(mark)}</p>
                             )} 
                       </div>  
                   </div>
@@ -376,8 +356,8 @@ function setSelected(e){
                         {question.ansArray.includes((isDecimal?Number(parseFloat(end).toFixed(1)):parseInt(end) )) ? 
                           choiceType === "keying" 
                               ? <input readOnly={hasAnswerSubmitted}inputmode="numeric" style={{ width: `${(ansLength * 14 )}px` }}  data-option={index}     maxLength={parseFloat(mark).toFixed(1).length} className={`${styles.checkNumLine}  answers`}      id={`pBox_${index}`} type="text"/>
-                              : <p data-option={index}   className={styles.mapBox} id={idddd2}>{isDecimal ? parseFloat(end).toFixed(1) : parseInt(end)}</p>
-                            :   <p className={styles.mapBox}   id={idddd2}  data-option={index}     >{isDecimal ? parseFloat(end).toFixed(1) : parseInt(end)}</p>
+                              : <p data-option={index}   className={styles.mapBox} id={idddd2}>{isDecimal ? Number(parseFloat(end).toFixed(1)) : parseInt(end)}</p>
+                            :   <p className={styles.mapBox}   id={idddd2}  data-option={index}     >{isDecimal ? Number(parseFloat(end).toFixed(1)): parseInt(end)}</p>
                         } 
                       </div>  
                     </div>
