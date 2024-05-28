@@ -3206,3 +3206,8 @@
 .orc_dragdrop img {
   pointer-events: none;
 }
+.questionImage{
+  display: flex;
+  padding: 50px 0;
+  gap: 50px;
+}
