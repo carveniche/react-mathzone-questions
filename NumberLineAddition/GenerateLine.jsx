@@ -44,17 +44,35 @@ function handleSubmitAnswer(){
         var studFracNums = document.getElementsByClassName("ansFracNums")
         var studFracStarts = document.getElementsByClassName("ansFracStarts")
         var studFracInts = document.getElementsByClassName("ansFracInts") 
+        console.log({studFracNums,studFracStarts,studFracInts})
         var answers = [];
         for(var ansCount=0;ansCount<question.ansArray.length;ansCount++){ 
+          console.log(studFracNums[ansCount],"-----")
           // if(studFracNums[ansCount].value=="" || studFracStarts[ansCount].value=="" || studFracInts[ansCount].value == "") isEmpty = true
           // answers.push(`${studFracNums[ansCount].value} ${studFracStarts[ansCount].value} ${studFracInts[ansCount].value}`)
-          answers.push(`${studFracNums[ansCount].value || 0} ${studFracStarts[ansCount].value || 0} ${studFracInts[ansCount].value || interval}`)
-        } 
-        console.log({studAns})
+          answers.push(`${studFracNums[ansCount]?.value || 0} ${studFracStarts[ansCount]?.value || 0} ${studFracInts[ansCount]?.value || interval}`)
+        }   
+        // question.ansArray.forEach(opt=>{
+        //     var apsoo = opt.split(" ")[2];
+        //     if(apsoo.includes("-")) console.log({apsoo})            
+        // })
+      var questionAnswer = question.ansArray.map((opt)=>{
+        var ans = opt.split(" ");  
+        if(ans[2].includes("-")) ans[2] =  ans[2].replace("-","");
+        return ans.join(" ")
+      })
+      answers = answers.map((opt)=>{
+        var ans = opt.split(" ");   
+        if(ans[0]== "-") ans[0] = 0
+        return ans.join(" ")
+      })
+        console.log({answers})
         setStudAnswers(answers)
         if(answers.length!=question.ansArray.length) isEmpty = true;
-        console.log(answers, question.ansArray)
-        answers.forEach(ans=>{ if(!question.ansArray.includes(ans)) isWrong = true;}) 
+        // console.log(answers, question.ansArray)
+        // answers.forEach(ans=>{ if(!question.ansArray.includes(ans)) isWrong = true;}) 
+        console.log(answers, questionAnswer)
+        answers.forEach(ans=>{ if(!questionAnswer.includes(ans)) isWrong = true;}) 
 
       }else{
         answers = Array.from(document.getElementsByClassName("answers"))
@@ -87,8 +105,8 @@ function handleSubmitAnswer(){
         }  
         var parser = new DOMParser();
         var doc = parser.parseFromString(selectedOption, 'text/html'); 
-        var selectedAnswer = doc.querySelector('span'); 
-        if(selectedAnswer && selectedAnswer.dataset.fracvalue == undefined) isWrong = true;
+        var selectedAnswer = doc.querySelector('span');  
+        if(selectedAnswer && selectedAnswer.dataset?.fracvalue == undefined) isWrong = true;
         if(typeof selectedOption == "undefined" ) isEmpty = true 
       }else{
         var selectedOption;
@@ -129,12 +147,26 @@ function setFractionsSelected(e){
         } 
         currentElement = currentElement.parentElement; 
     }} 
-
-    var idOpt = dataSetElement.dataset.option;  
-    var pointer = document.getElementById(`pBox_${dataSetElement.dataset["fracstart"]} ${dataSetElement.dataset["fracnum"]} ${dataSetElement.dataset["fracinterval"]}`)   
+    var idOpt = dataSetElement.dataset["fracstart"];  
+    // var idOpt = dataSetElement.dataset.option;  
+    var isNEG = dataSetElement.dataset.isneg || false; 
+    // console.log("e.target.value",dataSetElement)
+    console.log("isNEG",{isNEG}) 
+    // var pointer = document.getElementById(`pBox_${dataSetElement.dataset["fracstart"]} ${dataSetElement.dataset["fracnum"]} ${dataSetElement.dataset["fracinterval"]}`)      
+    var pointer = document.getElementById(`pBox_${dataSetElement.dataset["fracstart"]} ${dataSetElement.dataset["fracnum"]} ${dataSetElement.dataset["fracinterval"]}`)      
+    // var pointer = document.getElementById(`pBox_${dataSetElement.dataset["fracstart"]} ${dataSetElement.dataset["fracnum"]} ${dataSetElement.dataset["fracinterval"]}`)      
+    // var pointer = document.querySelector(`[data-isneg=${isNEG}][id=${`pBox_${dataSetElement.dataset["fracstart"]}\\ ${dataSetElement.dataset["fracnum"]}\\ ${dataSetElement.dataset["fracinterval"]}`}]`)  
+    // var pointer = isNEG ? document.querySelector(`[data-isneg="true"][id=${`pBox_${dataSetElement.dataset["fracstart"]}\\ ${dataSetElement.dataset["fracnum"]}\\ ${dataSetElement.dataset["fracinterval"]}`}]`) : document.querySelector(`[data-isneg="false"][id=${`pBox_${dataSetElement.dataset["fracstart"]}\\ ${dataSetElement.dataset["fracnum"]}\\ ${dataSetElement.dataset["fracinterval"]}`}]`)      
+    // console.log(`${`pBox_${dataSetElement.dataset["fracstart"]} ${dataSetElement.dataset["fracnum"]} ${dataSetElement.dataset["fracinterval"]}`}`)
+    // var elements = document.querySelector(`[data-isneg][id=${`pBox_${dataSetElement.dataset["fracstart"]}\\ ${dataSetElement.dataset["fracnum"]}\\ ${dataSetElement.dataset["fracinterval"]}`}]`);
+    // console.log("elements",elements)
+    var kjadcja = `[data-isneg=${isNEG}][id=${`pBox_${dataSetElement.dataset["fracstart"]}\\ ${dataSetElement.dataset["fracnum"]}\\ ${dataSetElement.dataset["fracinterval"]}`}]`;
     var ansVal = document.getElementById(`pValBox_${idOpt}`)  
-    console.log(`pBox_${dataSetElement.dataset["fracstart"]}${dataSetElement.dataset["fracnum"]}${dataSetElement.dataset["fracinterval"]}`)
-    console.log(pointer)
+    // console.log(`pBox_${dataSetElement.dataset["fracstart"]}${dataSetElement.dataset["fracnum"]}${dataSetElement.dataset["fracinterval"]}`)
+    console.log({pointer})
+    console.log({kjadcja})
+    // console.log(pointer.classList)
+    // console.log(document.querySelector(`[data-isneg="false"][id=${`pBox_${dataSetElement.dataset["fracstart"]}\\ ${dataSetElement.dataset["fracnum"]}\\ ${dataSetElement.dataset["fracinterval"]}`}]`))
     {choiceType == "mapping" && !answered&& Array.from(pointer.classList).forEach(cla=>{   
       cla.includes("vertBar") ?  pointer.classList.add(`${styles.selected}`)  : pointer.classList.add(`${styles.vertBar}`) 
       pointer.classList.remove(cla); 
@@ -239,84 +271,248 @@ function setSelected(e){
       var num = isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark)
       var ansSelected = studAns.includes(num);  
       var ansLength = isDecimal?parseFloat(mark).toFixed(1).length:parseInt(mark).toString().length;  
-      // console.log((isDecimal ? parseFloat(mark).toFixed(1) : parseInt(mark)) + " : " + (isDecimal ? parseFloat(end).toFixed(1) : parseInt(end))) 
     if(question.isFraction){
-      var fracNum = 1; 
-      if(mark==start || mark == 0){ 
-        // fracNum  = 0;
-        // var num = {fracStart, fracNum, fracInterval} 
-        // var fracId = `pBox_${ asasdsfsa }${0}${fracInterval}`;   
-        var fracId = `pBox_${mark } 0 ${fracInterval}`;   
-      // console.log("-------------------------------------------------------",fracId) 
-      // console.log({asasdsfsa, fracId}) 
-      console.log("INCLUDES",question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) )))
-        var ptick = <div className={` ${`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`}`} style={{minWidth:`${(fracStart==0?40:45)}px`}} data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval}   onClick={(e)=>setFractionsSelected(e)} key={index} >
-                          <div className={styles.botline}  data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval}></div>
-                          <div className={styles.ticktext} 
-                          style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
-                          data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval}>
-                              <div  data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval} className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar} id={fracId}></div>  
-                              { (question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) ))
-                                ? choiceType === "keying" 
-                                ? <input readOnly={hasAnswerSubmitted}   style={{ width: `${(ansLength * 14 )}px` }}      maxLength={ansLength} className={`${styles.checkNumLine}  answers`}   id={idddd2} type="text"/>
-                                : choiceType == "selectchoice" ? <p className={styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.numMapBox }   style={{display:`${numsDisplayed || mark == start ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}     id={idddd2}> <StaticMathField   >{mark}</StaticMathField></p>
-                                : <p className={styles.numMapBox}   style={{display:`${numsDisplayed || mark == start   ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}    id={idddd2}    ><StaticMathField   >{mark}</StaticMathField></p>
-                              
-                                )} 
-                          </div>  
-                      </div> 
-          lineBlocks.push(ptick) 
-     }
-     while(fracNum<=fracInterval && fracStart<parseInt(question.end) ){ 
-      var fracSection ; 
-      var idddd;
-      var whole ;
-      var indentity ;
-        
-      if(fracNum == fracInterval){  
-        fracStart++;   
-        fracSection = `${fracStart==0?"":fracStart}`;
-        whole = 0;
-        indentity = `${fracStart} ${whole} ${fracInterval}`;
-        idddd = `pBox_${indentity}`; 
-      }else{ 
-        fracSection =  `${fracStart==0?"":fracStart} \\frac{${fracNum}}{${fracInterval}}`;
-        indentity = `${fracStart} ${fracNum} ${fracInterval}`;
-        // idddd = `pBox_${fracStart}${fracNum}${fracInterval}`; 
-        idddd = `pBox_${indentity}`; 
-      }        
-      var startLength  = fracStart.toString().length;
-      var numLength  = fracNum.toString().length;
-      var intLength  = fracInterval.toString().length;
-      // console.log(fracNum, fracNum == fracInterval)
-      // console.log(typeof indentity)
-      // console.log(typeof question.ansArray[0])
-      // fractions.push(`${fracStart}  ${fracNum}  ${fracInterval  }`)  
-      console.log("dsffgdedfsg",fracNum%fracInterval, fracNum==0)
-      var ptick = <div  className={`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`} style={{minWidth:`${(fracStart==0?40:question.ansArray.includes(indentity)?70:45)}px`}} data-fracnum={fracNum%fracInterval} data-fracstart={fracStart} data-fracinterval={fracInterval}  onClick={(e)=>{setFractionsSelected(e)}}   key={index} >
-                    <div className={styles.botline}  data-fracnum={fracNum%fracInterval} data-fracstart={fracStart} data-fracinterval={fracInterval}></div>
-                    <div className={styles.ticktext} 
-                    style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
-                    data-fracnum={fracNum%fracInterval} data-fracstart={fracStart} data-fracinterval={fracInterval}>
-                        <div  data-fracnum={fracNum%fracInterval} data-fracstart={fracStart} data-fracinterval={fracInterval} className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  id={idddd}></div>  
-                        { (question.ansArray.includes(indentity)
-                          ? choiceType === "keying" 
-                          ? <div className={styles.answerNum} >
-                                <input readOnly={hasAnswerSubmitted} style={{ width: `${(startLength * 14 )}px`, display:(fracStart==0 ? "none":"block"), minWidth: "25px", height:"30px",paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px" }}   maxLength={startLength} className={`answers ansFracNums`}   id={"ansFracNum"} type="text"/>
-                              <div className={styles.answerFrac} style={{display:(fracNum%fracInterval==0 ? "none":"")}}  >
-                                <input readOnly={hasAnswerSubmitted} style={{ width: `${(numLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={numLength} className={`answers ansFracStarts`}   id={"ansFracStart"} type="text"/>
-                                <span style={{border:"1px solid #858585", width:"-webkit-fill-available"}} ></span>
-                                <input readOnly={hasAnswerSubmitted} style={{ width: `${(intLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={intLength} className={`answers ansFracInts`}   id={"ansFracInt"} type="text"/>
+      //   if(mark<0){ 
+      //     var fracNum = fracInterval;  
+      //   if(mark==start || fracNum == fracInterval){ 
+      //     console.log({fracNum, fracInterval, fracStart, mark}, "9999")  
+      //     fracNum--;    
+      //       var fracId = `pBox_${mark } 0 ${fracInterval}`;   
+      //     console.log("INCLUDES",question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) )))
+      //       var ptick = <div className={` ${`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`}`} style={{minWidth:`${(fracStart==0?40:45)}px`}} data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval}   onClick={(e)=>setFractionsSelected(e)} key={index} >
+      //                         <div className={styles.botline}  data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval}></div>
+      //                         <div className={styles.ticktext} 
+      //                         style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
+      //                         data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval}>
+      //                             <div  data-fracnum={0} data-fracstart={fracStart} data-fracinterval={fracInterval} className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar} id={fracId}></div>  
+      //                             { (question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) ))
+      //                               ? choiceType === "keying" 
+      //                               ? <input readOnly={hasAnswerSubmitted}   style={{ width: `${(ansLength * 14 )}px` }}      maxLength={ansLength} className={`${styles.checkNumLine}  answers`}   id={idddd2} type="text"/>
+      //                               : choiceType == "selectchoice" ? <p className={styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.numMapBox }   style={{display:`${numsDisplayed || mark == start ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}     id={idddd2}> <StaticMathField   >{mark}</StaticMathField></p>
+      //                               : <p className={styles.numMapBox}   style={{display:`${numsDisplayed || mark == start   ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}    id={idddd2}    ><StaticMathField   >{mark}</StaticMathField></p>
+                                  
+      //                               )} 
+      //                         </div>  
+      //                     </div> 
+      //         lineBlocks.push(ptick) 
+      //   } 
+      //   while(fracNum >= 1  && fracStart<parseInt(question.end) ){ 
+      //     console.log({fracStart, fracNum,fracInterval})
+
+      //     var fracSection ; 
+      //     var idddd;
+      //     var whole ;
+      //     var identity ;
+      //     console.log({fracStart,fracNum,fracInterval},"------------")
+          
+      //     if(fracNum == fracInterval ){  
+      //       console.log({fracStart,fracNum,fracInterval},"+9845985648564865")
+      //       fracSection = `${fracStart==-1?fracStart==0?"":"-":fracStart}`;
+      //       whole = 0;
+      //       identity = `${fracStart} ${whole} ${fracInterval}`;
+      //       idddd = `pBox_${identity}`; 
+      //     }else{  
+      //       console.log({fracStart,fracNum,fracInterval},"+98459------------564865")
+      //       fracSection =  `${fracStart==-1?fracStart==0?"":"-":fracStart+1} \\frac{${fracNum}}{${fracInterval}}`;
+      //       identity = `${fracStart} ${fracNum} ${fracInterval}`;
+      //       idddd = `pBox_${identity}`; 
+      //     }    
+      //     fracNum--;      
+      //     var startLength  = fracStart.toString().length;
+      //     var numLength  = fracNum.toString().length;
+      //     var intLength  = fracInterval.toString().length; 
+      //     var ptick = <div  className={`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`} style={{minWidth:`${(fracStart==0?40:question.ansArray.includes(identity)?70:45)}px`}} data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart} data-fracinterval={fracInterval}  onClick={(e)=>{setFractionsSelected(e)}}   key={index} >
+      //                   <div className={styles.botline}  data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart} data-fracinterval={fracInterval}></div>
+      //                   <div className={styles.ticktext} 
+      //                   style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
+      //                   data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart} data-fracinterval={fracInterval}>
+      //                       <div  data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart} data-fracinterval={fracInterval} className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  id={idddd}></div>  
+      //                       { (question.ansArray.includes(identity)
+      //                         ? choiceType === "keying" 
+      //                         ? <div className={styles.answerNum} >
+      //                               <input readOnly={hasAnswerSubmitted} style={{ width: `${(startLength * 14 )}px`, display:(fracStart==0 ? "none":"block"), minWidth: "25px", height:"30px",paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px" }}   maxLength={startLength} className={`answers ansFracNums`}   id={"ansFracNum"} type="text"/>
+      //                             <div className={styles.answerFrac} style={{display:((fracNum%fracInterval)+1==0 ? "none":"")}}  >
+      //                               <input readOnly={hasAnswerSubmitted} style={{ width: `${(numLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={numLength} className={`answers ansFracStarts`}   id={"ansFracStart"} type="text"/>
+      //                               <span style={{border:"1px solid #858585", width:"-webkit-fill-available"}} ></span>
+      //                               <input readOnly={hasAnswerSubmitted} style={{ width: `${(intLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={intLength} className={`answers ansFracInts`}   id={"ansFracInt"} type="text"/>
+      //                             </div>
+      //                         </div>
+      //                         :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={`${fracNum == 0 ? styles.numMapBox : styles.mapBox}       `}    style={{display:`${numsDisplayed || fracStart ==end || (fracNum%fracInterval)+1 == 0  ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}} id={idddd2}><StaticMathField  >{fracSection}</StaticMathField></p>
+      //                         : <p className={`${fracNum == fracInterval ? styles.numMapBox : styles.mapBox} `}   id={idddd2} style={{display:`${numsDisplayed || fracStart == end ||  (fracNum%fracInterval)+1 == 0 ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}}   ><StaticMathField   >{fracSection}</StaticMathField></p>
+      //                         )} 
+      //                   </div>  
+      //               </div>
+      //   if(fracStart != 0 || fracNum != fracInterval) lineBlocks.push(ptick)  
+      //   }   
+      //   fracStart++;
+      
+      
+      
+      
+      
+      
+      
+      // }else{
+        if(mark<0){ 
+          var fracNum = fracInterval;  
+        if(mark==start || fracNum == fracInterval){ 
+          // console.log({fracNum, fracInterval, fracStart, mark}, "9999")  
+          fracNum--;  
+            var identity = `${fracStart} 0 -${fracInterval}`;  
+            var fracId = `pBox_${mark } 0 -${fracInterval}`;   
+            console.log({identity,fracId})
+            console.log(question.ansArray.includes(identity), question.ansArray, identity) 
+
+          // console.log("INCLUDES",question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) )))
+            var ptick = <div className={` ${`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`}`} style={{minWidth:`${(fracStart==0?40:45)}px`}} data-isneg={mark<0} data-fracnum={0} data-fracstart={fracStart} data-fracinterval={`-${fracInterval}`}   onClick={(e)=>setFractionsSelected(e)} key={index} >
+                              <div className={styles.botline} data-isneg={mark<0}  data-fracnum={0} data-fracstart={fracStart} data-fracinterval={`-${fracInterval}`}></div>
+                              <div className={styles.ticktext} 
+                              style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
+                              data-isneg={mark<0} data-fracnum={0} data-fracstart={fracStart} data-fracinterval={`-${fracInterval}`}>
+                                  <div  data-isneg={mark<0} data-fracnum={0} data-fracstart={fracStart} data-fracinterval={`-${fracInterval}`} className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar} id={fracId}></div>  
+                                  { (question.ansArray.includes(identity)
+                                    ? choiceType === "keying" 
+                                    ? <input readOnly={hasAnswerSubmitted}   style={{ width: `${(ansLength * 14 )}px` }}      maxLength={ansLength} className={`${styles.checkNumLine}  answers`}   id={idddd2} type="text"/>
+                                    : choiceType == "selectchoice" ? <p className={styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.numMapBox }   style={{display:`${numsDisplayed || mark == start ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}     id={idddd2}> <StaticMathField   >{mark}</StaticMathField></p>
+                                    : <p className={styles.numMapBox}   style={{display:`${numsDisplayed || mark == start   ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}    id={idddd2}    ><StaticMathField   >{mark}</StaticMathField></p>
+                                  
+                                    )} 
+                              </div>  
+                          </div> 
+              lineBlocks.push(ptick) 
+        } 
+        while(fracNum >= 1  && fracStart<parseInt(question.end) ){ 
+          // console.log({fracStart, fracNum,fracInterval})
+
+          var fracSection ; 
+          var idddd;
+          var whole ;
+          var identity ;
+          // console.log({fracStart,fracNum,fracInterval},"------------")
+          
+          if(fracNum == fracInterval ){  
+            console.log({fracStart,fracNum,fracInterval},"+9845985648564865")
+            fracSection = `${fracStart==-1?fracStart==0?"":"-":fracStart}`;
+            whole = 0;
+            identity = `${fracStart} ${whole} -${fracInterval}`;
+            idddd = `pBox_${identity}`; 
+          }else{  
+            // console.log({fracStart,fracNum,fracInterval},"+98459------------564865")
+            fracSection =  `${fracStart==-1?fracStart==0?"":"-":fracStart+1} \\frac{${fracNum}}{${fracInterval}}`;
+            identity = `${fracStart+1} ${fracNum} -${fracInterval}`;
+            idddd = `pBox_${identity}`; 
+            // console.log(question.ansArray.includes(identity), question.ansArray)
+          }    
+          fracNum--;   
+          // console.log({identity,fracId})
+          // console.log(question.ansArray.includes(identity), question.ansArray, identity)   
+          var startLength  = fracStart.toString().length;
+          var numLength  = fracNum.toString().length;
+          var intLength  = fracInterval.toString().length; 
+          var ptick = <div  className={`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`} style={{minWidth:`${(fracStart==0?40:question.ansArray.includes(identity)?70:45)}px`}} data-isneg={mark<0} data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart+1} data-fracinterval={`-${fracInterval}`}  onClick={(e)=>{setFractionsSelected(e)}}   key={index} >
+                        <div className={styles.botline} data-isneg={mark<0} data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart+1} data-fracinterval={`-${fracInterval}`}></div>
+                        <div className={styles.ticktext} 
+                        style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
+                        data-isneg={mark<0} data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart+1} data-fracinterval={`-${fracInterval}`}>
+                            <div  data-isneg={mark<0} data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart+1} data-fracinterval={`-${fracInterval}`} className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  id={idddd}></div>  
+                            { (question.ansArray.includes(identity)
+                              ? choiceType === "keying" 
+                              ? <div className={styles.answerNum} >
+                                    <input readOnly={hasAnswerSubmitted} style={{ width: `${(startLength * 14 )}px`, display:(fracStart==0 ? "none":"block"), minWidth: "25px", height:"30px",paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px" }}   maxLength={startLength} className={`answers ansFracNums`}   id={"ansFracNum"} type="text"/>
+                                  <div className={styles.answerFrac} style={{display:((fracNum%fracInterval)+1==0 ? "none":"")}}  >
+                                    <input readOnly={hasAnswerSubmitted} style={{ width: `${(numLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={numLength} className={`answers ansFracStarts`}   id={"ansFracStart"} type="text"/>
+                                    <span style={{border:"1px solid #858585", width:"-webkit-fill-available"}} ></span>
+                                    <input readOnly={hasAnswerSubmitted} style={{ width: `${(intLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={intLength} className={`answers ansFracInts`}   id={"ansFracInt"} type="text"/>
+                                  </div>
                               </div>
-                           </div>
-                          :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={`${fracNum == 0 ? styles.numMapBox : styles.mapBox}       `}    style={{display:`${numsDisplayed || fracStart ==end || fracNum%fracInterval == 0  ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}} id={idddd2}><StaticMathField  >{fracSection}</StaticMathField></p>
-                          : <p className={`${fracNum == fracInterval ? styles.numMapBox : styles.mapBox} `}   id={idddd2} style={{display:`${numsDisplayed || fracStart == end ||  fracNum%fracInterval == 0 ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}}   ><StaticMathField   >{fracSection}</StaticMathField></p>
-                          )} 
-                    </div>  
-                </div>
-    if(fracStart != 0 || fracNum != fracInterval) lineBlocks.push(ptick)  
-    fracNum++;  
-    }    
+                              :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={`${fracNum == 0 ? styles.numMapBox : styles.mapBox}       `}    style={{display:`${numsDisplayed || fracStart ==end || (fracNum%fracInterval)+1 == 0  ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}} id={idddd2}><StaticMathField  >{fracSection}</StaticMathField></p>
+                              : <p className={`${fracNum == fracInterval ? styles.numMapBox : styles.mapBox} `}   id={idddd2} style={{display:`${numsDisplayed || fracStart == end ||  (fracNum%fracInterval)+1 == 0 ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}}   ><StaticMathField   >{fracSection}</StaticMathField></p>
+                              )} 
+                        </div>  
+                    </div>
+        if(fracStart != 0 || fracNum != fracInterval) lineBlocks.push(ptick)  
+        }   
+        fracStart++;
+      
+      
+      
+      
+      
+      
+      
+      }else{
+        
+        var fracNum = 1; 
+      if(mark==start || mark == 0){ 
+        console.log({fracNum, fracInterval, fracStart, mark})   
+        var identity = `${mark} 0 ${fracInterval}`;
+        var fracId = `pBox_${identity}`;   
+        console.log({fracId, identity})
+        console.log("INCLUDES",question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) )))
+          var ptick = <div className={` ${`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`}`} style={{minWidth:`${(fracStart==0?40:45)}px`}} data-isneg={mark<0} data-fracnum={0} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval}   onClick={(e)=>setFractionsSelected(e)} key={index} >
+                            <div className={styles.botline}  data-isneg={mark<0}  data-fracnum={0} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval}></div>
+                            <div className={styles.ticktext} 
+                            style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
+                            data-isneg={mark<0} data-fracnum={0} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval}>
+                                <div  data-isneg={mark<0}  data-fracnum={0} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval} className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar} id={fracId}></div>  
+                                { (question.ansArray.includes(identity)
+                                  ? choiceType === "keying" 
+                                  ? <input readOnly={hasAnswerSubmitted}   style={{ width: `${(ansLength * 14 )}px` }}      maxLength={ansLength} className={`${styles.checkNumLine}  answers ansFracNums`}   id={idddd2} type="text"/>
+                                  : choiceType == "selectchoice" ? <p className={styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.numMapBox }   style={{display:`${numsDisplayed || mark == start ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}     id={idddd2}> <StaticMathField   >{mark}</StaticMathField></p>
+                                  : <p className={styles.numMapBox}   style={{display:`${numsDisplayed || mark == start   ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}    id={idddd2}    ><StaticMathField   >{mark}</StaticMathField></p>
+                                
+                                  )} 
+                            </div>  
+                        </div> 
+            lineBlocks.push(ptick) 
+      }
+      while(fracNum<=fracInterval && fracStart<parseInt(question.end) ){ 
+        var fracSection ; 
+        var idddd;
+        var whole ;
+        var identity ; 
+ 
+        if(fracNum == fracInterval){  
+          fracStart++;   
+          fracSection = `${fracStart==0?"":fracStart}`;
+          whole = 0;
+          identity = `${fracStart} ${whole} ${fracInterval}`;
+          idddd = `pBox_${identity}`; 
+        }else{ 
+          fracSection =  `${fracStart==0?"":fracStart} \\frac{${fracNum}}{${fracInterval}}`;
+          identity = `${fracStart} ${fracNum} ${fracInterval}`;
+          idddd = `pBox_${identity}`; 
+        }  
+        
+        console.log({identity})      
+        var startLength  = fracStart.toString().length;
+        var numLength  = fracNum.toString().length;
+        var intLength  = fracInterval.toString().length; 
+        var ptick = <div  className={`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`} style={{minWidth:`${(fracStart==0?40:question.ansArray.includes(identity)?70:45)}px`}} data-isneg={mark<0} data-fracnum={fracNum%fracInterval} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval}  onClick={(e)=>{setFractionsSelected(e)}}   key={index} >
+                      <div className={styles.botline}  data-fracnum={fracNum%fracInterval} data-isneg={mark<0} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval}></div>
+                      <div className={styles.ticktext}  data-isneg={mark<0}
+                      style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
+                      data-fracnum={fracNum%fracInterval} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval}>
+                          <div  data-isneg={mark<0} data-fracnum={fracNum%fracInterval} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval} className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar}  id={idddd}></div>  
+                          { (question.ansArray.includes(identity)
+                            ? choiceType === "keying" 
+                            ? <div className={styles.answerNum} >
+                                  <input readOnly={hasAnswerSubmitted} style={{ width: `${(startLength * 14 )}px`, display:(fracStart==0 ? "none":"block"), minWidth: "25px", height:"30px",paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px" }}   maxLength={startLength} className={`answers ansFracNums`}   id={"ansFracNum"} type="text"/>
+                                <div className={styles.answerFrac} style={{display:(fracNum%fracInterval==0 ? "none":"")}}  >
+                                  <input readOnly={hasAnswerSubmitted} style={{ width: `${(numLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={numLength} className={`answers ansFracStarts`}   id={"ansFracStart"} type="text"/>
+                                  <span style={{border:"1px solid #858585", width:"-webkit-fill-available"}} ></span>
+                                  <input readOnly={hasAnswerSubmitted} style={{ width: `${(intLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={intLength} className={`answers ansFracInts`}   id={"ansFracInt"} type="text"/>
+                                </div>
+                            </div>
+                            :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={`${fracNum == 0 ? styles.numMapBox : styles.mapBox}       `}    style={{display:`${numsDisplayed || fracStart ==end || fracNum%fracInterval == 0  ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}} id={idddd2}><StaticMathField  >{fracSection}</StaticMathField></p>
+                            : <p className={`${fracNum == fracInterval ? styles.numMapBox : styles.mapBox} `}   id={idddd2} style={{display:`${numsDisplayed || fracStart == end ||  fracNum%fracInterval == 0 ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}}   ><StaticMathField   >{fracSection}</StaticMathField></p>
+                            )} 
+                      </div>  
+                  </div>
+      if(fracStart != 0 || fracNum != fracInterval) lineBlocks.push(ptick)  
+      fracNum++;  
+      }   
+      }
     }else{
       console.log("MARK", mark) 
       console.log("MARK float",  parseFloat(mark).toFixed(1).length*10)
