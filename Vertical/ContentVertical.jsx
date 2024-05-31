@@ -106,12 +106,12 @@ export default function ContentVertical({
         {contentData?.map((items, index) => (
           <div
             key={index}
-            className={styles.VerticalKeyingFlexBox}
+            className={`${styles.VerticalKeyingFlexBox} HORIBAR` } 
             style={{
               borderTop: `${
                 index === totalRows - 1 ? 2 : 0
               }px solid black`,
-              borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
+              borderBottom: `${index === totalRows - 1 || (index ===  1 &&totalRows>3) ? 2 : 0}px solid black`,
               width: `${totalCols * 35}px`,
               padding: `${index === totalRows - 1 ? 5 : 0}px 0`,
               paddingBottom: `${index === 2 ? 0 : "initial"}px`,
