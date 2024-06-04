@@ -44,14 +44,21 @@ function handleSubmitAnswer(){
         var studFracNums = document.getElementsByClassName("ansFracNums")
         var studFracStarts = document.getElementsByClassName("ansFracStarts")
         var studFracInts = document.getElementsByClassName("ansFracInts") 
-        console.log({studFracNums,studFracStarts,studFracInts})
+        var studFracIntsWhole = document.getElementsByClassName("ansFracNumsInteger") 
+        
+        console.log({studFracNums,studFracStarts,studFracInts,studFracIntsWhole})
         var answers = [];
-        for(var ansCount=0;ansCount<question.ansArray.length;ansCount++){ 
-          console.log(studFracNums[ansCount],"-----")
+        for(var ansCount=0;ansCount<studFracStarts.length;ansCount++){ 
+          console.log(studFracNums[ansCount]?.value,"-----")
+          if(studFracNums[ansCount]?.value == "" || studFracStarts[ansCount]?.value == "" || studFracInts[ansCount]?.value == "") break;
           // if(studFracNums[ansCount].value=="" || studFracStarts[ansCount].value=="" || studFracInts[ansCount].value == "") isEmpty = true
           // answers.push(`${studFracNums[ansCount].value} ${studFracStarts[ansCount].value} ${studFracInts[ansCount].value}`)
-          answers.push(`${studFracNums[ansCount]?.value || 0} ${studFracStarts[ansCount]?.value || 0} ${studFracInts[ansCount]?.value || interval}`)
-        }   
+          answers.push(`${studFracNums[ansCount]?.value  || 0} ${studFracStarts[ansCount]?.value || 0} ${studFracInts[ansCount]?.value || interval}`)
+        }  
+        for(var ansCount=0;ansCount<studFracIntsWhole.length;ansCount++){ 
+          if(studFracIntsWhole[ansCount]?.value == "") break
+           answers.push(`${studFracIntsWhole[ansCount]?.value  || 0} 0 ${interval}`)
+        }  
         // question.ansArray.forEach(opt=>{
         //     var apsoo = opt.split(" ")[2];
         //     if(apsoo.includes("-")) console.log({apsoo})            
@@ -372,7 +379,7 @@ function setSelected(e){
                                   <div  data-isneg={mark<0} data-fracnum={0} data-fracstart={fracStart} data-fracinterval={`-${fracInterval}`} className={answered ? ansSelected ? styles.ansSelected : styles.answeredVertBar : choiceType == "mapping" ? styles.vertBar : styles.keyVertBar} id={fracId}></div>  
                                   { (question.ansArray.includes(identity)
                                     ? choiceType === "keying" 
-                                    ? <input readOnly={hasAnswerSubmitted}   style={{ width: `${(ansLength * 14 )}px` }}      maxLength={ansLength} className={`${styles.checkNumLine}  answers`}   id={idddd2} type="text"/>
+                                    ? <input readOnly={hasAnswerSubmitted}   style={{ width: `${(ansLength * 14 )}px` }}  data-fracinterval={`${fracInterval}`}     maxLength={ansLength} className={`${styles.checkNumLine}  ansFracNumsInteger answers`}   id={idddd2} type="text"/>
                                     : choiceType == "selectchoice" ? <p className={styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.numMapBox }   style={{display:`${numsDisplayed || mark == start ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}     id={idddd2}> <StaticMathField   >{mark}</StaticMathField></p>
                                     : <p className={styles.numMapBox}   style={{display:`${numsDisplayed || mark == start   ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}    id={idddd2}    ><StaticMathField   >{mark}</StaticMathField></p>
                                   
