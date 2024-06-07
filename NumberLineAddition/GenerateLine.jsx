@@ -9,6 +9,7 @@ import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgress
 import SelectChoice from "../ChoicesType/SelectChoice/SelectChoice";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import { StaticMathField } from "../../ExternalPackages";
+import SelectChoiceHorizontalFillUpsEquationType from "../HorizontalFillUpsEquationType/ChoiceTypeHorizontalFillUpsEquationType/SelectChoiceHorizontalFillUpsEquationType/SelectChoiceHorizontalFillUpsEquationType";
 // StaticMathField
 // export default function GenerateLine({question, start, end, choiceType,interval,questionContent, ansArray }){
 export default function GenerateLine({question, meter }){
@@ -28,7 +29,21 @@ export default function GenerateLine({question, meter }){
   var start = isDecimal ? parseFloat(question.start): parseInt(question.start)
   var end = isDecimal ? parseFloat(question.end): parseInt(question.end)
   var interval = isDecimal ? parseFloat(question.interval): parseInt(question.interval)
-  var choices = question.choices  ;
+  // var choices = question.choices  ;
+  var choices = question.choices?.map(choice=>choice.toString()) ;
+  // var choicesasfas = question.choices.map((opt)=>{
+  //   console.log("OPT",opt)
+  //   console.log(opt.includes("mq-selectable"))
+  //   // console.log(parse(question?.questionName ,optionSelectStaticMathField))
+  //   console.log(parse(opt ,optionSelectStaticMathField)[0])
+
+  //   // <div className={styles.questionName}>{parse(question?.questionName, optionSelectStaticMathField)}</div> 
+    
+  //   // return (opt.includes("mq-selectable")? <div>{parse(opt,optionSelectStaticMathField)}</div> : opt )
+  //   return (opt.includes("mq-selectable") ? `<div>${parse(opt , optionSelectStaticMathField).outerHTML}</div>` : opt )
+  // })  ;
+
+  console.log({choices})
    
 const [lines, setLines] = useState([])  
 var answers=[] ;
@@ -114,7 +129,11 @@ function handleSubmitAnswer(){
         var parser = new DOMParser();
         var doc = parser.parseFromString(selectedOption, 'text/html'); 
         var selectedAnswer = doc.querySelector('span');  
-        if(selectedAnswer && selectedAnswer.dataset?.fracvalue == undefined) isWrong = true;
+        console.log({selectedAnswer})
+        // console.log("selectedAnswer.dataset", selectedAnswer.dataset?.correctanswer )
+        // if(selectedAnswer && selectedAnswer.dataset?.fracvalue == undefined) isWrong = true;
+        // if
+        if(selectedAnswer && selectedAnswer?.dataset && selectedAnswer?.dataset?.correctanswer == undefined) isWrong = true;
         if(typeof selectedOption == "undefined" ) isEmpty = true 
       }else{
         var selectedOption;
@@ -139,6 +158,7 @@ function handleSubmitAnswer(){
     setAnswered(true)
     setQuestionWithAnswer({...question,[student_answer]:studAns}) 
 } 
+// choiceType=='selectchoice'&&<SelectChoice content={content} inputRef={inputRef} totalEmptyBox={totalEmptyBox} totalRows={totalRows} answerHasSelected={hasAnswerSubmitted} choices={choices} studentAnswer={studentAnswer} choiceType={choiceType} questionType={questionType}/>
  
 function setFractionsSelected(e){  
   if(choiceType !== "mapping") return 
@@ -296,8 +316,8 @@ function setSelected(e){
       //                             { (question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) ))
       //                               ? choiceType === "keying" 
       //                               ? <input readOnly={hasAnswerSubmitted}   style={{ width: `${(ansLength * 14 )}px` }}      maxLength={ansLength} className={`${styles.checkNumLine}  answers`}   id={idddd2} type="text"/>
-      //                               : choiceType == "selectchoice" ? <p className={styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.numMapBox }   style={{display:`${numsDisplayed || mark == start ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}     id={idddd2}> <StaticMathField   >{mark}</StaticMathField></p>
-      //                               : <p className={styles.numMapBox}   style={{display:`${numsDisplayed || mark == start   ?"block":"block"}`,top:`${numsDisplayed ? "10px":"3px"}`}}    id={idddd2}    ><StaticMathField   >{mark}</StaticMathField></p>
+      //                               : choiceType == "selectchoice" ? <p className={styles.qMark}  >{`?`}</p> : <p  value={mark} className={styles.numMapBox }   style={{display:`${numsDisplayed || mark == start ?"block":"block"}`,top:`${numsDisplayed ? "3px":"3px"}`}}     id={idddd2}> <StaticMathField   >{mark}</StaticMathField></p>
+      //                               : <p className={styles.numMapBox}   style={{display:`${numsDisplayed || mark == start   ?"block":"block"}`,top:`${numsDisplayed ? "3px":"3px"}`}}    id={idddd2}    ><StaticMathField   >{mark}</StaticMathField></p>
                                   
       //                               )} 
       //                         </div>  
@@ -345,8 +365,8 @@ function setSelected(e){
       //                               <input readOnly={hasAnswerSubmitted} style={{ width: `${(intLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={intLength} className={`answers ansFracInts`}   id={"ansFracInt"} type="text"/>
       //                             </div>
       //                         </div>
-      //                         :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={`${fracNum == 0 ? styles.numMapBox : styles.mapBox}       `}    style={{display:`${numsDisplayed || fracStart ==end || (fracNum%fracInterval)+1 == 0  ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}} id={idddd2}><StaticMathField  >{fracSection}</StaticMathField></p>
-      //                         : <p className={`${fracNum == fracInterval ? styles.numMapBox : styles.mapBox} `}   id={idddd2} style={{display:`${numsDisplayed || fracStart == end ||  (fracNum%fracInterval)+1 == 0 ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}}   ><StaticMathField   >{fracSection}</StaticMathField></p>
+      //                         :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={`${fracNum == 0 ? styles.numMapBox : styles.mapBox}       `}    style={{display:`${numsDisplayed || fracStart ==end || (fracNum%fracInterval)+1 == 0  ?"block":"none"}`,top:`${numsDisplayed ? "3px":"3px"}`}} id={idddd2}><StaticMathField  >{fracSection}</StaticMathField></p>
+      //                         : <p className={`${fracNum == fracInterval ? styles.numMapBox : styles.mapBox} `}   id={idddd2} style={{display:`${numsDisplayed || fracStart == end ||  (fracNum%fracInterval)+1 == 0 ?"block":"none"}`,top:`${numsDisplayed ? "3px":"3px"}`}}   ><StaticMathField   >{fracSection}</StaticMathField></p>
       //                         )} 
       //                   </div>  
       //               </div>
@@ -433,8 +453,8 @@ function setSelected(e){
                                     <input readOnly={hasAnswerSubmitted} style={{ width: `${(intLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={intLength} className={`answers ansFracInts`}   id={"ansFracInt"} type="text"/>
                                   </div>
                               </div>
-                              :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={`${fracNum == 0 ? styles.numMapBox : styles.mapBox}       `}    style={{display:`${numsDisplayed || fracStart ==end || (fracNum%fracInterval)+1 == 0  ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}} id={idddd2}><StaticMathField  >{fracSection}</StaticMathField></p>
-                              : <p className={`${fracNum == fracInterval ? styles.numMapBox : styles.mapBox} `}   id={idddd2} style={{display:`${numsDisplayed || fracStart == end ||  (fracNum%fracInterval)+1 == 0 ?"block":"none"}`,top:`${numsDisplayed ? "10px":"3px"}`}}   ><StaticMathField   >{fracSection}</StaticMathField></p>
+                              :  choiceType == "selectchoice" ? <p className= {styles.qMark}  >{`?`}</p> : <p  value={mark} className={`${fracNum == 0 ? styles.numMapBox : styles.mapBox}       `}    style={{display:`${numsDisplayed || fracStart ==end || (fracNum%fracInterval)+1 == 0  ?"block":"none"}`,top:`${numsDisplayed ? "3px":"3px"}`}} id={idddd2}><StaticMathField  >{fracSection}</StaticMathField></p>
+                              : <p className={`${fracNum == fracInterval ? styles.numMapBox : styles.mapBox} `}   id={idddd2} style={{display:`${numsDisplayed || fracStart == end ||  (fracNum%fracInterval)+1 == 0 ?"block":"none"}`,top:`${numsDisplayed ? "3px":"3px"}`}}   ><StaticMathField   >{fracSection}</StaticMathField></p>
                               )} 
                         </div>  
                     </div>
@@ -592,9 +612,10 @@ function setSelected(e){
         />
       )}   
     {redAlert &&  <CustomAlertBoxMathZone/>   }  
-
+    {/* <div className={styles.questionName}>{parse(question.choices[0], optionSelectStaticMathField)}</div> */}
     <div id="studentAnswerResponse"> 
-    <div className={styles.questionName}>{parse(question?.questionName)}</div>
+    <div className={styles.questionName}>{parse(question?.questionName, optionSelectStaticMathField)}</div>
+    {/* <div className={styles.questionName}>{parse(question?.questionName)}</div> */}
         {question?.upload_file_name && (
           <div>
             <img src={question?.upload_file_name} alt="image not found" />
@@ -628,10 +649,10 @@ function setSelected(e){
                     </div>  
                   </div>
               </div> 
-          </div> 
-           
+          </div>  
         {choiceType=="keying" ? <p style={{padding:"20px 0"}} >{`Enter the ${question.ansArray.length > 1 ? "answers" : "answer"} in the ${question.ansArray.length > 1 ? "boxes." : "box."}`} </p> : choiceType=="mapping" ? <p style={{padding:"20px 0"}} >{`Click on the ${question.ansArray.length > 1 ? "numbers" : "number"} to select.`}</p> :""}
-        {choiceType == "selectchoice" && <SelectChoice   inputRef={inputRef} content={[]} isFraction={question.isFraction}  totalRows={question.rows} answerHasSelected={hasAnswerSubmitted} choices={choices} studentAnswer={studAns} choiceType={choiceType}  />}
+        {/* {choiceType == "selectchoice" && <SelectChoice   inputRef={inputRef} content={question?.questionContent} isFraction={question.isFraction}  totalRows={question.rows} answerHasSelected={hasAnswerSubmitted} choices={choices} studentAnswer={studAns} choiceType={choiceType}  />} */}
+        {choiceType == "selectchoice" && <SelectChoiceHorizontalFillUpsEquationType   inputRef={inputRef} content={question?.questionContent} isFraction={question.isFraction}  totalRows={question.rows} answerHasSelected={hasAnswerSubmitted} choices={choices} studentAnswer={studAns} choiceType={choiceType}  />}
         
    </div>  
       </div> 

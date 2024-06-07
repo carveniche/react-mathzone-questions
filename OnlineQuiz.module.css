@@ -3271,9 +3271,11 @@ border:1px solid #888888
 .mapBox,.numMapBox{
   margin: 6px 0; 
 }
-.numMapBox{
-  position: relative;
+.mapBox{ 
   top: 10px;
+}
+.numMapBox{
+  position: relative; 
 }
 #ansFracStart,#ansFracNum,#ansFracInt{
   font-family: "GothamRnd-Book2";
