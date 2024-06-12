@@ -957,6 +957,7 @@ td.ldivision_left{
 .mathzoneMultipleChoicequestionName th,
 .mathzoneMultipleChoicequestionName td {
   padding: 1rem;
+  border :1px solid black
 }
 .mathzoneMainOlBox {
   margin: 1rem 0;
