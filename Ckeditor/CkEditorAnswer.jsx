@@ -43,6 +43,8 @@ export default function CkEditorAnswer({
     console.log("idsabled");
     disabledEditor(parentRef);
   }, []);
+  // var longdiv = str.includes("ldivision");
+  var longdiv = str.replaceAll(" ","").includes("ldivision") || str.replaceAll(" ","").includes("border-bottom:thinsolid") || str.replaceAll(" ","").includes("border-top:thinsolid");
 
   return (
     <div>
@@ -57,7 +59,7 @@ export default function CkEditorAnswer({
             <img src={upload_file_name} alt="image not found" />
           </div>
         )}
-        <div className={"ckEditorResetValue"}>
+        <div className={`${ longdiv ? "ckEditorTableResetValue" : "ckEditorResetValue"}`}>
           {" "}
           {<form>{HTMLReactParser(str, optionSelect)}</form>}
         </div>
