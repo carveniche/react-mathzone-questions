@@ -1,3 +1,5 @@
+import { commonClassNameEqn, student_answer } from "./MathConstant";
+
 export const manupulateQuestionContent1Darrayed = (arr) => {
   return arr?.map((innerArr) => {
     return innerArr?.map((item) => {
