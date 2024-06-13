@@ -81,34 +81,43 @@ function handleSubmitAnswer(){
         // })
       var questionAnswer = question.ansArray.map((opt)=>{
         var ans = opt.split(" ");  
-        if(ans[2].includes("-")) ans[2] =  ans[2].replace("-","");
+        // if(ans[2].includes("-")) ans[2] =  ans[2].replace("-","");
         return ans.join(" ")
       })
       answers = answers.map((opt)=>{
         var ans = opt.split(" ");   
         if(ans[0]== "-") ans[0] = 0
+        if(ans[1].includes("-")) {
+          ans[1] = ans[1].replaceAll("-","")
+          ans[2] = `-${ans[2]}`
+        }
+        if(ans[0].includes("-")) {
+          ans[2] = `-${ans[2]}`
+        }
         return ans.join(" ")
       })
         console.log({answers})
-        setStudAnswers(answers)
         if(answers.length!=question.ansArray.length) isEmpty = true;
         // console.log(answers, question.ansArray)
         // answers.forEach(ans=>{ if(!question.ansArray.includes(ans)) isWrong = true;}) 
-        console.log(answers, questionAnswer)
         answers.forEach(ans=>{ if(!questionAnswer.includes(ans)) isWrong = true;}) 
-
+        answers.forEach(ans=>{ 
+          if(!questionAnswer.includes(ans)) isWrong = true;
+        }) 
+        // console.log(question.ansArray)
       }else{
         answers = Array.from(document.getElementsByClassName("answers"))
         var solution = answers.map(ans => isDecimal?parseFloat(ans.value):parseInt(ans.value));
         solution = solution.sort((a,b)=>b-a)
         var ansArray = question.ansArray.sort((a,b)=>b-a)
-        console.log(ansArray, solution)
+        console.log({ansArray, solution})
         for(var i = 0; i<question.ansArray.length ;i++){ 
           if(isNaN(solution[i])) isEmpty=true
           if(solution[i] !=ansArray[i] ) isWrong=true 
           // if(!question.ansArray.includes(solution[i]) ) isWrong=true
         }
       }
+
     }else if(choiceType == "mapping" && !isWrong && !isEmpty){  
       console.log("STUDAND",studAns)
       console.log(studAns.length!=question.ansArray.length) 
@@ -145,6 +154,7 @@ function handleSubmitAnswer(){
         if(selectedOption != question.ansArray[0]) isWrong = true 
         } 
    }
+
     if(isEmpty){
       setRedAlert(true)
       return
@@ -410,7 +420,6 @@ function setSelected(e){
               lineBlocks.push(ptick) 
         } 
         while(fracNum >= 1  && fracStart<parseInt(question.end) ){ 
-          // console.log({fracStart, fracNum,fracInterval})
 
           var fracSection ; 
           var idddd;
@@ -426,16 +435,21 @@ function setSelected(e){
             idddd = `pBox_${identity}`; 
           }else{  
             // console.log({fracStart,fracNum,fracInterval},"+98459------------564865")
-            fracSection =  `${fracStart==-1?fracStart==0?"":"-":fracStart+1} \\frac{${fracNum}}{${fracInterval}}`;
+            // fracSection =  `${fracStart==-1?fracStart==0?"":"-":fracStart+1} \\frac{${fracNum}}{${fracInterval}}`;
+            fracSection =  `${fracStart==-1?fracStart==0?"":"":fracStart+1} \\frac{${fracStart==-1? `-${fracNum}`:fracNum}}{${fracInterval}}`;
             identity = `${fracStart+1} ${fracNum} -${fracInterval}`;
             idddd = `pBox_${identity}`; 
             // console.log(question.ansArray.includes(identity), question.ansArray)
-          }    
+          }  
+          console.log("FRACSECTION",fracSection,{fracStart, fracNum,fracInterval})
+
           fracNum--;   
           // console.log({identity,fracId})
           
           var startLength  = fracStart.toString().length;
+          // var startLength  = fracStart==-1 ? fracStart.toString().length + 1 : fracStart.toString().length;
           var numLength  = fracNum.toString().length;
+          var numLength  = fracStart==-1 ? fracNum.toString().length + 1 : fracNum.toString().length;
           var intLength  = fracInterval.toString().length; 
           var ptick = <div  className={`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`} style={{minWidth:`${(fracStart==0?40:question.ansArray.includes(identity)?70:45)}px`}} data-isneg={mark<0} data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart+1} data-fracinterval={`-${fracInterval}`}  onClick={(e)=>{setFractionsSelected(e)}}   key={index} >
                         <div className={styles.botline} data-isneg={mark<0} data-fracnum={(fracNum%fracInterval)+1} data-fracstart={fracStart+1} data-fracinterval={`-${fracInterval}`}></div>
@@ -446,7 +460,7 @@ function setSelected(e){
                             { (question.ansArray.includes(identity)
                               ? choiceType === "keying" 
                               ? <div className={styles.answerNum} >
-                                    <input readOnly={hasAnswerSubmitted} style={{ width: `${(startLength * 14 )}px`, display:(fracStart==0 ? "none":"block"), minWidth: "25px", height:"30px",paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px" }}   maxLength={startLength} className={`answers ansFracNums`}   id={"ansFracNum"} type="text"/>
+                                    <input readOnly={hasAnswerSubmitted} style={{ width: `${(startLength * 14 )}px`, display:(fracStart==-1? "none":"block"), minWidth: "25px", height:"30px",paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px" }}   maxLength={startLength} className={`answers ansFracNums`}   id={"ansFracNum"} type="text"/>
                                   <div className={styles.answerFrac} style={{display:((fracNum%fracInterval)+1==0 ? "none":"")}}  >
                                     <input readOnly={hasAnswerSubmitted} style={{ width: `${(numLength * 14 )}px`,minWidth: "26px",height:"30px", paddingTop:"5px",fontFamily: "GothamRnd-Book2",textAlign:"center",fontStyle: "normal", fontWeight: "700", fontSize: "18px"  }}   maxLength={numLength} className={`answers ansFracStarts`}   id={"ansFracStart"} type="text"/>
                                     <span style={{border:"1px solid #858585", width:"-webkit-fill-available"}} ></span>
@@ -475,10 +489,7 @@ function setSelected(e){
         console.log({fracNum, fracInterval, fracStart, mark})   
         var identity = `${mark} 0 ${fracInterval}`;
         var fracId = `pBox_${identity}`;   
-        console.log("////////////////////////////////",{fracId, identity})  
-
-        console.log("INCLUDES",question.ansArray.includes((isDecimal?Number(parseFloat(mark).toFixed(1)):parseInt(mark  ) )))
-          var ptick = <div className={` ${`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`}`} style={{minWidth:`${(fracStart==0?40:45)}px`}} data-isneg={mark<0} data-fracnum={0} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval}   onClick={(e)=>setFractionsSelected(e)} key={index} >
+      var ptick = <div className={` ${`${hasAnswerSubmitted ? styles.answeredSection : styles.section}`}`} style={{minWidth:`${(fracStart==0?40:45)}px`}} data-isneg={mark<0} data-fracnum={0} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval}   onClick={(e)=>setFractionsSelected(e)} key={index} >
                             <div className={styles.botline}  data-isneg={mark<0}  data-fracnum={0} data-fracstart={`${fracStart}`} data-fracinterval={fracInterval}></div>
                             <div className={styles.ticktext} 
                             style={{ padding: (choiceType === "keying" && question.ansArray.includes(isDecimal ? Number(parseFloat(mark).toFixed(1)) : parseInt(mark))) ? 0 : "0 .5rem"}}
@@ -512,7 +523,8 @@ function setSelected(e){
           identity = `${fracStart} ${fracNum} ${fracInterval}`;
           idddd = `pBox_${identity}`; 
         }  
-        console.log({fracNum, fracInterval, fracStart, mark})   
+        // console.log({fracNum, fracInterval, fracStart, mark})   
+        console.log("FRACSECTION",fracSection,{fracStart, fracNum,fracInterval})
 
         
         // console.log({identity },question.ansArray)      
