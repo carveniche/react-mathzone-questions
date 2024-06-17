@@ -9,7 +9,6 @@ import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/common
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import parse from "html-react-parser";
-import { useLocation } from "react-router";
 import { ROUTERKEYCONST } from "../../../../../constants";
 const validationForSelectMultipleSelect = (choices) => {
   let n = choices?.length || 0;
@@ -34,7 +33,6 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
     setQuestionWithAnswer,
     isStudentAnswerResponse,
   } = useContext(ValidationContext);
-  const {search,pathname}  = useLocation()
   const showAnswer = hasAnswerSubmitted;
   const setShowAnswer = setHasAnswerSubmitted;
   const inputRef = useRef();
@@ -54,12 +52,11 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
     setShowAnswer(true);
   };
 
-console.log("PATHNAME",{pathname})
   return (
     <>
       {
       // state?.from == "logical_puzzles" ? 
-      state?.questionImage && pathname != ROUTERKEYCONST.logicalpuzzles ? 
+      state?.questionImage ? 
       <div className={styles.questionImage} >
         <p>Question Image</p>
         <img  src={state.questionImage} />
