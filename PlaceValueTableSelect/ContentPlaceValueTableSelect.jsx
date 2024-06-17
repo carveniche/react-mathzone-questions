@@ -88,7 +88,7 @@ export default function ContentPlaceValueTableSelect({
                     handleChange(e, index, i);
                   }}
                   disabled={hasAnswerSubmitted || isStudentAnswerResponse}
-                  style={{ width: 100 }}
+                  style={{ width: 35,minHeight:35 }}
                 />
               </div>
             )

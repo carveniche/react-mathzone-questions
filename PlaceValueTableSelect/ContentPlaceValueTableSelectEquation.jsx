@@ -163,7 +163,7 @@ export default function ContentPlaceValueTableSelectEquation({
                     handleChange(e.target.value, item.row, item.col,true);
                   }}
                   readOnly={hasAnswerSubmitted || isStudentAnswerResponse}
-                  style={{ width: 120 , minHeight: 50, }}
+                  style={{ width: 35 , minHeight: 35, }}
 
                  
                 />
@@ -173,8 +173,8 @@ export default function ContentPlaceValueTableSelectEquation({
                     item?.student_answer??""
                   }
                   style={{
-                    minWidth: 120,
-                      minHeight: 50,
+                    minWidth: 35,
+                      minHeight: 35,
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
@@ -201,8 +201,8 @@ export default function ContentPlaceValueTableSelectEquation({
                 ):(
                   <div
                     style={{
-                      minWidth: 120,
-                      minHeight: 50,
+                      minWidth: 35,
+                      minHeight: 35,
                       border: "1px solid black",
                       display: "flex",
                       justifyContent: "center",
