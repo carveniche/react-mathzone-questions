@@ -9,7 +9,6 @@ import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/common
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import parse from "html-react-parser";
-import { ROUTERKEYCONST } from "../../../../../constants";
 const validationForSelectMultipleSelect = (choices) => {
   let n = choices?.length || 0;
   for (let i = 0; i < n; i++) {
