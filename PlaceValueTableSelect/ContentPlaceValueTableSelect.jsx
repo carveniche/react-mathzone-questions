@@ -22,6 +22,8 @@ export default function ContentPlaceValueTableSelect({
   let [rowsData, setRowsData] = useState([]);
   const size = useRef({});
   const { isStudentAnswerResponse } = useContext(ValidationContext);
+
+  const [row, setRow] = useState([]);
   useEffect(() => {
     let arr = content?.map((row) =>
       row?.map((cols) => {
@@ -31,9 +33,16 @@ export default function ContentPlaceValueTableSelect({
     );
 
     setRowsData([...arr]);
+    setRow([...arr]);
   }, []);
   const [state, setState] = useState({});
   const handleChange = (e, rows, cols) => {
+
+    console.log('row',row)
+    row[rows][cols].stringLength =
+      e.target.value.length > 1 ? e.target.value.length : 1;
+      setRow([...row]);
+
     let str = "" + rows + cols;
     setState({ ...state, [str]: e.target.value });
     rowsData[rows][cols][student_answer] = e.target.value;
@@ -55,7 +64,7 @@ export default function ContentPlaceValueTableSelect({
           </div>
         ))}
       </div>
-      {content?.map((items, index) => (
+      {row?.map((items, index) => (
         <div
           key={index}
           className={styles.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox}
@@ -88,7 +97,9 @@ export default function ContentPlaceValueTableSelect({
                     handleChange(e, index, i);
                   }}
                   disabled={hasAnswerSubmitted || isStudentAnswerResponse}
-                  style={{ width: 35,minHeight:35 }}
+                  style={{ width: 'auto',minHeight:35,minWidth:35 }}
+                  size={item?.stringLength || 1}
+                  
                 />
               </div>
             )

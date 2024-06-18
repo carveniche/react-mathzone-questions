@@ -51,7 +51,7 @@ export default function ContentPlaceValueTableSelectEquation({
   let [rowsData, setRowsData] = useState([]);
   const size = useRef({});
   const { isStudentAnswerResponse } = useContext(ValidationContext);
-
+  const [row, setRow] = useState([]);
   useEffect(() => {
     let arr = content?.map((row) =>
       row?.map((cols) => {
@@ -62,6 +62,8 @@ export default function ContentPlaceValueTableSelectEquation({
 
      console.log('this is useeffect',arr);
     setRowsData([...arr]);
+    setRow([...arr]);
+
     
   }, []);
 
@@ -97,6 +99,11 @@ export default function ContentPlaceValueTableSelectEquation({
   const handleChange = (value, rows, cols,status = false) => {
     if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     if (status && currentVirtualKeyBoard > -1) setCurrentVirtualKeyBoard(-1);
+
+    console.log('row',row)
+    row[rows][cols].stringLength =
+      value.length > 1 ? value.length : 1;
+      setRow([...row]);
 
     //let str = "" + rows + cols;
     let str = "" +rows+"row"+cols+"col";
@@ -138,7 +145,7 @@ export default function ContentPlaceValueTableSelectEquation({
           </div>
         ))}
       </div>
-      {content?.map((items, index) => (
+      {row?.map((items, index) => (
         <div
           key={index}
           className={styles.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox}
@@ -163,8 +170,8 @@ export default function ContentPlaceValueTableSelectEquation({
                     handleChange(e.target.value, item.row, item.col,true);
                   }}
                   readOnly={hasAnswerSubmitted || isStudentAnswerResponse}
-                  style={{ width: 35 , minHeight: 35, }}
-
+                  style={{ width: 'auto', minHeight: 35 ,minWidth:35 }}
+                   size={item?.stringLength || 1}
                  
                 />
                 ):(!hasAnswerSubmitted &&!isStudentAnswerResponse)?(
