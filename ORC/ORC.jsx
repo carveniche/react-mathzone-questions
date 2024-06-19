@@ -110,6 +110,11 @@ function ORC({ obj, question_text, meter }) {
     disabledCkeditor();
   }, []);
   useEffect(() => {
+    document.querySelectorAll(".AfterQstAns").forEach(inp=>{
+      if(hasAnswerSubmitted) inp.setAttribute("readonly",true)
+    })    
+  }, [hasAnswerSubmitted]);
+  useEffect(() => {
     let temp = [];
     obj?.orc_oprc_data[0]?.response?.map((items) =>
       items.map((item) => temp.push(item))
@@ -246,6 +251,21 @@ function ORC({ obj, question_text, meter }) {
     }
   }, [currentVirtualKeyBoard]);
   let setIsAnsweredCorrect = setIsAnswerCorrect;
+
+  function afterQstnTextHtmlParser(htmlString) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, 'text/html');
+    return doc.body;
+  } 
+  var afterQstTextInp = [];
+  var afterQstTxt = afterQstnTextHtmlParser(obj?.after_question_text || "") ;
+  const inputs = afterQstTxt.querySelectorAll('input');
+  inputs.forEach(input => {
+    afterQstTextInp.push(input.value)
+    input.classList.toggle("AfterQstAns")
+    input.setAttribute("value","")
+  });
+
   const handleSubmit = () => {
     if (hasAnswerSubmitted) return;
     if (inputText.length > 0) {
@@ -255,6 +275,24 @@ function ORC({ obj, question_text, meter }) {
         return;
       }
     }
+    var afterQstnTxtAns = document.querySelectorAll(".AfterQstAns");
+    if(afterQstnTxtAns.length>0){
+        var afterQstnTxtAnsValues = [];
+        afterQstnTxtAns.forEach(ans=>{
+          if(ans.value) afterQstnTxtAnsValues.push(ans.value)
+        })
+
+        if( afterQstnTxtAnsValues.length==0 || afterQstTextInp.length==0 ||  afterQstnTxtAnsValues.length !== afterQstTextInp.length) {
+          setRedAlert(true) 
+          return
+        }else setRedAlert(false)
+
+        for(let ans of afterQstnTxtAnsValues){
+          if(!afterQstTextInp.includes(ans)){
+            setIsAnsweredCorrect(false);
+          }
+        }
+    } 
     for (let i = 0; i < dropState.length; i++) {
       if (dropState[i].length < 1) {
         setRedAlert(true);
@@ -438,11 +476,26 @@ function ORC({ obj, question_text, meter }) {
             }
           </>
           <div>
-            <div id="mathzoneFibAfterText">
+            {/* <div id="mathzoneFibAfterText">
               {typeof obj?.after_question_text == "string"
                 ? HtmlParser(obj?.after_question_text)
                 : obj?.after_question_text}
+            </div> */}
+             <div id="mathzoneFibAfterText">
+              {typeof obj?.after_question_text == "string"
+                ?  parse(afterQstTxt.innerHTML)
+                : obj?.after_question_text}
             </div>
+            {/* <div id="mathzoneFibAfterText">
+              {
+              typeof obj?.after_question_text == "string"
+                ? 
+                HtmlParser(obj?.after_question_text) 
+                // parse(afterQstTxt.innerHTML) 
+                :
+                obj?.after_question_text
+                 }
+            </div> */}
           </div>
           {obj?.text && (
             <div id="orcTextParent" style={InlineCss.TextBox}>

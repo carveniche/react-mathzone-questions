@@ -433,12 +433,12 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
             <div></div>
           </ProgressBorder>
         </div>
+        <div id="ckeditorValueModified">
         <div
           className={` ${GenStyles.contentParent} ${GenStyles.questionName} ckEditorResetValue ckEditorResetValue`}
           ref={heightDiv}
           style={{ width: "auto" }}
         >
-          <div id="ckeditorValueModified">
             {state ? HTMLReactParser(str) : HTMLReactParser(str, optionSelect)}
           </div>
           {!hasAnswerSubmitted && currentVirtualKeyBoard > -1 && (
