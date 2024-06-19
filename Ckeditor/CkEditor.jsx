@@ -409,6 +409,8 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
     setHasAnswerSelected(true);
   };
   const inputRef1 = useRef([]);
+console.log("STRRRRR",str.replaceAll(" ","").includes("ldivision"))
+var longdiv = str.replaceAll(" ","").includes("ldivision") || str.replaceAll(" ","").includes("border-bottom:thinsolid") || str.replaceAll(" ","").includes("border-top:thinsolid");
 
   return (
     <div
@@ -435,7 +437,7 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
         </div>
         <div id="ckeditorValueModified">
         <div
-          className={` ${GenStyles.contentParent} ${GenStyles.questionName} ckEditorResetValue ckEditorResetValue`}
+          className={` ${GenStyles.contentParent} ${GenStyles.questionName} ${longdiv ? "ckEditorTableResetValue" : "ckEditorResetValue"} `}
           ref={heightDiv}
           style={{ width: "auto" }}
         >
