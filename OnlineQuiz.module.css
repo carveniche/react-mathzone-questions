@@ -5,6 +5,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "GothamRnd-Book";
+  src: url("fonts/GothamRounded-Book.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 .flex {
   display: flex;
 }
@@ -456,20 +463,20 @@
   color: white;
 }
 
-.bgIndigo_roundcard{
+.bgIndigo_roundcard {
   background-color: indigo;
   color: white;
-  min-width: 45px!important;
-    border-radius: 50%!important;
+  min-width: 45px !important;
+  border-radius: 50% !important;
 }
-.roundcard_empty{
-  min-width: 45px!important;
-  border-radius: 50%!important;
+.roundcard_empty {
+  min-width: 45px !important;
+  border-radius: 50% !important;
 }
 
-.roundcard_empty > div{
-  min-width: 45px!important;
-  border-radius: 50%!important;
+.roundcard_empty > div {
+  min-width: 45px !important;
+  border-radius: 50% !important;
 }
 .questionContent {
   font-size: 16px;
@@ -1346,7 +1353,7 @@
 
 .MatchObjectHorizontalTypeDragDropFlexBox3 > div {
   display: flex;
-  
+
   flex-wrap: wrap;
 }
 
@@ -3137,13 +3144,13 @@
   top: 48px;
   left: 76px;
   display: flex;
- gap:0px !important;
+  gap: 0px !important;
   justify-content: left;
 }
-.keyrow_2 td:nth-child(1){
- display: none !important;
+.keyrow_2 td:nth-child(1) {
+  display: none !important;
 }
-.keyrow_2 td{
+.keyrow_2 td {
   padding-left: 63px;
 }
 .quizCorrectInorrect {
@@ -3194,10 +3201,10 @@
 .tdspace td:nth-child(1) {
   left: 9px;
 }
-.tdspace_pd td:nth-child(1){
+.tdspace_pd td:nth-child(1) {
   left: 9px;
 }
-.tdspace_pd td{
+.tdspace_pd td {
   padding-left: 25px;
 }
 .contentParent img {
@@ -3205,6 +3212,11 @@
 }
 .orc_dragdrop img {
   pointer-events: none;
+}
+.questionImage{
+  display: flex;
+  padding: 50px 0;
+  gap: 50px;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

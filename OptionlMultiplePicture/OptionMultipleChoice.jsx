@@ -21,6 +21,7 @@ const validationForSelectMultipleSelect = (choices) => {
   return 0;
 };
 function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
+  console.log({state, totalRows, meter,})
   meter = Number(meter) || 0;
   const {
     hasAnswerSubmitted,
@@ -52,6 +53,16 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
 
   return (
     <>
+      {
+      // state?.from == "logical_puzzles" ? 
+      state?.questionImage ? 
+      <div className={styles.questionImage} >
+        <p>Question Image</p>
+        <img  src={state.questionImage} />
+      </div> : 
+      ""
+      // <p>{JSON.stringify(state?.questionImage)}</p>
+    }
       <div>
         {!isStudentAnswerResponse && (
           <SolveButton
