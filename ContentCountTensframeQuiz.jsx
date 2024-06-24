@@ -26,7 +26,7 @@ function ContentCountTensframeQuiz({ content, totalRows,setImageLoaded,studentRe
     rows.push(temp);
   }
   let totalColumns = rows[0]?.length;
-
+console.log("---------------")
   return (
     <div column={totalColumns} className={styles.CountGridTenframesMultipleContentGrid}
     style={{
