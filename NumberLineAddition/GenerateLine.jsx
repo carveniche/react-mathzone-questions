@@ -441,7 +441,6 @@ function setSelected(e){
             idddd = `pBox_${identity}`; 
             // console.log(question.ansArray.includes(identity), question.ansArray)
           }  
-          console.log("FRACSECTION",fracSection,{fracStart, fracNum,fracInterval})
 
           fracNum--;   
           // console.log({identity,fracId})
@@ -524,7 +523,6 @@ function setSelected(e){
           idddd = `pBox_${identity}`; 
         }  
         // console.log({fracNum, fracInterval, fracStart, mark})   
-        console.log("FRACSECTION",fracSection,{fracStart, fracNum,fracInterval})
 
         
         // console.log({identity },question.ansArray)      
