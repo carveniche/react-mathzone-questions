@@ -409,8 +409,13 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
     setHasAnswerSelected(true);
   };
   const inputRef1 = useRef([]);
-console.log("STRRRRR",str.replaceAll(" ","").includes("ldivision"))
-var longdiv = str.replaceAll(" ","").includes("ldivision") || str.replaceAll(" ","").includes("border-bottom:thinsolid") || str.replaceAll(" ","").includes("border-top:thinsolid");
+  console.log("STRRRRR", str.replaceAll(" ", "").includes("ldivision"));
+  var longdiv =
+    str.replaceAll(" ", "").includes("ldivision") ||
+    str.replaceAll(" ", "").includes("border-bottom:thinsolid") ||
+    str.replaceAll(" ", "").includes("border-top:thinsolid");
+
+  var noBorder = str.replaceAll(" ", "").includes(`border="0"`);
 
   return (
     <div
@@ -436,11 +441,17 @@ var longdiv = str.replaceAll(" ","").includes("ldivision") || str.replaceAll(" "
           </ProgressBorder>
         </div>
         <div id="ckeditorValueModified">
-        <div
-          className={` ${GenStyles.contentParent} ${GenStyles.questionName} ${longdiv ? "ckEditorTableResetValue" : "ckEditorResetValue"} `}
-          ref={heightDiv}
-          style={{ width: "auto" }}
-        >
+          <div
+            className={`${
+              longdiv
+                ? "ckEditorTableResetValue"
+                : noBorder
+                ? "ckEditorResetValueNoBorder"
+                : "ckEditorResetValue"
+            }`}
+            ref={heightDiv}
+            style={{ width: "auto" }}
+          >
             {state ? HTMLReactParser(str) : HTMLReactParser(str, optionSelect)}
           </div>
           {!hasAnswerSubmitted && currentVirtualKeyBoard > -1 && (

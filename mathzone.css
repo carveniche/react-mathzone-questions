@@ -675,38 +675,42 @@ sup .fraction-root .fdn,
   vertical-align: inherit;
   max-width: fit-content;
   max-height: fit-content;
-} 
-
-.ckEditorResetValue td, 
-.ckEditorResetValue table, 
-.ckEditorResetValue tr {
-  border:1px solid black;
 }
 
-.ckEditorTableResetValue td, 
-.ckEditorTableResetValue table, 
+.ckEditorResetValue td,
+.ckEditorResetValue table,
+.ckEditorResetValue tr {
+  border: 1px solid black;
+}
+
+.ckEditorResetValueNoBorder td,
+.ckEditorResetValueNoBorder table,
+.ckEditorResetValueNoBorder tr {
+  border: none;
+}
+
+.ckEditorTableResetValue td,
+.ckEditorTableResetValue table,
 .ckEditorTableResetValue tr {
-  border:0;
+  border: 0;
   border-spacing: 2px;
 }
- 
 
-td.ldivision_top{ 
+td.ldivision_top {
   border-top: 1px solid black;
 }
 
-td.ldivision_bottom{ 
-  border-bottom: 1px solid black;  
+td.ldivision_bottom {
+  border-bottom: 1px solid black;
 }
 
-td.ldivision_right{ 
-  border-right: 1px solid black;  
+td.ldivision_right {
+  border-right: 1px solid black;
 }
 
-td.ldivision_left{ 
-  border-left: 1px solid black; 
+td.ldivision_left {
+  border-left: 1px solid black;
 }
- 
 
 .ckEditorResetValue p {
   display: block;
@@ -715,7 +719,9 @@ td.ldivision_left{
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
-.ckEditorResetValue table,.ckEditorTableResetValue table {
+.ckEditorResetValue table,
+.ckEditorTableResetValue table,
+.ckEditorResetValueNoBorder table {
   border-collapse: separate;
   text-indent: initial;
   border-spacing: 2px;
@@ -957,7 +963,7 @@ td.ldivision_left{
 .mathzoneMultipleChoicequestionName th,
 .mathzoneMultipleChoicequestionName td {
   padding: 1rem;
-  border :1px solid black
+  border: 1px solid black;
 }
 .mathzoneMainOlBox {
   margin: 1rem 0;
@@ -1129,7 +1135,7 @@ td.ldivision_left{
   left: 0;
   top: 50%;
   right: 0;
-  border-top: 1px solid; 
+  border-top: 1px solid;
   -webkit-transform: rotate(-15deg);
   -moz-transform: rotate(-20deg);
   -ms-transform: rotate(-20deg);

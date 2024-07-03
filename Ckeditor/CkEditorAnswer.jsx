@@ -44,7 +44,14 @@ export default function CkEditorAnswer({
     disabledEditor(parentRef);
   }, []);
   // var longdiv = str.includes("ldivision");
-  var longdiv = str.replaceAll(" ","").includes("ldivision") || str.replaceAll(" ","").includes("border-bottom:thinsolid") || str.replaceAll(" ","").includes("border-top:thinsolid");
+  var longdiv =
+    str.replaceAll(" ", "").includes("ldivision") ||
+    str.replaceAll(" ", "").includes("border-bottom:thinsolid") ||
+    str.replaceAll(" ", "").includes("border-top:thinsolid");
+
+  var noBorder = str.replaceAll(" ", "").includes(`border="0"`);
+
+  console.log({ longdiv });
 
   return (
     <div>
@@ -59,7 +66,15 @@ export default function CkEditorAnswer({
             <img src={upload_file_name} alt="image not found" />
           </div>
         )}
-        <div className={`${ longdiv ? "ckEditorTableResetValue" : "ckEditorResetValue"}`}>
+        <div
+          className={`${
+            longdiv
+              ? "ckEditorTableResetValue"
+              : noBorder
+              ? "ckEditorResetValueNoBorder"
+              : "ckEditorResetValue"
+          }`}
+        >
           {" "}
           {<form>{HTMLReactParser(str, optionSelect)}</form>}
         </div>
