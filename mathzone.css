@@ -9,7 +9,7 @@ img {
 .mq-math-mode sup.mq-nthroot {
   padding-top: 0.8em;
 }
-.mq-root-block {
+#studentAnswerResponse.mq-root-block {
   overflow: auto;
 }
 
