@@ -46,10 +46,11 @@ export default function VerticalSelect({
             style={{
               display: "flex",
               alignItems: "center",
-              borderTop: `${index === totalRows - 1 ? 2 : 0}px solid black`,
+              borderTop: `${index === totalRows - 1 || index===2 ? 2 : 0}px solid black`,
               borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
               width: `${totalCols * 35}px`,
               padding: `${index === totalRows - 1 ? 5 : 0}px 0`,
+              paddingTop: `${index === 2 ? 5 : 'initial'}px`,
             }}
             key={index}
             border={index === totalRows - 1 && "2px"}
