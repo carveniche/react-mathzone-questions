@@ -129,13 +129,13 @@ export default function ShortDivisionDragAndDropType({
             {dropState?.map((items, index) => {
               if(index !==2){
             return(
-                <tr key={index} className={content.length > 2?(index==1?`${styles.row_1}`:''):''}
+                <tr key={index} className={content.length > 2?(index==1?`${styles.row_1}`:''):`${styles.row_td_2}`}
                 >
                 
                 {items?.map((item, i) =>
                 
                   item.isMissed !== "true" ? (
-                    <td style={{width:'40px',height:'55px'}}
+                    <td style={{width:'40px',height:'50px',paddingLeft:'10px'}}
                       key={i}
                       ref={(el) =>
                         (droppableContainerRef.current[index][i] = {
@@ -160,23 +160,21 @@ export default function ShortDivisionDragAndDropType({
                    
                       {index == 1 && i == 0 && (
                         <>
-                        <RightPranthesis transform={content.length > 2 ? 'scale(1.4, 5.02)' : 'scale(1.4, 2.65)'}
-                           style={{top:content.length > 2 ?'-16px':'9px'}}>
+                        <RightPranthesis transform={content.length > 2 ? 'scale(1.2, 5.02)' : 'scale(1.5, 3.75)'}
+                           style={{top:content.length > 2 ?'-5px':'18px'}}>
 
-                          |
+                          )
                         </RightPranthesis>
                             {/* <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p> */}
                         </>
                       )}
                     </td>
                   ) : (
-                    <td key={i}>
+                    <td key={i} style={{width:'40px',height:'50px',paddingLeft:'10px'}}>
                       <div
                         className={`droppablehfu ${styles.LongDivisonDragDropBox}`}
                         style={{
-                          border: `${
-                            item.show || isStudentAnswerResponse ? 0 : 1
-                          }px dashed indigo`,
+                          border: `${item.show || isStudentAnswerResponse ? '1px dashed transparent' : '1px dashed indigo'}`,
                           minWidth: 40,
                           minHeight: 40,
                         }}
@@ -231,8 +229,8 @@ export default function ShortDivisionDragAndDropType({
                      
                       {index == 1 && i == 0 && (
                         <>
-                            <RightPranthesis transform={content.length > 2 ? 'scale(1.4, 5.02)' : 'scale(1.4, 2.65)'}
-                           style={{top:content.length > 2 ?'-16px':'9px'}}>|</RightPranthesis>
+                            <RightPranthesis transform={content.length > 2 ? 'scale(1.2, 5.02)' : 'scale(1.5, 3.75)'}
+                           style={{top:content.length > 2 ?'-5px':'18px'}}>)</RightPranthesis>
 
                              {/* <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p> */}
                         </>
@@ -261,7 +259,7 @@ export default function ShortDivisionDragAndDropType({
                           show: item?.show,
                         })
                       }
-                      style={{width:'40px',height:'50px'}}
+                      className={`${styles.remainder_td}`}
                     >
                       <div data-value={`rowssssssssss-${i}`}>
                         <b>
@@ -271,15 +269,13 @@ export default function ShortDivisionDragAndDropType({
                     
                     </td>
                   ) : (
-                    <td key={i} style={{width:'40px',height:'50px'}}>
+                    <td key={i} className={`${styles.remainder_td}`} >
                       <div
-                        className={`droppablehfu ${styles.LongDivisonDragDropBox}`}
+                        className={`droppablehfu  ${styles.LongDivisonDragDropBoxRemainder}`}
                         style={{
-                          border: `${
-                            item.show || isStudentAnswerResponse ? 0 : 1
-                          }px dashed indigo`,
-                          minWidth: 40,
-                          minHeight: 40,
+                          border: `${item.show || isStudentAnswerResponse ? '1px dashed transparent' : '1px dashed indigo'}`,
+                          width: 30,
+                          height: 30,
                         }}
                         id={`${index} ${i}`}
                         value={item.re_value}
@@ -390,7 +386,7 @@ export const RightPranthesis = styled.div`
   position: absolute;
   top: 4px;
   transform: ${(props) => props.transform ?? 'scale(1.5, 2.65)'};
-  right: -1px;
+  right: -5px;
   color: indigo;
 `;
 export const TopBorder = styled.div`
