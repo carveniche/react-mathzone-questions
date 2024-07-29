@@ -3212,14 +3212,12 @@
 .tdspace td:nth-last-child(2) {
  padding-left: 10px;
 }
-.tdspace td:nth-child(1) {
-  left: 9px;
-}
+.tdspace td:nth-child(1),
 .tdspace_pd td:nth-child(1) {
-  left: 9px;
+  left: 9px !important;
 }
-.tdspace td:not('td:nth-child(1)'),
-.tdspace_pd td:not('td:nth-child(1)'){
+.tdspace td,
+.tdspace_pd td{
   padding-left: 20px;
 }
 
