@@ -3167,7 +3167,7 @@
   display: none !important;
 }
 .keyrow_2 td {
-  
+  position: relative;
 }
 .quizCorrectInorrect {
   font-family: "GothamRnd-Medium";
@@ -3204,10 +3204,7 @@
   font-weight: bold;
 }
 
-.tdspace td:not('td:nth-child(1)'),
-.tdspace_pd td:not('td:nth-child(1)'){
-  padding-left: 20px;
-}
+
 .tdspace td:nth-last-child(1) {
  
   left: -28px;
@@ -3221,8 +3218,9 @@
 .tdspace_pd td:nth-child(1) {
   left: 9px;
 }
-.tdspace_pd td:nth-last-child(2) {
-  padding-left: 10px;
+.tdspace td:not('td:nth-child(1)'),
+.tdspace_pd td:not('td:nth-child(1)'){
+  padding-left: 20px;
 }
 
 .contentParent img {
