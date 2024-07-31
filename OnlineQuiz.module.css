@@ -3206,11 +3206,10 @@
 
 
 .tdspace td:nth-last-child(1) {
- 
-  left: -28px;
+  padding-left: 6px;
 }
 .tdspace td:nth-last-child(2) {
- padding-left: 10px;
+ padding-left: 13px;
 }
 .tdspace td:nth-child(1),
 .tdspace_pd td:nth-child(1) {
