@@ -37,7 +37,8 @@ function SelectChoiceOptionMultiplePicture({
     }
 
     setRows([...rows]);
-  }, []);
+  }, [choices[0]?.[0]?.value]);
+  // }, []);
 
   const selectOptionHandler = (i) => {
     if (isAnswerSelected || isStudentAnswerResponse) return;
@@ -67,7 +68,7 @@ function SelectChoiceOptionMultiplePicture({
 
               display: "flex",
               cursor: "pointer",
-             // flexWrap: "wrap",
+              // flexWrap: "wrap",
               border: " 1px solid black",
               padding: "1rem",
               borderRadius: "5px",
