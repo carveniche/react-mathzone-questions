@@ -160,7 +160,7 @@ export default function ShortDivisionDragAndDropType({
                    
                       {index == 1 && i == 0 && (
                         <>
-                        <RightPranthesis transform={content.length > 2 ? 'scale(1.2, 5.02)' : 'scale(1.5, 3.75)'}
+                        <RightPranthesis transform={content.length > 2 ? 'scale(1.2, 6.5)' : 'scale(1.5, 3.75)'}
                            style={{top:content.length > 2 ?'-5px':'18px'}}>
 
                           )
@@ -229,7 +229,7 @@ export default function ShortDivisionDragAndDropType({
                      
                       {index == 1 && i == 0 && (
                         <>
-                            <RightPranthesis transform={content.length > 2 ? 'scale(1.2, 5.02)' : 'scale(1.5, 3.75)'}
+                            <RightPranthesis transform={content.length > 2 ? 'scale(1.2, 6.5)' : 'scale(1.5, 3.75)'}
                            style={{top:content.length > 2 ?'-5px':'18px'}}>)</RightPranthesis>
 
                              {/* <p style={content.length>2?StraightPranthesis:StraightPranthesisSmall}></p> */}
