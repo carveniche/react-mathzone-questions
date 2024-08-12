@@ -279,7 +279,8 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
   const [selectOptionAnswer, setSelectOptionAnswer] = useState();
 
   const handleFocus = (i) => {
-    setCurrentVirtualKeyBoard(i);
+    if (str.includes("\\frac")) setCurrentVirtualKeyBoard(-1);
+    else setCurrentVirtualKeyBoard(i);
     setCurrentInputBox(i);
   };
   const handlClick = (str) => {
@@ -362,9 +363,13 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
     checkTextAnswer = tempAnswer === "wrong" ? false : true;
     //editable
     for (let key in correctAnswerEditor) {
+      console.log("BEFORE", value[key]);
+      if (value[key].includes(`\\ `))
+        value[key] = value[key].replaceAll(`\\ `, "");
+      console.log("After", value[key]);
       if (value[key] == undefined || String(value[key]).trim() === "") {
         setRedAlert(true);
-        return;
+        // return;
       }
     }
     for (let key in correctAnswerEditor) {
