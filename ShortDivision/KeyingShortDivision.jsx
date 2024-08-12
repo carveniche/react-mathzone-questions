@@ -47,21 +47,21 @@ export default function ShortDivisionKeyingChoiceType({
     <div style={{ width: "fit-content" }}>
       <table
         style={{ borderCollapse: "collapse",position:"relative" }}
-        className={styles.longDivisonTable}
+        className={`${styles.longDivisonTable} ${styles.longDivisonkeyingTable}`}
       >
         <tbody style={{position:"relative"}}>
           {row?.map((items, index) => {
          
      if(index !==2){
       return(
-        <tr key={index} className={items?.some(item => item?.value === 'R') ? styles.tdspace : styles.tdspace_pd}>
+        <tr key={index} className={`${items?.some(item => item?.value === 'R') ? styles.tdspace : styles.tdspace_pd} ${content.length > 2 && index==1 ?styles.keyrow_1:''}`} >
 
               {items?.map((item, i) =>
 
                   item.isMissed !== "true" 
                   ? (
             
-                  <td key={i} style={{width:'40px',height:'40px'}} >
+                  <td key={i} style={{maxWidth:'40px',maxHeight:'40px'}} >
                     <div>
                       <p  style={InlineCss.Input}>
                         <HtmlParserComponent value={item?.value} />
@@ -78,12 +78,13 @@ export default function ShortDivisionKeyingChoiceType({
                   
                     {index == 1 && i == 0 && (
                       <>
-                     <KeyRightPranthesis>)</KeyRightPranthesis>
+                     <RightPranthesis transform={content.length > 2 ? 'scale(1.2, 5.02)' : 'scale(1.5, 3.48)'}
+                           style={{top:content.length > 2 ?'11px':'18px'}}>)</RightPranthesis>
                       </>
                     )}
                   </td>
                 ) : (
-                  <td key={i} className="two" style={{width:'40px',height:'40px'}}>
+                  <td key={i} className="two" style={{maxWidth:'40px',maxHeight:'40px'}}>
                     <div>{HtmlParser(item.imgvalue)}</div>
                     {console.log(item[student_answer])}
                     <div>
@@ -116,7 +117,8 @@ export default function ShortDivisionKeyingChoiceType({
                   
                     {index == 1 && i == 0 && (
                       <>
-                     <KeyRightPranthesis>)</KeyRightPranthesis>
+                     <RightPranthesis transform={content.length > 2 ? 'scale(1.2, 5.02)' : 'scale(1.5, 3.48)'}
+                           style={{top:content.length > 2 ?'11px':'18px'}}>)</RightPranthesis>
                       </>
                     )}
                   </td>
@@ -196,12 +198,12 @@ export default function ShortDivisionKeyingChoiceType({
   );
 }
 
-export const KeyRightPranthesis = styled.div`
-position: absolute;
-top: 16px;
-transform: scale(1.5,3.65);
-right: -8px;
-color: indigo;
+export const RightPranthesis = styled.div`
+  position: absolute;
+  top: 4px;
+  transform: ${(props) => props.transform ?? 'scale(1.5, 3.65)'};
+  right: -5px;
+  color: indigo;
 `;
 
 export const BottomBorder = styled.div`
@@ -216,9 +218,9 @@ export const BottomBorder = styled.div`
 
 const InlineCss = {
   Input: {
-    height: "38px",
+    height: "34px",
     textAlign: "center",
-    width: "38px",
+    width: "34px",
     position:"relative",
     zIndex:"1",
     display:'flex',
