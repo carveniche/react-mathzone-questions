@@ -127,7 +127,7 @@ export default function jsonDataTesting() {
     live_class_practice_id: null,
     message: "Quiz started successfully",
   };
-  return obj2
+
 //   return obj2;
   //  obj.question_data[0].question_type=obj2.type
   //  obj.question_data[0].question_text=JSON.stringify(obj2)
@@ -156,8 +156,8 @@ var  qstn={
         {
             "question_id": 97543,
             "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"place_value_table_select\",\"rows\":\"2\",\"cols\":\"2\",\"questionName\":\"To find the volume of the given figure, Sam and Ron wrote the equations.\\n<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/05Vcompositefigures/Volume%20of%20composite%20figures_74.png\\\">   \\nWho is correct?\",\"questionContent\":[[{\"row\":0,\"col\":0,\"value\":\"Sam\"},{\"row\":0,\"col\":1,\"value\":\"(2 × 4 × 4) + (10 × 24 × 2)\"}],[{\"row\":1,\"col\":0,\"value\":\"Ron\"},{\"row\":1,\"col\":1,\"value\":\"(6 × 4 × 2) + (8 × 4 × 2)\"}]],\"questiontbHead\":[{\"row\":0,\"value\":\"Name\"},{\"row\":1,\"value\":\"Equation\"}],\"solution\":{\"model\":[{\"val\":\"The given composite figure can be split as\"},{\"val\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/05Vcompositefigures/Volume%20of%20composite%20figures_75.png\\\">\"},{\"val\":\"The volume of the figure = the volume of shape A + the volume of shape B.\"},{\"val\":\"The dimensions of shape A are 2 cm, 8 cm, 8 cm.\"},{\"val\":\"The dimensions of shape B are 24 - 2 = 22 cm, 2 cm, and 8 cm.\"},{\"val\":\"So, the volume = (2 × 8 × 8) + (22 × 2 × 8) cubic units.\"},{\"val\":\"This equation does not match both Sam and Ron's equations, so none of them is correct.\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[{\"value\":\"Both of them \",\"option\":\"false\"},{\"value\":\"Ron\",\"option\":\"false\"},{\"value\":\"None of them\",\"option\":\"true\"},{\"value\":\"Sam\",\"option\":\"false\"}],\"choiceType\":\"selectchoice\",\"pvts_text_head\":\"\"}",
-            "question_type": "place_value_table_select",
+            "question_text":"{\"operation\":\"addition\",\"type\":\"compare_drag_operator\",\"rows\":\"1\",\"cols\":\"3\",\"questionName\":\"<span>Drag the correct operator.\\n</span><div><span><br></span></div>\",\"questionContent\":[{\"row\":0,\"col\":0,\"value\":\"9\",\"isMissed\":\"false\"},{\"row\":0,\"col\":1,\"value\":\"=\",\"isMissed\":\"true\"},{\"row\":0,\"col\":2,\"value\":\"9\",\"isMissed\":\"false\"}],\"solution\":{\"model\":[{\"val\":\"9 = 9\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[{\"selected\":\"false\",\"value\":\"<\"},{\"selected\":\"true\",\"value\":\"=\"},{\"selected\":\"false\",\"value\":\">\"}],\"choiceType\":\"dragdrop\",\"choiceCount\":3}",
+            "question_type": "compare_drag_operator",
             "upload_file_name": "",
             "level": "level1",
             "fib_text": null,
@@ -174,6 +174,7 @@ var  qstn={
     "live_class_practice_id": null,
     "message": "Quiz started successfully"
 }
+return qstn;
 
 var data2 = {
     "status": true,
@@ -236,7 +237,7 @@ var data = {
     "message": "Quiz started successfully"
 }
 
-return qstn;
+
 
 
 
