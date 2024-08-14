@@ -126,5 +126,10 @@ const InlineCss = {
     height: "30px",
     textAlign: "center",
     width: "18px",
+    fontSize:"15px",
+    padding:"0",
+    border:"1px solid grey",
+
+    
   },
 };

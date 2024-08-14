@@ -187,34 +187,61 @@ export default function MainVertical({ obj, meter }) {
 export function MainVerticalCorrectAnswer({ data }) {
 
   const [row, setRow] = useState([])
+  const [QuestionType, setQuestionType] = useState("")
+
   let totalCols=data.cols
   let totalRows=data.rows
   useEffect(() => {
     let arr = []
     arr = data?.questionContent
     setRow([...arr])
+    setQuestionType(data?.choiceType)
 
   }, [])
+
   return (
     <div className={styles.correctAnswerBox}>
     <div className={`${styles.correctAnswer} ${styles.correctAnswer2}`}>
       <h6>The correct answer is:</h6>
     <div>
       <div style={{ marginTop: "4rem" }}>
-        {row?.map((items, index) => (
-           <div
+        {row?.map((items, index) => {
+          
+          const keyingStyle = {
+            borderTop: `${
+              index === totalRows - 1 || index===2 ? 2 : 0
+            }px solid black`,
+            borderBottom: `${index === totalRows - 1  ? 2 : 0}px solid black`,
+            width: `${totalCols * 35}px`,
+            padding: `${index === totalRows - 1 ? 5 : 0}px 0`,
+            paddingBottom: `${index === 2 ? 0 : "initial"}px`,
+            paddingTop: `${index === 2 ? 5 : "initial"}px`,
+          };
+          const dragdropStyle = {
+            display: "flex",
+            alignItems: "center",
+            borderTop: `${index === totalRows - 1 || index === 2 ? 2 : 0}px solid black`,
+            borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
+            width: `${totalCols * 80}px`,
+            maxWidth: "fit-content",
+          };
+          const selectChoiceStyle = {
+            display: "flex",
+            alignItems: "center",
+            borderTop: `${index === totalRows - 1 || index===2 ? 2 : 0}px solid black`,
+            borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
+            width: `${totalCols * 35}px`,
+            padding: `${index === totalRows - 1 ? 5 : 0}px 0`,
+            paddingTop: `${index === 2 ? 5 : 'initial'}px`,
+          }
+        const finalStyle = QuestionType === "dragdrop" ? dragdropStyle : QuestionType === "keying" ? keyingStyle : selectChoiceStyle;
+
+
+          return(
+       <div
            key={index}
            className={styles.VerticalKeyingFlexBox}
-           style={{
-             borderTop: `${
-               index === totalRows - 1 ? 2 : 0
-             }px solid black`,
-             borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
-             width: `${totalCols * 35}px`,
-             padding: `${index === totalRows - 1? 5 : 0}px 0`,
-             paddingBottom: `${index === 2 ? 0 : "initial"}px`,
-           }}
-         >
+            style={finalStyle}>
             {items?.map((item, i) =>
 
               <div
@@ -228,7 +255,7 @@ export function MainVerticalCorrectAnswer({ data }) {
 
             )}
           </div>
-        ))}
+)})}
       </div>
 
     </div>

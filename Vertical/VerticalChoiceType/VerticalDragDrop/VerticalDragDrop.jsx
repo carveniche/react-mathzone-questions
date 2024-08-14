@@ -90,7 +90,7 @@ export default function VerticalDragDrop({
             style={{
               display: "flex",
               alignItems: "center",
-              borderTop: `${index === totalRows - 1 ? 2 : 0}px solid black`,
+              borderTop: `${index === totalRows - 1 || index===2 ? 2 : 0}px solid black`,
               borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
               width: `${totalCols * 80}px`,
               maxWidth: "fit-content",

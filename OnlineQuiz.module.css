@@ -3057,16 +3057,30 @@
 }
 
 .LongDivisonDragDropBox {
-  min-height: 50px;
-  height: auto;
-  width: auto;
+  min-height: 40px;
+  height: 40px;
+  width: 40px;
   text-align: center;
-  min-width: 96px;
+  min-width: 40px;
   border: 1px solid black;
 }
-
+.LongDivisonDragDropBoxRemainder > div{
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+.remainder_td{
+  width: 30px;
+  height: 30px;
+  max-width: 30px;
+  max-height: 30px;
+}
 .LongDivisonDragDropBox > div {
-  min-width: inherit;
+  min-width: 40px;
   min-height: 40px;
   display: flex;
   justify-content: center;
@@ -3093,8 +3107,14 @@
 .longDivisonTable td {
   text-align: center;
   padding: 5px;
+  padding-left: 25px;
   padding-top: 8px;
   position: relative;
+}
+
+.longDivisonTable td:nth-child(1) {
+
+  padding-left:0px;
 }
 .skippedQuestionTitle {
   text-align: center;
@@ -3111,11 +3131,6 @@
   padding: 0.5rem;
 }
 
-.row_1 {
-  position: relative;
-  top: 43px;
-}
-
 .bodyPage2.old_question_type *:global(.top-new) {
   font-size: 12px;
 }
@@ -3128,30 +3143,31 @@
 
 .row_1 {
   position: relative;
-  top: 40px;
+  top: 50px;
 }
 .row_2 {
   position: relative;
-  top: -57px;
-  left: 25px;
+  top: -50px;
+  left: 30px;
 }
+
 .keyrow_1 {
   position: relative;
-  top: 43px;
+  top: 18px;
 }
 .keyrow_2 {
   position: absolute;
-  top: 48px;
-  left: 76px;
+  top: 45px;
+  left: 68px;
   display: flex;
-  gap: 0px !important;
+  gap: 12px !important;
   justify-content: left;
 }
 .keyrow_2 td:nth-child(1) {
   display: none !important;
 }
 .keyrow_2 td {
-  padding-left: 63px;
+  position: relative;
 }
 .quizCorrectInorrect {
   font-family: "GothamRnd-Medium";
@@ -3188,25 +3204,22 @@
   font-weight: bold;
 }
 
-.tdspace td {
-  padding-left: 25px;
-}
+
 .tdspace td:nth-last-child(1) {
-  padding-left: 0 !important;
-  left: -35px;
+  padding-left: 6px;
 }
 .tdspace td:nth-last-child(2) {
-  padding-left: 0 !important;
+ padding-left: 13px;
 }
-.tdspace td:nth-child(1) {
-  left: 9px;
-}
+.tdspace td:nth-child(1),
 .tdspace_pd td:nth-child(1) {
-  left: 9px;
+  left: 9px !important;
 }
-.tdspace_pd td {
-  padding-left: 25px;
+.tdspace td,
+.tdspace_pd td{
+  padding-left: 20px;
 }
+
 .contentParent img {
   user-select: none;
 }
