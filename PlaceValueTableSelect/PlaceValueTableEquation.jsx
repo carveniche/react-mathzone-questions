@@ -110,6 +110,17 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
       }
     }
     for (let key in newData) {
+      console.log(newData[key]);
+      if (newData[key]) {
+        if (!choices[key]) return 0;
+      }
+    }
+    for (let key in equationObj) {
+      if (equationObj[key].includes("\\ "))
+        equationObj[key] = equationObj[key].replaceAll("\\ ", "");
+    }
+
+    for (let key in newData) {
       if (newData[key]) {
         if (!choices[key]) return 0;
         else if (equationObj?.hasOwnProperty(key)) {

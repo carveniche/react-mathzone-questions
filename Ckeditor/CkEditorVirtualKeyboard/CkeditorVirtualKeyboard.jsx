@@ -97,7 +97,7 @@ export const CkeditorVirtualKeyboard = ({
             </span>
           </div>
           <div id={styles.mathToolbar}>
-            <div
+            {/* <div
               className="btn mathsign fractions_cls"
               title="\frac{ }{ }"
               onClick={() => handlClick(0)}
@@ -109,7 +109,7 @@ export const CkeditorVirtualKeyboard = ({
                 className="fraction"
                 id={styles.symbolsWidthHeight}
               />
-            </div>
+            </div> */}
             <div
               className="btn mathsign"
               title="\cdot"

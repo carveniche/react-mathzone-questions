@@ -12,10 +12,18 @@ import {
   oldAndNewData,
 } from "./CollectAnswerDataHorizontalFillUpsEquation/CollectAnswerDataHorizontalFillUpsEquation";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { deleteKeysFromArray, findSelectedValue, manupulateEquationTypeQuestion1D, manupulateQuestionContent1Darray, manupulateQuestionContentDnd2d, twoDto1DArray } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import {
+  deleteKeysFromArray,
+  findSelectedValue,
+  manupulateEquationTypeQuestion1D,
+  manupulateQuestionContent1Darray,
+  manupulateQuestionContentDnd2d,
+  twoDto1DArray,
+} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import  { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import compareLatexData from "../../CommonJSFiles/compareLatexData";
+import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef;
@@ -67,28 +75,35 @@ const validationForDragAndDrop = (inputRef) => {
   return 2;
 };
 
-const validationForKeying = (newData, choices,equationObj) => {
+const validationForKeying = (newData, choices, equationObj) => {
   for (let key in newData) {
+    console.log(newData[key]);
     if (newData[key]) {
       if (!choices[key]) return 0;
     }
   }
+  for (let key in equationObj) {
+    if (equationObj[key].includes("\\ "))
+      equationObj[key] = equationObj[key].replaceAll("\\ ", "");
+  }
   for (let key in newData) {
     if (newData[key]) {
-      if (!choices[key]) return 0;
-      else if (
-      equationObj?.hasOwnProperty(key)
-      )
-        {
-          
-          if(!compareLatexData( String(newData[key]).trim()?.toLowerCase() ,
-          String(equationObj[key]).trim()?.toLowerCase()))
-          return 1
-        }
-        else if( String(newData[key]).trim()?.toLowerCase() !==
-        String(choices[key]).trim()?.toLowerCase()){
-          return 1
-        }
+      if (!choices[key]) {
+        return 0;
+      } else if (equationObj?.hasOwnProperty(key)) {
+        if (
+          !compareLatexData(
+            String(newData[key]).trim()?.toLowerCase(),
+            String(equationObj[key]).trim()?.toLowerCase()
+          )
+        )
+          return 1;
+      } else if (
+        String(newData[key]).trim()?.toLowerCase() !==
+        String(choices[key]).trim()?.toLowerCase()
+      ) {
+        return 1;
+      }
     }
   }
   return 2;
@@ -97,7 +112,8 @@ const validationForKeying = (newData, choices,equationObj) => {
 const changeStateAfterValidation = (
   setHasAnswerSubmitted,
   setIsAnswerCorrect,
-  val,setRedAlert
+  val,
+  setRedAlert
 ) => {
   if (val === 0) {
     setRedAlert(true);
@@ -118,7 +134,7 @@ export default function HorizontalFillUpsEquationType({
   const [newData, setNewData] = useState({});
   totalRows = Number(totalRows);
   totalCols = Number(totalCols);
-const equationKeyingRef=useRef()
+  const equationKeyingRef = useRef();
   meter = Number(meter) || 0;
   //let [rows, setRows] = useState([]);
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
@@ -133,8 +149,13 @@ const equationKeyingRef=useRef()
     setTotalEmptyBox(totalEmptyBox);
     //setRows(rows);
   }, []);
-  const { hasAnswerSubmitted, setHasAnswerSubmitted, setIsAnswerCorrect,setQuestionWithAnswer,isStudentAnswerResponse } =
-    useContext(ValidationContext);
+  const {
+    hasAnswerSubmitted,
+    setHasAnswerSubmitted,
+    setIsAnswerCorrect,
+    setQuestionWithAnswer,
+    isStudentAnswerResponse,
+  } = useContext(ValidationContext);
   const handleSubmitAnswer = () => {
     // if (hasAnswerSubmitted) return;
 
@@ -143,39 +164,49 @@ const equationKeyingRef=useRef()
       changeStateAfterValidation(
         setHasAnswerSubmitted,
         setIsAnswerCorrect,
-        status,setRedAlert
+        status,
+        setRedAlert
       );
-      if(state!==0){
-        let result =manupulateQuestionContentDnd2d(inputRef.current,"value")
-        result=twoDto1DArray(result)
-        result=deleteKeysFromArray(result,{"dropVal":"dropVal"})
-        setQuestionWithAnswer({...state,questionContent:result})
-      
+      if (state !== 0) {
+        let result = manupulateQuestionContentDnd2d(inputRef.current, "value");
+        result = twoDto1DArray(result);
+        result = deleteKeysFromArray(result, { dropVal: "dropVal" });
+        setQuestionWithAnswer({ ...state, questionContent: result });
       }
     } else if (state?.choiceType == "keying") {
-      let status = validationForKeying(newData, inputRef.current,equationKeyingRef.current);
-  
+      let status = validationForKeying(
+        newData,
+        inputRef.current,
+        equationKeyingRef.current
+      );
+
       changeStateAfterValidation(
         setHasAnswerSubmitted,
         setIsAnswerCorrect,
-        status,setRedAlert
+        status,
+        setRedAlert
       );
-     if(status!=0){
-      let result=manupulateEquationTypeQuestion1D(state?.questionContent,inputRef?.current,"value")
-      result=manupulateQuestionContent1Darray(result)
-      console.log(result)
-      setQuestionWithAnswer({...state,questionContent:result})
-     }
+      if (status != 0) {
+        let result = manupulateEquationTypeQuestion1D(
+          state?.questionContent,
+          inputRef?.current,
+          "value"
+        );
+        result = manupulateQuestionContent1Darray(result);
+        console.log(result);
+        setQuestionWithAnswer({ ...state, questionContent: result });
+      }
     } else if (state?.choiceType == "selectchoice") {
       let val = validationForSelectChoice(inputRef.current, newData);
       changeStateAfterValidation(
         setHasAnswerSubmitted,
         setIsAnswerCorrect,
-        val,setRedAlert
+        val,
+        setRedAlert
       );
-      if(val!==0){
-        let value=findSelectedValue(inputRef.current,"value")
-        setQuestionWithAnswer({...state,[student_answer]:value})
+      if (val !== 0) {
+        let value = findSelectedValue(inputRef.current, "value");
+        setQuestionWithAnswer({ ...state, [student_answer]: value });
       }
     }
   };
@@ -186,7 +217,7 @@ const equationKeyingRef=useRef()
   }, []);
   return (
     <div className={styles.MainApp}>
-      {!isStudentAnswerResponse&&<SolveButton onClick={handleSubmitAnswer} />}
+      {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
@@ -212,7 +243,6 @@ const equationKeyingRef=useRef()
             choiceType={state?.choiceType}
             studentAnswer={state[student_answer]}
             equationKeyingRef={equationKeyingRef}
-            
           />
         </div>
       </div>

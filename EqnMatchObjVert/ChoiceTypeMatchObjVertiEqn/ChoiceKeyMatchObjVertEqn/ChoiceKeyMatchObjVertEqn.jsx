@@ -30,6 +30,7 @@ export default function ChoiceKeyMatchObjVertEqn({
   const { isStudentAnswerResponse } = useContext(ValidationContext);
   const ref = useRef([]);
   let [inputState, setInputState] = useState({});
+  const [isFrac, setisFrac] = useState(false);
   const temp = new Array(Number(totalRows) || 1).fill(0);
   const ref1 = useRef({});
   let array = temp.map((item) => {
@@ -73,6 +74,13 @@ export default function ChoiceKeyMatchObjVertEqn({
     for (let i = 0; i < totalRows; i++) {
       let temp = [];
       content?.map((item) => {
+        console.log({ item });
+        if (
+          (item?.numvalue?.includes("\\frac") ||
+            item?.imgvalue?.includes("\\frac")) &&
+          !isFrac
+        )
+          setisFrac(true);
         item.row == i && temp.push({ ...item, show: false, dropVal: "" });
       });
       arr.push(temp);
@@ -202,7 +210,8 @@ export default function ChoiceKeyMatchObjVertEqn({
       </table>
       {currentVirtualKeyBoard > -1 &&
         currentBoxRef.current.length > 1 &&
-        !hasAnswerSubmitted && (
+        !hasAnswerSubmitted &&
+        !isFrac && (
           <VirtualKeyboard
             inputRef={
               inputBoxRef.current[currentBoxRef.current[0]][
