@@ -325,6 +325,24 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
   }, []);
   const [redAlert, setRedAlert] = useState(false);
 
+  useEffect(() => {
+    const widthTimeout = setTimeout(() => {
+      // const element = document.querySelector("#ckeditorValueModified table");
+      // if (element) {
+      //   element.style.width = "fit-content";
+      //   element.style.maxWidth = "80%";
+      // }
+      const tables = document.querySelectorAll("#ckeditorValueModified  ");
+      tables.forEach((table) => {
+        table.style.width = "fit-content";
+        table.style.maxWidth = "80%";
+      });
+    }, 500);
+    return () => {
+      clearTimeout(widthTimeout);
+    };
+  }, []);
+
   const handleSubmit = () => {
     if (hasAnswerSelected) return;
     let checkRadioAnswer = true;
