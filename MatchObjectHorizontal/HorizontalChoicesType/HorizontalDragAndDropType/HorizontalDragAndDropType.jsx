@@ -106,6 +106,9 @@ export default function HorizontalDragAndDropType({
         <div
           key={index}
           className={styles.MatchObjectHorizontalTypeDragDropFlexBox}
+          style={{
+            gap: items.length === 2 ? '5rem' : '2rem', 
+          }}
         >
           {items?.map((item, i) =>
             item.isMissed === "false" ? (
