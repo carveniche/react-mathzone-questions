@@ -215,7 +215,8 @@ tr.ck-bottom-border td {
   top: -25px;
 }
 sup {
-  font-size: xx-small;
+  font-size: 70%;
+  padding-left: 3px;
   vertical-align: super;
 }
 .radical {
@@ -343,7 +344,8 @@ sup {
   font-family: MathJax_Size4;
 }
 sup {
-  font-size: xx-small;
+  font-size: 70%;
+  padding-left: 3px;
   vertical-align: super;
 }
 .fraction-root > span {
@@ -592,16 +594,16 @@ sup .fraction-root .fdn,
 .nth-root-new1 {
   position: absolute;
   top: 1px;
-  left: -24px;
-  font-size: 46%;
+  left: -37px;
+  font-size: 75% !important;
   white-space: nowrap;
   line-height: 0px;
 }
 .nth-root-new2 {
   position: absolute;
-  top: -14px;
-  left: -88px;
-  font-size: 52%;
+  top: -3px;
+  left: -110px;
+  font-size: 75% !important;
   line-height: 0px;
   white-space: nowrap;
 }
