@@ -107,13 +107,13 @@
 
 /* Actual code */
 .questionName {
-  font-size: 18px;
+  font-size: 38px;
   font-style: normal;
   font-weight: 700;
-  line-height: 27px;
+  line-height: 35px;
   letter-spacing: 0em;
   text-align: left;
-
+  margin-bottom: 15px;
   color: #233584;
 }
 .ckeditrorAnswer input[type="radio"],
@@ -309,8 +309,12 @@
 .imageBoxes {
   position: relative;
   cursor: pointer;
+ 
 }
+.imageBoxes>img{
 
+  width:300px,
+}
 .modal {
   height: 120px;
 
@@ -2966,6 +2970,8 @@
 }
 #newTypeQuestion .questionName img {
   width: auto !important;
+
+
 }
 .buttonContainer {
   width: calc(100%);
@@ -2991,6 +2997,7 @@
 }
 #mathZoneNextQuestion .questionName {
   width: auto !important;
+  
 }
 .studentTabContainer {
   display: flex;
@@ -3452,3 +3459,53 @@ border:1px solid black;
   -o-transform: rotate(-20deg);
   transform: rotate(-20deg);
 }
+
+
+
+.successPandaAnimation {
+  animation: moveUp 1s ease-out;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(100px); 
+    opacity: 0; 
+  }
+  50% {
+    transform: translateY(0); 
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10px); 
+    opacity: 1;
+  }
+}
+
+.wrongImageAnimation {
+  animation: shake 1s ease-out;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateY(100px); 
+    opacity: 0; 
+  }
+  50% {
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+  100% {
+    transform: translateY(-10px);
+    opacity: 1; 
+  }
+}
+
+.wrongImageFixed {
+  position: absolute; 
+  bottom: "12%"; 
+  left: 100px; 
+  height: "350px";
+  width: "350px";
+  
+}
+
