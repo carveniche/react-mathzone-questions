@@ -50,7 +50,7 @@ function OnlineQuizSelectChoiceOptionMushroom({
   };
   return (
     <div
-      className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}
+      className={`${styles.flex} ${styles.flexWrap} ${styles.boxChoices}`}
       style={{ marginTop: "100px" }}
     >
       {choices.map((item, index) => (
@@ -58,40 +58,26 @@ function OnlineQuizSelectChoiceOptionMushroom({
           key={index}
           ref={(el) => (selectOptionsChoiceRef.current[index] = el)}
           onClick={() => selectOptionHandler(index)}
+          className={styles.choiceItem}
+
           style={{
             position: "relative",
             cursor: "pointer",
-            border: selectedOption === index ? "2px solid yellow" : "none",
-            borderRadius: "50%", // Makes the border round
-            padding: selectedOption === index ? "4px" : "0", 
-            borderWidth:selectedOption === index ? "18px" : "0"
-
+            outline: selectedOption === index ? "4px solid yellow" : "none",
+            borderRadius: "50%", 
+            padding: "0", 
           }}
         >
           <img
             src="https://d325uq16osfh2r.cloudfront.net/games/Mushroom.gif"
             alt="Mushroom"
-            style={{ height: "200px", width: "200px" }}
+            className={styles.choiceImage}
           />
-          <div
-            style={{
-              position: "absolute",
-              top: "20%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              textAlign: "center",
-              color: "#fff",
-              fontWeight: "bold",
-              pointerEvents: "none",
-              fontSize: fontSizeDynamic(HtmlParser(item)),
-              border:"10px solid red",
-              borderRadius:"50%",
-             borderBlockColor:"red",
-             backgroundColor:"red"
-            }}
+         <div
+            className={styles.choiceText}
+            style={{ fontSize: fontSizeDynamic(HtmlParser(item)) }}
           >
             {typeof item === "string" ? HtmlParser(item) : item}
-            {/* "hdfkjhdsuhfsdiuifi" */}
           </div>
         </div>
       ))}

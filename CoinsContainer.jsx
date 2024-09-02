@@ -40,28 +40,26 @@ function CoinsContainer({coins,setCoins,correctAnswerGiven}) {
 }
 
 export default CoinsContainer;
-const styles={
-    coinContainer: {
-        position: "absolute",
-        right: "190px",
-        top: "-40px",
-        display: "flex",
-        alignItems: "center",
-      },
-      coinIcon: {
-        width: "100px",
-        height: "100px",
-        position: "relative",
-      },
-      coinText: {
-        position: "absolute",
-        fontSize: "18px", 
-        fontWeight: "bold",
-        color: "#333",
-        marginLeft: "0px", 
-        textAlign: "center",
-        width: "100%",
-        color: "white", 
-      },
-     
-}
+const styles = {
+  coinContainer: {
+    position: "fixed", 
+    right: "1%", 
+    top: "50px",
+    display: "flex",
+    alignItems: "center",
+  },
+  coinIcon: {
+    width: "10vw", 
+    height: "10vw",
+    position: "relative",
+  },
+  coinText: {
+    position: "absolute",
+    fontSize: "2vw", 
+    fontWeight: "bold",
+    color: "#fff",
+    marginLeft: "0px",
+    textAlign: "center",
+    width: "100%",
+  },
+};
