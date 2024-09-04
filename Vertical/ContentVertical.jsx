@@ -109,14 +109,13 @@ export default function ContentVertical({
             className={styles.VerticalKeyingFlexBox}
             style={{
               borderTop: `${
-                index === totalRows - 1 || index===2 ? 2 : 0
+                index === totalRows - 1 || index === 2 ? 2 : 0
               }px solid black`,
-              borderBottom: `${index === totalRows - 1  ? 2 : 0}px solid black`,
+              borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
               width: `${totalCols * 35}px`,
               padding: `${index === totalRows - 1 ? 5 : 0}px 0`,
               paddingBottom: `${index === 2 ? 0 : "initial"}px`,
               paddingTop: `${index === 2 ? 5 : "initial"}px`,
-             
             }}
           >
             {items?.map((item, i) =>
@@ -140,6 +139,13 @@ export default function ContentVertical({
                       isStudentAnswerResponse
                         ? item[student_answer]
                         : contentData[index][i]?.dropVal
+                    }
+                    type={
+                      !["+", "-", "/", "*"].includes(item.value)
+                        ? typeof parseInt(item.value) === "number"
+                          ? "number"
+                          : "text"
+                        : "text"
                     }
                     onKeyUp={(e) => {
                       if (isStudentAnswerResponse) return;
