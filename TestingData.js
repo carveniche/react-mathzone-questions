@@ -146,33 +146,7 @@ export default function jsonDataTesting() {
     //     "orc_oprc_data": [],
     //     "ol_data": []
     // }
-    var qstn =
-    {
-        "status": true,
-        "question_no": 1,
-        "total": 10,
-        "question_data": [
-            {
-                "question_id": 97543,
-                "operation": "addition",
-                "question_text": "{\"operation\":\"addition\",\"type\":\"horizontalpreviewclick\",\"rows\":\"3\",\"cols\":\"6\",\"questionName\":\"Choose the correct division sentence for the given picture.\",\"questionContent\":[{\"row\":1,\"col\":1,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":1,\"col\":2,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":1,\"col\":3,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":1,\"col\":4,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":1,\"col\":5,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":1,\"col\":6,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":2,\"col\":1,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":2,\"col\":2,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":2,\"col\":3,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":2,\"col\":4,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":2,\"col\":5,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":2,\"col\":6,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":3,\"col\":1,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":3,\"col\":2,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":3,\"col\":3,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":3,\"col\":4,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":3,\"col\":5,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"},{\"row\":3,\"col\":6,\"value\":\"<img src=\\\"https://s3.ap-south-1.amazonaws.com/begalileo-assets/GeometricalShapes/Red-Triangle.png\\\">\"}],\"solution\":{\"model\":[{\"val\":\"18 ÷ 3 = 6\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"18 ÷ 9 = 2\",\"18 ÷ 3 = 6\",\"18 ÷ 1 = 15\",\"6 ÷ 18 = 3\"],\"choiceType\":\"selectchoice\",\"choiceCount\":4,\"answer\":\"18 ÷ 3 = 6\"}",
-                "question_type": "horizontalpreviewclick",
-                "upload_file_name": "",
-                "level": "level1",
-                "fib_text": null,
-                "fib_before_text": null,
-                "after_question_text": null,
-                "choice_data": [],
-                "orc_oprc_data": [],
-                "ol_data": []
-            }
-        ],
-        "lice_class_id": 4,
-        "tag_id": 1458,
-        "level": "level1",
-        "live_class_practice_id": null,
-        "message": "Quiz started successfully"
-    }
+    var  qstn=JSON.parse('{"status":true,"question_no":1,"total":10,"question_data":[{"question_id":82456,"operation":null,"question_text":"580 =  ?","question_type":"Multiple choice","upload_file_name":"","level":"level1","fib_text":null,"fib_before_text":null,"after_question_text":null,"choice_data":[{"choice_id":160101,"choices":"50 hundreds + 0 tens + 8 ones","correct":false,"choice_image":"","solution":"","solution_image":"","solution1":"","solution1_image":"","solution2":"","solution2_image":""},{"choice_id":160102,"choices":"5 hundreds + 8 tens + 0 ones","correct":true,"choice_image":"","solution":"","solution_image":"https://d1ttopz56pc27j.cloudfront.net/old_questions/II_MAT0201_Q10_Sol.png?Expires=1725870469&Signature=aPRgH5pj2tqGuhYTHeMw6dvhbo6RBtqx9TC8xU9a~XStBzs0OjACbsrBr58QeRqVBiUOWeHG4eSflnDdo-ef3SfjRDSJgdS1cwek79AS5XgvniUyDHohn0JXsyCxkpjEjfjL4Mns9UQd6YxqN-Gmiq40nlywo23As9L36Y0EVouFvGW2cwlzgseaLp8oeVn1lhtoOq7jfB0-r24XEfxYkCa4aa-faT15Cs0OPb05072TyupagvHymwGNjRHe152n8AuADnk6mPVWfvvKwwwtxsDIq2axdvgzNp1VH4HWT1s5pdnap5saHG2NThYRT~N3zPujLuc0J2692GiZFoZoEQ__&Key-Pair-Id=APKAICORD66RPKDMHT4Q","solution1":"In expanded form, 580 can be written as \\r\\n<br/>5 hundreds + 8 tens + 0 ones","solution1_image":"","solution2":"","solution2_image":""},{"choice_id":160103,"choices":"0 hundreds + 8 tens + 5 ones","correct":false,"choice_image":"","solution":"","solution_image":"","solution1":"","solution1_image":"","solution2":"","solution2_image":""},{"choice_id":160104,"choices":"None","correct":false,"choice_image":"","solution":"","solution_image":"","solution1":"","solution1_image":"","solution2":"","solution2_image":""}],"orc_oprc_data":[],"ol_data":[]}],"lice_class_id":4,"tag_id":2196,"level":"level3","live_class_practice_id":null,"message":"Quiz started successfully"}')
     return qstn;
 
     var data2 = {

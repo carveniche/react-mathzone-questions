@@ -1,6 +1,8 @@
 import React from "react";
 import MultipleChoice from "./MultipleChoice";
 export default function MainMultipleChoice({ obj, meter, choiceId }) {
+
+  console.log(obj,"inside main multiple choice")
   let studentAnswer = "";
   let question_data = obj?.question_data || [];
   question_data = question_data[0] || {};

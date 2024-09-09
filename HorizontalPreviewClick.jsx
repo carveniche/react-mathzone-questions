@@ -74,7 +74,7 @@ function HorizontalPreviewClick({ obj, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div
         id="studentAnswerResponse"
-        style={{ display: "flex", gap: 90, marginTop: 20,marginLeft:"20%" }}
+        style={{ display: "flex", gap: 90,marginLeft:"10%" }}
       >
         
 
@@ -130,32 +130,3 @@ function HorizontalPreviewClick({ obj, meter }) {
 
 export default HorizontalPreviewClick;
 
-const stylesProgress = {
-  progressBarContainer: {
-    position: "absolute",
-    right: "220px",
-    top: "30px",
-    height: "300px",
-    width: "20px",
-    backgroundColor: "#e9ecef",
-    borderRadius: "10px",
-    overflow: "hidden",
-    display: "flex",
-    flexDirection: "column-reverse",
-  },
-  progressBarSegment: {
-    transition: "background-color 0.3s ease",
-    width: "100%",
-  },
-  // iconsContainer: {
-  //   display: "flex",
-  //   // flexDirection: "column",
-  //   alignItems: "center",
-  //   // gap: "20px",
-  //   marginTop: "-400px",
-  //   marginLeft: "-30px",
-  // },
-  successPandaAnimation: {
-    animation: "moveUp 1s ease-out",
-  },
-};

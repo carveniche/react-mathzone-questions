@@ -24,11 +24,11 @@ function ProgressBar({progress,setProgress}) {
 export default ProgressBar;
 const styles = {
   progressBarContainer: {
-    position: "fixed", // Use fixed positioning for a consistent position
-    right: "2%", // Adjust this for your design
-    top: "20%", // Adjust this for your design
-    height: "60vh", // Use a viewport height for responsiveness
-    width: "2vw", // Use a viewport width for responsiveness
+    position: "fixed",
+    right: "2%",
+    top: "20%", 
+    height: "60vh", 
+    width: "2vw", 
     backgroundColor: "#e9ecef",
     borderRadius: "10px",
     overflow: "hidden",

@@ -10,6 +10,9 @@ const disabledOrcAnswered = () => {
   for (let inputs of inputBoxes) inputs.disabled = true;
 };
 export default function OrcAnswered({ obj, question_text }) {
+  
+  console.log(obj,"check obj in OrcAnswered")
+
   const optionSelect = {
     replace: (domNode) => {
       if (domNode?.attribs?.class) {

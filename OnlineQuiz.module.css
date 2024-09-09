@@ -3558,8 +3558,8 @@ border:1px solid black;
 
 .fairyimage {
   position: fixed;
-  bottom: 30%; /* Position relative to viewport height */
-  left: 50%; /* Use left for centering horizontally */
+  bottom: 10%; /* Position relative to viewport height */
+  left: 90%; /* Use left for centering horizontally */
   transform: translateX(-50%); /* Adjust for horizontal centering */
   height: 30vw; /* Responsive height based on viewport width */
   width: 30vw; /* Responsive width based on viewport width */
@@ -3580,17 +3580,17 @@ border:1px solid black;
 @media (max-width: 768px) {
   .fairyimage {
     bottom: 5%;
-    left: 50%;
+    left: 85%;
     transform: translateX(-50%); /* Center horizontally */
-    height: 35vw; /* Adjust height for tablets */
-    width: 35vw; /* Adjust width for tablets */
+    height: 45vw; /* Adjust height for tablets */
+    width: 45vw; /* Adjust width for tablets */
   }
 }
 
 @media (max-width: 480px) {
   .fairyimage {
     bottom: 5%;
-    left: 50%;
+    left: 90%;
     transform: translateX(-50%); /* Center horizontally */
     height: 35vw; /* Adjust height for mobile devices */
     width: 35vw; /* Adjust width for mobile devices */
