@@ -14,6 +14,7 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { findSelectedValue, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import PlaceValueTableSelectMushroom from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoiceMushroom";
 const changeAnswerStatus = (
   val,
   setIsAnswerCorrect,
@@ -134,6 +135,11 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
     }
   };
   const [redAlert, setRedAlert] = useState(false);
+  const isImageUrl = (url) => {
+    return url.match(/\.(jpeg|jpg|gif|png|svg)$/) != null;
+  };
+  console.log(state.choices,"check choices")
+  const choicesContainImage = state.choices.some((choice) => isImageUrl(choice.value));
 
   return (
     <div>
@@ -178,7 +184,7 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
               choices={state?.choices}
             />
           ) : state?.choiceType == "selectchoice" ? (
-            <PlaceValueTableSelectChoice
+            choicesContainImage?<PlaceValueTableSelectChoice
               content={state.questionContent}
               totalRows={Number(totalRows)}
               inputRef={inputRef}
@@ -189,6 +195,19 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
               choices={state?.choices}
               studentAnswer={state[student_answer]||""}
             />
+            :
+            <PlaceValueTableSelectMushroom
+            content={state.questionContent}
+            totalRows={Number(totalRows)}
+            inputRef={inputRef}
+            totalEmptyBox={totalEmptyBox}
+            hasAnswerSubmitted={hasAnswerSubmitted}
+            questionHead={state.questiontbHead}
+            totalCols={Number(state?.cols)}
+            choices={state?.choices}
+            studentAnswer={state[student_answer]||""}
+          />
+            
           ) : (
             <h1>Coming soon</h1>
           )}

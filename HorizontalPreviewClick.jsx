@@ -10,11 +10,7 @@ import OnlineQuizQuestionContent from "./OnlineQuizQuestionContent";
 import OnlineQuizSelectChoiceOption from "./OnlineQuizSelectChoiceOption";
 import SolveButton from "./SolveButton";
 import OnlineQuizSelectChoiceOptionMushroom from "./OnlineQuizSelectChoiceQuestionMushroom";
-import ProgressBar from "./ProgressBar";
-import CoinsContainer from "./CoinsContainer";
-import CoinImage from "./CoinImage";
-import CorrectAnswerImage from "./CorrectAnswerImage";
-import WrongImage from "./WrongImage";
+
 
 function HorizontalPreviewClick({ obj, meter }) {
   console.log(obj.choices, "check obj");
@@ -74,7 +70,7 @@ function HorizontalPreviewClick({ obj, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div
         id="studentAnswerResponse"
-        style={{ display: "flex", gap: 90,marginLeft:"10%" }}
+        style={{ display: "flex", gap: 90,marginLeft:"3%" }}
       >
         
 

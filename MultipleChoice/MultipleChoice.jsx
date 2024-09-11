@@ -9,6 +9,7 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SelectMultipleChoiceMushroom from "./SelectMultipleChoiceMushroom";
 export default function MultipleChoice({ state, meter, choiceId }) {
   meter = Number(meter) || 0;
   const inputRef = useRef();
@@ -45,7 +46,9 @@ export default function MultipleChoice({ state, meter, choiceId }) {
     }
     setRedAlert(true);
   };
-
+  const hasImage = state?.choice_data.some(
+    (choice) => choice.choice_image.trim() !== "" 
+  );
   return (
     <div id="multipleChoiceStudentAnswerResponse">
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
@@ -66,12 +69,23 @@ export default function MultipleChoice({ state, meter, choiceId }) {
           <ConditionOnProgressBar meter={meter} />
         </div>
         <div>
-          <SelectMultipleChoice
-            choices={state?.choice_data}
-            answerHasSelected={showAnswer}
-            inputRef={inputRef}
-            choiceId={choiceId}
-          />
+        
+           {hasImage ? (
+            <SelectMultipleChoice
+              choices={state?.choice_data}
+              answerHasSelected={showAnswer}
+              inputRef={inputRef}
+              choiceId={choiceId}
+            />
+          ) : (
+            <SelectMultipleChoiceMushroom
+              choices={state?.choice_data}
+              answerHasSelected={showAnswer}
+              inputRef={inputRef}
+              choiceId={choiceId}
+            />
+          )}
+
         </div>
       </div>
     </div>

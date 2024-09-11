@@ -10,6 +10,7 @@ import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/re
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SelectQuestionTextImageMushroom from "./SelectQuestionTextImageMushroom";
 export default function QuestionTextImage({ state, meter }) {
   meter = Number(meter) || 0;
   const [choosenAnswer, setChoosenAnswer] = useState(false);
@@ -30,6 +31,14 @@ export default function QuestionTextImage({ state, meter }) {
     setQuestionWithAnswer({ ...state, [student_answer]: answerRef.current });
     setHasAnswerSubmitted(true);
   };
+  console.log(state.choices,"check choices")
+  const isImageUrl = (url) => {
+    console.log(url)
+    return url.match(/\.(jpeg|jpg|gif|png|svg)$/) != null;
+  };
+  const choicesContainImage = state.choices.some((choice) =>
+    isImageUrl(choice.image)
+  );
 
   return (
     <div>
@@ -57,13 +66,23 @@ export default function QuestionTextImage({ state, meter }) {
             content={state?.questionContent}
             contentText={state.ContentQuestionTextImage}
           />
-          <SelectQuestionTextImage
-            choices={state?.choices}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            setChoosenAnswer={setChoosenAnswer}
-            studentAnswer={state[student_answer]}
-            answrerRef={answerRef}
-          />
+          {choicesContainImage ? (
+            <SelectQuestionTextImage
+              choices={state?.choices}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              setChoosenAnswer={setChoosenAnswer}
+              studentAnswer={state[student_answer]}
+              answrerRef={answerRef}
+            />
+          ) : (
+            <SelectQuestionTextImageMushroom
+              choices={state?.choices}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              setChoosenAnswer={setChoosenAnswer}
+              studentAnswer={state[student_answer]}
+              answrerRef={answerRef}
+            />
+          )}
         </div>
       </div>
     </div>

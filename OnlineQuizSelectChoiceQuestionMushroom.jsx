@@ -51,7 +51,7 @@ function OnlineQuizSelectChoiceOptionMushroom({
   return (
     <div
       className={`${styles.flex} ${styles.flexWrap} ${styles.boxChoices}`}
-      style={{ marginTop: "100px" }}
+      style={{ marginTop: "100px",marginBottom:"50px" }}
     >
       {choices.map((item, index) => (
         <div
@@ -63,10 +63,10 @@ function OnlineQuizSelectChoiceOptionMushroom({
           style={{
             position: "relative",
             cursor: "pointer",
-            outline: selectedOption === index ? "4px solid yellow" : "none",
-            borderRadius: "50%", 
-            padding: "0", 
-          }}
+              outline: selectedOption === index ? "4px solid yellow" : "none",
+              borderRadius: "50%", 
+              padding: "0", 
+            }}
         >
           <img
             src="https://d325uq16osfh2r.cloudfront.net/games/Mushroom.gif"

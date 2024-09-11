@@ -9,6 +9,7 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SelectMultipleSelectMushroom from "./SelectMultipleSelectMushroom";
 export default function MultipleSelect({ state, meter,choiceId }) {
   meter = Number(meter) || 0;
   const inputRef = useRef();
@@ -54,8 +55,12 @@ export default function MultipleSelect({ state, meter,choiceId }) {
     setChoicesId([...choicesIdContainer])
     setIsAnswerCorrect(true);
     setHasAnswerSubmitted(true);
-  };
+  };  
+  const validImageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
+  const hasImage = state?.choice_data.some(
+    (choice) => choice.choice_image.trim() !== "" 
+  );
   return (
     <div>
       {!isStudentAnswerResponse&&<SolveButton
@@ -76,12 +81,19 @@ export default function MultipleSelect({ state, meter,choiceId }) {
           <ConditionOnProgressBar meter={meter} />
         </div>
         <div>
-          <SelectMultipleSelect
+          {hasImage?<SelectMultipleSelect
+            choices={state?.choice_data}
+            answerHasSelected={hasAnswerSubmitted}
+            inputRef={inputRef}
+            choiceId={choiceId}
+          />:
+            <SelectMultipleSelectMushroom
             choices={state?.choice_data}
             answerHasSelected={hasAnswerSubmitted}
             inputRef={inputRef}
             choiceId={choiceId}
           />
+          }
         </div>
       </div>
     </div>

@@ -44,13 +44,12 @@ const styles = {
   coinContainer: {
     position: "fixed", 
     right: "1%", 
-    top: "50px",
+    top: "100px",
     display: "flex",
     alignItems: "center",
   },
   coinIcon: {
     width: "10vw", 
-    height: "10vw",
     position: "relative",
   },
   coinText: {

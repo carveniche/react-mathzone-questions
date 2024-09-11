@@ -101,6 +101,7 @@ import  PlaceValueTableEquation  from "./PlaceValueTableEquation";
 export default function MainValueTableSelect({obj,meter})
 {
     let str=JSON.stringify(obj)
+    console.log(str)
    // return  <PlaceValueTableSelect state={obj} totalRows={obj?.rows} meter={meter}/>
     return str.includes("mq-selectable")?<PlaceValueTableEquation  totalRows={obj?.rows} state={obj} meter={meter}/>: <PlaceValueTableSelect state={obj} totalRows={obj?.rows} meter={meter}/>
   

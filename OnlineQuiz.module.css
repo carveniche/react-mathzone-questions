@@ -3681,5 +3681,5 @@ border:1px solid black;
   pointer-events: none;
   border-radius: 50%;
   background-color: rgba(255, 0, 0, 0.8); /* Adjust background color */
-  padding: 3px;
+  padding: 1vw;
 }

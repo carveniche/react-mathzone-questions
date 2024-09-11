@@ -11,6 +11,7 @@ import ContentCountTensframeQuiz from "./ContentCountTensframeQuiz";
 import styles from "./OnlineQuiz.module.css";
 import OnlineQuizSelectChoiceOption from "./OnlineQuizSelectChoiceOption";
 import SolveButton from "./SolveButton";
+import OnlineQuizSelectChoiceOptionMushroom from "./OnlineQuizSelectChoiceQuestionMushroom";
 function CountTensFramesQuiz({
   state,
   totalRows,
@@ -48,6 +49,13 @@ function CountTensFramesQuiz({
     setQuestionWithAnswer({ ...state, [student_answer]: answerRef?.current });
     setShowAnswer(true);
   };
+  const isImageUrl = (url) => {
+    return url.match(/\.(jpeg|jpg|gif|png|svg)$/) != null;
+  };
+  const choicesContainImage = state.choices.some((choice) =>
+    isImageUrl(choice)
+  );
+
   return (
     <div>
       {!teacher && !isStudentAnswerResponse && (
@@ -87,17 +95,31 @@ function CountTensFramesQuiz({
             />
           )}
 
-          <OnlineQuizSelectChoiceOption
-            choices={state?.choices}
-            correctAnswer={state?.answerCount}
-            answerHasSelected={answerHasSelected}
-            setanswerHasSelected={setanswerHasSelected}
-            isAnswerSelected={showAnswer}
-            setIsAnswerCorrect={setIsAnswerCorrect}
-            teacher={teacher}
-            answerRef={answerRef}
-            studentAnswer={state[student_answer]}
-          />
+          {choicesContainImage ? (
+            <OnlineQuizSelectChoiceOption
+              choices={state?.choices}
+              correctAnswer={state?.answerCount}
+              answerHasSelected={answerHasSelected}
+              setanswerHasSelected={setanswerHasSelected}
+              isAnswerSelected={showAnswer}
+              setIsAnswerCorrect={setIsAnswerCorrect}
+              teacher={teacher}
+              answerRef={answerRef}
+              studentAnswer={state[student_answer]}
+            />
+          ) : (
+            <OnlineQuizSelectChoiceOptionMushroom
+              choices={state?.choices}
+              correctAnswer={state?.answerCount}
+              answerHasSelected={answerHasSelected}
+              setanswerHasSelected={setanswerHasSelected}
+              isAnswerSelected={showAnswer}
+              setIsAnswerCorrect={setIsAnswerCorrect}
+              teacher={teacher}
+              answerRef={answerRef}
+              studentAnswer={state[student_answer]}
+            />
+          )}
         </div>
       </div>
     </div>

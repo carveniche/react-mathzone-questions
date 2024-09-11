@@ -27,6 +27,7 @@ import {
   manupulateEquationTypeQuestion2Darr,
   manupulateQuestionContent1Darrayed,
 } from "../commonScript/commonScript";
+import PlaceValueTableSelectMushroom from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoiceMushroom";
 
 const changeAnswerStatus = (
   val,
@@ -291,6 +292,13 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
     console.log("this is  new data ", arr);
     setNewData({ ...arr });
   }, []);
+  const isImageUrl = (url) => {
+    return url.match(/\.(jpeg|jpg|gif|png|svg)$/) != null;
+  };
+  console.log(state.choices, "check choices");
+  const choicesContainImage = state.choices.some((choice) =>
+    isImageUrl(choice.value)
+  );
 
   return (
     <div>
@@ -339,7 +347,20 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
               choices={state?.choices}
             />
           ) : state?.choiceType == "selectchoice" ? (
-            <PlaceValueTableSelectChoice
+            choicesContainImage ? (
+              <PlaceValueTableSelectChoice
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+                questionHead={state.questiontbHead}
+                totalCols={Number(state?.cols)}
+                choices={state?.choices}
+                studentAnswer={state[student_answer] || ""}
+              />
+            ) : (
+              <PlaceValueTableSelectMushroom
               content={state.questionContent}
               totalRows={Number(totalRows)}
               inputRef={inputRef}
@@ -349,7 +370,8 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
               totalCols={Number(state?.cols)}
               choices={state?.choices}
               studentAnswer={state[student_answer] || ""}
-            />
+              />
+            )
           ) : (
             <h1>Coming soon</h1>
           )}

@@ -26,7 +26,7 @@ const styles = {
   progressBarContainer: {
     position: "fixed",
     right: "2%",
-    top: "20%", 
+    top: "25%", 
     height: "60vh", 
     width: "2vw", 
     backgroundColor: "#e9ecef",
