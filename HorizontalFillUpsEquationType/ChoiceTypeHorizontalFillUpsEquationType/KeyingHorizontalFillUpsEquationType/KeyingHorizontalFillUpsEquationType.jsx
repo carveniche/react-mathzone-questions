@@ -88,6 +88,27 @@ export default function KeyingHorizontalFillUpsEquationType({
     }
   };
 
+  const handleKeyDown = (event) => {
+    const allowedKeys = [
+      "/",
+      "-",
+      "+",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
+      " ",
+      "Tab",
+    ];
+    if (!/^[0-9\.]$/.test(event.key) && !allowedKeys.includes(event.key))
+      event.preventDefault();
+  };
   equationKeyingRef.current = { ...equetionState };
   inputRef.current = { ...inputState };
   return (
@@ -153,6 +174,31 @@ export default function KeyingHorizontalFillUpsEquationType({
                           onChange={(e) =>
                             handleChange(e.latex(), item.row, item.col, false)
                           }
+                          onKeyDown={(event) => {
+                            console.log(event.key);
+                            const allowedKeys = [
+                              "/",
+                              "-",
+                              "+",
+                              "1",
+                              "2",
+                              "3",
+                              "4",
+                              "5",
+                              "6",
+                              "7",
+                              "8",
+                              "9",
+                              "0",
+                              " ",
+                              "Tab",
+                            ];
+                            if (
+                              !/^[0-9\.]$/.test(event.key) &&
+                              !allowedKeys.includes(event.key)
+                            )
+                              event.preventDefault();
+                          }}
                           ref={(el) => (ref1.current[`${index}${i}`] = el)}
                         />
                       ) : (

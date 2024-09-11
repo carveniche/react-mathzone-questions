@@ -190,6 +190,33 @@ export default function ChoiceKeyMatchObjVertEqn({
                                 boxShadow: 0,
                               },
                             }}
+                            onKeyDown={(event) => {
+                              console.log(event.key);
+
+                              const allowedKeys = [
+                                "/",
+                                "+",
+                                "-",
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "0",
+                                " ",
+                                "Tab",
+                              ];
+                              if (
+                                !/^[0-9\.]$/.test(event.key) &&
+                                !allowedKeys.includes(event.key)
+                              )
+                                event.preventDefault();
+                            }}
+                            ref={(el) => (ref1.current[`${index}${i}`] = el)}
                             onFocus={() =>
                               handleFocus(index, i, false, item.row, item.col)
                             }
