@@ -9,6 +9,11 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { logicalTableKgQuestionContent } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 // let data = {
 //   operation: "addition",
 //   type: "logical_table_kg",
@@ -64,7 +69,7 @@ import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D"
 //     scols: null,
 //   },
 // };
-function LogicalTableKg({data, meter }) {
+function LogicalTableKg({ data, meter }) {
   meter = Number(meter) || 0;
   const [objdata, setObjdata] = useState({});
   const {
@@ -73,10 +78,11 @@ function LogicalTableKg({data, meter }) {
     setIsAnswerCorrect,
     setChoicesId,
     setStudentAnswerQuestion,
-    isStudentAnswerResponse,setQuestionWithAnswer
+    isStudentAnswerResponse,
+    setQuestionWithAnswer,
   } = useContext(ValidationContext);
   const handleClick = (row, col) => {
-    if (hasAnswerSubmitted||isStudentAnswerResponse) return;
+    if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     for (let i = 0; i < Object.keys(objdata).length; i++) {
       if (Object.keys(objdata)[i][1] === `${col}`) {
         delete objdata[Object.keys(objdata)[i]];
@@ -85,9 +91,9 @@ function LogicalTableKg({data, meter }) {
     setObjdata({ ...objdata, [`${row}${col}`]: true });
   };
   const handleSubmit = () => {
-    if (hasAnswerSubmitted||isStudentAnswerResponse) return;
+    if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     if (Object.keys(objdata).length !== data.questionContent.length - 1) {
-      setRedAlert(true)
+      setRedAlert(true);
       return;
     }
     let arr = [];
@@ -108,61 +114,75 @@ function LogicalTableKg({data, meter }) {
     } else {
       setIsAnswerCorrect(false);
     }
-    let result=logicalTableKgQuestionContent(data?.questionContent,objdata)
-    setQuestionWithAnswer({...data,questionContent:result})
+    let result = logicalTableKgQuestionContent(data?.questionContent, objdata);
+    setQuestionWithAnswer({ ...data, questionContent: result });
     let jsonData = serializeResponse("studentAnswerResponse");
     setStudentAnswerQuestion(jsonData);
     setHasAnswerSubmitted(true);
   };
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
+
+  var questionTextFormatted = removeUnwantedTags(data.questionName);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div className={styles.student_answer_mathzone}>
-      {!isStudentAnswerResponse&&<SolveButton
-        onClick={handleSubmit}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
-        {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmit}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles2.questionName}>{parse(data.questionName)}</div>
-        {data?.upload_file_name&&<div><img src={data?.upload_file_name} alt="image not found"/></div>}
+        <div className={styles2.questionName}>
+          {/* {parse(data.questionName)} */}
+          {parse(questionTextFormatted)}
+        </div>
+        {data?.upload_file_name && (
+          <div>
+            <img src={data?.upload_file_name} alt="image not found" />
+          </div>
+        )}
         <div>
           <ConditionOnProgressBar meter={meter} />
         </div>
         <table>
-         
           {data.questionContent.map((e, i) => (
-          <tr>
-              
+            <tr>
               {e.map((item, index) => {
                 return (
                   <td>
                     <div>
-                    {(item.isMissed===""||item.isMissed===undefined)? (
-                      <div className={styles.inner} style={{flexDirection:'column',color:'indigo'}}>
-                       
-                        <div>{parse(item?.image)} </div>
-                        <div>{parse(item?.text)}</div>
-                      </div>
-                    ) : (
-                      <div className={styles.inner}>
+                      {item.isMissed === "" || item.isMissed === undefined ? (
                         <div
-                          className={styles.circle}
-                          onClick={() => {
-                            handleClick(i, index);
-                          }}
+                          className={styles.inner}
+                          style={{ flexDirection: "column", color: "indigo" }}
                         >
-                          {(Object.keys(objdata).includes(`${i}${index}`)||(isStudentAnswerResponse&&item[student_answer])) ? (
-                            <div className={styles.green}></div>
-                          ) : null}
+                          <div>{parse(item?.image)} </div>
+                          <div>{parse(item?.text)}</div>
                         </div>
-                      </div>
-                    )}
-                  </div>
+                      ) : (
+                        <div className={styles.inner}>
+                          <div
+                            className={styles.circle}
+                            onClick={() => {
+                              handleClick(i, index);
+                            }}
+                          >
+                            {Object.keys(objdata).includes(`${i}${index}`) ||
+                            (isStudentAnswerResponse &&
+                              item[student_answer]) ? (
+                              <div className={styles.green}></div>
+                            ) : null}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </td>
                 );
               })}
-          
-          </tr>
+            </tr>
           ))}
         </table>
       </div>

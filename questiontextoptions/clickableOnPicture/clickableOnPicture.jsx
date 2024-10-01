@@ -9,6 +9,10 @@ import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import CustomAlertBoxMathZone from "../../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../../CommonJSFiles/gettingResponse";
 // let data = {
 //   operation: "addition",
 //   type: "questiontextoptions",
@@ -43,26 +47,26 @@ import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto
 export const ClickableOnPic = ({ data, meter }) => {
   meter = Number(meter) || 0;
   const [questionContent, setQuestionContent] = useState([]);
-  const [selectedAnswer,setSelectedAnswer]=useState("")
- 
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+
   useEffect(() => {
     let totalRows = Number(data?.row) || 0;
     let arr = [];
-    let studentAnswer=""
+    let studentAnswer = "";
     for (let i = 0; i < totalRows; i++) {
       data?.questionContent[i]?.map((item, j) => {
-        if(item?.selected==="true"){
-studentAnswer=item[student_answer]
+        if (item?.selected === "true") {
+          studentAnswer = item[student_answer];
         }
         item?.row == i + 1 &&
           item.col == j + 1 &&
           arr.push({ ...item, show: false });
       });
     }
-    
+
     setQuestionContent([...arr]);
   }, []);
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   const [prevStatus, setPrevStatus] = useState(-1);
   const {
     hasAnswerSubmitted,
@@ -71,37 +75,47 @@ studentAnswer=item[student_answer]
     setChoicesId,
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
-    setQuestionWithAnswer
+    setQuestionWithAnswer,
   } = useContext(ValidationContext);
   const handleClick = (index) => {
-    if (hasAnswerSubmitted||isStudentAnswerResponse) return;
+    if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     setPrevStatus(index);
-   
-    setSelectedAnswer(questionContent[index]?.count)
+
+    setSelectedAnswer(questionContent[index]?.count);
   };
 
   const checkAnswer = () => {
-    if (hasAnswerSubmitted||isStudentAnswerResponse) return;
+    if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     if (prevStatus == -1) {
-      setRedAlert(true)
+      setRedAlert(true);
       return;
     }
     if (questionContent[prevStatus].selected == "true")
       setIsAnswerCorrect(true);
     else setIsAnswerCorrect(false);
-    setQuestionWithAnswer({...data,[student_answer]:selectedAnswer})
+    setQuestionWithAnswer({ ...data, [student_answer]: selectedAnswer });
     setHasAnswerSubmitted(true);
   };
 
+  var questionTextFormatted = removeUnwantedTags(data?.questionName);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div>
-     {!isStudentAnswerResponse&& <SolveButton onClick={checkAnswer} />}
-      {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
+      {!isStudentAnswerResponse && <SolveButton onClick={checkAnswer} />}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles2.questionName}>{parse(data?.questionName)}</div>
-        {data?.upload_file_name&&<div><img src={data?.upload_file_name} alt="image not found"/></div>}
+        <div className={styles2.questionName}>
+          {/* {parse(data?.questionName)} */}
+          {parse(questionTextFormatted)}
+        </div>
+        {data?.upload_file_name && (
+          <div>
+            <img src={data?.upload_file_name} alt="image not found" />
+          </div>
+        )}
         <div>
-         <ConditionOnProgressBar meter={meter} />
+          <ConditionOnProgressBar meter={meter} />
         </div>
         <div>
           <div
@@ -116,7 +130,13 @@ studentAnswer=item[student_answer]
                 <div
                   className={styles.frame}
                   style={{
-                    background:(isStudentAnswerResponse&&String(e?.count)===String(data[student_answer])?.trim())?"blue": prevStatus == i ? "blue" : "white",
+                    background:
+                      isStudentAnswerResponse &&
+                      String(e?.count) === String(data[student_answer])?.trim()
+                        ? "blue"
+                        : prevStatus == i
+                        ? "blue"
+                        : "white",
                     cursor: "pointer",
                   }}
                   onClick={() => {

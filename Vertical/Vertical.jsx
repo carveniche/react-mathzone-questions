@@ -19,7 +19,10 @@ import {
 } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 const validationForSelectChoice = (choices, questionContent) => {
   let val = null;
   let n = choices?.length;
@@ -138,6 +141,10 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
     }
   };
 
+  var questionTextFormatted = removeUnwantedTags(state?.questionName);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
+
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -149,7 +156,8 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
-          {HtmlParser(state?.questionName)}
+          {/* {HtmlParser(state?.questionName)} */}
+          {HtmlParser(questionTextFormatted)}
         </div>
         {state?.upload_file_name && (
           <div>

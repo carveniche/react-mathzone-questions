@@ -9,6 +9,10 @@ import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/common
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import parse from "html-react-parser";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 const validationForSelectMultipleSelect = (choices) => {
   let n = choices?.length || 0;
   for (let i = 0; i < n; i++) {
@@ -51,6 +55,9 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
     setShowAnswer(true);
   };
 
+  var questionTextFormatted = removeUnwantedTags(state?.questionName);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <>
       {
@@ -78,7 +85,8 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
           className="mathzone-color-indigo word-space_pre-wrap"
         >
           <div className={styles.questionName}>
-            {parse(state?.questionName)}
+            {/* {parse(state?.questionName)} */}
+            {parse(questionTextFormatted)}
           </div>
           {state?.upload_file_name && (
             <div>

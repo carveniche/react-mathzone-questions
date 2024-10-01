@@ -6,7 +6,11 @@ import SolveButton from "../SolveButton";
 import SelectMultipleChoice from "./SelectMultipleChoice";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { ProgressBorder } from "../../Modal2/modal2";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+  serializeResponse,
+} from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 export default function MultipleChoice({ state, meter, choiceId }) {
@@ -45,7 +49,9 @@ export default function MultipleChoice({ state, meter, choiceId }) {
     }
     setRedAlert(true);
   };
-
+  var questionTextFormatted = removeUnwantedTags(state?.question_text);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div id="multipleChoiceStudentAnswerResponse">
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
@@ -55,7 +61,8 @@ export default function MultipleChoice({ state, meter, choiceId }) {
           className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
           style={{ whiteSpace: "initial" }}
         >
-          {parse(state?.question_text)}
+          {/* {parse(state?.question_text)} */}
+          {parse(questionTextFormatted)}
         </div>
         {String(state?.upload_file_name).trim() && (
           <div>

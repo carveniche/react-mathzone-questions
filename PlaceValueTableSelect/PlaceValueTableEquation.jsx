@@ -16,7 +16,11 @@ import {
   manupulateQuestionContent1Darray,
   manupulateQuestionContentHorizontal,
 } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+  serializeResponse,
+} from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
 import ContentPlaceValueTableSelectEquation from "./ContentPlaceValueTableSelectEquation";
 
@@ -292,6 +296,9 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
     setNewData({ ...arr });
   }, []);
 
+  var questionTextFormatted = removeUnwantedTags(state?.questionName);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -303,7 +310,8 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
-          {parse(state?.questionName, optionSelectStaticMathField)}
+          {/* {parse(state?.questionName, optionSelectStaticMathField)} */}
+          {parse(questionTextFormatted, optionSelectStaticMathField)}
         </div>
         {state?.upload_file_name && (
           <div>

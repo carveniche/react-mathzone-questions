@@ -10,7 +10,10 @@ import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/common
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
-
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 const validationForSelectChoice = (choices, answer) => {
   let n = choices?.length || 0;
   let val = null;
@@ -34,7 +37,7 @@ const answerUpdationStatus = (
   setRedAlert
 ) => {
   if (val === 0) {
-    setRedAlert(true)
+    setRedAlert(true);
     return;
   } else if (val === 1) setAnswerCorrectStatus(false);
   else if (val === 2) setAnswerCorrectStatus(true);
@@ -44,14 +47,16 @@ const answerUpdationStatus = (
 };
 export default function CountOnTensframe({ obj, meter }) {
   meter = Number(meter) || 0;
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   const inputRef = useRef();
   const {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setChoicesId,
-    setStudentAnswerQuestion,setQuestionWithAnswer,isStudentAnswerResponse,
+    setStudentAnswerQuestion,
+    setQuestionWithAnswer,
+    isStudentAnswerResponse,
   } = useContext(ValidationContext);
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
@@ -65,38 +70,50 @@ export default function CountOnTensframe({ obj, meter }) {
         setStudentAnswerQuestion,
         setRedAlert
       );
-    if(val!==0){
-      let values=findSelectedValue(inputRef?.current,"value")
-      setQuestionWithAnswer({...obj,[student_answer]:values})
-    }
+      if (val !== 0) {
+        let values = findSelectedValue(inputRef?.current, "value");
+        setQuestionWithAnswer({ ...obj, [student_answer]: values });
+      }
     } else {
       console.log("unsupported file...");
       return;
     }
   };
+  var questionTextFormatted = removeUnwantedTags(obj?.questionName);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div>
-     {!isStudentAnswerResponse&& <SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
-       {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles.questionName}><HtmlParserComponent value={obj?.questionName}/></div>
+        <div className={styles.questionName}>
+          <HtmlParserComponent value={questionTextFormatted} />
+          {/* <HtmlParserComponent value={obj?.questionName} /> */}
+        </div>
         {obj?.upload_file_name && (
           <div>
             <img src={obj?.upload_file_name} alt="image not found" />
           </div>
         )}
         <div>
-          <ConditionOnProgressBar meter={meter}/>
+          <ConditionOnProgressBar meter={meter} />
         </div>
         <div>
           <ContentCountOnTensframe
             content={obj?.questionContent}
             totalRows={obj?.answerCount}
           />
-          <SelectCountOnTensframe choices={obj?.choices} inputRef={inputRef} studentAnswer={obj[student_answer]}/>
+          <SelectCountOnTensframe
+            choices={obj?.choices}
+            inputRef={inputRef}
+            studentAnswer={obj[student_answer]}
+          />
         </div>
       </div>
     </div>

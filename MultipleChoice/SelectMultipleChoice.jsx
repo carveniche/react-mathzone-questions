@@ -3,6 +3,10 @@ import { useState, useRef } from "react";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 export default function SelectMultipleChoice({
   choices,
   inputRef,
@@ -16,6 +20,10 @@ export default function SelectMultipleChoice({
   useEffect(() => {
     let arr = [];
     choices?.map((item) => {
+      if (item.solution) {
+        item.solution = removeUnwantedTags(item.solution);
+        item.solution = addLazyLoading(item.solution);
+      }
       let obj = { ...item, show: false };
       arr.push({ ...obj });
     });

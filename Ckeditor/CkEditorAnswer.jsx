@@ -4,6 +4,10 @@ import { StaticMathField } from "../../ExternalPackages";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import SolutionMultipleChoice from "../MultipleChoice/SolutionMultipleChoice";
 import styles from "../OnlineQuiz.module.css";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 const disabledEditor = (parent) => {
   let inputTag = parent.current.querySelectorAll("input");
   for (let items of inputTag) {
@@ -53,6 +57,9 @@ export default function CkEditorAnswer({
 
   console.log({ longdiv });
 
+  var questionTextFormatted = removeUnwantedTags(str);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div>
       <div
@@ -75,8 +82,7 @@ export default function CkEditorAnswer({
               : "ckEditorResetValue"
           }`}
         >
-          {" "}
-          {<form>{HTMLReactParser(str, optionSelect)}</form>}
+          {<form>{HTMLReactParser(questionTextFormatted, optionSelect)}</form>}
         </div>
         {choiceData?.length > 0 && (
           <SolutionMultipleChoice

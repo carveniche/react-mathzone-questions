@@ -10,6 +10,11 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
   let n = arr?.length || 0;
@@ -194,6 +199,9 @@ export default function RandomArrangmentDragDrop({
     setStudentAnswerQuestion(jsonData);
   };
 
+  var questionTextFormatted = removeUnwantedTags(state?.questionName);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -204,7 +212,10 @@ export default function RandomArrangmentDragDrop({
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles.questionName}>{parse(state?.questionName)}</div>
+        <div className={styles.questionName}>
+          {/* {parse(state?.questionName)} */}
+          {parse(questionTextFormatted)}
+        </div>
         {state?.upload_file_name && (
           <div>
             <img src={state?.upload_file_name} alt="image not found" />

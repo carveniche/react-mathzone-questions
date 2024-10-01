@@ -5,6 +5,10 @@ import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
 import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../../../OnlineQuiz.module.css";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../../../CommonJSFiles/gettingResponse";
 export default function HorizontalKeyingChoiceType({
   inputRef,
   content,
@@ -37,12 +41,22 @@ export default function HorizontalKeyingChoiceType({
 
   return row?.map((items, index) => (
     <div key={index} className={styles.MatchObjectHorizontalTypeKeyingFlexBox}>
-      {items?.map((item, i) =>
-        item.isMissed === "false" ? (
-          <div className={styles.MatchObjectHorizontalTypeKeyingFlexBox3}  style={{
-              width:`calc((100% - ${(items.length-1)*2}rem) / ${items.length})`
-             }}>
-            <div>{HtmlParser(item?.imgvalue)}</div>
+      {items?.map((item, i) => {
+        console.log("ITEM", item.imgvalue);
+
+        var imageFormatted = removeUnwantedTags(item?.imgvalue);
+        imageFormatted = addLazyLoading(imageFormatted);
+        console.log("imageFormatted", imageFormatted);
+        return item.isMissed === "false" ? (
+          <div
+            className={styles.MatchObjectHorizontalTypeKeyingFlexBox3}
+            style={{
+              width: `calc((100% - ${(items.length - 1) * 2}rem) / ${
+                items.length
+              })`,
+            }}
+          >
+            <div>{HtmlParser(imageFormatted)}</div>
             <div>
               <b>
                 <HtmlParserComponent value={item?.numvalue} />
@@ -50,10 +64,15 @@ export default function HorizontalKeyingChoiceType({
             </div>
           </div>
         ) : (
-          <div className={styles.MatchObjectHorizontalTypeKeyingFlexBox3}  style={{
-              width:`calc((100% - ${(items.length-1)*2}rem) / ${items.length})`
-             }}>
-            <div>{HtmlParser(item.imgvalue)}</div>
+          <div
+            className={styles.MatchObjectHorizontalTypeKeyingFlexBox3}
+            style={{
+              width: `calc((100% - ${(items.length - 1) * 2}rem) / ${
+                items.length
+              })`,
+            }}
+          >
+            <div>{HtmlParser(imageFormatted)}</div>
             <div>
               <div>
                 {
@@ -73,8 +92,8 @@ export default function HorizontalKeyingChoiceType({
               </div>
             </div>
           </div>
-        )
-      )}
+        );
+      })}
     </div>
   ));
 }

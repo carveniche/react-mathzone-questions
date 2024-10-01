@@ -9,6 +9,10 @@ import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 // let data = {
 //   operation: "addition",
 //   type: "hundreds_chart",
@@ -31,22 +35,22 @@ function HundredChart({ data, meter }) {
     setIsAnswerCorrect,
     setChoicesId,
     setStudentAnswerQuestion,
-    setQuestionWithAnswer,isStudentAnswerResponse
+    setQuestionWithAnswer,
+    isStudentAnswerResponse,
   } = useContext(ValidationContext);
-  const [selectedAnswer,setSelectedAnswer]=useState("")
+  const [selectedAnswer, setSelectedAnswer] = useState("");
   const handleClick = (id, i) => {
-    if (hasAnswerSubmitted||isStudentAnswerResponse) return;
+    if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     if (Number(id) === Number(data.answer)) {
       setIsAnswerCorrect(true);
-      
     } else {
       setIsAnswerCorrect(false);
     }
-    setSelectedAnswer(Number(id))
+    setSelectedAnswer(Number(id));
     setPrevState(i);
   };
   let arr = [];
-  
+
   for (let i = 0; i < 10; i++) {
     let temp = Array(10)
       .fill(0)
@@ -56,36 +60,55 @@ function HundredChart({ data, meter }) {
       <div className={styles.flex} key={i}>
         {temp.map((e, j) => {
           if (e === Number(data.answer)) {
-            return <div key={j} className={styles.brown1}>{"??"}</div>;
+            return (
+              <div key={j} className={styles.brown1}>
+                {"??"}
+              </div>
+            );
           } else {
-            return <div key={j} className={styles.brown}>{e}</div>;
+            return (
+              <div key={j} className={styles.brown}>
+                {e}
+              </div>
+            );
           }
         })}
       </div>
     );
   }
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   const handleSubmitAnswer = () => {
-    if (hasAnswerSubmitted||isStudentAnswerResponse) return;
+    if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     if (prevState == -1) {
-      setRedAlert(true)
+      setRedAlert(true);
       return;
     }
-    setQuestionWithAnswer({...data,[student_answer]:selectedAnswer})
+    setQuestionWithAnswer({ ...data, [student_answer]: selectedAnswer });
     setHasAnswerSubmitted(true);
   };
+
+  var questionTextFormatted = removeUnwantedTags(data?.questionName);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div>
-      {!isStudentAnswerResponse&&<SolveButton
-        onClick={handleSubmitAnswer}
-        hasAnswerSubmitted={hasAnswerSubmitted}
-      />}
-       {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          hasAnswerSubmitted={hasAnswerSubmitted}
+        />
+      )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div className={styles.outer} id="studentAnswerResponse">
         <div className={styles2.questionName}>
-          {HtmlParser(data?.questionName)}
+          {/* {HtmlParser(data?.questionName)} */}
+          {HtmlParser(questionTextFormatted)}
         </div>
-        {data?.upload_file_name&&<div><img src={data?.upload_file_name} alt="image not found"/></div>}
+        {data?.upload_file_name && (
+          <div>
+            <img src={data?.upload_file_name} alt="image not found" />
+          </div>
+        )}
         <div>
           <ConditionOnProgressBar meter={meter} />
         </div>
@@ -95,7 +118,14 @@ function HundredChart({ data, meter }) {
           <div className={styles.HundredChartFlexBox}>
             {data.choices.map((k, i) => (
               <div
-                className={(isStudentAnswerResponse&&Number(k)===Number(data[student_answer]))?styles.answer1:prevState == i ? styles.answer1 : styles.answer}
+                className={
+                  isStudentAnswerResponse &&
+                  Number(k) === Number(data[student_answer])
+                    ? styles.answer1
+                    : prevState == i
+                    ? styles.answer1
+                    : styles.answer
+                }
                 onClick={() => {
                   handleClick(k, i);
                 }}

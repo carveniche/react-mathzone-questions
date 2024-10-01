@@ -15,6 +15,10 @@ import oneDto2D, {
   student_answer,
 } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
+import {
   findSelectedValue,
   manupulateDataSelectChoice,
   manupulateJsonData,
@@ -181,6 +185,9 @@ export default function PlaceValueChart({
     }
   };
   const [redAlert, setRedAlert] = useState(false);
+  var questionTextFormatted = removeUnwantedTags(state.questionName);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -192,7 +199,8 @@ export default function PlaceValueChart({
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
-          {HtmlParser(state.questionName)}
+          {/* {HtmlParser(state.questionName)} */}
+          {HtmlParser(questionTextFormatted)}
         </div>
         {state?.upload_file_name && (
           <div>

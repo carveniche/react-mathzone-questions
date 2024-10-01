@@ -7,7 +7,11 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { CkeditorVirtualKeyboard } from "./CkEditorVirtualKeyboard/CkeditorVirtualKeyboard";
 import SelectMultipleChoice from "../MultipleChoice/SelectMultipleChoice";
-import { serializeResponse2 } from "../../CommonJSFiles/gettingResponse";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+  serializeResponse2,
+} from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import compareLatexData from "../../CommonJSFiles/compareLatexData";
@@ -440,6 +444,10 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
 
   var noBorder = str.replaceAll(" ", "").includes(`border="0"`);
 
+  var questionTextFormatted = removeUnwantedTags(str);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", questionTextFormatted);
+
   return (
     <div
       className={`${`${GenStyles.MainApp} ${GenStyles.ckeditor} multipleChoiceStudentAnswerResponse`} ${
@@ -475,7 +483,9 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
             ref={heightDiv}
             style={{ width: "auto" }}
           >
-            {state ? HTMLReactParser(str) : HTMLReactParser(str, optionSelect)}
+            {state
+              ? HTMLReactParser(questionTextFormatted)
+              : HTMLReactParser(questionTextFormatted, optionSelect)}
           </div>
           {!hasAnswerSubmitted && currentVirtualKeyBoard > -1 && (
             <CkeditorVirtualKeyboard

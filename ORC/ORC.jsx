@@ -14,7 +14,10 @@ import HtmlParser from "react-html-parser";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
-
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 const collectTextInputField = () => {
   let parent = document.getElementById("orcTextParent");
   if (!parent) {
@@ -110,9 +113,9 @@ function ORC({ obj, question_text, meter }) {
     disabledCkeditor();
   }, []);
   useEffect(() => {
-    document.querySelectorAll(".AfterQstAns").forEach(inp=>{
-      if(hasAnswerSubmitted) inp.setAttribute("readonly",true)
-    })    
+    document.querySelectorAll(".AfterQstAns").forEach((inp) => {
+      if (hasAnswerSubmitted) inp.setAttribute("readonly", true);
+    });
   }, [hasAnswerSubmitted]);
   useEffect(() => {
     let temp = [];
@@ -254,16 +257,16 @@ function ORC({ obj, question_text, meter }) {
 
   function afterQstnTextHtmlParser(htmlString) {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlString, 'text/html');
+    const doc = parser.parseFromString(htmlString, "text/html");
     return doc.body;
-  } 
+  }
   var afterQstTextInp = [];
-  var afterQstTxt = afterQstnTextHtmlParser(obj?.after_question_text || "") ;
-  const inputs = afterQstTxt.querySelectorAll('input');
-  inputs.forEach(input => {
-    afterQstTextInp.push(input.value)
-    input.classList.toggle("AfterQstAns")
-    input.setAttribute("value","")
+  var afterQstTxt = afterQstnTextHtmlParser(obj?.after_question_text || "");
+  const inputs = afterQstTxt.querySelectorAll("input");
+  inputs.forEach((input) => {
+    afterQstTextInp.push(input.value);
+    input.classList.toggle("AfterQstAns");
+    input.setAttribute("value", "");
   });
 
   const handleSubmit = () => {
@@ -276,23 +279,27 @@ function ORC({ obj, question_text, meter }) {
       }
     }
     var afterQstnTxtAns = document.querySelectorAll(".AfterQstAns");
-    if(afterQstnTxtAns.length>0){
-        var afterQstnTxtAnsValues = [];
-        afterQstnTxtAns.forEach(ans=>{
-          if(ans.value) afterQstnTxtAnsValues.push(ans.value)
-        })
+    if (afterQstnTxtAns.length > 0) {
+      var afterQstnTxtAnsValues = [];
+      afterQstnTxtAns.forEach((ans) => {
+        if (ans.value) afterQstnTxtAnsValues.push(ans.value);
+      });
 
-        if( afterQstnTxtAnsValues.length==0 || afterQstTextInp.length==0 ||  afterQstnTxtAnsValues.length !== afterQstTextInp.length) {
-          setRedAlert(true) 
-          return
-        }else setRedAlert(false)
+      if (
+        afterQstnTxtAnsValues.length == 0 ||
+        afterQstTextInp.length == 0 ||
+        afterQstnTxtAnsValues.length !== afterQstTextInp.length
+      ) {
+        setRedAlert(true);
+        return;
+      } else setRedAlert(false);
 
-        for(let ans of afterQstnTxtAnsValues){
-          if(!afterQstTextInp.includes(ans)){
-            setIsAnsweredCorrect(false);
-          }
+      for (let ans of afterQstnTxtAnsValues) {
+        if (!afterQstTextInp.includes(ans)) {
+          setIsAnsweredCorrect(false);
         }
-    } 
+      }
+    }
     for (let i = 0; i < dropState.length; i++) {
       if (dropState[i].length < 1) {
         setRedAlert(true);
@@ -359,6 +366,10 @@ function ORC({ obj, question_text, meter }) {
     value[i] = text;
     setValue({ ...value });
   };
+
+  var questionTextFormatted = removeUnwantedTags(question_text);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", { questionTextFormatted });
   return (
     <div>
       {
@@ -370,7 +381,8 @@ function ORC({ obj, question_text, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className="mathzoneQuestionName" id="orc_question_type">
-          {parse(question_text, optionSelect)}
+          {/* {parse(question_text, optionSelect)} */}
+          {parse(questionTextFormatted, optionSelect)}
         </div>
         {obj?.upload_file_name && (
           <div>
@@ -481,9 +493,9 @@ function ORC({ obj, question_text, meter }) {
                 ? HtmlParser(obj?.after_question_text)
                 : obj?.after_question_text}
             </div> */}
-             <div id="mathzoneFibAfterText">
+            <div id="mathzoneFibAfterText">
               {typeof obj?.after_question_text == "string"
-                ?  parse(afterQstTxt.innerHTML)
+                ? parse(afterQstTxt.innerHTML)
                 : obj?.after_question_text}
             </div>
             {/* <div id="mathzoneFibAfterText">

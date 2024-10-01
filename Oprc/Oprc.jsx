@@ -12,6 +12,10 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 
 function Oprc({ obj, meter }) {
   let currentIndex = 0;
@@ -147,6 +151,9 @@ function Oprc({ obj, meter }) {
     return;
   };
 
+  var questionTextFormatted = removeUnwantedTags(obj?.question_text);
+  questionTextFormatted = addLazyLoading(questionTextFormatted);
+  console.log("questionTextFormatted", questionTextFormatted);
   meter = Number(meter) || 0;
   const [redAlert, setRedAlert] = useState(false);
   return (
@@ -155,7 +162,7 @@ function Oprc({ obj, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className="mathzoneQuestionName">
-          {parse(obj?.question_text, optionSelect)}
+          {parse(questionTextFormatted, optionSelect)}
         </div>
         {obj?.upload_file_name && (
           <div>
@@ -181,17 +188,22 @@ function Oprc({ obj, meter }) {
             }}
           >
             {obj.orc_oprc_data[0]?.row_headers?.length > 0 && <div></div>}
-            {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => (
-              <div
-                key={i}
-                className={`${
-                  i + 1 == obj?.orc_oprc_data[0]?.column_headers?.length &&
-                  "mathzoneLastChild"
-                }`}
-              >
-                {parse(item, optionSelect)}
-              </div>
-            ))}
+            {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => {
+              item = removeUnwantedTags(item);
+              item = addLazyLoading(item);
+              console.log("FORMATTED ITME", item);
+              return (
+                <div
+                  key={i}
+                  className={`${
+                    i + 1 == obj?.orc_oprc_data[0]?.column_headers?.length &&
+                    "mathzoneLastChild"
+                  }`}
+                >
+                  {parse(item, optionSelect)}
+                </div>
+              );
+            })}
             {obj?.orc_oprc_data[0]?.row_headers?.map((item, i) => (
               <React.Fragment key={i}>
                 <div>{parse(item, optionSelect)}</div>
