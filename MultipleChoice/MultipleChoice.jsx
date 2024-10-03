@@ -9,6 +9,7 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 export default function MultipleChoice({ state, meter, choiceId }) {
   meter = Number(meter) || 0;
   const inputRef = useRef();
@@ -55,7 +56,7 @@ export default function MultipleChoice({ state, meter, choiceId }) {
           className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
           style={{ whiteSpace: "initial" }}
         >
-          {parse(state?.question_text)}
+          {parse(state?.question_text,optionSelectStaticMathField)}
         </div>
         {String(state?.upload_file_name).trim() && (
           <div>
