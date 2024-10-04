@@ -65,7 +65,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
         state?.questionImage ? (
           <div className={styles.questionImage}>
             <p>Question Image</p>
-            <img src={state.questionImage} />
+            <img loading="lazy" src={state.questionImage} />
           </div>
         ) : (
           ""
@@ -90,7 +90,11 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
           </div>
           {state?.upload_file_name && (
             <div>
-              <img src={state?.upload_file_name} alt="image not found" />
+              <img
+                loading="lazy"
+                src={state?.upload_file_name}
+                alt="image not found"
+              />
             </div>
           )}
           <div>

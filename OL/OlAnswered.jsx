@@ -2,13 +2,20 @@ import React from "react";
 import { Box } from "./OL";
 import styles from "../OnlineQuiz.module.css";
 import parse from "html-react-parser";
-import {StaticMathField } from "../../ExternalPackages";
+import { StaticMathField } from "../../ExternalPackages";
+import {
+  addLazyLoading,
+  removeUnwantedTags,
+} from "../../CommonJSFiles/gettingResponse";
 export default function OlAnswered({ obj }) {
   const optionSelect = {
     replace: (domNode) => {
       if (domNode?.attribs?.class) {
         let clsName = String(domNode?.attribs?.class);
-        if (clsName.includes("mathquill-rendered-math")||clsName.includes("mathImg")) {
+        if (
+          clsName.includes("mathquill-rendered-math") ||
+          clsName.includes("mathImg")
+        ) {
           if (clsName.includes("mathquill-editable")) {
             return (
               <div
@@ -30,12 +37,16 @@ export default function OlAnswered({ obj }) {
       }
     },
   };
+
+  var formattedmodel = removeUnwantedTags(obj?.questionContent);
+  formattedmodel = addLazyLoading(formattedmodel);
+  console.log("formattedmodel", formattedmodel);
   return (
     <div style={{ clear: "both" }}>
       <div>
         <div className={`${styles.contentParent}`}>
           <Box>
-            {obj?.questionContent.map((item, index) => (
+            {formattedmodel.map((item, index) => (
               <div key={index}>{parse(item, optionSelect)}</div>
             ))}
           </Box>

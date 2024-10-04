@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { useEffect, useState, useRef } from "react";
 import styles from "../OnlineQuiz.module.css";
@@ -47,7 +46,6 @@ const validationForSelectChoice = (inputRef, content) => {
   return 2;
 };
 const validationForDragAndDrop = (inputRef) => {
-
   let n = inputRef?.current?.length || 0;
   let arr = inputRef.current;
   for (let i = 0; i < n; i++) {
@@ -56,22 +54,18 @@ const validationForDragAndDrop = (inputRef) => {
       if (arr[i][j].isMissed == "true" || arr[i][j].re_isMissed == "true") {
         if (!arr[i][j].show) return 0; //not selected
       }
-     
     }
   }
 
   for (let i = 0; i < n; i++) {
     let m = arr[i]?.length || 0;
     for (let j = 0; j < m; j++) {
-      if (arr[i][j].isMissed == "true"){
-        
-        if (arr[i][j].value != arr[i][j].dropVal) return 1 //not selected}
+      if (arr[i][j].isMissed == "true") {
+        if (arr[i][j].value != arr[i][j].dropVal) return 1; //not selected}
       }
-      if (arr[i][j].re_isMissed == "true"){
-        if (arr[i][j].re_value != arr[i][j].dropVal) return 1 
-        }
-
-       
+      if (arr[i][j].re_isMissed == "true") {
+        if (arr[i][j].re_value != arr[i][j].dropVal) return 1;
+      }
     }
   }
   return 2;
@@ -113,30 +107,30 @@ const validationForKeying = (inputRef) => {
   for (let i = 0; i < n; i++) {
     let m = arr[i]?.length || 0;
     for (let j = 0; j < m; j++) {
-      if (arr[i][j].isMissed === "true"){
+      if (arr[i][j].isMissed === "true") {
         if (
           String(arr[i][j]?.dropVal).trim()?.toLowerCase() !=
           String(arr[i][j]?.value).trim()?.toLowerCase()
         )
           return 1;
-        }
-        if (arr[i][j].re_isMissed === "true"){
-          if (
-            String(arr[i][j]?.dropVal).trim()?.toLowerCase() !=
-            String(arr[i][j]?.re_value).trim()?.toLowerCase()
-          )
-            return 1;
-          }
+      }
+      if (arr[i][j].re_isMissed === "true") {
+        if (
+          String(arr[i][j]?.dropVal).trim()?.toLowerCase() !=
+          String(arr[i][j]?.re_value).trim()?.toLowerCase()
+        )
+          return 1;
+      }
     }
   }
   return 2;
 };
 export default function ShortDivision({ state, totalRows, totalCols, meter }) {
- let createnew=state?.questionContent
- console.log(createnew)
+  let createnew = state?.questionContent;
+  console.log(createnew);
   // new Array()
-  console.log(state, totalRows, totalCols, meter,"short")
-  
+  console.log(state, totalRows, totalCols, meter, "short");
+
   meter = Number(meter) || 0;
   totalRows = Number(totalRows);
   totalCols = Number(totalCols);
@@ -235,13 +229,17 @@ export default function ShortDivision({ state, totalRows, totalCols, meter }) {
         <div className={styles.questionName}>{parse(state?.questionName)}</div>
         {state?.upload_file_name && (
           <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div className={styles.borderTopBottomMargin}>
           <ConditionOnProgressBar meter={meter} />
         </div>
-       
+
         <div className={styles.contentParent}>
           <ContentShortDivsion
             content={state?.questionContent}

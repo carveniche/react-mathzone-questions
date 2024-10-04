@@ -1318,7 +1318,11 @@ export default function GenerateLine({ question, meter }) {
         {/* <div className={styles.questionName}>{parse(question?.questionName)}</div> */}
         {question?.upload_file_name && (
           <div>
-            <img src={question?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={question?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div className={styles.borderTopBottomMargin}>

@@ -56,7 +56,11 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
         {state?.question_text && <div>{HtmlParser(state?.question_text)}</div>}
         {state?.upload_file_name && (
           <div>
-            <img src={state?.upload_file_name} alt="Image not found" />
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="Image not found"
+            />
           </div>
         )}
         <div>

@@ -386,7 +386,11 @@ function ORC({ obj, question_text, meter }) {
         </div>
         {obj?.upload_file_name && (
           <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={obj?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div>
@@ -406,61 +410,72 @@ function ORC({ obj, question_text, meter }) {
                     }, 1fr)`,
                   }}
                 >
-                  {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => (
-                    <div
-                      key={i}
-                      className={`mathzoneFlexbox ${
-                        i == obj?.orc_oprc_data[0]?.column_headers?.length &&
-                        "mathzoneEvenChild"
-                      }`}
-                      style={{
-                        border: 0,
-                        borderBottom: "1px solid black",
-                        borderRight: `${
-                          i < obj?.orc_oprc_data[0]?.column_headers?.length - 1
-                            ? 1
-                            : 0
-                        }px solid black`,
-                      }}
-                    >
-                      {parse(item, optionSelect)}
-                    </div>
-                  ))}
-                  {dropState?.map((items, i) => (
-                    <div
-                      className={`droppableOrc mathzoneOrcDivBox`}
-                      id={i}
-                      key={i}
-                      ref={(el) =>
-                        (droppableContainerRef.current[i] = {
-                          el,
-                          show: false,
-                          isMissed: true,
-                        })
-                      }
-                      style={{
-                        paddingBottom: "6rem",
-                        border: 0,
-                        borderRight: `${
-                          i < dropState?.length - 1 ? 1 : 0
-                        }px solid black`,
-                      }}
-                    >
-                      {items?.map((item, index) => (
-                        <Draggable
-                          onStop={(e) => handleStop2(e, i, index)}
-                          defaultPosition={{ x: 0, y: 0 }}
-                          axis="both"
-                          disabled={hasAnswerSubmiited}
-                          key={index}
-                        >
-                          <div style={{ cursor: "pointer" }}>
-                            {parse(item, optionSelect)}
-                          </div>
-                        </Draggable>
-                      ))}
-                    </div>
-                  ))}
+                  {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => {
+                    var formattedItem = addLazyLoading(item);
+                    formattedItem = removeUnwantedTags(formattedItem);
+                    return (
+                      <div
+                        key={i}
+                        className={`mathzoneFlexbox ${
+                          i == obj?.orc_oprc_data[0]?.column_headers?.length &&
+                          "mathzoneEvenChild"
+                        }`}
+                        style={{
+                          border: 0,
+                          borderBottom: "1px solid black",
+                          borderRight: `${
+                            i <
+                            obj?.orc_oprc_data[0]?.column_headers?.length - 1
+                              ? 1
+                              : 0
+                          }px solid black`,
+                        }}
+                      >
+                        {parse(formattedItem, optionSelect)}
+                      </div>
+                    );
+                  })}
+                  {dropState?.map((items, i) => {
+                    return (
+                      <div
+                        className={`droppableOrc mathzoneOrcDivBox`}
+                        id={i}
+                        key={i}
+                        ref={(el) =>
+                          (droppableContainerRef.current[i] = {
+                            el,
+                            show: false,
+                            isMissed: true,
+                          })
+                        }
+                        style={{
+                          paddingBottom: "6rem",
+                          border: 0,
+                          borderRight: `${
+                            i < dropState?.length - 1 ? 1 : 0
+                          }px solid black`,
+                        }}
+                      >
+                        {items?.map((item, index) => {
+                          console.log("ITEMSiii", items);
+
+                          return (
+                            <Draggable
+                              onStop={(e) => handleStop2(e, i, index)}
+                              defaultPosition={{ x: 0, y: 0 }}
+                              axis="both"
+                              disabled={hasAnswerSubmiited}
+                              key={index}
+                            >
+                              <div style={{ cursor: "pointer" }}>
+                                {parse(item, optionSelect)}
+                              </div>
+                            </Draggable>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             {
@@ -470,20 +485,26 @@ function ORC({ obj, question_text, meter }) {
                 className="mathzoneOrcDivBox2"
                 key={`drag${dragKey}`}
               >
-                {dragState?.map((items, i) => (
-                  <Draggable
-                    handle=".handle"
-                    onStop={(e) => handleStop1(e, i)}
-                    defaultPosition={{ x: 0, y: 0 }}
-                    axis="both"
-                    disabled={hasAnswerSubmiited}
-                    key={i}
-                  >
-                    <div style={{ cursor: "pointer" }} className="handle">
-                      {parse(items, optionSelect)}
-                    </div>
-                  </Draggable>
-                ))}
+                {dragState?.map((items, i) => {
+                  console.log("ITETEE", items);
+                  var formattedItem = removeUnwantedTags(items);
+                  formattedItem = removeUnwantedTags(formattedItem);
+                  return (
+                    <Draggable
+                      handle=".handle"
+                      onStop={(e) => handleStop1(e, i)}
+                      defaultPosition={{ x: 0, y: 0 }}
+                      axis="both"
+                      disabled={hasAnswerSubmiited}
+                      key={i}
+                    >
+                      <div style={{ cursor: "pointer" }} className="handle">
+                        {/* {parse(items, optionSelect)} */}
+                        {parse(formattedItem, optionSelect)}
+                      </div>
+                    </Draggable>
+                  );
+                })}
               </div>
             }
           </>

@@ -118,6 +118,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[1] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/1.png"
                 className="dot1"
                 id={styles.symbolsWidthHeight}
@@ -131,6 +132,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[2] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/4.png"
                 className="divide"
                 id={styles.symbolsWidthHeight}
@@ -144,6 +146,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[3] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/11.png"
                 id={styles.symbolsWidthHeight}
               />
@@ -156,6 +159,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[4] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/10.png"
                 className="sqroot"
                 id={styles.symbolsWidthHeight}
@@ -169,6 +173,7 @@ export const CkeditorVirtualKeyboard = ({
               onTouchStart={() => handlClick(5)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/12.png"
                 className="exponent"
                 id={styles.symbolsWidthHeight}
@@ -182,6 +187,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[6] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/6.png"
                 className="lessthanequal"
                 id={styles.symbolsWidthHeight}
@@ -195,6 +201,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[7] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/7.png"
                 className="greaterthanequal"
                 id={styles.symbolsWidthHeight}
@@ -208,6 +215,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[8] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/3.png"
                 className="absolute"
                 id={styles.symbolsWidthHeight}
@@ -221,6 +229,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[9] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/9.png"
                 className="pi"
                 id={styles.symbolsWidthHeight}
@@ -234,6 +243,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[10] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/8.png"
                 className="nthroot"
                 id={styles.symbolsWidthHeight}
@@ -247,6 +257,7 @@ export const CkeditorVirtualKeyboard = ({
               ref={(el) => (reference.current[11] = el)}
             >
               <img
+                loading="lazy"
                 src="/assets/static/media/MathQuillSymbols/2.png"
                 className="xbase"
                 id={styles.symbolsWidthHeight}

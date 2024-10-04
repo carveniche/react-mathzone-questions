@@ -141,7 +141,11 @@ function LogicalTableKg({ data, meter }) {
         </div>
         {data?.upload_file_name && (
           <div>
-            <img src={data?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={data?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div>

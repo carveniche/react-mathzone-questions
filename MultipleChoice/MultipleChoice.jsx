@@ -52,6 +52,11 @@ export default function MultipleChoice({ state, meter, choiceId }) {
   var questionTextFormatted = removeUnwantedTags(state?.question_text);
   questionTextFormatted = addLazyLoading(questionTextFormatted);
   console.log("questionTextFormatted", { questionTextFormatted });
+
+  var questionChoicesFormatted = removeUnwantedTags(state?.choice_data);
+  questionChoicesFormatted = addLazyLoading(questionChoicesFormatted);
+  console.log("questionChoicesFormatted", questionChoicesFormatted);
+
   return (
     <div id="multipleChoiceStudentAnswerResponse">
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
@@ -66,7 +71,11 @@ export default function MultipleChoice({ state, meter, choiceId }) {
         </div>
         {String(state?.upload_file_name).trim() && (
           <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div>
@@ -74,7 +83,8 @@ export default function MultipleChoice({ state, meter, choiceId }) {
         </div>
         <div>
           <SelectMultipleChoice
-            choices={state?.choice_data}
+            choices={questionChoicesFormatted}
+            // choices={state?.choice_data}
             answerHasSelected={showAnswer}
             inputRef={inputRef}
             choiceId={choiceId}

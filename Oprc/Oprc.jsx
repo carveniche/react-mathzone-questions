@@ -19,6 +19,7 @@ import {
 
 function Oprc({ obj, meter }) {
   let currentIndex = 0;
+  console.log("obj", obj);
   const inputRef = useRef([]);
   const { hasAnswerSubmitted, setHasAnswerSubmitted, setIsAnswerCorrect } =
     useContext(ValidationContext);
@@ -166,7 +167,11 @@ function Oprc({ obj, meter }) {
         </div>
         {obj?.upload_file_name && (
           <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={obj?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div>
@@ -191,7 +196,6 @@ function Oprc({ obj, meter }) {
             {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => {
               item = removeUnwantedTags(item);
               item = addLazyLoading(item);
-              console.log("FORMATTED ITME", item);
               return (
                 <div
                   key={i}
@@ -204,35 +208,40 @@ function Oprc({ obj, meter }) {
                 </div>
               );
             })}
-            {obj?.orc_oprc_data[0]?.row_headers?.map((item, i) => (
-              <React.Fragment key={i}>
-                <div>{parse(item, optionSelect)}</div>
-                {dropState[i]?.map((item, index) => (
-                  <div
-                    style={{ cursor: "pointer" }}
-                    className={`droppableOprc mathzoneOprcGridDivBox`}
-                    id={`${i} ${index}`}
-                    ref={(el) =>
-                      (droppableContainerRef.current[i][index] = {
-                        el,
-                        isMissed: true,
-                        show: item.show,
-                      })
-                    }
-                    key={index}
-                  >
-                    {item.show && (
-                      <Draggable
-                        onStop={(e) => handleStop2(e, i, index)}
-                        disabled={hasAnswerSubmit}
+            {obj?.orc_oprc_data[0]?.row_headers?.map((item, i) => {
+              var formattedItem = addLazyLoading(item);
+              return (
+                <React.Fragment key={i}>
+                  <div>{parse(formattedItem, optionSelect)}</div>
+                  {dropState[i]?.map((item, index) => {
+                    return (
+                      <div
+                        style={{ cursor: "pointer" }}
+                        className={`droppableOprc mathzoneOprcGridDivBox`}
+                        id={`${i} ${index}`}
+                        ref={(el) =>
+                          (droppableContainerRef.current[i][index] = {
+                            el,
+                            isMissed: true,
+                            show: item.show,
+                          })
+                        }
+                        key={index}
                       >
-                        <div>{parse(item.val, optionSelect)}</div>
-                      </Draggable>
-                    )}
-                  </div>
-                ))}
-              </React.Fragment>
-            ))}
+                        {item.show && (
+                          <Draggable
+                            onStop={(e) => handleStop2(e, i, index)}
+                            disabled={hasAnswerSubmit}
+                          >
+                            <div>{parse(item.val, optionSelect)}</div>
+                          </Draggable>
+                        )}
+                      </div>
+                    );
+                  })}
+                </React.Fragment>
+              );
+            })}
           </div>
           <div
             className={`draggableOprc mathzoneOprcGridDivBox2`}

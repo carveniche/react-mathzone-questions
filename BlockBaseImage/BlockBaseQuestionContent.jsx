@@ -2,6 +2,7 @@ import React from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styled from "styled-components";
 import styles from "../OnlineQuiz.module.css";
+import { addLazyLoading } from "../../CommonJSFiles/gettingResponse";
 export default function BlockBaseQuestionContent({ questionContent }) {
   return (
     <>
@@ -10,7 +11,7 @@ export default function BlockBaseQuestionContent({ questionContent }) {
           <div style={Styles.FlexBox} key={i}>
             {items.map((item, index) => (
               <div className={styles.blockBaseBoxes} key={index}>
-                {HtmlParser(item)}
+                {HtmlParser(addLazyLoading(item))}
               </div>
             ))}
           </div>

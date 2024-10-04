@@ -37,7 +37,16 @@ export default function QuestionTextImage({ state, meter }) {
 
   var questionTextFormatted = removeUnwantedTags(state?.questionName);
   questionTextFormatted = addLazyLoading(questionTextFormatted);
-  console.log("questionTextFormatted", { questionTextFormatted });
+
+  var questionContentFormatted = removeUnwantedTags(state?.questionContent);
+  questionContentFormatted = addLazyLoading(questionContentFormatted);
+
+  var choicesFormatted = state.choices.map((choice) => {
+    var choiceImageFromatted = removeUnwantedTags(choice?.image);
+    choiceImageFromatted = addLazyLoading(choiceImageFromatted);
+    return { ...choice, image: choiceImageFromatted };
+  });
+
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -54,7 +63,11 @@ export default function QuestionTextImage({ state, meter }) {
         </div>
         {state?.upload_file_name && (
           <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div>
@@ -62,11 +75,11 @@ export default function QuestionTextImage({ state, meter }) {
         </div>
         <div className={styles.contentParent}>
           <ContentQuestionTextImage
-            content={state?.questionContent}
+            content={questionContentFormatted}
             contentText={state.ContentQuestionTextImage}
           />
           <SelectQuestionTextImage
-            choices={state?.choices}
+            choices={choicesFormatted}
             hasAnswerSubmitted={hasAnswerSubmitted}
             setChoosenAnswer={setChoosenAnswer}
             studentAnswer={state[student_answer]}

@@ -13,7 +13,15 @@ export default function DisabledQuestionTextImage({ state, meter }) {
         <div className={styles.questionName}>
           {HtmlParser(state?.questionName)}
         </div>
-        {state?.upload_file_name&&<div><img src={state?.upload_file_name} alt="image not found"/></div>}
+        {state?.upload_file_name && (
+          <div>
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
+          </div>
+        )}
         <div>
           <ProgressBorder meter={meter + 1}>
             <div></div>

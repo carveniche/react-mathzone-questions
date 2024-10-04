@@ -57,7 +57,7 @@ export default function SelectMultipleSelect({
                 )}
                 {value?.choice_image && (
                   <div className="choiceImage">
-                    <img src={value?.choice_image} />
+                    <img loading="lazy" src={value?.choice_image} />
                   </div>
                 )}
               </div>

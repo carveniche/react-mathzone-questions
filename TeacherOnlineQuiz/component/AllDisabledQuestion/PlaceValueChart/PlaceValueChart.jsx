@@ -78,11 +78,15 @@ const validationForSelectChoice = (choices, content) => {
   }
   return 2;
 };
-export default function PlaceValueChart({ state, totalRows, totalColumns,meter }) {
-  meter=Number(meter)||0
+export default function PlaceValueChart({
+  state,
+  totalRows,
+  totalColumns,
+  meter,
+}) {
+  meter = Number(meter) || 0;
   let rows = [];
-  const hasAnswerSubmitted =true
-
+  const hasAnswerSubmitted = true;
 
   for (let i = 0; i < Number(totalRows); i++) {
     let temp = new Array(Number(state.cols));
@@ -91,14 +95,21 @@ export default function PlaceValueChart({ state, totalRows, totalColumns,meter }
   const dropRef = useRef(rows);
   return (
     <div>
-    
       <div>
         <div className={styles.questionName}>
           {HtmlParser(state.questionName)}
         </div>
-        {state?.upload_file_name&&<div><img src={state?.upload_file_name} alt="image not found"/></div>}
+        {state?.upload_file_name && (
+          <div>
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
+          </div>
+        )}
         <div>
-          <ProgressBorder meter={meter+1}>
+          <ProgressBorder meter={meter + 1}>
             <div></div>
           </ProgressBorder>
         </div>

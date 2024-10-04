@@ -5,7 +5,10 @@ import SolveButton from "../SolveButton";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import {
+  addLazyLoading,
+  serializeResponse,
+} from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import oneDto2D, {
@@ -197,6 +200,7 @@ export default function LongDivsion({ state, totalRows, totalCols, meter }) {
     setStudentAnswerQuestion(jsonData);
     setHasAnswerSubmitted(true);
   };
+  var formattedQuestionName = addLazyLoading(state?.questionName);
 
   return (
     <div>
@@ -208,10 +212,16 @@ export default function LongDivsion({ state, totalRows, totalCols, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles.questionName}>{parse(state?.questionName)}</div>
+        <div className={styles.questionName}>
+          {parse(formattedQuestionName)}
+        </div>
         {state?.upload_file_name && (
           <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div className={styles.borderTopBottomMargin}>

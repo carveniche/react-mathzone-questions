@@ -12,7 +12,10 @@ import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import { findSelectedValue, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import {
+  findSelectedValue,
+  manupulateQuestionContentHorizontal,
+} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 const changeAnswerStatus = (
   val,
@@ -73,14 +76,15 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
     setIsAnswerCorrect,
     setChoicesId,
     setStudentAnswerQuestion,
-    setQuestionWithAnswer, isStudentAnswerResponse
+    setQuestionWithAnswer,
+    isStudentAnswerResponse,
   } = useContext(ValidationContext);
-  const input2Ref=useRef()
+  const input2Ref = useRef();
   const handleSubmitAnswer = () => {
-    if(hasAnswerSubmitted)return
+    if (hasAnswerSubmitted) return;
     if (state?.choiceType == "keying") {
-      console.log('this is inputr current',inputRef.current);
-      
+      console.log("this is inputr current", inputRef.current);
+
       for (let i = 0; i < inputRef.current?.length; i++)
         if (!String(inputRef.current[i].children[0].value).trim()) {
           setRedAlert(true);
@@ -94,16 +98,17 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
           )
         ) {
           setHasAnswerSubmitted(true);
-         setQuestionWithAnswer({...state,questionContent:input2Ref.current})
+          setQuestionWithAnswer({
+            ...state,
+            questionContent: input2Ref.current,
+          });
           return;
         }
-      setQuestionWithAnswer({...state,questionContent:input2Ref.current})
+      setQuestionWithAnswer({ ...state, questionContent: input2Ref.current });
       setIsAnswerCorrect(true);
       setHasAnswerSubmitted(true);
       return;
-    } 
-    
-    else if (state?.choiceType == "dragdrop") {
+    } else if (state?.choiceType == "dragdrop") {
       let val = ValidationForDragDrop(inputRef?.current);
       changeAnswerStatus(
         val,
@@ -112,14 +117,15 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
         setStudentAnswerQuestion,
         setRedAlert
       );
-      if(val!==0){
-        let result=manupulateQuestionContentHorizontal(inputRef?.current,"dropVal")
-        setQuestionWithAnswer({...state,questionContent:result})
+      if (val !== 0) {
+        let result = manupulateQuestionContentHorizontal(
+          inputRef?.current,
+          "dropVal"
+        );
+        setQuestionWithAnswer({ ...state, questionContent: result });
       }
     } else if (state?.choiceType == "selectchoice") {
-      let val = ValidationForSelectChoice(
-        inputRef?.current
-      );
+      let val = ValidationForSelectChoice(inputRef?.current);
       changeAnswerStatus(
         val,
         setIsAnswerCorrect,
@@ -127,20 +133,22 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
         setStudentAnswerQuestion,
         setRedAlert
       );
-     if(val!==0){
-      let value=findSelectedValue(inputRef?.current,"value")
-      setQuestionWithAnswer({...state,[student_answer]:value})
-     }
+      if (val !== 0) {
+        let value = findSelectedValue(inputRef?.current, "value");
+        setQuestionWithAnswer({ ...state, [student_answer]: value });
+      }
     }
   };
   const [redAlert, setRedAlert] = useState(false);
 
   return (
     <div>
-     { !isStudentAnswerResponse&& <SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
@@ -148,7 +156,11 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
         </div>
         {state?.upload_file_name && (
           <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div>
@@ -187,7 +199,7 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
               questionHead={state.questiontbHead}
               totalCols={Number(state?.cols)}
               choices={state?.choices}
-              studentAnswer={state[student_answer]||""}
+              studentAnswer={state[student_answer] || ""}
             />
           ) : (
             <h1>Coming soon</h1>

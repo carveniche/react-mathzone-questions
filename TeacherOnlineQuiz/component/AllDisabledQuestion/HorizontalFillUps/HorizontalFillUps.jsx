@@ -1,98 +1,83 @@
 import React, { useContext } from "react";
 import ContentHorizontalFillUps from "./ContentHorizontalFillUps";
 import { useEffect, useState, useRef } from "react";
-import styles from "../OnlineQuiz.module.css"
+import styles from "../OnlineQuiz.module.css";
 import parse from "html-react-parser";
 import { ProgressBorder } from "../../../../../Modal2/modal2";
-const validationForSelectChoice=(inputRef,content)=>{
-let arr=inputRef?.current
-let n=arr?.length||0
+const validationForSelectChoice = (inputRef, content) => {
+  let arr = inputRef?.current;
+  let n = arr?.length || 0;
 
-let val=null
-for(let i=0;i<n;i++)
-{
-  if(arr[i].show)
-  {
-    val=arr[i].value
-    break;
-  }
-}
-if(val===null)
-return 0
-n=content?.length||0
-for(let i=0;i<n;i++)
-{
-  if(content[i]?.isMissed=="true")
-  {
-if(content[i]?.value!=val)
-{
-return 1
-}
-  }
-}
-return 2
-}
-const validationForDragAndDrop=(inputRef)=>
-{
-  let n=inputRef?.current?.length||0
-  let arr=inputRef.current
-  for(let i=0;i<n;i++)
-  {
-let m=arr[i]?.length||0
-for(let j=0;j<m;j++)
-{
-  if(arr[i][j].isMissed=="true")
-  {
-    if(!arr[i][j].show)
-    return 0//not selected
-  }
-}
-  }
-  for(let i=0;i<n;i++)
-  {
-let m=arr[i]?.length||0
-for(let j=0;j<m;j++)
-{
-  if(arr[i][j].isMissed=="true")
-    if(arr[i][j].value!=arr[i][j].dropVal)
-    return 1//not selected}
-  
-}
-  }
- return 2
-}
-const validationForMultiSelect=(choices)=>{
-
- 
-  let n=choices?.length||0
-  let flag=true
-  for(let i=0;i<n;i++)
-  {
-    if(choices[i].show){
-      flag=false
-      break
+  let val = null;
+  for (let i = 0; i < n; i++) {
+    if (arr[i].show) {
+      val = arr[i].value;
+      break;
     }
   }
-  if(flag)
-  {
-    return 0
+  if (val === null) return 0;
+  n = content?.length || 0;
+  for (let i = 0; i < n; i++) {
+    if (content[i]?.isMissed == "true") {
+      if (content[i]?.value != val) {
+        return 1;
+      }
+    }
   }
-  for(let i=0;i<n;i++)
-  {
-    if(choices[i].show!=choices[i].correct){
-    return 1}
+  return 2;
+};
+const validationForDragAndDrop = (inputRef) => {
+  let n = inputRef?.current?.length || 0;
+  let arr = inputRef.current;
+  for (let i = 0; i < n; i++) {
+    let m = arr[i]?.length || 0;
+    for (let j = 0; j < m; j++) {
+      if (arr[i][j].isMissed == "true") {
+        if (!arr[i][j].show) return 0; //not selected
+      }
+    }
   }
-  return 2
-}
-export default function HorizontalFillUps({ state, totalRows, totalCols,meter }) {
-  
+  for (let i = 0; i < n; i++) {
+    let m = arr[i]?.length || 0;
+    for (let j = 0; j < m; j++) {
+      if (arr[i][j].isMissed == "true")
+        if (arr[i][j].value != arr[i][j].dropVal) return 1; //not selected}
+    }
+  }
+  return 2;
+};
+const validationForMultiSelect = (choices) => {
+  let n = choices?.length || 0;
+  let flag = true;
+  for (let i = 0; i < n; i++) {
+    if (choices[i].show) {
+      flag = false;
+      break;
+    }
+  }
+  if (flag) {
+    return 0;
+  }
+  for (let i = 0; i < n; i++) {
+    if (choices[i].show != choices[i].correct) {
+      return 1;
+    }
+  }
+  return 2;
+};
+export default function HorizontalFillUps({
+  state,
+  totalRows,
+  totalCols,
+  meter,
+}) {
   totalRows = Number(totalRows);
   totalCols = Number(totalCols);
-  meter=Number(meter)||0
+  meter = Number(meter) || 0;
   //let [rows, setRows] = useState([]);
-  const hasAnswerSubmitted=true
+  const hasAnswerSubmitted = true;
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
-  
+
   const inputRef = useRef(new Array(totalEmptyBox));
   useEffect(() => {
     let totalEmptyBox = 0;
@@ -108,14 +93,21 @@ export default function HorizontalFillUps({ state, totalRows, totalCols,meter })
     <div>
       <div>
         <div className={styles.questionName}>{parse(state?.questionName)}</div>
-        {state?.upload_file_name&&<div><img src={state?.upload_file_name} alt="image not found"/></div>}
+        {state?.upload_file_name && (
+          <div>
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
+          </div>
+        )}
         <div className={styles.borderTopBottomMargin}>
-          <ProgressBorder meter={meter+1}>
+          <ProgressBorder meter={meter + 1}>
             <div></div>
           </ProgressBorder>
         </div>
-        <div className={styles.contentParent} >
-          
+        <div className={styles.contentParent}>
           <ContentHorizontalFillUps
             content={state?.questionContent}
             totalEmptyBox={totalEmptyBox}
@@ -126,7 +118,6 @@ export default function HorizontalFillUps({ state, totalRows, totalCols,meter })
             choices={state?.choices}
             choiceType={state?.choiceType}
           />
-
         </div>
       </div>
     </div>

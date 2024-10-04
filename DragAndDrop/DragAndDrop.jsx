@@ -157,11 +157,15 @@ export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles?.questionName}>
-        {parse(state?.questionName, optionSelectStaticMathField)}
+          {parse(state?.questionName, optionSelectStaticMathField)}
         </div>
         {state?.upload_file_name && (
           <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div>

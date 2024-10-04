@@ -33,56 +33,54 @@ const validationForKeyingChoiceType = (choices) => {
   return 2;
 };
 const validationForSelectChoice = (choices) => {
-
   for (let items of choices) {
     if (items.show) {
-      if(String(items.show)!==items.selected)
-      return 1
-      else return 2
+      if (String(items.show) !== items.selected) return 1;
+      else return 2;
     }
   }
-  return 0
+  return 0;
 };
-const changeAnswerStatus=(val,setIsAnswerCorrect,setHasAnswerSubmitted)=>{
-  if(val===0)
-  {
+const changeAnswerStatus = (val, setIsAnswerCorrect, setHasAnswerSubmitted) => {
+  if (val === 0) {
     alert("please choose the answer");
-    return
-
-}
-else if(val===1)
-setIsAnswerCorrect(false)
-else
-setIsAnswerCorrect(true)
-setHasAnswerSubmitted(true)
-
-
-}
-export default function DragAndDrop({ state, totalRows, totalColumns,meter }) {
-  meter=Number(meter)||0
+    return;
+  } else if (val === 1) setIsAnswerCorrect(false);
+  else setIsAnswerCorrect(true);
+  setHasAnswerSubmitted(true);
+};
+export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
+  meter = Number(meter) || 0;
   let rows = [];
-  const  hasAnswerSubmitted = true 
+  const hasAnswerSubmitted = true;
   for (let i = 0; i < Number(totalRows); i++) {
     let temp = new Array(Number(state.cols));
     rows.push(temp);
   }
   const dropRef = useRef(rows);
-  
+
   return (
     <div>
-    
       <div>
         <div className={styles?.questionName}>
           {HtmlParser(state?.questionName)}
         </div>
-        {state?.upload_file_name&&<div><img src={state?.upload_file_name} alt="image not found"/></div>}
+        {state?.upload_file_name && (
+          <div>
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
+          </div>
+        )}
         <div>
-          <ProgressBorder meter={meter+1}>
+          <ProgressBorder meter={meter + 1}>
             <div></div>
           </ProgressBorder>
         </div>
         <div className={styles.contentParent}>
-          {(state?.choiceType == "dragdrop"||1) ? (
+          {state?.choiceType == "dragdrop" || 1 ? (
             <DropBoxes
               content={state.questionContent}
               totalRows={Number(totalRows)}
@@ -109,7 +107,7 @@ export default function DragAndDrop({ state, totalRows, totalColumns,meter }) {
               dropRef={dropRef}
               totalCols={Number(totalColumns)}
             />
-          ) :(
+          ) : (
             <h1>Unsupported file types ...</h1>
           )}
         </div>

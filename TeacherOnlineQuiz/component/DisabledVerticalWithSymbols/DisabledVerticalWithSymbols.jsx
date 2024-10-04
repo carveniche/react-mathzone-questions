@@ -9,18 +9,26 @@ export default function DisabledVerticalWithSymbols({
   state,
   totalRows,
   totalCols,
-  meter
+  meter,
 }) {
-  meter=Number(meter)||0
+  meter = Number(meter) || 0;
   return (
     <div>
       <div>
         <div className={styles.questionName}>
           {HtmlParser(state?.questionName)}
         </div>
-        {state?.upload_file_name&&<div><img src={state?.upload_file_name} alt="image not found"/></div>}
+        {state?.upload_file_name && (
+          <div>
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
+          </div>
+        )}
         <div>
-          <ProgressBorder meter={meter+1}>
+          <ProgressBorder meter={meter + 1}>
             <div></div>
           </ProgressBorder>
         </div>
@@ -29,9 +37,7 @@ export default function DisabledVerticalWithSymbols({
             content={state?.questionContent}
             contentText={state.ContentQuestionTextImage}
           />
-          <DisabledSelectVerticalSymbols 
-            choices={state?.choices}
-          />
+          <DisabledSelectVerticalSymbols choices={state?.choices} />
         </div>
       </div>
     </div>

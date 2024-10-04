@@ -463,7 +463,7 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
         {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
         {upload_file_name && (
           <div>
-            <img src={upload_file_name} alt="image not found" />
+            <img loading="lazy" src={upload_file_name} alt="image not found" />
           </div>
         )}
         <div>

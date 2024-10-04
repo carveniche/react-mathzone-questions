@@ -130,7 +130,11 @@ export default function NumberBond({ obj, meter }) {
         )}
         {obj?.upload_file_name && (
           <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={obj?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         {Boolean(String(obj?.questionContentText).trim()) && (

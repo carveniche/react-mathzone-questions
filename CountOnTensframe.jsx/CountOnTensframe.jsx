@@ -98,7 +98,11 @@ export default function CountOnTensframe({ obj, meter }) {
         </div>
         {obj?.upload_file_name && (
           <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={obj?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div>

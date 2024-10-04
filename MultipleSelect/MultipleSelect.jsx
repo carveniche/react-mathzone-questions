@@ -79,7 +79,7 @@ export default function MultipleSelect({ state, meter, choiceId }) {
           {/* {HtmlParser(state?.question_text)} */}
         </div>
         <div>
-          <img src={state?.upload_file_name} />
+          <img loading="lazy" src={state?.upload_file_name} />
         </div>
         <div>
           <ConditionOnProgressBar meter={meter} />

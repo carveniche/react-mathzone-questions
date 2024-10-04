@@ -198,7 +198,14 @@ export default function DragAndDropImageCompare({
 
   var questionTextFormatted = removeUnwantedTags(state?.questionName);
   questionTextFormatted = addLazyLoading(questionTextFormatted);
-  console.log("questionTextFormatted", { questionTextFormatted });
+  var questionContentFormatted = state.questionContent.map((qc) => {
+    qc = qc.map((choice) => {
+      var formattedQCImage = addLazyLoading(choice.value);
+      return { ...choice, value: formattedQCImage };
+    });
+    return qc;
+  });
+
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -211,11 +218,15 @@ export default function DragAndDropImageCompare({
       <div id="studentAnswerResponse">
         <div className={styles?.questionName}>
           {questionTextFormatted}
-          {parse(state?.questionName)}
+          {/* {parse(state?.questionName)} */}
         </div>
         {state?.upload_file_name && (
           <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+            <img
+              loading="lazy"
+              src={state?.upload_file_name}
+              alt="image not found"
+            />
           </div>
         )}
         <div>
@@ -224,7 +235,7 @@ export default function DragAndDropImageCompare({
         <div className={styles.contentParent}>
           {state?.choiceType == "dragdrop" ? (
             <DropBoxesImageCompare
-              content={state.questionContent}
+              content={questionContentFormatted}
               totalRows={Number(totalRows)}
               state={state}
               isAnswerSubmitted={!hasAnswerSubmitted}
@@ -234,7 +245,7 @@ export default function DragAndDropImageCompare({
             />
           ) : state?.choiceType == "keying" ? (
             <CompareOfImageKeyingChoiceType
-              content={state.questionContent}
+              content={questionContentFormatted}
               totalRows={Number(totalRows)}
               state={state}
               isAnswerSubmitted={!hasAnswerSubmitted}
@@ -243,7 +254,7 @@ export default function DragAndDropImageCompare({
             />
           ) : state?.choiceType == "selectchoice" ? (
             <CompareOfImageSelectChoice
-              content={state.questionContent}
+              content={questionContentFormatted}
               totalRows={Number(totalRows)}
               state={state}
               isAnswerSubmitted={!hasAnswerSubmitted}
