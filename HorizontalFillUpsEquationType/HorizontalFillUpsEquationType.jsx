@@ -77,7 +77,6 @@ const validationForDragAndDrop = (inputRef) => {
 
 const validationForKeying = (newData, choices, equationObj) => {
   for (let key in newData) {
-    console.log(newData[key]);
     if (newData[key]) {
       if (!choices[key]) return 0;
     }
