@@ -40,6 +40,25 @@ export default function KeyingHorizontalFillUpsEquationType({
   const [row, setRow] = useState([]);
   const { isStudentAnswerResponse } = useContext(ValidationContext);
   const handleChange = (e, rows, cols, status = false) => {
+    var negativeFraction;
+    const numeDenomArrE = [...e.matchAll(/\{([^}]*)\}/g)].map(
+      (match) => match[1]
+    );
+    var IntegerPartVal2 = e?.split("\\")[0];
+    if (IntegerPartVal2 === "-")
+      negativeFraction = `\\frac{-${numeDenomArrE[0] || ""}}{${
+        numeDenomArrE[1] || ""
+      }}`;
+
+    if (
+      IntegerPartVal2 === "-" &&
+      numeDenomArrE[0] &&
+      numeDenomArrE[1] &&
+      numeDenomArrE[0].replaceAll(" ", "") &&
+      numeDenomArrE[1].replaceAll(" ", "")
+    )
+      e = negativeFraction;
+    console.log("E", e);
     // row[rows][cols].stringLength=e.length >5?e.length:5;
     row[rows][cols].stringLength = e.length > 1 ? e.length : 1;
 

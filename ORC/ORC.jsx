@@ -110,9 +110,9 @@ function ORC({ obj, question_text, meter }) {
     disabledCkeditor();
   }, []);
   useEffect(() => {
-    document.querySelectorAll(".AfterQstAns").forEach(inp=>{
-      if(hasAnswerSubmitted) inp.setAttribute("readonly",true)
-    })    
+    document.querySelectorAll(".AfterQstAns").forEach((inp) => {
+      if (hasAnswerSubmitted) inp.setAttribute("readonly", true);
+    });
   }, [hasAnswerSubmitted]);
   useEffect(() => {
     let temp = [];
@@ -158,7 +158,27 @@ function ORC({ obj, question_text, meter }) {
   const [value, setValue] = useState({});
   let currentIndex = 0;
   const handleChange = (e, i) => {
-    setValueState(e.latex(), i);
+    e = e.latex();
+    var negativeFraction;
+    const numeDenomArrE = [...e.matchAll(/\{([^}]*)\}/g)].map(
+      (match) => match[1]
+    );
+    var IntegerPartVal2 = e?.split("\\")[0];
+    if (IntegerPartVal2 === "-")
+      negativeFraction = `\\frac{-${numeDenomArrE[0] || ""}}{${
+        numeDenomArrE[1] || ""
+      }}`;
+
+    if (
+      IntegerPartVal2 === "-" &&
+      numeDenomArrE[0] &&
+      numeDenomArrE[1] &&
+      numeDenomArrE[0].replaceAll(" ", "") &&
+      numeDenomArrE[1].replaceAll(" ", "")
+    )
+      e = negativeFraction;
+    console.log("E", e);
+    setValueState(e, i);
   };
   const handleFocus = (e, y) => {
     setCurrentVirtualKeyBoard(y);
@@ -254,16 +274,16 @@ function ORC({ obj, question_text, meter }) {
 
   function afterQstnTextHtmlParser(htmlString) {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlString, 'text/html');
+    const doc = parser.parseFromString(htmlString, "text/html");
     return doc.body;
-  } 
+  }
   var afterQstTextInp = [];
-  var afterQstTxt = afterQstnTextHtmlParser(obj?.after_question_text || "") ;
-  const inputs = afterQstTxt.querySelectorAll('input');
-  inputs.forEach(input => {
-    afterQstTextInp.push(input.value)
-    input.classList.toggle("AfterQstAns")
-    input.setAttribute("value","")
+  var afterQstTxt = afterQstnTextHtmlParser(obj?.after_question_text || "");
+  const inputs = afterQstTxt.querySelectorAll("input");
+  inputs.forEach((input) => {
+    afterQstTextInp.push(input.value);
+    input.classList.toggle("AfterQstAns");
+    input.setAttribute("value", "");
   });
 
   const handleSubmit = () => {
@@ -276,23 +296,27 @@ function ORC({ obj, question_text, meter }) {
       }
     }
     var afterQstnTxtAns = document.querySelectorAll(".AfterQstAns");
-    if(afterQstnTxtAns.length>0){
-        var afterQstnTxtAnsValues = [];
-        afterQstnTxtAns.forEach(ans=>{
-          if(ans.value) afterQstnTxtAnsValues.push(ans.value)
-        })
+    if (afterQstnTxtAns.length > 0) {
+      var afterQstnTxtAnsValues = [];
+      afterQstnTxtAns.forEach((ans) => {
+        if (ans.value) afterQstnTxtAnsValues.push(ans.value);
+      });
 
-        if( afterQstnTxtAnsValues.length==0 || afterQstTextInp.length==0 ||  afterQstnTxtAnsValues.length !== afterQstTextInp.length) {
-          setRedAlert(true) 
-          return
-        }else setRedAlert(false)
+      if (
+        afterQstnTxtAnsValues.length == 0 ||
+        afterQstTextInp.length == 0 ||
+        afterQstnTxtAnsValues.length !== afterQstTextInp.length
+      ) {
+        setRedAlert(true);
+        return;
+      } else setRedAlert(false);
 
-        for(let ans of afterQstnTxtAnsValues){
-          if(!afterQstTextInp.includes(ans)){
-            setIsAnsweredCorrect(false);
-          }
+      for (let ans of afterQstnTxtAnsValues) {
+        if (!afterQstTextInp.includes(ans)) {
+          setIsAnsweredCorrect(false);
         }
-    } 
+      }
+    }
     for (let i = 0; i < dropState.length; i++) {
       if (dropState[i].length < 1) {
         setRedAlert(true);
@@ -481,9 +505,9 @@ function ORC({ obj, question_text, meter }) {
                 ? HtmlParser(obj?.after_question_text)
                 : obj?.after_question_text}
             </div> */}
-             <div id="mathzoneFibAfterText">
+            <div id="mathzoneFibAfterText">
               {typeof obj?.after_question_text == "string"
-                ?  parse(afterQstTxt.innerHTML)
+                ? parse(afterQstTxt.innerHTML)
                 : obj?.after_question_text}
             </div>
             {/* <div id="mathzoneFibAfterText">
