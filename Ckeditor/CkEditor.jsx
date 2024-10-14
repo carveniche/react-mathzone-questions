@@ -303,7 +303,27 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
   let hasAnswerSelected = hasAnswerSubmitted;
   let setHasAnswerSelected = setHasAnswerSubmitted;
   const handleChange = (e, i) => {
-    setValueState(e.latex(), i);
+    e = e.latex();
+    var negativeFraction;
+    const numeDenomArrE = [...e.matchAll(/\{([^}]*)\}/g)].map(
+      (match) => match[1]
+    );
+    var IntegerPartVal2 = e?.split("\\")[0];
+    if (IntegerPartVal2 === "-")
+      negativeFraction = `\\frac{-${numeDenomArrE[0] || ""}}{${
+        numeDenomArrE[1] || ""
+      }}`;
+
+    if (
+      IntegerPartVal2 === "-" &&
+      numeDenomArrE[0] &&
+      numeDenomArrE[1] &&
+      numeDenomArrE[0].replaceAll(" ", "") &&
+      numeDenomArrE[1].replaceAll(" ", "")
+    )
+      e = negativeFraction;
+    console.log("E", e);
+    setValueState(e, i);
   };
   useEffect(() => {
     let parent = document.getElementById("parentIdQuizEditorOnline");
