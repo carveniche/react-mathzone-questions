@@ -20,8 +20,11 @@ export default function HorizontalKeyingChoiceType({
     const hasNumber = /\d/.test(item.value);
     var inpValue;
     inpValue = e.target.value;
-    const studAnsHasLetter = /[a-zA-Z\s]/.test(inpValue);
+    const studAnsHasLetter = /[a-zA-Z]/.test(inpValue);
 
+    const studAnsHasSpace = /[\s]/.test(inpValue);
+    const solnHasSpace = /[\s]/.test(item.value);
+    if (!solnHasSpace && studAnsHasSpace) return;
     if (!hasLetter && studAnsHasLetter) return;
 
     if (!hasLetter && hasNumber && inpValue.length > item.value.length)

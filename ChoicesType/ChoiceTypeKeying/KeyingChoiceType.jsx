@@ -18,6 +18,9 @@ export default function VerticalKeyingChoiceType({
     if (inpValue === " ") return;
     const hasLetter = /[a-zA-Z]/.test(item.value);
     const hasNumber = /\d/.test(item.value);
+    const studAnsHasSpace = /[\s]/.test(inpValue);
+    const solnHasSpace = /[\s]/.test(item.value);
+    if (!solnHasSpace && studAnsHasSpace) return;
 
     const studAnsHasLetter = /[a-zA-Z]/.test(inpValue);
 

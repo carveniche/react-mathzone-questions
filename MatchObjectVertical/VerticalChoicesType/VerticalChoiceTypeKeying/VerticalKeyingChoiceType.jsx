@@ -20,7 +20,10 @@ export default function VerticalKeyingChoiceType({
     console.log(hasNumber, hasLetter);
     var inpValue;
     inpValue = e.target.value;
-    const studAnsHasLetter = /[a-zA-Z\s]/.test(inpValue);
+    const studAnsHasLetter = /[a-zA-Z]/.test(inpValue);
+    const studAnsHasSpace = /[\s]/.test(inpValue);
+    const solnHasSpace = /[\s]/.test(item.numvalue);
+    if (!solnHasSpace && studAnsHasSpace) return;
     if (!hasLetter && studAnsHasLetter) return;
     if (!hasLetter && hasNumber && inpValue.length > item.numvalue.length)
       inpValue = inpValue.slice(0, item.value.length);
