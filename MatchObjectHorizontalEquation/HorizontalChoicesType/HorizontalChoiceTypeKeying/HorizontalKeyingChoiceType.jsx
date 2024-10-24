@@ -32,6 +32,25 @@ export default function HorizontalKeyingChoiceType({
   const ref1 = useRef({});
   const { isStudentAnswerResponse } = useContext(ValidationContext);
   const handleChange = (e, rows, cols, status = false) => {
+    var negativeFraction;
+    const numeDenomArrE = [...e.matchAll(/\{([^}]*)\}/g)].map(
+      (match) => match[1]
+    );
+    var IntegerPartVal2 = e?.split("\\")[0];
+    if (IntegerPartVal2 === "-")
+      negativeFraction = `\\frac{-${numeDenomArrE[0] || ""}}{${
+        numeDenomArrE[1] || ""
+      }}`;
+
+    if (
+      IntegerPartVal2 === "-" &&
+      numeDenomArrE[0] &&
+      numeDenomArrE[1] &&
+      numeDenomArrE[0].replaceAll(" ", "") &&
+      numeDenomArrE[1].replaceAll(" ", "")
+    )
+      e = negativeFraction;
+    console.log("E", e);
     if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     if (status && currentVirtualKeyBoard > -1) setCurrentVirtualKeyBoard(-1);
     let str = "" + rows + "row" + cols + "col";

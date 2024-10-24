@@ -1,52 +1,49 @@
-import shuffle  from "shuffle-array";
-import React, { useRef, useState,useEffect, useContext } from "react"
+import shuffle from "shuffle-array";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import Draggable from "react-draggable";
-import styled from "styled-components"
+import styled from "styled-components";
 import parse from "html-react-parser";
 import styles from "../OnlineQuiz.module.css";
-import { EditableMathField, StaticMathField } from "../../../../../ExternalPackages";
+import {
+  EditableMathField,
+  StaticMathField,
+} from "../../../../../ExternalPackages";
 import { ProgressBorder } from "../../../../../Modal2/modal2";
 
-
 const ifElementFind = (target, xyAxis) => {
-  if(xyAxis[0]==undefined)
-  return
+  if (xyAxis[0] == undefined) return;
   let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
 
   while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
- 
     if (elem?.className.includes(target))
       return Number(elem?.getAttribute("id"));
     elem = elem.parentNode;
   }
-  
+
   return false;
 };
-const collectTextInputField=()=>{
-  let parent=document.getElementById('orcTextParent')
-  if(!parent)
-  {
-return
+const collectTextInputField = () => {
+  let parent = document.getElementById("orcTextParent");
+  if (!parent) {
+    return;
   }
- 
-  let inputBoxes=parent.querySelectorAll('input')
-  
 
-  for(let input of inputBoxes){
-    if(input.value==''){
-      alert('please fill all the field')
-      return false
+  let inputBoxes = parent.querySelectorAll("input");
+
+  for (let input of inputBoxes) {
+    if (input.value == "") {
+      alert("please fill all the field");
+      return false;
     }
   }
-  let temp=[]
-  for(let input of inputBoxes){
-  temp.push(input.value)
+  let temp = [];
+  for (let input of inputBoxes) {
+    temp.push(input.value);
   }
-  return temp
-  }
+  return temp;
+};
 const ifElementFind2 = (target, xyAxis) => {
-  if(xyAxis[0])
-  return
+  if (xyAxis[0]) return;
   let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);
 
   while (elem?.getAttribute("id") !== "root" && elem?.getAttribute("id")) {
@@ -89,46 +86,42 @@ const updateState2 = (
     let temp = sourceState[i].map((item) => item);
     arr2d.push(temp);
   }
-  
+
   setSourceState([...arr2d]);
 };
-const refreshPageLoad=(parent,setInputText)=>{
-  let inputBoxes=parent?.querySelectorAll('input')
-  if(!parent)
-  return
-  let temp=[]
-  for(let inputs of inputBoxes)
-  {
-    temp.push(inputs.value)
-    inputs.value=''
+const refreshPageLoad = (parent, setInputText) => {
+  let inputBoxes = parent?.querySelectorAll("input");
+  if (!parent) return;
+  let temp = [];
+  for (let inputs of inputBoxes) {
+    temp.push(inputs.value);
+    inputs.value = "";
   }
-  setInputText([...temp])
-}
+  setInputText([...temp]);
+};
 
-const compareArrayText=(arr1,arr2)=>{
-  for(let i=0;i<arr1.length;i++)
-  {
-    let item1=arr1[i]
-    let item2=arr2[i]
-    if(item1!=item2)
-    return false
+const compareArrayText = (arr1, arr2) => {
+  for (let i = 0; i < arr1.length; i++) {
+    let item1 = arr1[i];
+    let item2 = arr2[i];
+    if (item1 != item2) return false;
   }
-  return true
-}
-function ORC({obj,question_text,meter}) {
+  return true;
+};
+function ORC({ obj, question_text, meter }) {
   let [dragState, setDragState] = useState([]);
-  meter=Number(meter)||0
+  meter = Number(meter) || 0;
   const [xyAxis, setXyAxis] = useState([]);
   let [dropState, setDropState] = useState([]);
   const currentDrop = useRef([-1, -1]);
   const [dragActive, setDragActive] = useState(false);
   const [dropActive, setDropActive] = useState(false);
-  
 
   useEffect(() => {
     let temp = [];
-    obj?.orc_oprc_data[0]?.response?.map((items) => items.map((item) => temp.push(item)))
-     
+    obj?.orc_oprc_data[0]?.response?.map((items) =>
+      items.map((item) => temp.push(item))
+    );
 
     temp = shuffle(temp);
     setDragState([...temp]);
@@ -140,7 +133,7 @@ function ORC({obj,question_text,meter}) {
   const handleStop1 = (e, i) => {
     let x = e.clientX;
     let y = e.clientY;
-    
+
     setDragActive(true);
     currentDrag.current = i;
     let temp = [...dragState];
@@ -148,11 +141,10 @@ function ORC({obj,question_text,meter}) {
     setXyAxis([...position]);
     setDragState([]);
     setDragState([...temp]);
-  }; 
+  };
   const currentDrag = useRef(-1);
   const droppableRef = useRef([]);
   const handleStop2 = (e, row, col) => {
-      
     setDropActive(true);
     let x = e.clientX;
     let y = e.clientY;
@@ -185,40 +177,59 @@ function ORC({obj,question_text,meter}) {
       setXyAxis([]);
     }
   }, [xyAxis.length]);
-  const [value,setValue]=useState({})
-  let currentIndex=0
+  const [value, setValue] = useState({});
+  let currentIndex = 0;
   const handleChange = (e, i) => {
-    setValueState(e.latex(), i);
+    e = e.latex();
+    var negativeFraction;
+    const numeDenomArrE = [...e.matchAll(/\{([^}]*)\}/g)].map(
+      (match) => match[1]
+    );
+    var IntegerPartVal2 = e?.split("\\")[0];
+    if (IntegerPartVal2 === "-")
+      negativeFraction = `\\frac{-${numeDenomArrE[0] || ""}}{${
+        numeDenomArrE[1] || ""
+      }}`;
+
+    if (
+      IntegerPartVal2 === "-" &&
+      numeDenomArrE[0] &&
+      numeDenomArrE[1] &&
+      numeDenomArrE[0].replaceAll(" ", "") &&
+      numeDenomArrE[1].replaceAll(" ", "")
+    )
+      e = negativeFraction;
+    console.log("E", e);
+    setValueState(e, i);
   };
-  const handleFocus=(e,y)=>{
-
-    setCurrentVirtualKeyBoard(y)
-
-  }
-  const [refresh,setRefresh]=useState(true)
-  const inputRef=useRef([])
+  const handleFocus = (e, y) => {
+    setCurrentVirtualKeyBoard(y);
+  };
+  const [refresh, setRefresh] = useState(true);
+  const inputRef = useRef([]);
   const optionSelect = {
     replace: (domNode) => {
       if (domNode?.attribs?.class) {
         let clsName = String(domNode?.attribs?.class);
         if (clsName.includes("mathquill-rendered-math")) {
-
           if (clsName.includes("mathquill-editable")) {
-
             let y = currentIndex;
-            currentIndex = currentIndex + 1;  
-            return (<div
-              ref={(el) => (inputRef.current[y] = el)}
-              style={{
-                display: "inline-block",
-                height: "fit-content",
-                width: "fit-content",
-                position: "relative",
-              }}
-              onFocus={(e) => handleFocus(e,y)}
-            >
-               <EditableMathField  latex={value[y] ? value[y] : ""}
-                  onChange={(e) => handleChange(e, y)} />             
+            currentIndex = currentIndex + 1;
+            return (
+              <div
+                ref={(el) => (inputRef.current[y] = el)}
+                style={{
+                  display: "inline-block",
+                  height: "fit-content",
+                  width: "fit-content",
+                  position: "relative",
+                }}
+                onFocus={(e) => handleFocus(e, y)}
+              >
+                <EditableMathField
+                  latex={value[y] ? value[y] : ""}
+                  onChange={(e) => handleChange(e, y)}
+                />
               </div>
             );
           }
@@ -229,9 +240,9 @@ function ORC({obj,question_text,meter}) {
       }
     },
   };
-  const calcRef=useRef([])
-  const ref=useRef([])
-  
+  const calcRef = useRef([]);
+  const ref = useRef([]);
+
   useEffect(() => {
     var id;
     if (xyAxis.length > 0 && dropActive) {
@@ -253,275 +264,275 @@ function ORC({obj,question_text,meter}) {
       }, 0);
     }
   }, [xyAxis.length]);
-  const [inputText,setInputText]=useState([])
-  useEffect(()=>{
-    let parent=document.getElementById("orcTextParent")
-    if(parent)
-    refreshPageLoad(parent,setInputText)
-    setRefresh(false)
+  const [inputText, setInputText] = useState([]);
+  useEffect(() => {
+    let parent = document.getElementById("orcTextParent");
+    if (parent) refreshPageLoad(parent, setInputText);
+    setRefresh(false);
+  }, []);
+  const [currentVirtualKeyBoard, setCurrentVirtualKeyBoard] = useState(-1);
+  const handleClose = () => {
+    setCurrentVirtualKeyBoard(-1);
+  };
+  useEffect(() => {
+    let xPosition = 0;
+    let yPosition = 0;
 
-  },[])
-  const [currentVirtualKeyBoard,setCurrentVirtualKeyBoard]=useState(-1)
-const handleClose=()=>{
-  setCurrentVirtualKeyBoard(-1)
-}
-useEffect(() => {
-  let xPosition = 0;
-  let yPosition = 0;
-  
-  if (currentVirtualKeyBoard > -1) {
-    
-    if (
-      inputRef.current[currentVirtualKeyBoard].getBoundingClientRect().left -
-        calcRef.current.clientWidth -
-        16 >
-      -1
-    ) {
-      xPosition =
+    if (currentVirtualKeyBoard > -1) {
+      if (
         inputRef.current[currentVirtualKeyBoard].getBoundingClientRect().left -
-        calcRef.current.clientWidth -
-        16;
-    }
-    if (
-      inputRef.current[currentVirtualKeyBoard].getBoundingClientRect().top -
-        calcRef.current.clientHeight -
-        21 >
-      -1
-    ) {
-      yPosition =
+          calcRef.current.clientWidth -
+          16 >
+        -1
+      ) {
+        xPosition =
+          inputRef.current[currentVirtualKeyBoard].getBoundingClientRect()
+            .left -
+          calcRef.current.clientWidth -
+          16;
+      }
+      if (
         inputRef.current[currentVirtualKeyBoard].getBoundingClientRect().top -
-        calcRef.current.clientHeight -
-        21;
-    } else {
-      yPosition =
-        inputRef.current[currentVirtualKeyBoard].getBoundingClientRect().bottom;
+          calcRef.current.clientHeight -
+          21 >
+        -1
+      ) {
+        yPosition =
+          inputRef.current[currentVirtualKeyBoard].getBoundingClientRect().top -
+          calcRef.current.clientHeight -
+          21;
+      } else {
+        yPosition =
+          inputRef.current[currentVirtualKeyBoard].getBoundingClientRect()
+            .bottom;
+      }
+
+      calcRef.current.style = `left:${xPosition}px; top:${yPosition}px`;
     }
-    
-    calcRef.current.style = `left:${xPosition}px; top:${yPosition}px`;
-   
-  }
+  }, [currentVirtualKeyBoard]);
+  let hasAnswerSubmiited = true;
 
-}, [currentVirtualKeyBoard]);
-let hasAnswerSubmiited=true
-
-const handlClick = (i) => {
-
-  if(currentVirtualKeyBoard > -1)
-  {inputRef?.current[
-    currentVirtualKeyBoard
-  ]?.children[0]?.children[0]?.children[0]?.focus();
-  let tempText = value[currentVirtualKeyBoard]
-    ? value[currentVirtualKeyBoard] + ref.current[i].title
-    : ref.current[i].title;
-  setValueState(tempText, currentVirtualKeyBoard);
-
-}
-};
-const setValueState = (text, i) => {
-  value[i] = text;
-  setValue({ ...value });
-};
+  const handlClick = (i) => {
+    if (currentVirtualKeyBoard > -1) {
+      inputRef?.current[
+        currentVirtualKeyBoard
+      ]?.children[0]?.children[0]?.children[0]?.focus();
+      let tempText = value[currentVirtualKeyBoard]
+        ? value[currentVirtualKeyBoard] + ref.current[i].title
+        : ref.current[i].title;
+      setValueState(tempText, currentVirtualKeyBoard);
+    }
+  };
+  const setValueState = (text, i) => {
+    value[i] = text;
+    setValue({ ...value });
+  };
   return (
     <div className={styles.MainApp}>
-           <div id="studentAnswerResponse">
-       <div className={styles.questionName}>{parse(question_text,optionSelect)}</div>  
-       <div>
-          <ProgressBorder meter={meter+1}>
+      <div id="studentAnswerResponse">
+        <div className={styles.questionName}>
+          {parse(question_text, optionSelect)}
+        </div>
+        <div>
+          <ProgressBorder meter={meter + 1}>
             <div></div>
           </ProgressBorder>
         </div>
-     <div className={styles.contentParent}>
-     
-      <>
-      {obj?.orc_oprc_data[0]?.column_headers&&obj?.orc_oprc_data[0]?.column_headers?.length > 0 && (
-        <Grid totalCols={obj?.orc_oprc_data[0]?.column_headers?.length}>
-          
-          {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => (
-            <div key={i} className="flexbox">{parse(item,optionSelect)}</div>
-          ))}
-          {dropState?.map((items, i) => (
-            <DivBox
-              className="droppableOrc"
-              id={i}
-              ref={(el) => (droppableRef.current[i] = el)}
-              style={{paddingBottom:"6rem"}}
-            >
-              {items?.map((item, index) => (
-                <Draggable
-                  onStop={(e) => handleStop2(e, i, index)}
-                  defaultPosition={{ x: 0, y: 0 }}
-                  axis="both"
-                  disabled={hasAnswerSubmiited}
-                >
-                  <div style={{ cursor: "pointer" }}>{parse(item,optionSelect)}</div>
-                </Draggable>
-              ))}
-            </DivBox>
-          ))}
-        </Grid>
-      )}
-      { (
-        <DivBox2 id="draggableOrc" ref={draggableRef}>
-          {dragState?.map((items, i) => (
-            <Draggable
-              handle=".handle"
-              onStop={(e) => handleStop1(e, i)}
-              defaultPosition={{ x: 0, y: 0 }}
-              axis="both"
-              disabled={hasAnswerSubmiited}
-            >
-              <div style={{ cursor: "pointer" }} className="handle">
-                {parse(items,optionSelect)}
-              </div>
-            </Draggable>
-          ))}
-        </DivBox2>
-      )}
-      
-      </>
-    {  obj?.text&&<TextBox id="orcTextParent">
-          {refresh?parse(obj?.text):parse(obj?.text,optionSelect)}
-      </TextBox>}
+        <div className={styles.contentParent}>
+          <>
+            {obj?.orc_oprc_data[0]?.column_headers &&
+              obj?.orc_oprc_data[0]?.column_headers?.length > 0 && (
+                <Grid totalCols={obj?.orc_oprc_data[0]?.column_headers?.length}>
+                  {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => (
+                    <div key={i} className="flexbox">
+                      {parse(item, optionSelect)}
+                    </div>
+                  ))}
+                  {dropState?.map((items, i) => (
+                    <DivBox
+                      className="droppableOrc"
+                      id={i}
+                      ref={(el) => (droppableRef.current[i] = el)}
+                      style={{ paddingBottom: "6rem" }}
+                    >
+                      {items?.map((item, index) => (
+                        <Draggable
+                          onStop={(e) => handleStop2(e, i, index)}
+                          defaultPosition={{ x: 0, y: 0 }}
+                          axis="both"
+                          disabled={hasAnswerSubmiited}
+                        >
+                          <div style={{ cursor: "pointer" }}>
+                            {parse(item, optionSelect)}
+                          </div>
+                        </Draggable>
+                      ))}
+                    </DivBox>
+                  ))}
+                </Grid>
+              )}
+            {
+              <DivBox2 id="draggableOrc" ref={draggableRef}>
+                {dragState?.map((items, i) => (
+                  <Draggable
+                    handle=".handle"
+                    onStop={(e) => handleStop1(e, i)}
+                    defaultPosition={{ x: 0, y: 0 }}
+                    axis="both"
+                    disabled={hasAnswerSubmiited}
+                  >
+                    <div style={{ cursor: "pointer" }} className="handle">
+                      {parse(items, optionSelect)}
+                    </div>
+                  </Draggable>
+                ))}
+              </DivBox2>
+            }
+          </>
+          {obj?.text && (
+            <TextBox id="orcTextParent">
+              {refresh ? parse(obj?.text) : parse(obj?.text, optionSelect)}
+            </TextBox>
+          )}
+        </div>
       </div>
-      </div>
-    {/* virtual Keyboard */}
-    {currentVirtualKeyBoard > -1 && (
-              <div
-                id={styles.mathToolbarContainer}
-                className="ui-draggable mathquill-rendered-math mathquill-rendered-math_position"
-                style={{ zIndex: 999950 }}
-                ref={calcRef}
+      {/* virtual Keyboard */}
+      {currentVirtualKeyBoard > -1 && (
+        <div
+          id={styles.mathToolbarContainer}
+          className="ui-draggable mathquill-rendered-math mathquill-rendered-math_position"
+          style={{ zIndex: 999950 }}
+          ref={calcRef}
+        >
+          <div className="tooltip-wrapper">
+            <div className="tooltip-top-bar" id={styles.tooltipTopBar}>
+              <span className="tooltip-handle">&nbsp;</span>
+              <span
+                className={styles.tooltipClose}
+                onClick={(e) => handleClose()}
               >
-                <div className="tooltip-wrapper">
-                  <div className="tooltip-top-bar" id={styles.tooltipTopBar}>
-                    <span className="tooltip-handle">&nbsp;</span>
-                    <span
-                      className={styles.tooltipClose}
-                      onClick={(e) => handleClose()}
-                    >
-                      X&nbsp;
-                    </span>
-                  </div>
-                  <div id={styles.mathToolbar}>
-                    <div
-                      className="btn mathsign fractions_cls"
-                      title="\frac{ }{ }"
-                      onClick={() => handlClick(0)}
-                      ref={(el) => (ref.current[0] = el)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="fraction" /> */}
-                      frac
-                    </div>
-                    <div
-                      className="btn mathsign"
-                      title="\cdot"
-                      onClick={() => handlClick(1)}
-                      ref={(el) => (ref.current[1] = el)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="dot" /> */}
-                      cdot
-                    </div>
-                    <div
-                      className="btn mathsign"
-                      title="\div"
-                      onClick={() => handlClick(2)}
-                      ref={(el) => (ref.current[2] = el)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="divide" /> */}
-                      dvd
-                    </div>
-                    <div
-                      className="btn mathsign"
-                      title="\times"
-                      onClick={() => handlClick(3)}
-                      ref={(el) => (ref.current[3] = el)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="multiply" /> */}
-                      tms
-                    </div>
-                    <div
-                      className="btn mathsign mathquill_cursor_cls"
-                      title="\sqrt{}"
-                      onClick={() => handlClick(4)}
-                      ref={(el) => (ref.current[4] = el)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="sqroot" /> */}
-                      srt
-                    </div>
-                    <div
-                      className="btn mathsign mathquill_cursor_cls"
-                      title="^{ }"
-                      ref={(el) => (ref.current[5] = el)}
-                      onClick={() => handlClick(5)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="exponent" /> */}
-                      exp
-                    </div>
-                    <div
-                      className="btn mathsign"
-                      title="\le"
-                      onClick={() => handlClick(6)}
-                      ref={(el) => (ref.current[6] = el)}
-                    >
-                      {/* <img
+                X&nbsp;
+              </span>
+            </div>
+            <div id={styles.mathToolbar}>
+              <div
+                className="btn mathsign fractions_cls"
+                title="\frac{ }{ }"
+                onClick={() => handlClick(0)}
+                ref={(el) => (ref.current[0] = el)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="fraction" /> */}
+                frac
+              </div>
+              <div
+                className="btn mathsign"
+                title="\cdot"
+                onClick={() => handlClick(1)}
+                ref={(el) => (ref.current[1] = el)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="dot" /> */}
+                cdot
+              </div>
+              <div
+                className="btn mathsign"
+                title="\div"
+                onClick={() => handlClick(2)}
+                ref={(el) => (ref.current[2] = el)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="divide" /> */}
+                dvd
+              </div>
+              <div
+                className="btn mathsign"
+                title="\times"
+                onClick={() => handlClick(3)}
+                ref={(el) => (ref.current[3] = el)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="multiply" /> */}
+                tms
+              </div>
+              <div
+                className="btn mathsign mathquill_cursor_cls"
+                title="\sqrt{}"
+                onClick={() => handlClick(4)}
+                ref={(el) => (ref.current[4] = el)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="sqroot" /> */}
+                srt
+              </div>
+              <div
+                className="btn mathsign mathquill_cursor_cls"
+                title="^{ }"
+                ref={(el) => (ref.current[5] = el)}
+                onClick={() => handlClick(5)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="exponent" /> */}
+                exp
+              </div>
+              <div
+                className="btn mathsign"
+                title="\le"
+                onClick={() => handlClick(6)}
+                ref={(el) => (ref.current[6] = el)}
+              >
+                {/* <img
           src="/assets/new_home/mathquill_p.gif"
           className="lessthanequal"
         /> */}
-                      Lte
-                    </div>
-                    <div
-                      className="btn mathsign"
-                      title="\ge"
-                      onClick={() => handlClick(7)}
-                      ref={(el) => (ref.current[7] = el)}
-                    >
-                      {/* <img
+                Lte
+              </div>
+              <div
+                className="btn mathsign"
+                title="\ge"
+                onClick={() => handlClick(7)}
+                ref={(el) => (ref.current[7] = el)}
+              >
+                {/* <img
           src="/assets/new_home/mathquill_p.gif"
           className="greaterthanequal"
         /> */}
-                      Gte
-                    </div>
-                    <div
-                      className="btn mathsign mathquill_cursor_cls"
-                      title="\left|\right|"
-                      onClick={() => handlClick(8)}
-                      ref={(el) => (ref.current[8] = el)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="absolute" /> */}
-                      Abs
-                    </div>
-                    <div
-                      className="btn mathsign"
-                      title="\prod"
-                      onClick={() => handlClick(9)}
-                      ref={(el) => (ref.current[9] = el)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="pi" /> */}
-                      PI
-                    </div>
-                    <div
-                      className="btn mathsign mathquill_cursor_cls"
-                      title="\nthroot{}{}"
-                      onClick={() => handlClick(10)}
-                      ref={(el) => (ref.current[10] = el)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="nthroot" /> */}
-                      Ntr
-                    </div>
-                    <div
-                      className="btn mathsign mathquill_cursor_cls"
-                      title="_{ }"
-                      onClick={() => handlClick(11)}
-                      ref={(el) => (ref.current[11] = el)}
-                    >
-                      {/* <img src="/assets/new_home/mathquill_p.gif" className="xbase" /> */}
-                      Xbs
-                    </div>
-                  </div>
-                </div>
+                Gte
               </div>
-            )}
-           
+              <div
+                className="btn mathsign mathquill_cursor_cls"
+                title="\left|\right|"
+                onClick={() => handlClick(8)}
+                ref={(el) => (ref.current[8] = el)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="absolute" /> */}
+                Abs
+              </div>
+              <div
+                className="btn mathsign"
+                title="\prod"
+                onClick={() => handlClick(9)}
+                ref={(el) => (ref.current[9] = el)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="pi" /> */}
+                PI
+              </div>
+              <div
+                className="btn mathsign mathquill_cursor_cls"
+                title="\nthroot{}{}"
+                onClick={() => handlClick(10)}
+                ref={(el) => (ref.current[10] = el)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="nthroot" /> */}
+                Ntr
+              </div>
+              <div
+                className="btn mathsign mathquill_cursor_cls"
+                title="_{ }"
+                onClick={() => handlClick(11)}
+                ref={(el) => (ref.current[11] = el)}
+              >
+                {/* <img src="/assets/new_home/mathquill_p.gif" className="xbase" /> */}
+                Xbs
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -534,7 +545,7 @@ export const Grid = styled.div`
   min-width:100px;
   margin: 2rem;
 
-  grid-template-columns: repeat(${props=>props.totalCols}, 1fr);
+  grid-template-columns: repeat(${(props) => props.totalCols}, 1fr);
  
   height:auto;
   > div:nth-child(even) {
@@ -552,7 +563,7 @@ export const Grid = styled.div`
     align-items: center;
     word-break:break;
   }
-  > div:nth-child(${props=>props.totalCols+1}) {
+  > div:nth-child(${(props) => props.totalCols + 1}) {
     min-height: 100px;
 
     height: auto;
@@ -596,8 +607,8 @@ export const DivBox2 = styled.div`
   width: calc(100% - 2rem);
 
   position: relative;
- 
-  min-height:80px;
+
+  min-height: 80px;
   z-index: 5;
   display: flex;
   gap: 0.9rem;
@@ -606,30 +617,25 @@ export const DivBox2 = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin: 0 2rem;
-  
-  height:auto;
+
+  height: auto;
   border: 1px solid black;
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
   > div {
-   
-  
     width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid black;
-
   }
   * .react-draggable react-draggable-dragged {
     transform: translate(0, 0);
   }
 `;
-export const TextBox=styled.div`
-width:92%;
-margin:1rem auto;
-
-
-`
+export const TextBox = styled.div`
+  width: 92%;
+  margin: 1rem auto;
+`;
 
 // {showExplation&&<button onClick={handleExplation} className={styles.checkButton3}>Hide Details</button>}
 // {showExplation&&<OrcAnswered obj={obj} />}
