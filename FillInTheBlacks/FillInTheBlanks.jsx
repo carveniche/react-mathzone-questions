@@ -10,9 +10,6 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
   const [inputState, setInputState] = useState("");
   const [redAlert, setRedAlert] = useState(false);
   meter = Number(meter) || 0;
-  const handleChange = (e) => {
-    setInputState(e.target.value);
-  };
   const {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
@@ -21,6 +18,18 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
   } = useContext(ValidationContext);
+  var answer = state?.choice_data[0].choices;
+  const hasLetter = /[a-zA-Z]/.test(answer);
+  const hasNumber = /\d/.test(answer);
+  const handleChange = (e) => {
+    var inpValue;
+    inpValue = e.target.value;
+
+    if (!hasLetter && hasNumber && e.target.value.length > answer.length)
+      inpValue = e.target.value.slice(0, answer.length);
+
+    setInputState(inpValue);
+  };
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
     if (String(inputState).trim() == "") {
@@ -68,7 +77,10 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
           )}
           <input
             style={StylesInline.Input}
-            type="text"
+            maxLength={answer.length}
+            type={`${
+              hasLetter && hasNumber ? "text" : hasLetter ? "text" : "number"
+            }`}
             value={isStudentAnswerResponse ? choiceId : inputState}
             onChange={handleChange}
             disabled={hasAnswerSubmitted || isStudentAnswerResponse}
