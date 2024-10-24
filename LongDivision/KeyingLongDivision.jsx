@@ -17,6 +17,8 @@ export default function LongDivisionKeyingChoiceType({
   const [row, setRow] = useState([]);
   const { isStudentAnswerResponse } = useContext(ValidationContext);
   const handleChange = (e, rows, cols) => {
+    const hasLetter = /[a-zA-Z\s]/.test(e.target.value);
+    if (hasLetter) return;
     row[rows][cols].dropVal = e.target.value;
     if (row[rows][cols].dropVal == "") {
       row[rows][cols].show = false;
@@ -126,10 +128,8 @@ const InlineCss = {
     height: "30px",
     textAlign: "center",
     width: "18px",
-    fontSize:"15px",
-    padding:"0",
-    border:"1px solid grey",
-
-    
+    fontSize: "15px",
+    padding: "0",
+    border: "1px solid grey",
   },
 };

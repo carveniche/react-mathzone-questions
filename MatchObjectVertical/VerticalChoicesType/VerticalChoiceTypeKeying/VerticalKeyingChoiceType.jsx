@@ -14,8 +14,18 @@ export default function VerticalKeyingChoiceType({
 }) {
   const [row, setRow] = useState([]);
   const { isStudentAnswerResponse } = useContext(ValidationContext);
-  const handleChange = (e, rows, cols) => {
-    row[rows][cols].dropVal = e.target.value;
+  const handleChange = (e, rows, cols, item) => {
+    const hasLetter = /[a-zA-Z]/.test(item.numvalue);
+    const hasNumber = /\d/.test(item.numvalue);
+    console.log(hasNumber, hasLetter);
+    var inpValue;
+    inpValue = e.target.value;
+    const studAnsHasLetter = /[a-zA-Z\s]/.test(inpValue);
+    if (!hasLetter && studAnsHasLetter) return;
+    if (!hasLetter && hasNumber && inpValue.length > item.numvalue.length)
+      inpValue = inpValue.slice(0, item.value.length);
+
+    row[rows][cols].dropVal = inpValue;
     if (row[rows][cols].dropVal == "") {
       row[rows][cols].show = false;
     } else row[rows][cols].show = true;
@@ -70,9 +80,10 @@ export default function VerticalKeyingChoiceType({
                                 ? item[student_answer]
                                 : row[index][i]?.dropVal
                             }
+                            maxLength={item.numvalue.length}
                             onChange={(e) => {
                               if (isStudentAnswerResponse) return;
-                              handleChange(e, index, i);
+                              handleChange(e, index, i, item);
                             }}
                             disabled={
                               hasAnswerSubmitted || isStudentAnswerResponse

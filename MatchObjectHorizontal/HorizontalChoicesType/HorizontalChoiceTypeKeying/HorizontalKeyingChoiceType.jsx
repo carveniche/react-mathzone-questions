@@ -14,8 +14,19 @@ export default function HorizontalKeyingChoiceType({
 }) {
   const [row, setRow] = useState([]);
   const { isStudentAnswerResponse } = useContext(ValidationContext);
-  const handleChange = (e, rows, cols) => {
-    row[rows][cols].dropVal = e.target.value;
+  const handleChange = (e, rows, cols, item) => {
+    const hasLetter = /[a-zA-Z]/.test(item);
+    const hasNumber = /\d/.test(item);
+    var inpValue;
+    inpValue = e.target.value;
+    const studAnsHasLetter = /[a-zA-Z\s]/.test(inpValue);
+
+    if (!hasLetter && studAnsHasLetter) return;
+
+    if (!hasLetter && hasNumber && inpValue.length > item.length)
+      inpValue = inpValue.slice(0, item.value.length);
+
+    row[rows][cols].dropVal = inpValue;
     if (row[rows][cols].dropVal == "") {
       row[rows][cols].show = false;
     } else row[rows][cols].show = true;
@@ -36,12 +47,21 @@ export default function HorizontalKeyingChoiceType({
   inputRef.current = row;
 
   return row?.map((items, index) => (
-    <div key={index} className={styles.MatchObjectHorizontalTypeKeyingFlexBox}>
+    <div
+      key={index}
+      style={{ gridGap: 0 }}
+      className={styles.MatchObjectHorizontalTypeKeyingFlexBox}
+    >
       {items?.map((item, i) =>
         item.isMissed === "false" ? (
-          <div className={styles.MatchObjectHorizontalTypeKeyingFlexBox3}  style={{
-              width:`calc((100% - ${(items.length-1)*2}rem) / ${items.length})`
-             }}>
+          <div
+            className={styles.MatchObjectHorizontalTypeKeyingFlexBox3}
+            style={{
+              width: `calc((100% - ${(items.length - 1) * 2}rem) / ${
+                items.length
+              })`,
+            }}
+          >
             <div>{HtmlParser(item?.imgvalue)}</div>
             <div>
               <b>
@@ -50,9 +70,14 @@ export default function HorizontalKeyingChoiceType({
             </div>
           </div>
         ) : (
-          <div className={styles.MatchObjectHorizontalTypeKeyingFlexBox3}  style={{
-              width:`calc((100% - ${(items.length-1)*2}rem) / ${items.length})`
-             }}>
+          <div
+            className={styles.MatchObjectHorizontalTypeKeyingFlexBox3}
+            style={{
+              width: `calc((100% - ${(items.length - 1) * 2}rem) / ${
+                items.length
+              })`,
+            }}
+          >
             <div>{HtmlParser(item.imgvalue)}</div>
             <div>
               <div>
@@ -64,8 +89,9 @@ export default function HorizontalKeyingChoiceType({
                         ? item[student_answer]
                         : row[index][i]?.dropVal
                     }
+                    maxLength={item.numvalue.length}
                     onChange={(e) => {
-                      handleChange(e, index, i);
+                      handleChange(e, index, i, item.numvalue);
                     }}
                     disabled={hasAnswerSubmitted || isStudentAnswerResponse}
                   />
@@ -89,6 +115,6 @@ const InlineCss = {
   Input: {
     height: "50px",
     textAlign: "center",
-    width: "180px",
+    width: "100%",
   },
 };

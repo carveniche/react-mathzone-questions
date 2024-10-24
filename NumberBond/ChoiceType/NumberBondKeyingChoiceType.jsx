@@ -75,7 +75,8 @@ const RenderBinaryTree = ({ node, state, onClick }) => {
               className={styles.InputBox}
               style={{ border: 0 }}
               type="text"
-              onChange={(e) => onClick(e, element?.row, element?.col)}
+              maxLength={element.value.length}
+              onChange={(e) => onClick(e, element?.row, element?.col, element)}
               value={
                 isStudentAnswerResponse
                   ? element[student_answer]
@@ -157,7 +158,8 @@ function NumberBondKeyingChoiceType({ datas, inputRef }) {
   let [obj3, setObj3] = useState({});
   const [line, setLine] = useState("");
   const [inputState, setInputState] = useState({});
-  const handleInputChange = (e, row, col) => {
+  const handleInputChange = (e, row, col, element) => {
+    if (e.target.value.length > element.value.length) return;
     if (isNaN(Number(e.target.value))) return;
     let str = `${row} ${col}`;
     let temp = { ...inputState };

@@ -15,7 +15,7 @@ export default function KeyingchoiceTypePlaceValueChart({
   totalRows,
   totalColumns,
   numberSystem,
-  state
+  state,
 }) {
   const [rows, setRows] = useState([]);
   const [numbers, setNumbers] = useState([]);
@@ -29,14 +29,19 @@ export default function KeyingchoiceTypePlaceValueChart({
     }
     let n = Number(totalColumns) || 0;
 
-    let temp2 = numberSystemConverter(n,numberSystem,String(state?.chartType).trim()?.toLowerCase());
-     setNumbers([...temp2]);
+    let temp2 = numberSystemConverter(
+      n,
+      numberSystem,
+      String(state?.chartType).trim()?.toLowerCase()
+    );
+    setNumbers([...temp2]);
 
     setRows([...rows]);
   }, []);
-  const {isStudentAnswerResponse}=useContext(ValidationContext)
+  const { isStudentAnswerResponse } = useContext(ValidationContext);
   const handleChange = (e, i) => {
     let text = e.target.value;
+    if (text.length > 1) return;
     rows[i].dropVal = text;
     setRows([...rows]);
   };
@@ -49,7 +54,7 @@ export default function KeyingchoiceTypePlaceValueChart({
           className={styles.PlaceValueChartKeyingGrid}
           style={{
             gridTemplateColumns: `repeat(${Number(totalColumns) || 1}, 1fr)`,
-            overflow:"auto"
+            overflow: "auto",
           }}
         >
           {numbers?.map((item, i) => (
@@ -69,7 +74,9 @@ export default function KeyingchoiceTypePlaceValueChart({
                   (index + 1) % totalColumns == 0 && styles.rightBorder
                 }`}
               >
-                <div><HtmlParserComponent value={items?.value}/></div>
+                <div>
+                  <HtmlParserComponent value={items?.value} />
+                </div>
               </div>
             ) : (
               <div
@@ -79,10 +86,15 @@ export default function KeyingchoiceTypePlaceValueChart({
               >
                 <input
                   style={InlineCss.Input}
+                  maxLength={items.value.length}
                   onChange={(e) => handleChange(e, index)}
-                  disabled={isAnswerSubmitted||isStudentAnswerResponse}
+                  disabled={isAnswerSubmitted || isStudentAnswerResponse}
                   type="text"
-                  value={isStudentAnswerResponse?items[student_answer]:items[index]?.dropVal}
+                  value={
+                    isStudentAnswerResponse
+                      ? items[student_answer]
+                      : items[index]?.dropVal
+                  }
                 />
               </div>
             )

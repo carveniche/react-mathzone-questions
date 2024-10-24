@@ -36,17 +36,28 @@ export default function ContentPlaceValueTableSelect({
     setRow([...arr]);
   }, []);
   const [state, setState] = useState({});
-  const handleChange = (e, rows, cols) => {
-
-    console.log('row',row)
+  const handleChange = (e, rows, cols, item) => {
+    console.log("row", row, item);
     row[rows][cols].stringLength =
       e.target.value.length > 1 ? e.target.value.length : 1;
-      setRow([...row]);
+    setRow([...row]);
 
     let str = "" + rows + cols;
-    setState({ ...state, [str]: e.target.value });
-    rowsData[rows][cols][student_answer] = e.target.value;
-    size.current[str] = e.target.value?.length > 2 ? e.target.value.length : 2;
+
+    const hasLetter = /[a-zA-Z]/.test(item.value);
+    const hasNumber = /\d/.test(item.value);
+    var inpValue;
+    inpValue = e.target.value;
+    const studAnsHasLetter = /[a-zA-Z\s]/.test(inpValue);
+
+    if (!hasLetter && studAnsHasLetter) return;
+
+    if (!hasLetter && hasNumber && inpValue.length > item.value.length)
+      inpValue = inpValue.slice(0, item.value.length);
+
+    setState({ ...state, [str]: inpValue });
+    rowsData[rows][cols][student_answer] = inpValue;
+    size.current[str] = inpValue?.length > 2 ? inpValue.length : 2;
     setRowsData([...rowsData]);
   };
 
@@ -86,6 +97,7 @@ export default function ContentPlaceValueTableSelect({
               >
                 <input
                   type="text"
+                  maxLength={item.value.length}
                   value={
                     isStudentAnswerResponse
                       ? item[student_answer]
@@ -94,12 +106,11 @@ export default function ContentPlaceValueTableSelect({
                       : ""
                   }
                   onChange={(e) => {
-                    handleChange(e, index, i);
+                    handleChange(e, index, i, item);
                   }}
                   disabled={hasAnswerSubmitted || isStudentAnswerResponse}
-                  style={{ width: 'auto',minHeight:35,minWidth:35 }}
+                  style={{ width: "auto", minHeight: 35, minWidth: 35 }}
                   size={item?.stringLength || 1}
-                  
                 />
               </div>
             )

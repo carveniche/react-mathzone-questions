@@ -24,7 +24,7 @@ export default function ContentVertical({
 
   const handleChange = (e, rows, cols) => {
     let arr = ["Backspace"];
-
+    if (e.key === " ") return;
     if (isNaN(Number(e.key)) && !arr.includes(e.key)) {
       return;
     }
@@ -140,6 +140,7 @@ export default function ContentVertical({
                         ? item[student_answer]
                         : contentData[index][i]?.dropVal
                     }
+                    maxLength={item.value.length}
                     type={
                       !["+", "-", "/", "*"].includes(item.value)
                         ? typeof parseInt(item.value) === "number"

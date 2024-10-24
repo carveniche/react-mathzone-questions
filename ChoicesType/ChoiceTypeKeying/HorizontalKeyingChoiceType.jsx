@@ -15,8 +15,19 @@ export default function HorizontalKeyingChoiceType({
 }) {
   const [row, setRow] = useState([]);
   const { isStudentAnswerResponse } = useContext(ValidationContext);
-  const handleChange = (e, rows, cols) => {
-    row[rows][cols].dropVal = e.target.value;
+  const handleChange = (e, rows, cols, item) => {
+    const hasLetter = /[a-zA-Z]/.test(item.value);
+    const hasNumber = /\d/.test(item.value);
+    var inpValue;
+    inpValue = e.target.value;
+    const studAnsHasLetter = /[a-zA-Z\s]/.test(inpValue);
+
+    if (!hasLetter && studAnsHasLetter) return;
+
+    if (!hasLetter && hasNumber && inpValue.length > item.value.length)
+      inpValue = inpValue.slice(0, item.value.length);
+
+    row[rows][cols].dropVal = inpValue;
     row[rows][cols].stringLength =
       e.target.value.length > 5 ? e.target.value.length : 5;
     if (e.target.value === "" && e.target.value === undefined)
@@ -71,9 +82,10 @@ export default function HorizontalKeyingChoiceType({
                         ? item[student_answer]
                         : row[index][i]?.dropVal
                     }
+                    maxLength={item.value.length}
                     onChange={(e) => {
                       if (isStudentAnswerResponse) return;
-                      handleChange(e, index, i);
+                      handleChange(e, index, i, item);
                     }}
                     size={item?.stringLength || 5}
                     //   maxlength={item?.value?.length||10}

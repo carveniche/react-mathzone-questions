@@ -130,6 +130,7 @@ export default function KeyingHorizontalFillUpsEquationType({
                         <input
                           readOnly={hasAnswerSubmitted}
                           style={InlineCss.Input}
+                          maxLength={item.value.length}
                           value={
                             isStudentAnswerResponse
                               ? item[student_answer]
