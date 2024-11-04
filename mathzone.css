@@ -948,6 +948,10 @@ td.ldivision_left {
   color: #233584;
 }
 
+.mathzoneQuestionName div {
+  text-wrap: wrap !important;
+}
+
 .mathzoneOprcGrid {
   display: Grid;
   max-width: 90%;
