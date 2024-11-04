@@ -203,6 +203,8 @@ tr.ck-bottom-border td {
 
 .right-spac {
   float: right;
+  display: inline-flex;
+  flex-wrap: nowrap;
 }
 
 .font-bracket1 {
@@ -219,9 +221,9 @@ tr.ck-bottom-border td {
 
 .right-spac .num1 {
   display: inline-block;
-  padding: 4px;
+  padding: .5px !important;
   position: relative;
-  letter-spacing: 18px;
+  letter-spacing: 10px !important;
 }
 
 .num1 .carry {

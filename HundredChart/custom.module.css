@@ -1,107 +1,147 @@
 .flex {
-    display: flex;
-    color: black;
-    /* outline: solid orange; */
-  }
-  .brown {
-    background-color: rgb(249, 249, 249);
-    height: 40px;
-    width: 40px;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid rgb(209, 210, 209);
-  }
-  .brown1 {
-    background-color: rgb(148, 148, 148);
-    height: 40px;
-    width: 40px;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid rgb(209, 210, 209);
-    color: white;
-    font-weight: bold;
-  }
-  .outer {
-    /* outline: yellow solid; */
-    
+  display: flex;
+  color: black;
+  /* outline: solid orange; */
+}
 
-    display: flex;
-    flex-direction: column;
-    
-  }
+.brown {
+  background-color: rgb(249, 249, 249);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(209, 210, 209);
+}
+
+.brown1 {
+  background-color: rgb(148, 148, 148);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(209, 210, 209);
+  color: white;
+  font-weight: bold;
+}
+
+.outer {
+  /* outline: yellow solid; */
+
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+.greenCorrect {
+  background-color: green !important;
+}
+
+.redInCorrect {
+  background-color: red !important;
+}
+
+.answer {
+  width: 45% !important;
+  border: 1px solid black;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  align-items: center;
+  padding-left: 18px;
+  color: #233584;
+  border-radius: 12px;
+  min-height: 80px;
+}
+
+.answer1 {
+  width: 45% !important;
+  border: 1px solid black;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  align-items: center;
+  padding-left: 18px;
+  color: #233584;
+  border-radius: 12px;
+  min-height: 80px;
+  background-color: #b9c2fc
+}
+
+.flex_column {
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.bottom {
+  margin-bottom: 10px;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: solid darkgray;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-left: 30px;
+  /* margin-top: 10px; */
+  cursor: pointer;
+}
+
+.ans {
+  margin-left: 20px;
+}
+
+.green {
+  color: green;
+  font-size: 20px;
+}
+
+.red {
+  color: red;
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 500px) {
   .answer {
-    height: 50px;
-    width: 60%;
-    border: 1px solid black;
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    cursor :pointer;
-    
+    width: 90%;
   }
-  .answer1 {
-    height: 50px;
-    width: 60%;
-    border: 1px solid black;
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    background-color: #b9c2fc
-    
-  
-  }
-  .flex_column {
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-  .bottom {
-    margin-bottom: 10px;
-  }
-  .circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: solid darkgray;
+
+  .brown,
+  .brown1 {
     height: 30px;
     width: 30px;
-    border-radius: 50%;
-    margin-left: 30px;
-    /* margin-top: 10px; */
-    cursor: pointer;
   }
-  .ans {
-    margin-left: 20px;
-  }
-  .green {
-    color: green;
-    font-size: 20px;
-  }
-  .red {
-    color: red;
-    font-size: 20px;
-  }
-  @media only screen and (max-width: 500px) {
-    .answer {
-      width: 90%;
-    }
-    .brown,
-    .brown1 {
-      height: 30px;
-      width: 30px;
-    }
-  }
-  
-  /* Hundred chart  */
+}
 
-.HundredChartFlexBox{
+/* Hundred chart  */
+
+.HundredChartFlexBox {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 }
-.HundredChartFlexBox > div {
+
+.HundredChartFlexBox>div {
   width: calc(50% - 1rem);
 }
