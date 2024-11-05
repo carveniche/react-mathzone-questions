@@ -357,7 +357,16 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
         table.style.width = "fit-content";
         table.style.maxWidth = "80%";
       });
-    }, 500);
+      const allTables = document.querySelectorAll(
+        "#ckeditorValueModified table"
+      );
+      allTables.forEach((table) => {
+        if (table.closest("table")) {
+          table.style.width = "fit-content";
+          table.style.maxWidth = "80%";
+        }
+      });
+    }, 100);
     return () => {
       clearTimeout(widthTimeout);
     };
