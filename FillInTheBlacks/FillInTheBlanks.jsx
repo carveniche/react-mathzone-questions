@@ -78,9 +78,6 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
           <input
             style={StylesInline.Input}
             maxLength={answer.length}
-            type={`${
-              hasLetter && hasNumber ? "text" : hasLetter ? "text" : "number"
-            }`}
             value={isStudentAnswerResponse ? choiceId : inputState}
             onChange={handleChange}
             disabled={hasAnswerSubmitted || isStudentAnswerResponse}
