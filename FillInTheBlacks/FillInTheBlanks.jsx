@@ -50,6 +50,9 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
     setHasAnswerSubmitted(true);
     return;
   };
+  state.question_text = state?.question_text
+    .replaceAll(">,", "> ,")
+    .replaceAll("<,", "< ,");
   return (
     <div>
       {!isStudentAnswerResponse && (
