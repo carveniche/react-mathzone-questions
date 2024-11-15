@@ -461,7 +461,6 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
     setHasAnswerSelected(true);
   };
   const inputRef1 = useRef([]);
-  console.log("STRRRRR", str.replaceAll(" ", "").includes("ldivision"));
   var longdiv =
     str.replaceAll(" ", "").includes("ldivision") ||
     str.replaceAll(" ", "").includes("border-bottom:thinsolid") ||
