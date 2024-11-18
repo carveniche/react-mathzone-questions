@@ -9,7 +9,7 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-export default function MultipleSelect({ state, meter,choiceId }) {
+export default function MultipleSelect({ state, meter, choiceId }) {
   meter = Number(meter) || 0;
   const inputRef = useRef();
   const {
@@ -17,9 +17,10 @@ export default function MultipleSelect({ state, meter,choiceId }) {
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setChoicesId,
-    setStudentAnswerQuestion,isStudentAnswerResponse
+    setStudentAnswerQuestion,
+    isStudentAnswerResponse,
   } = useContext(ValidationContext);
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) {
       return;
@@ -34,35 +35,36 @@ export default function MultipleSelect({ state, meter,choiceId }) {
       }
     }
     if (status == 0) {
-      setRedAlert(true)
+      setRedAlert(true);
       return;
     }
-    let choicesIdContainer=[]
-    for(let item of arr){
-      if(item?.show)
-      choicesIdContainer.push(item?.choice_id)
+    let choicesIdContainer = [];
+    for (let item of arr) {
+      if (item?.show) choicesIdContainer.push(item?.choice_id);
     }
-    for(let i=0;i<n;i++)
-    for (let i = 0; i < n; i++) {
-      if (arr[i].show != arr[i].correct) {
-        setChoicesId([...choicesIdContainer])
-        setIsAnswerCorrect(false);
-        setHasAnswerSubmitted(true);
-        return;
+    for (let i = 0; i < n; i++)
+      for (let i = 0; i < n; i++) {
+        if (arr[i].show != arr[i].correct) {
+          setChoicesId([...choicesIdContainer]);
+          setIsAnswerCorrect(false);
+          setHasAnswerSubmitted(true);
+          return;
+        }
       }
-    }
-    setChoicesId([...choicesIdContainer])
+    setChoicesId([...choicesIdContainer]);
     setIsAnswerCorrect(true);
     setHasAnswerSubmitted(true);
   };
 
   return (
     <div>
-      {!isStudentAnswerResponse&&<SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
-       {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div
           className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
