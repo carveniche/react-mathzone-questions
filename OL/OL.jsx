@@ -15,7 +15,7 @@ const reorder = (list, startIndex, endIndex) => {
   result.splice(endIndex, 0, removed);
   return result;
 };
-function Ol({ obj,meter }) {
+function Ol({ obj, meter }) {
   const {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
@@ -24,7 +24,7 @@ function Ol({ obj,meter }) {
     setStudentAnswerQuestion,
     studentAnswerQuestion,
   } = useContext(ValidationContext);
-  meter=Number(meter)||0
+  meter = Number(meter) || 0;
   const onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) {
@@ -54,7 +54,10 @@ function Ol({ obj,meter }) {
     replace: (domNode) => {
       if (domNode?.attribs?.class) {
         let clsName = String(domNode?.attribs?.class);
-        if (clsName.includes("mathquill-rendered-math")||clsName.includes("mathImg")) {
+        if (
+          clsName.includes("mathquill-rendered-math") ||
+          clsName.includes("mathImg")
+        ) {
           if (clsName.includes("mathquill-editable")) {
             let y = currentIndex;
             currentIndex = currentIndex + 1;
@@ -83,7 +86,7 @@ function Ol({ obj,meter }) {
       }
     },
   };
- 
+
   const handleSubmit = () => {
     if (hasAnswerSubmitted) return;
     for (let i = 0; i < questionContent?.length; i++) {
@@ -99,17 +102,23 @@ function Ol({ obj,meter }) {
     setIsAnswerCorrect(true);
   };
 
-  
   return (
     <div>
-     <SolveButton onClick={handleSubmit} answerHasSelected={hasAnswerSubmitted}/>
+      <SolveButton
+        onClick={handleSubmit}
+        answerHasSelected={hasAnswerSubmitted}
+      />
       <div id="studentAnswerResponse">
         <div className="mathzoneQuestionName">
           {parse(obj?.questionName, optionSelect)}
         </div>
-        {obj?.upload_file_name&&<div><img src={obj?.upload_file_name} alt="image not found"/></div>}
+        {obj?.upload_file_name && (
+          <div>
+            <img src={obj?.upload_file_name} alt="image not found" />
+          </div>
+        )}
         <div>
-          <ProgressBorder meter={meter+1}>
+          <ProgressBorder meter={meter + 1}>
             <div></div>
           </ProgressBorder>
         </div>
@@ -117,7 +126,11 @@ function Ol({ obj,meter }) {
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable">
               {(provided, snapshot) => (
-                <div className="mathzoneMainOlBox" {...provided.droppableProps} ref={provided.innerRef}>
+                <div
+                  className="mathzoneMainOlBox"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
                   {questionContent.map((item, index) => (
                     <Draggable
                       isDragDisabled={hasAnswerSubmitted}
@@ -131,22 +144,19 @@ function Ol({ obj,meter }) {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          {parse(item,optionSelect)}
+                          {parse(item, optionSelect)}
                         </div>
                       )}
                     </Draggable>
                   ))}
                   {provided.placeholder}
-                </div >
+                </div>
               )}
             </Droppable>
           </DragDropContext>
-          <div id="mathzoneFibAfterText">
-            {parse(obj?.text, optionSelect)}
-          </div>
+          <div id="mathzoneFibAfterText">{parse(obj?.text, optionSelect)}</div>
         </div>
       </div>
-      
     </div>
   );
 }
