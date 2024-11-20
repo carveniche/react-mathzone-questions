@@ -394,126 +394,129 @@ function ORC({ obj, question_text, meter }) {
         />
       }
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className="mathzoneQuestionName" id="orc_question_type">
-          {readQuestionText && <SpeakQuestionText readText={question_text} />}
-          {parse(question_text, optionSelect)}
-        </div>
-        {obj?.upload_file_name && (
-          <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
-          </div>
-        )}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && <SpeakQuestionText readText={question_text} />}
         <div>
-          <ProgressBorder meter={meter + 1}>
-            <div></div>
-          </ProgressBorder>
-        </div>
-        <div className={`${styles.contentParent} ${styles.orc_dragdrop}`}>
-          <>
-            {obj?.orc_oprc_data[0]?.column_headers &&
-              obj?.orc_oprc_data[0]?.column_headers?.length > 0 && (
+          <div className="mathzoneQuestionName" id="orc_question_type">
+            {parse(question_text, optionSelect)}
+          </div>
+          {obj?.upload_file_name && (
+            <div>
+              <img src={obj?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ProgressBorder meter={meter + 1}>
+              <div></div>
+            </ProgressBorder>
+          </div>
+          <div className={`${styles.contentParent} ${styles.orc_dragdrop}`}>
+            <>
+              {obj?.orc_oprc_data[0]?.column_headers &&
+                obj?.orc_oprc_data[0]?.column_headers?.length > 0 && (
+                  <div
+                    className="mathzoneOrcGrid"
+                    style={{
+                      gridTemplateColumns: `repeat(${
+                        Number(obj?.orc_oprc_data[0]?.column_headers?.length) ||
+                        1
+                      }, 1fr)`,
+                    }}
+                  >
+                    {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => (
+                      <div
+                        key={i}
+                        className={`mathzoneFlexbox ${
+                          i == obj?.orc_oprc_data[0]?.column_headers?.length &&
+                          "mathzoneEvenChild"
+                        }`}
+                        style={{
+                          border: 0,
+                          borderBottom: "1px solid black",
+                          borderRight: `${
+                            i <
+                            obj?.orc_oprc_data[0]?.column_headers?.length - 1
+                              ? 1
+                              : 0
+                          }px solid black`,
+                        }}
+                      >
+                        {parse(item, optionSelect)}
+                      </div>
+                    ))}
+                    {dropState?.map((items, i) => (
+                      <div
+                        className={`droppableOrc mathzoneOrcDivBox`}
+                        id={i}
+                        key={i}
+                        ref={(el) =>
+                          (droppableContainerRef.current[i] = {
+                            el,
+                            show: false,
+                            isMissed: true,
+                          })
+                        }
+                        style={{
+                          paddingBottom: "6rem",
+                          border: 0,
+                          borderRight: `${
+                            i < dropState?.length - 1 ? 1 : 0
+                          }px solid black`,
+                        }}
+                      >
+                        {items?.map((item, index) => (
+                          <Draggable
+                            onStop={(e) => handleStop2(e, i, index)}
+                            defaultPosition={{ x: 0, y: 0 }}
+                            axis="both"
+                            disabled={hasAnswerSubmiited}
+                            key={index}
+                          >
+                            <div style={{ cursor: "pointer" }}>
+                              {parse(item, optionSelect)}
+                            </div>
+                          </Draggable>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              {
                 <div
-                  className="mathzoneOrcGrid"
-                  style={{
-                    gridTemplateColumns: `repeat(${
-                      Number(obj?.orc_oprc_data[0]?.column_headers?.length) || 1
-                    }, 1fr)`,
-                  }}
+                  id="draggableOrc"
+                  ref={draggableRef}
+                  className="mathzoneOrcDivBox2"
+                  key={`drag${dragKey}`}
                 >
-                  {obj?.orc_oprc_data[0]?.column_headers?.map((item, i) => (
-                    <div
+                  {dragState?.map((items, i) => (
+                    <Draggable
+                      handle=".handle"
+                      onStop={(e) => handleStop1(e, i)}
+                      defaultPosition={{ x: 0, y: 0 }}
+                      axis="both"
+                      disabled={hasAnswerSubmiited}
                       key={i}
-                      className={`mathzoneFlexbox ${
-                        i == obj?.orc_oprc_data[0]?.column_headers?.length &&
-                        "mathzoneEvenChild"
-                      }`}
-                      style={{
-                        border: 0,
-                        borderBottom: "1px solid black",
-                        borderRight: `${
-                          i < obj?.orc_oprc_data[0]?.column_headers?.length - 1
-                            ? 1
-                            : 0
-                        }px solid black`,
-                      }}
                     >
-                      {parse(item, optionSelect)}
-                    </div>
-                  ))}
-                  {dropState?.map((items, i) => (
-                    <div
-                      className={`droppableOrc mathzoneOrcDivBox`}
-                      id={i}
-                      key={i}
-                      ref={(el) =>
-                        (droppableContainerRef.current[i] = {
-                          el,
-                          show: false,
-                          isMissed: true,
-                        })
-                      }
-                      style={{
-                        paddingBottom: "6rem",
-                        border: 0,
-                        borderRight: `${
-                          i < dropState?.length - 1 ? 1 : 0
-                        }px solid black`,
-                      }}
-                    >
-                      {items?.map((item, index) => (
-                        <Draggable
-                          onStop={(e) => handleStop2(e, i, index)}
-                          defaultPosition={{ x: 0, y: 0 }}
-                          axis="both"
-                          disabled={hasAnswerSubmiited}
-                          key={index}
-                        >
-                          <div style={{ cursor: "pointer" }}>
-                            {parse(item, optionSelect)}
-                          </div>
-                        </Draggable>
-                      ))}
-                    </div>
+                      <div style={{ cursor: "pointer" }} className="handle">
+                        {parse(items, optionSelect)}
+                      </div>
+                    </Draggable>
                   ))}
                 </div>
-              )}
-            {
-              <div
-                id="draggableOrc"
-                ref={draggableRef}
-                className="mathzoneOrcDivBox2"
-                key={`drag${dragKey}`}
-              >
-                {dragState?.map((items, i) => (
-                  <Draggable
-                    handle=".handle"
-                    onStop={(e) => handleStop1(e, i)}
-                    defaultPosition={{ x: 0, y: 0 }}
-                    axis="both"
-                    disabled={hasAnswerSubmiited}
-                    key={i}
-                  >
-                    <div style={{ cursor: "pointer" }} className="handle">
-                      {parse(items, optionSelect)}
-                    </div>
-                  </Draggable>
-                ))}
-              </div>
-            }
-          </>
-          <div>
-            {/* <div id="mathzoneFibAfterText">
+              }
+            </>
+            <div>
+              {/* <div id="mathzoneFibAfterText">
               {typeof obj?.after_question_text == "string"
                 ? HtmlParser(obj?.after_question_text)
                 : obj?.after_question_text}
             </div> */}
-            <div id="mathzoneFibAfterText">
-              {typeof obj?.after_question_text == "string"
-                ? parse(afterQstTxt.innerHTML)
-                : obj?.after_question_text}
-            </div>
-            {/* <div id="mathzoneFibAfterText">
+              <div id="mathzoneFibAfterText">
+                {typeof obj?.after_question_text == "string"
+                  ? parse(afterQstTxt.innerHTML)
+                  : obj?.after_question_text}
+              </div>
+              {/* <div id="mathzoneFibAfterText">
               {
               typeof obj?.after_question_text == "string"
                 ? 
@@ -523,20 +526,21 @@ function ORC({ obj, question_text, meter }) {
                 obj?.after_question_text
                  }
             </div> */}
-          </div>
-          {obj?.text && (
-            <div id="orcTextParent" style={InlineCss.TextBox}>
-              {refresh ? parse(obj?.text) : parse(obj?.text, optionSelect)}
             </div>
-          )}
-        </div>
-        <div
-          style={{
-            marginTop: "1rem",
-            visibility: "hidden",
-          }}
-        >
-          hello
+            {obj?.text && (
+              <div id="orcTextParent" style={InlineCss.TextBox}>
+                {refresh ? parse(obj?.text) : parse(obj?.text, optionSelect)}
+              </div>
+            )}
+          </div>
+          <div
+            style={{
+              marginTop: "1rem",
+              visibility: "hidden",
+            }}
+          >
+            hello
+          </div>
         </div>
       </div>
       {/* virtual Keyboard */}

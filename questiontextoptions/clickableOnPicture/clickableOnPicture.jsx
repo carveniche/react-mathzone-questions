@@ -99,54 +99,57 @@ export const ClickableOnPic = ({ data, meter }) => {
     <div>
       {!isStudentAnswerResponse && <SolveButton onClick={checkAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles2.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={data?.questionName} />
-          )}
-          {parse(data?.questionName)}
-        </div>
-        {data?.upload_file_name && (
-          <div>
-            <img src={data?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={data?.questionName} />
         )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div>
-          <div
-            totalCols={Number(data?.col) || 0}
-            className={styles2.QuestiontextoptionsGrid}
-            style={{
-              gridTemplateColumns: `repeat(${Number(data?.col) || 1}, 1fr)`,
-            }}
-          >
-            {questionContent?.map((e, i) => {
-              return (
-                <div
-                  className={styles.frame}
-                  style={{
-                    background:
-                      isStudentAnswerResponse &&
-                      String(e?.count) === String(data[student_answer])?.trim()
-                        ? "blue"
-                        : prevStatus == i
-                        ? "blue"
-                        : "white",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    handleClick(i);
-                  }}
-                >
-                  <Pattern
-                    count={questionContent[i]?.count}
-                    imgUrl={questionContent[i]?.value}
-                  />
-                </div>
-              );
-            })}
+          <div className={styles2.questionName}>
+            {parse(data?.questionName)}
+          </div>
+          {data?.upload_file_name && (
+            <div>
+              <img src={data?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div>
+            <div
+              totalCols={Number(data?.col) || 0}
+              className={styles2.QuestiontextoptionsGrid}
+              style={{
+                gridTemplateColumns: `repeat(${Number(data?.col) || 1}, 1fr)`,
+              }}
+            >
+              {questionContent?.map((e, i) => {
+                return (
+                  <div
+                    className={styles.frame}
+                    style={{
+                      background:
+                        isStudentAnswerResponse &&
+                        String(e?.count) ===
+                          String(data[student_answer])?.trim()
+                          ? "blue"
+                          : prevStatus == i
+                          ? "blue"
+                          : "white",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      handleClick(i);
+                    }}
+                  >
+                    <Pattern
+                      count={questionContent[i]?.count}
+                      imgUrl={questionContent[i]?.value}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

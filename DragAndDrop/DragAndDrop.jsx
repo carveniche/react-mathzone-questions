@@ -147,7 +147,22 @@ export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
       );
     }
   };
-
+  var combinedReadOutText = state?.questionName;
+  if (state.questionContent) {
+    var contentText = state.questionContent.reduce((acc, cont, index) => {
+      console.log("INDEX", index);
+      var fillerText =
+        index == 1
+          ? "is less than or geater than or equal to"
+          : index == 0
+          ? "which number"
+          : "what number";
+      return cont.isMissed == "true"
+        ? `${acc} ${fillerText}`
+        : `${acc} ${cont.value}`;
+    }, "");
+    combinedReadOutText = combinedReadOutText + "." + contentText;
+  }
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -158,7 +173,7 @@ export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles?.questionName}>
+        <div className={styles?.questionName} style={{ display: "flex" }}>
           {readQuestionText && (
             <SpeakQuestionText readText={state?.questionName} />
           )}

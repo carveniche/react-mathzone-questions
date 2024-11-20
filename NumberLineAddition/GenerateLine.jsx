@@ -1079,91 +1079,93 @@ export default function GenerateLine({ question, meter }) {
         />
       )}
       {redAlert && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={question?.questionName} />
-          )}
-          {parse(question?.questionName, optionSelectStaticMathField)}
-        </div>
-        {question?.upload_file_name && (
-          <div>
-            <img src={question?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={question?.questionName} />
         )}
-        <div className={styles.borderTopBottomMargin}>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <div className={styles.hori}>
-            <div id={styles.horizontal_line}>
-              <div id="xline" className={styles.xline}>
-                <div className={styles.arrowLeft}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 60 36"
-                    width="60"
-                    height="36"
-                  >
-                    <path fill="none" d="M0 0h60v36H0z" />
-                    <path
-                      d="M14 18l15-10M15 18l15 10"
-                      stroke="#888888"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                  <div className={styles.arrowBotline}></div>
-                </div>
-                {lines.map((line) => (
-                  <>{line}</>
-                ))}
-                <div className={styles.arrowRight}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 60 36"
-                    width="60"
-                    height="36"
-                  >
-                    <path fill="none" d="M0 0h60v36H0z" />
-                    <path
-                      transform="rotate(180 30 18)"
-                      d="M14 18l15-10M15 18l15 10"
-                      stroke="#888888"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                  <div className={styles.arrowBotline}></div>
+        <div style={{ maxWidth: "100%" }}>
+          <div className={styles.questionName}>
+            {parse(question?.questionName, optionSelectStaticMathField)}
+          </div>
+          {question?.upload_file_name && (
+            <div>
+              <img src={question?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div className={styles.borderTopBottomMargin}>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <div className={styles.hori}>
+              <div id={styles.horizontal_line}>
+                <div id="xline" className={styles.xline}>
+                  <div className={styles.arrowLeft}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 60 36"
+                      width="60"
+                      height="36"
+                    >
+                      <path fill="none" d="M0 0h60v36H0z" />
+                      <path
+                        d="M14 18l15-10M15 18l15 10"
+                        stroke="#888888"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                    <div className={styles.arrowBotline}></div>
+                  </div>
+                  {lines.map((line) => (
+                    <>{line}</>
+                  ))}
+                  <div className={styles.arrowRight}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 60 36"
+                      width="60"
+                      height="36"
+                    >
+                      <path fill="none" d="M0 0h60v36H0z" />
+                      <path
+                        transform="rotate(180 30 18)"
+                        d="M14 18l15-10M15 18l15 10"
+                        stroke="#888888"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                    <div className={styles.arrowBotline}></div>
+                  </div>
                 </div>
               </div>
             </div>
+            {choiceType == "keying" ? (
+              <p style={{ padding: "20px 0" }}>
+                {`Enter the ${
+                  question.ansArray.length > 1 ? "answers" : "answer"
+                } in the ${
+                  question.ansArray.length > 1 ? "boxes." : "box."
+                }`}{" "}
+              </p>
+            ) : choiceType == "mapping" ? (
+              <p style={{ padding: "20px 0" }}>{`Click on the ${
+                question.ansArray.length > 1 ? "numbers" : "number"
+              } to select.`}</p>
+            ) : (
+              ""
+            )}
+            {choiceType == "selectchoice" && (
+              <SelectChoiceHorizontalFillUpsEquationType
+                inputRef={inputRef}
+                content={question?.questionContent}
+                isFraction={question.isFraction}
+                totalRows={question.rows}
+                answerHasSelected={hasAnswerSubmitted}
+                choices={choices}
+                studentAnswer={studAns}
+                choiceType={choiceType}
+              />
+            )}
           </div>
-          {choiceType == "keying" ? (
-            <p style={{ padding: "20px 0" }}>
-              {`Enter the ${
-                question.ansArray.length > 1 ? "answers" : "answer"
-              } in the ${
-                question.ansArray.length > 1 ? "boxes." : "box."
-              }`}{" "}
-            </p>
-          ) : choiceType == "mapping" ? (
-            <p style={{ padding: "20px 0" }}>{`Click on the ${
-              question.ansArray.length > 1 ? "numbers" : "number"
-            } to select.`}</p>
-          ) : (
-            ""
-          )}
-          {choiceType == "selectchoice" && (
-            <SelectChoiceHorizontalFillUpsEquationType
-              inputRef={inputRef}
-              content={question?.questionContent}
-              isFraction={question.isFraction}
-              totalRows={question.rows}
-              answerHasSelected={hasAnswerSubmitted}
-              choices={choices}
-              studentAnswer={studAns}
-              choiceType={choiceType}
-            />
-          )}
         </div>
       </div>
     </div>

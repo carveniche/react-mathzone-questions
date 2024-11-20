@@ -11,8 +11,7 @@ export default function SpeakQuestionText({ type, readText }) {
   const [voices, setVoices] = useState([]);
   const [canStart, setCanStart] = useState(false);
   const { indianAccent } = useContext(ValidationContext);
-  console.log({ readText });
-  console.log(text);
+  console.log("Readable Text", text);
   function removeImgTags(inputHTML) {
     const imgTagRegex = /<img[^>]*>/g;
     return inputHTML.replace(imgTagRegex, "");
@@ -26,19 +25,32 @@ export default function SpeakQuestionText({ type, readText }) {
       readText = readText.replace(/(\d+)\s*-\s*(\d+)/g, (match, p1, p2) => {
         return `${p1} minus ${p2}`;
       });
+      readText = readText.replace(/(-?\d+)/g, (match) =>
+        match.startsWith("-") ? `minus ${match.slice(1)}` : match
+      );
       readText = readText
-        .replaceAll("</div>", "")
-        .replaceAll("<div>", "")
-        .replaceAll("&nbsp", "")
-        .replaceAll(";", "")
-        .replaceAll("_", "")
-        .replaceAll("<\\br>", "")
-        .replaceAll("<br>", "")
-        .replaceAll("<br/>", "")
-        .replaceAll("<span>", "")
-        .replaceAll("</span>", "")
-        .replaceAll("<p>", "")
-        .replaceAll("</p>", "");
+        .replace(
+          /\\frac{(\d+)}{(\d+)}/g,
+          (match, numerator, denominator) => `${numerator} by ${denominator}`
+        )
+        .replace(/°/g, " degree");
+      readText = readText.replace(
+        /([a-zA-Z0-9]+)\^{([a-zA-Z0-9]+)}/g,
+        (match, base, exponent) => `${base} to the power of ${exponent}`
+      );
+      readText = readText
+        .replaceAll("</div>", " ")
+        .replaceAll("<div>", " ")
+        .replaceAll("&nbsp", " ")
+        .replaceAll(";", " ")
+        .replaceAll("_", " ")
+        .replaceAll("<\\br>", " ")
+        .replaceAll("<br>", " ")
+        .replaceAll("<br/>", " ")
+        .replaceAll("<span>", " ")
+        .replaceAll("</span>", " ")
+        .replaceAll("<p>", " ")
+        .replaceAll("</p>", " ");
 
       setText(
         readText
@@ -92,8 +104,9 @@ export default function SpeakQuestionText({ type, readText }) {
         (voice) => voice.lang === "en-US" && voice.name.includes("Mark")
       );
     }
-    console.log("voiceAccent", voiceAccent);
     utterance.voice = voiceAccent && voiceAccent[0];
+    utterance.pitch = 0.5;
+    utterance.rate = indianAccent ? 0.75 : 0.7;
     if (voices.length === 0) {
       console.error("There was an error while generating speech:");
     }

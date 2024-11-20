@@ -57,32 +57,34 @@ export default function VerticalWithSymbols({
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {HtmlParser(state?.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <ContentVerticalSymbols
-            content={state?.questionContent}
-            contentText={state.ContentQuestionTextImage}
-          />
-          <SelectVerticalSymbols
-            choices={state?.choices}
-            choiceRef={choiceRef}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            studentAnswer={state[student_answer]}
-          />
+          <div className={styles.questionName}>
+            {HtmlParser(state?.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <ContentVerticalSymbols
+              content={state?.questionContent}
+              contentText={state.ContentQuestionTextImage}
+            />
+            <SelectVerticalSymbols
+              choices={state?.choices}
+              choiceRef={choiceRef}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              studentAnswer={state[student_answer]}
+            />
+          </div>
         </div>
       </div>
     </div>

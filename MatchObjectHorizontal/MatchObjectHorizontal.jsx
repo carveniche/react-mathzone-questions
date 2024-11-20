@@ -205,32 +205,34 @@ export default function MatchObjectHorizontal({
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {parse(state?.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
-        <div className={styles.borderTopBottomMargin}>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <ContentMatchObjectHorizontal
-            content={state?.questionContent}
-            totalEmptyBox={totalEmptyBox}
-            inputRef={inputRef}
-            totalRows={totalRows}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            totalCols={totalCols}
-            choices={state?.choices}
-            choiceType={state?.choiceType}
-          />
+        <div>
+          <div className={styles.questionName}>
+            {parse(state?.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div className={styles.borderTopBottomMargin}>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <ContentMatchObjectHorizontal
+              content={state?.questionContent}
+              totalEmptyBox={totalEmptyBox}
+              inputRef={inputRef}
+              totalRows={totalRows}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              totalCols={totalCols}
+              choices={state?.choices}
+              choiceType={state?.choiceType}
+            />
+          </div>
         </div>
       </div>
     </div>

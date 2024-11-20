@@ -135,6 +135,7 @@ export default function KeyingHorizontalFillUpsEquationType({
                               ? item[student_answer]
                               : inputState[`${item.row}row${item.col}col`]
                           }
+                          maxLength={item.value.length}
                           onChange={(e) => {
                             handleChange(
                               e.target.value,

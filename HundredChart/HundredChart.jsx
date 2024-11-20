@@ -94,7 +94,7 @@ function HundredChart({ data, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div className={styles.outer} id="studentAnswerResponse">
-        <div className={styles2.questionName}>
+        <div className={styles2.questionName} style={{ display: "flex" }}>
           {readQuestionText && (
             <SpeakQuestionText readText={data?.questionName} />
           )}

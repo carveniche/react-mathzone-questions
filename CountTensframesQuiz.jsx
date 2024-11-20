@@ -63,46 +63,48 @@ function CountTensFramesQuiz({
           msg={!imageLoaded ? "Image is loading..." : ""}
         />
       )}
-      <div id="studentAnswerResponse">
-        <div className={`${styles.questionName}`}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {HtmlParser(state?.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
-        <div className={`${styles.questionContentText}`}>
-          <HtmlParserComponent value={state?.questionContentText} />
-        </div>
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div class={styles.contentParent}>
-          {Boolean(totalRows) && (
-            <ContentCountTensframeQuiz
-              totalRows={totalRows}
-              totalColumn={state?.view_json?.cols}
-              content={state?.questionContent}
-              setImageLoaded={setImageLoaded}
-              studentResponseView={studentResponseView}
-            />
+          <div className={`${styles.questionName}`}>
+            {HtmlParser(state?.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
           )}
+          <div className={`${styles.questionContentText}`}>
+            <HtmlParserComponent value={state?.questionContentText} />
+          </div>
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div class={styles.contentParent}>
+            {Boolean(totalRows) && (
+              <ContentCountTensframeQuiz
+                totalRows={totalRows}
+                totalColumn={state?.view_json?.cols}
+                content={state?.questionContent}
+                setImageLoaded={setImageLoaded}
+                studentResponseView={studentResponseView}
+              />
+            )}
 
-          <OnlineQuizSelectChoiceOption
-            choices={state?.choices}
-            correctAnswer={state?.answerCount}
-            answerHasSelected={answerHasSelected}
-            setanswerHasSelected={setanswerHasSelected}
-            isAnswerSelected={showAnswer}
-            setIsAnswerCorrect={setIsAnswerCorrect}
-            teacher={teacher}
-            answerRef={answerRef}
-            studentAnswer={state[student_answer]}
-          />
+            <OnlineQuizSelectChoiceOption
+              choices={state?.choices}
+              correctAnswer={state?.answerCount}
+              answerHasSelected={answerHasSelected}
+              setanswerHasSelected={setanswerHasSelected}
+              isAnswerSelected={showAnswer}
+              setIsAnswerCorrect={setIsAnswerCorrect}
+              teacher={teacher}
+              answerRef={answerRef}
+              studentAnswer={state[student_answer]}
+            />
+          </div>
         </div>
       </div>
     </div>

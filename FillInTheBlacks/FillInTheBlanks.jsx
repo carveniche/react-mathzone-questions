@@ -74,38 +74,40 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
       {redAlert && !hasAnswerSubmitted && (
         <CustomAlertBoxMathZone msg={"Please answer the question..."} />
       )}
-      <div className="mathzoneQuestionName" id="studentAnswerResponse">
+      <div style={{ display: "flex" }}>
         {readQuestionText && combinedReadOutText && (
           <SpeakQuestionText type={"oldType"} readText={combinedReadOutText} />
         )}
-        {state?.question_text && (
-          <div>
-            <div>{HtmlParser(state?.question_text)}</div>
-          </div>
-        )}
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="Image not found" />
-          </div>
-        )}
-        <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div style={StylesInline.FlexBox}>
-          {state?.fib_before_text && (
-            <div>{HtmlParser(state?.fib_before_text)}</div>
+        <div className="mathzoneQuestionName" id="studentAnswerResponse">
+          {state?.question_text && (
+            <div>
+              <div>{HtmlParser(state?.question_text)}</div>
+            </div>
           )}
-          <input
-            style={StylesInline.Input}
-            maxLength={answer.length}
-            value={isStudentAnswerResponse ? choiceId : inputState}
-            onChange={handleChange}
-            disabled={hasAnswerSubmitted || isStudentAnswerResponse}
-          />
-          {state?.fib_text && <div>{HtmlParser(state?.fib_text)}</div>}
-          {state?.after_question_text && (
-            <div>{HtmlParser(state?.after_question_text)}</div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="Image not found" />
+            </div>
           )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div style={StylesInline.FlexBox}>
+            {state?.fib_before_text && (
+              <div>{HtmlParser(state?.fib_before_text)}</div>
+            )}
+            <input
+              style={StylesInline.Input}
+              maxLength={answer.length}
+              value={isStudentAnswerResponse ? choiceId : inputState}
+              onChange={handleChange}
+              disabled={hasAnswerSubmitted || isStudentAnswerResponse}
+            />
+            {state?.fib_text && <div>{HtmlParser(state?.fib_text)}</div>}
+            {state?.after_question_text && (
+              <div>{HtmlParser(state?.after_question_text)}</div>
+            )}
+          </div>
         </div>
       </div>
     </div>

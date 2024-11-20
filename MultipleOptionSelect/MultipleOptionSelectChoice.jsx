@@ -133,33 +133,36 @@ function MultipleOptionSelectChoice({
 
         <div
           id="studentAnswerResponse"
+          style={{ display: "flex" }}
           className="mathzone-color-indigo word-space_pre-wrap"
         >
-          <div className={styles.questionName}>
-            {readQuestionText && (
-              <SpeakQuestionText readText={state?.questionName} />
-            )}
-            {parse(state?.questionName)}
-          </div>
-          {state?.upload_file_name && (
-            <div>
-              <img src={state?.upload_file_name} alt="image not found" />
-            </div>
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
           )}
           <div>
-            <ConditionOnProgressBar meter={meter} />
-          </div>
-          <div className={styles.contentParent}>
-            {Boolean(totalRows) && (
-              <MultipleChoiceOptionSelectPicture
-                totalRows={totalRows}
-                choices={state?.questionContent}
-                totalColumns={state.col}
-                isAnswerSelected={showAnswer}
-                inputRef={inputRef}
-                studentAnswer={state[student_answer]}
-              />
+            <div className={styles.questionName}>
+              {parse(state?.questionName)}
+            </div>
+            {state?.upload_file_name && (
+              <div>
+                <img src={state?.upload_file_name} alt="image not found" />
+              </div>
             )}
+            <div>
+              <ConditionOnProgressBar meter={meter} />
+            </div>
+            <div className={styles.contentParent}>
+              {Boolean(totalRows) && (
+                <MultipleChoiceOptionSelectPicture
+                  totalRows={totalRows}
+                  choices={state?.questionContent}
+                  totalColumns={state.col}
+                  isAnswerSelected={showAnswer}
+                  inputRef={inputRef}
+                  studentAnswer={state[student_answer]}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

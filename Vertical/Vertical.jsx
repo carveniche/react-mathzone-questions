@@ -149,55 +149,57 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {HtmlParser(state?.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          {state?.choiceType === "keying" ? (
-            <ContentVertical
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              totalCols={Number(totalCols)}
-              inputRef={inputRef}
-              totalEmptyBox={totalEmptyBox}
-              hasAnswerSubmitted={hasAnswerSubmitted}
-            />
-          ) : state?.choiceType === "selectchoice" ? (
-            <VerticalSelect
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              totalCols={Number(totalCols)}
-              inputRef={inputRef}
-              totalEmptyBox={totalEmptyBox}
-              hasAnswerSubmitted={hasAnswerSubmitted}
-              choices={state?.choices}
-              studentAnswer={state[student_answer]}
-            />
-          ) : state?.choiceType === "dragdrop" ? (
-            <VerticalDragDrop
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              totalCols={Number(totalCols)}
-              inputRef={inputRef}
-              totalEmptyBox={totalEmptyBox}
-              hasAnswerSubmitted={hasAnswerSubmitted}
-              choices={state?.choices}
-            />
-          ) : (
-            <h1>Unsupported file types...</h1>
+          <div className={styles.questionName}>
+            {HtmlParser(state?.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
           )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            {state?.choiceType === "keying" ? (
+              <ContentVertical
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                totalCols={Number(totalCols)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+              />
+            ) : state?.choiceType === "selectchoice" ? (
+              <VerticalSelect
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                totalCols={Number(totalCols)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+                choices={state?.choices}
+                studentAnswer={state[student_answer]}
+              />
+            ) : state?.choiceType === "dragdrop" ? (
+              <VerticalDragDrop
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                totalCols={Number(totalCols)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+                choices={state?.choices}
+              />
+            ) : (
+              <h1>Unsupported file types...</h1>
+            )}
+          </div>
         </div>
       </div>
     </div>

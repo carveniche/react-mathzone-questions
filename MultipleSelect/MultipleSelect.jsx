@@ -67,31 +67,30 @@ export default function MultipleSelect({ state, meter, choiceId }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div
-          className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
-        >
-          {readQuestionText && (
-            <SpeakQuestionText
-              type={"oldType"}
-              readText={state?.question_text}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText type={"oldType"} readText={state?.question_text} />
+        )}
+        <div>
+          <div
+            className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
+          >
+            {HtmlParser(state?.question_text)}
+          </div>
+          <div>
+            <img src={state?.upload_file_name} />
+          </div>
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div>
+            <SelectMultipleSelect
+              choices={state?.choice_data}
+              answerHasSelected={hasAnswerSubmitted}
+              inputRef={inputRef}
+              choiceId={choiceId}
             />
-          )}
-          {HtmlParser(state?.question_text)}
-        </div>
-        <div>
-          <img src={state?.upload_file_name} />
-        </div>
-        <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div>
-          <SelectMultipleSelect
-            choices={state?.choice_data}
-            answerHasSelected={hasAnswerSubmitted}
-            inputRef={inputRef}
-            choiceId={choiceId}
-          />
+          </div>
         </div>
       </div>
     </div>

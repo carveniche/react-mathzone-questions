@@ -220,34 +220,36 @@ export default function HorizontalFillUpsEquationType({
     <div className={styles.MainApp}>
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
         {readQuestionText && (
           <SpeakQuestionText readText={state?.questionName} />
         )}
-        <div className={styles.questionName} style={{ display: "block" }}>
-          {parse(state?.questionName, optionSelectStaticMathField)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
-        )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <ContentHorizontalFillUpsEquationType
-            content={state?.questionContent}
-            totalEmptyBox={totalEmptyBox}
-            inputRef={inputRef}
-            totalRows={totalRows}
-            hasAnswerSubmitted={false}
-            totalCols={totalCols}
-            choices={state?.choices}
-            choiceType={state?.choiceType}
-            studentAnswer={state[student_answer]}
-            equationKeyingRef={equationKeyingRef}
-          />
+          <div className={styles.questionName} style={{ display: "block" }}>
+            {parse(state?.questionName, optionSelectStaticMathField)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <ContentHorizontalFillUpsEquationType
+              content={state?.questionContent}
+              totalEmptyBox={totalEmptyBox}
+              inputRef={inputRef}
+              totalRows={totalRows}
+              hasAnswerSubmitted={false}
+              totalCols={totalCols}
+              choices={state?.choices}
+              choiceType={state?.choiceType}
+              studentAnswer={state[student_answer]}
+              equationKeyingRef={equationKeyingRef}
+            />
+          </div>
         </div>
       </div>
     </div>

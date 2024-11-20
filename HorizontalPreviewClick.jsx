@@ -22,6 +22,7 @@ function HorizontalPreviewClick({ obj, meter }) {
     setChoicesId,
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
+    readQuestionText,
     isStudentAnswerResponse,
   } = useContext(ValidationContext);
   const showAnswer = hasAnswerSubmitted;
@@ -54,37 +55,39 @@ function HorizontalPreviewClick({ obj, meter }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          <SpeakQuestionText readText={questionText} />
-          {HtmlParser(obj?.questionName)}
-        </div>
-        {obj?.upload_file_name && (
-          <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
-          </div>
-        )}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && <SpeakQuestionText readText={questionText} />}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          {Boolean(obj?.rows) && Boolean(obj?.cols) && (
-            <OnlineQuizQuestionContent
-              totalRows={obj?.rows}
-              totalColumn={obj?.cols}
-              content={obj?.questionContent}
-            />
+          <div className={styles.questionName}>
+            {HtmlParser(obj?.questionName)}
+          </div>
+          {obj?.upload_file_name && (
+            <div>
+              <img src={obj?.upload_file_name} alt="image not found" />
+            </div>
           )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            {Boolean(obj?.rows) && Boolean(obj?.cols) && (
+              <OnlineQuizQuestionContent
+                totalRows={obj?.rows}
+                totalColumn={obj?.cols}
+                content={obj?.questionContent}
+              />
+            )}
 
-          <OnlineQuizSelectChoiceOption
-            choices={obj?.choices}
-            correctAnswer={obj?.answer}
-            isAnswerSelected={showAnswer}
-            setIsAnswerCorrect={setIsAnswerCorrect}
-            setanswerHasSelected={setHasAnswerSelected}
-            answerRef={input2Ref}
-            studentAnswer={obj[student_answer]}
-          />
+            <OnlineQuizSelectChoiceOption
+              choices={obj?.choices}
+              correctAnswer={obj?.answer}
+              isAnswerSelected={showAnswer}
+              setIsAnswerCorrect={setIsAnswerCorrect}
+              setanswerHasSelected={setHasAnswerSelected}
+              answerRef={input2Ref}
+              studentAnswer={obj[student_answer]}
+            />
+          </div>
         </div>
       </div>
     </div>

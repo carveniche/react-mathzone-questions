@@ -52,42 +52,46 @@ function HorizontalNotSymbols({ state, totalRows, meter }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {readQuestionText && <SpeakQuestionText readText={questionText} />}
-          {HtmlParser(state?.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
-        )}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && <SpeakQuestionText readText={questionText} />}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <div className={styles.questionName}>{state.questionContentText}</div>
-
-          {Boolean(totalRows) && (
-            <ContentHorizontalNotSymbols
-              totalRows={totalRows}
-              content={state?.questionContent}
-              totalColumns={state.col}
-              setanswerHasSelected={setanswerHasSelected}
-              isAnswerSelected={showAnswer}
-              setShowAnswer={setShowAnswer}
-            />
+          <div className={styles.questionName}>
+            {HtmlParser(state?.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
           )}
           <div>
-            <SelectChoiceHorizontalNotSymbol
-              choices={state.choices}
-              correctAnswer={state?.answerValue}
-              setanswerHasSelected={setanswerHasSelected}
-              isAnswerSelected={showAnswer}
-              setIsAnswerCorrect={setIsAnswerCorrect}
-              valueRef={valueRef}
-              studentAnswer={state[student_answer]}
-            />
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <div className={styles.questionName}>
+              {state.questionContentText}
+            </div>
+
+            {Boolean(totalRows) && (
+              <ContentHorizontalNotSymbols
+                totalRows={totalRows}
+                content={state?.questionContent}
+                totalColumns={state.col}
+                setanswerHasSelected={setanswerHasSelected}
+                isAnswerSelected={showAnswer}
+                setShowAnswer={setShowAnswer}
+              />
+            )}
+            <div>
+              <SelectChoiceHorizontalNotSymbol
+                choices={state.choices}
+                correctAnswer={state?.answerValue}
+                setanswerHasSelected={setanswerHasSelected}
+                isAnswerSelected={showAnswer}
+                setIsAnswerCorrect={setIsAnswerCorrect}
+                valueRef={valueRef}
+                studentAnswer={state[student_answer]}
+              />
+            </div>
           </div>
         </div>
       </div>

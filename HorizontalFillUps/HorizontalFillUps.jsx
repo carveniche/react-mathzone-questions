@@ -188,7 +188,6 @@ export default function HorizontalFillUps({
     setStudentAnswerQuestion(jsonData);
     setHasAnswerSubmitted(true);
   };
-
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -198,34 +197,36 @@ export default function HorizontalFillUps({
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName} style={{ display: "block" }}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {parse(state?.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
-        <div className={styles.borderTopBottomMargin}>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <ContentHorizontalFillUps
-            content={state?.questionContent}
-            totalEmptyBox={totalEmptyBox}
-            inputRef={inputRef}
-            totalRows={totalRows}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            totalCols={totalCols}
-            choices={state?.choices}
-            choiceType={state?.choiceType}
-            studentAnswer={state[student_answer]}
-            questionType={state?.type}
-          />
+        <div>
+          <div className={styles.questionName} style={{ display: "block" }}>
+            {parse(state?.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div className={styles.borderTopBottomMargin}>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <ContentHorizontalFillUps
+              content={state?.questionContent}
+              totalEmptyBox={totalEmptyBox}
+              inputRef={inputRef}
+              totalRows={totalRows}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              totalCols={totalCols}
+              choices={state?.choices}
+              choiceType={state?.choiceType}
+              studentAnswer={state[student_answer]}
+              questionType={state?.type}
+            />
+          </div>
         </div>
       </div>
     </div>

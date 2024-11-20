@@ -87,31 +87,31 @@ export default function CountOnTensframe({ obj, meter }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={obj?.questionName} />
-          )}
-          <HtmlParserComponent value={obj?.questionName} />
-        </div>
-        {obj?.upload_file_name && (
-          <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && <SpeakQuestionText readText={obj?.questionName} />}
+        <div>
+          <div className={styles.questionName}>
+            <HtmlParserComponent value={obj?.questionName} />
           </div>
-        )}
-        <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div>
-          <ContentCountOnTensframe
-            content={obj?.questionContent}
-            totalRows={obj?.answerCount}
-          />
-          <SelectCountOnTensframe
-            choices={obj?.choices}
-            inputRef={inputRef}
-            studentAnswer={obj[student_answer]}
-          />
+          {obj?.upload_file_name && (
+            <div>
+              <img src={obj?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div>
+            <ContentCountOnTensframe
+              content={obj?.questionContent}
+              totalRows={obj?.answerCount}
+            />
+            <SelectCountOnTensframe
+              choices={obj?.choices}
+              inputRef={inputRef}
+              studentAnswer={obj[student_answer]}
+            />
+          </div>
         </div>
       </div>
     </div>

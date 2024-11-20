@@ -67,48 +67,50 @@ export default function TensFrame({ state, totalRows, totalColumns, meter }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone msg={msg} />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {HtmlParser(state?.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
-        <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent} ref={heightDiv}>
-          <TensframeContent
-            totalColumns={totalColumns}
-            boxesImageRef={boxesImageRef}
-            images={HtmlParser(state?.questionContent)}
-            currentIndex={
-              isStudentAnswerResponse ? state[student_answer] : index
-            }
-          />
+        <div style={{ width: "100%" }}>
+          <div className={styles.questionName}>
+            {HtmlParser(state?.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
           <div>
-            <div className={styles.questionName}>Click to add</div>
-            <div className={styles.flex}>
-              <div
-                className={styles.TensframeButtonBox}
-                onClick={handleAddImage}
-                disabled={answerSubmit}
-              >
-                <div>1</div>
-                <div>{HtmlParser(state?.questionContent)}</div>
-              </div>
-              <div
-                className={styles.TensframeButtonBox}
-                onClick={handleRemoveImage}
-                disabled={answerSubmit}
-              >
-                <div>
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfdZqfU-iVR-ddMW3t0qFTshLKUaBwboTZyg&usqp=CAU" />
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent} ref={heightDiv}>
+            <TensframeContent
+              totalColumns={totalColumns}
+              boxesImageRef={boxesImageRef}
+              images={HtmlParser(state?.questionContent)}
+              currentIndex={
+                isStudentAnswerResponse ? state[student_answer] : index
+              }
+            />
+            <div>
+              <div className={styles.questionName}>Click to add</div>
+              <div className={styles.flex}>
+                <div
+                  className={styles.TensframeButtonBox}
+                  onClick={handleAddImage}
+                  disabled={answerSubmit}
+                >
+                  <div>1</div>
+                  <div>{HtmlParser(state?.questionContent)}</div>
+                </div>
+                <div
+                  className={styles.TensframeButtonBox}
+                  onClick={handleRemoveImage}
+                  disabled={answerSubmit}
+                >
+                  <div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfdZqfU-iVR-ddMW3t0qFTshLKUaBwboTZyg&usqp=CAU" />
+                  </div>
                 </div>
               </div>
             </div>

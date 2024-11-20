@@ -47,76 +47,77 @@ export const ClickableOnYesNo = ({ data, meter }) => {
     <div>
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmit} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles2.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={data?.questionName} />
-          )}
-          {HtmlParser(data?.questionName)}
-        </div>
-        {data?.upload_file_name && (
-          <div>
-            <img src={data?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={data?.questionName} />
         )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "4rem",
-              margin: "2rem 0",
-            }}
-          >
-            {data.questionContent[0].map((e, i) => {
-              return (
-                <div className={styles.frame} key={i}>
-                  <Pattern
-                    count={data.questionContent[0][i].count}
-                    imgUrl={data.questionContent[0][i].img}
-                  />
-                </div>
-              );
-            })}
+          <div className={styles2.questionName}>
+            {HtmlParser(data?.questionName)}
           </div>
-
-          <div style={{ display: "flex", gap: "1rem" }}>
-            <div
-              className={styles.yesNoButton}
-              onClick={() => {
-                handleClick("yes");
-              }}
-              style={{
-                background:
-                  isStudentAnswerResponse &&
-                  String(data[student_answer])?.trim() === "yes"
-                    ? "#b9c2fc"
-                    : choices == "yes"
-                    ? "#b9c2fc"
-                    : "initial",
-              }}
-            >
-              Yes
+          {data?.upload_file_name && (
+            <div>
+              <img src={data?.upload_file_name} alt="image not found" />
             </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div>
             <div
-              className={styles.yesNoButton}
               style={{
-                background:
-                  isStudentAnswerResponse &&
-                  String(data[student_answer])?.trim() === "no"
-                    ? "#b9c2fc"
-                    : choices == "no"
-                    ? "#b9c2fc"
-                    : "initial",
-              }}
-              onClick={() => {
-                handleClick("no");
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "4rem",
+                margin: "2rem 0",
               }}
             >
-              No
+              {data.questionContent[0].map((e, i) => {
+                return (
+                  <div className={styles.frame} key={i}>
+                    <Pattern
+                      count={data.questionContent[0][i].count}
+                      imgUrl={data.questionContent[0][i].img}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{ display: "flex", gap: "1rem" }}>
+              <div
+                className={styles.yesNoButton}
+                onClick={() => {
+                  handleClick("yes");
+                }}
+                style={{
+                  background:
+                    isStudentAnswerResponse &&
+                    String(data[student_answer])?.trim() === "yes"
+                      ? "#b9c2fc"
+                      : choices == "yes"
+                      ? "#b9c2fc"
+                      : "initial",
+                }}
+              >
+                Yes
+              </div>
+              <div
+                className={styles.yesNoButton}
+                style={{
+                  background:
+                    isStudentAnswerResponse &&
+                    String(data[student_answer])?.trim() === "no"
+                      ? "#b9c2fc"
+                      : choices == "no"
+                      ? "#b9c2fc"
+                      : "initial",
+                }}
+                onClick={() => {
+                  handleClick("no");
+                }}
+              >
+                No
+              </div>
             </div>
           </div>
         </div>

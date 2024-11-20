@@ -57,32 +57,34 @@ export default function BlockBaseImage({ state, totalRows, meter }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {HtmlParser(state.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <BlockBaseQuestionContent questionContent={rows} />
-          <BlockBaseImageChoiceSelection
-            choices={state.choices}
-            correctAnswer={state.answer}
-            setIsAnswerCorrect={setIsAnswerCorrect}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            setHasOptionSelected={setHasOptionSelected}
-            valueRef={valueRef}
-            studentAnswer={state[student_answer]}
-          />
+          <div className={styles.questionName}>
+            {HtmlParser(state.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <BlockBaseQuestionContent questionContent={rows} />
+            <BlockBaseImageChoiceSelection
+              choices={state.choices}
+              correctAnswer={state.answer}
+              setIsAnswerCorrect={setIsAnswerCorrect}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              setHasOptionSelected={setHasOptionSelected}
+              valueRef={valueRef}
+              studentAnswer={state[student_answer]}
+            />
+          </div>
         </div>
       </div>
     </div>

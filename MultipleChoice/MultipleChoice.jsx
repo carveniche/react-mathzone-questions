@@ -55,31 +55,33 @@ export default function MultipleChoice({ state, meter, choiceId }) {
     <div id="multipleChoiceStudentAnswerResponse">
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div
-          className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
-          style={{ whiteSpace: "initial" }}
-        >
-          {readQuestionText && (
-            <SpeakQuestionText type={"oldType"} readText={questionText} />
-          )}
-          {parse(state?.question_text)}
-        </div>
-        {String(state?.upload_file_name).trim() && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText type={"oldType"} readText={questionText} />
         )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div>
-          <SelectMultipleChoice
-            choices={state?.choice_data}
-            answerHasSelected={showAnswer}
-            inputRef={inputRef}
-            choiceId={choiceId}
-          />
+          <div
+            className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
+            style={{ whiteSpace: "initial" }}
+          >
+            {parse(state?.question_text)}
+          </div>
+          {String(state?.upload_file_name).trim() && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div>
+            <SelectMultipleChoice
+              choices={state?.choice_data}
+              answerHasSelected={showAnswer}
+              inputRef={inputRef}
+              choiceId={choiceId}
+            />
+          </div>
         </div>
       </div>
     </div>

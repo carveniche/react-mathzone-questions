@@ -230,35 +230,37 @@ export default function MatchObjVertEqn({
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div
-          className={`${styles.questionName} ${styles.mathquill_mathzone_questionname}`}
-        >
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {parse(state?.questionName, optionSelectStaticMathField)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
-        <div className={`${styles.borderTopBottomMargin}`}>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <ContMatchObjVerticalEqn
-            content={state?.questionContent}
-            totalEmptyBox={totalEmptyBox}
-            inputRef={inputRef}
-            totalRows={totalRows}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            totalCols={totalCols}
-            choices={state?.choices}
-            choiceType={state?.choiceType}
-            equationKeyingRef={equationKeyingRef}
-          />
+        <div>
+          <div
+            className={`${styles.questionName} ${styles.mathquill_mathzone_questionname}`}
+          >
+            {parse(state?.questionName, optionSelectStaticMathField)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div className={`${styles.borderTopBottomMargin}`}>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <ContMatchObjVerticalEqn
+              content={state?.questionContent}
+              totalEmptyBox={totalEmptyBox}
+              inputRef={inputRef}
+              totalRows={totalRows}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              totalCols={totalCols}
+              choices={state?.choices}
+              choiceType={state?.choiceType}
+              equationKeyingRef={equationKeyingRef}
+            />
+          </div>
         </div>
       </div>
     </div>

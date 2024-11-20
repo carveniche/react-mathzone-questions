@@ -110,56 +110,60 @@ function Ol({ obj, meter }) {
         onClick={handleSubmit}
         answerHasSelected={hasAnswerSubmitted}
       />
-      <div id="studentAnswerResponse">
-        <div className="mathzoneQuestionName">
-          {readQuestionText && (
-            <SpeakQuestionText type={"oldType"} readText={obj?.questionName} />
-          )}
-          {parse(obj?.questionName, optionSelect)}
-        </div>
-        {obj?.upload_file_name && (
-          <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText type={"oldType"} readText={obj?.questionName} />
         )}
         <div>
-          <ProgressBorder meter={meter + 1}>
-            <div></div>
-          </ProgressBorder>
-        </div>
-        <div className={`${styles.contentParent}`}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div
-                  className="mathzoneMainOlBox"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {questionContent.map((item, index) => (
-                    <Draggable
-                      isDragDisabled={hasAnswerSubmitted}
-                      key={String(index)}
-                      draggableId={String(index)}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          {parse(item, optionSelect)}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-          <div id="mathzoneFibAfterText">{parse(obj?.text, optionSelect)}</div>
+          <div className="mathzoneQuestionName">
+            {parse(obj?.questionName, optionSelect)}
+          </div>
+          {obj?.upload_file_name && (
+            <div>
+              <img src={obj?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ProgressBorder meter={meter + 1}>
+              <div></div>
+            </ProgressBorder>
+          </div>
+          <div className={`${styles.contentParent}`}>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="droppable">
+                {(provided, snapshot) => (
+                  <div
+                    className="mathzoneMainOlBox"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {questionContent.map((item, index) => (
+                      <Draggable
+                        isDragDisabled={hasAnswerSubmitted}
+                        key={String(index)}
+                        draggableId={String(index)}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            {parse(item, optionSelect)}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+            <div id="mathzoneFibAfterText">
+              {parse(obj?.text, optionSelect)}
+            </div>
+          </div>
         </div>
       </div>
     </div>

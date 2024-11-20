@@ -152,59 +152,61 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {HtmlParser(state.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          {state?.choiceType == "keying" ? (
-            <ContentPlaceValueTableSelect
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              inputRef={inputRef}
-              totalEmptyBox={totalEmptyBox}
-              hasAnswerSubmitted={hasAnswerSubmitted}
-              questionHead={state.questiontbHead}
-              totalCols={Number(state?.cols)}
-              input2Ref={input2Ref}
-            />
-          ) : state?.choiceType == "dragdrop" ? (
-            <PlaceValueTableDragDrop
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              inputRef={inputRef}
-              totalEmptyBox={totalEmptyBox}
-              hasAnswerSubmitted={hasAnswerSubmitted}
-              questionHead={state.questiontbHead}
-              totalCols={Number(state?.cols)}
-              choices={state?.choices}
-            />
-          ) : state?.choiceType == "selectchoice" ? (
-            <PlaceValueTableSelectChoice
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              inputRef={inputRef}
-              totalEmptyBox={totalEmptyBox}
-              hasAnswerSubmitted={hasAnswerSubmitted}
-              questionHead={state.questiontbHead}
-              totalCols={Number(state?.cols)}
-              choices={state?.choices}
-              studentAnswer={state[student_answer] || ""}
-            />
-          ) : (
-            <h1>Coming soon</h1>
+          <div className={styles.questionName}>
+            {HtmlParser(state.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
           )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            {state?.choiceType == "keying" ? (
+              <ContentPlaceValueTableSelect
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+                questionHead={state.questiontbHead}
+                totalCols={Number(state?.cols)}
+                input2Ref={input2Ref}
+              />
+            ) : state?.choiceType == "dragdrop" ? (
+              <PlaceValueTableDragDrop
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+                questionHead={state.questiontbHead}
+                totalCols={Number(state?.cols)}
+                choices={state?.choices}
+              />
+            ) : state?.choiceType == "selectchoice" ? (
+              <PlaceValueTableSelectChoice
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+                questionHead={state.questiontbHead}
+                totalCols={Number(state?.cols)}
+                choices={state?.choices}
+                studentAnswer={state[student_answer] || ""}
+              />
+            ) : (
+              <h1>Coming soon</h1>
+            )}
+          </div>
         </div>
       </div>
     </div>

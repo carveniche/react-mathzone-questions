@@ -202,55 +202,56 @@ export default function DragAndDropImageCompare({
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles?.questionName}>
-          {" "}
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
-          {parse(state?.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
         )}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          {state?.choiceType == "dragdrop" ? (
-            <DropBoxesImageCompare
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              state={state}
-              isAnswerSubmitted={!hasAnswerSubmitted}
-              dropRef={dropRef}
-              totalCols={Number(totalColumns)}
-              inputRef={inputRef}
-            />
-          ) : state?.choiceType == "keying" ? (
-            <CompareOfImageKeyingChoiceType
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              state={state}
-              isAnswerSubmitted={!hasAnswerSubmitted}
-              dropRef={dropRef}
-              totalCols={Number(totalColumns)}
-            />
-          ) : state?.choiceType == "selectchoice" ? (
-            <CompareOfImageSelectChoice
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              state={state}
-              isAnswerSubmitted={!hasAnswerSubmitted}
-              dropRef={dropRef}
-              totalCols={Number(totalColumns)}
-              studentAnswer={state[student_answer]}
-            />
-          ) : (
-            <h1>unsupported files types</h1>
+          <div className={styles?.questionName}>
+            {parse(state?.questionName)}
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
           )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            {state?.choiceType == "dragdrop" ? (
+              <DropBoxesImageCompare
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                state={state}
+                isAnswerSubmitted={!hasAnswerSubmitted}
+                dropRef={dropRef}
+                totalCols={Number(totalColumns)}
+                inputRef={inputRef}
+              />
+            ) : state?.choiceType == "keying" ? (
+              <CompareOfImageKeyingChoiceType
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                state={state}
+                isAnswerSubmitted={!hasAnswerSubmitted}
+                dropRef={dropRef}
+                totalCols={Number(totalColumns)}
+              />
+            ) : state?.choiceType == "selectchoice" ? (
+              <CompareOfImageSelectChoice
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                state={state}
+                isAnswerSubmitted={!hasAnswerSubmitted}
+                dropRef={dropRef}
+                totalCols={Number(totalColumns)}
+                studentAnswer={state[student_answer]}
+              />
+            ) : (
+              <h1>unsupported files types</h1>
+            )}
+          </div>
         </div>
       </div>
     </div>
