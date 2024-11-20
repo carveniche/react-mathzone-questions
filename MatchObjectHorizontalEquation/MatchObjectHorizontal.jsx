@@ -20,6 +20,7 @@ import {
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import { collectDataAtCompileTimeMatchObjectVerticalEqn } from "../EqnMatchObjVert/EqnMatchObjVertCollectData/EqnMatchObjVertCollectData";
 import compareLatexData from "../../CommonJSFiles/compareLatexData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
@@ -146,6 +147,7 @@ export default function MatchObjectHorizontal({
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
 
@@ -232,6 +234,10 @@ export default function MatchObjectHorizontal({
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {" "}
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
           {parse(state?.questionName, optionSelectStaticMathField)}
         </div>
         {state?.upload_file_name && (

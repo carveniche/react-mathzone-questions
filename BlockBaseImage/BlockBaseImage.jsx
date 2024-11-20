@@ -10,6 +10,7 @@ import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 export default function BlockBaseImage({ state, totalRows, meter }) {
   meter = Number(meter) || 0;
@@ -31,6 +32,7 @@ export default function BlockBaseImage({ state, totalRows, meter }) {
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const valueRef = useRef();
   const [hasOptionSelected, setHasOptionSelected] = useState(false);
@@ -57,6 +59,9 @@ export default function BlockBaseImage({ state, totalRows, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
           {HtmlParser(state.questionName)}
         </div>
         {state?.upload_file_name && (

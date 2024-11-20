@@ -269,6 +269,12 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
       }
     },
   };
+  setTimeout(() => {
+    let inputBoxes = document.querySelectorAll(".ckEditorResetValue input");
+    inputBoxes.forEach((inp) => {
+      inp.maxLength = inp.value.length;
+    });
+  }, 1000);
   useEffect(() => {
     if (!state) {
       removeAllSelectType();

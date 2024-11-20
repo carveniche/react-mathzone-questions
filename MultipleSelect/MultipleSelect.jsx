@@ -9,6 +9,7 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function MultipleSelect({ state, meter, choiceId }) {
   meter = Number(meter) || 0;
   const inputRef = useRef();
@@ -17,6 +18,7 @@ export default function MultipleSelect({ state, meter, choiceId }) {
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setChoicesId,
+    readQuestionText,
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
   } = useContext(ValidationContext);
@@ -68,7 +70,14 @@ export default function MultipleSelect({ state, meter, choiceId }) {
       <div id="studentAnswerResponse">
         <div
           className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
+          style={{ display: "flex" }}
         >
+          {readQuestionText && (
+            <SpeakQuestionText
+              type={"oldType"}
+              readText={state?.question_text}
+            />
+          )}
           {HtmlParser(state?.question_text)}
         </div>
         <div>

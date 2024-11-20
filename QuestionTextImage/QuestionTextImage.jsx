@@ -10,6 +10,7 @@ import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/re
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function QuestionTextImage({ state, meter }) {
   meter = Number(meter) || 0;
   const [choosenAnswer, setChoosenAnswer] = useState(false);
@@ -19,6 +20,7 @@ export default function QuestionTextImage({ state, meter }) {
     setHasAnswerSubmitted,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   const answerRef = useRef("");
   const handleSubmitAnswer = () => {
@@ -42,6 +44,10 @@ export default function QuestionTextImage({ state, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {" "}
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
           {parse(state?.questionName, optionSelectStaticMathField)}
         </div>
         {state?.upload_file_name && (

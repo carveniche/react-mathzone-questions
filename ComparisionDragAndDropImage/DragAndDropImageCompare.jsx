@@ -17,6 +17,7 @@ import SolveButton from "../SolveButton";
 import CompareOfImageKeyingChoiceType from "./ChoicesTypeCompareOfImage/CompareOfImageKeyingChoiceType/CompareOfImageKeyingChoiceType";
 import CompareOfImageSelectChoice from "./ChoicesTypeCompareOfImage/CompareOfImageKeyingSelectChoice/CompareOfImageSelectChoice";
 import DropBoxesImageCompare from "./DropBoxesImageCompare";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForKeyingChoiceType = (choices) => {
   let arr = choices?.current;
   let n = arr?.length || 0;
@@ -105,6 +106,7 @@ export default function DragAndDropImageCompare({
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
@@ -201,7 +203,13 @@ export default function DragAndDropImageCompare({
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles?.questionName}>{parse(state?.questionName)}</div>
+        <div className={styles?.questionName}>
+          {" "}
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
+          {parse(state?.questionName)}
+        </div>
         {state?.upload_file_name && (
           <div>
             <img src={state?.upload_file_name} alt="image not found" />

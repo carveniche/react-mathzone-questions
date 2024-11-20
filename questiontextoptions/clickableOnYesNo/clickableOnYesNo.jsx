@@ -8,6 +8,7 @@ import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import CustomAlertBoxMathZone from "../../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SpeakQuestionText from "../../CommonFiles/PatternMatchers/SpeakQuestionText";
 export const ClickableOnYesNo = ({ data, meter }) => {
   meter = Number(meter) || 0;
   const {
@@ -18,6 +19,7 @@ export const ClickableOnYesNo = ({ data, meter }) => {
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
 
   const handleClick = (val) => {
@@ -47,6 +49,9 @@ export const ClickableOnYesNo = ({ data, meter }) => {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles2.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={data?.questionName} />
+          )}
           {HtmlParser(data?.questionName)}
         </div>
         {data?.upload_file_name && (

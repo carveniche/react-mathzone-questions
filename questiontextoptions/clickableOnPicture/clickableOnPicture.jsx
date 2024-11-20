@@ -9,6 +9,7 @@ import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import CustomAlertBoxMathZone from "../../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SpeakQuestionText from "../../CommonFiles/PatternMatchers/SpeakQuestionText";
 // let data = {
 //   operation: "addition",
 //   type: "questiontextoptions",
@@ -72,6 +73,7 @@ export const ClickableOnPic = ({ data, meter }) => {
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   const handleClick = (index) => {
     if (hasAnswerSubmitted || isStudentAnswerResponse) return;
@@ -98,7 +100,12 @@ export const ClickableOnPic = ({ data, meter }) => {
       {!isStudentAnswerResponse && <SolveButton onClick={checkAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles2.questionName}>{parse(data?.questionName)}</div>
+        <div className={styles2.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={data?.questionName} />
+          )}
+          {parse(data?.questionName)}
+        </div>
         {data?.upload_file_name && (
           <div>
             <img src={data?.upload_file_name} alt="image not found" />

@@ -12,6 +12,7 @@ import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 function HorizontalNotSymbols({ state, totalRows, meter }) {
   meter = Number(meter) || 0;
   const valueRef = useRef();
@@ -20,6 +21,7 @@ function HorizontalNotSymbols({ state, totalRows, meter }) {
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setChoicesId,
+    readQuestionText,
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
@@ -38,6 +40,9 @@ function HorizontalNotSymbols({ state, totalRows, meter }) {
     setShowAnswer(true);
   };
 
+  var questionText = state?.questionName
+    .replaceAll("<span>", "")
+    .replaceAll("</span>", "");
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -49,6 +54,7 @@ function HorizontalNotSymbols({ state, totalRows, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {readQuestionText && <SpeakQuestionText readText={questionText} />}
           {HtmlParser(state?.questionName)}
         </div>
         {state?.upload_file_name && (

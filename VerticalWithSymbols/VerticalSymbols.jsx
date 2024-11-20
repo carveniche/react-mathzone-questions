@@ -11,6 +11,7 @@ import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function VerticalWithSymbols({
   state,
   totalRows,
@@ -27,6 +28,7 @@ export default function VerticalWithSymbols({
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
@@ -57,6 +59,9 @@ export default function VerticalWithSymbols({
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
           {HtmlParser(state?.questionName)}
         </div>
         {state?.upload_file_name && (

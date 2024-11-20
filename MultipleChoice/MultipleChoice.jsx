@@ -9,6 +9,7 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function MultipleChoice({ state, meter, choiceId }) {
   meter = Number(meter) || 0;
   const inputRef = useRef();
@@ -16,6 +17,7 @@ export default function MultipleChoice({ state, meter, choiceId }) {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
+    readQuestionText,
     setChoicesId,
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
@@ -45,6 +47,9 @@ export default function MultipleChoice({ state, meter, choiceId }) {
     }
     setRedAlert(true);
   };
+  var questionText = state?.question_text
+    .replaceAll("<br/>", "")
+    .replaceAll("<br>", "");
 
   return (
     <div id="multipleChoiceStudentAnswerResponse">
@@ -53,8 +58,11 @@ export default function MultipleChoice({ state, meter, choiceId }) {
       <div id="studentAnswerResponse">
         <div
           className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
-          style={{ whiteSpace: "initial" }}
+          style={{ whiteSpace: "initial", display: "flex" }}
         >
+          {readQuestionText && (
+            <SpeakQuestionText type={"oldType"} readText={questionText} />
+          )}
           {parse(state?.question_text)}
         </div>
         {String(state?.upload_file_name).trim() && (

@@ -11,6 +11,7 @@ import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function TensFrame({ state, totalRows, totalColumns, meter }) {
   meter = Number(meter) || 0;
   let boxesImageRef = useRef([]);
@@ -44,6 +45,7 @@ export default function TensFrame({ state, totalRows, totalColumns, meter }) {
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   let answerSubmit = hasAnswerSubmitted;
   let setAnswerSubmit = setHasAnswerSubmitted;
@@ -67,6 +69,9 @@ export default function TensFrame({ state, totalRows, totalColumns, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone msg={msg} />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
           {HtmlParser(state?.questionName)}
         </div>
         {state?.upload_file_name && (

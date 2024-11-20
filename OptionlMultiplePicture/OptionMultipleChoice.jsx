@@ -9,6 +9,7 @@ import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/common
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import parse from "html-react-parser";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForSelectMultipleSelect = (choices) => {
   let n = choices?.length || 0;
   for (let i = 0; i < n; i++) {
@@ -31,6 +32,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const showAnswer = hasAnswerSubmitted;
   const setShowAnswer = setHasAnswerSubmitted;
@@ -78,6 +80,9 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
           className="mathzone-color-indigo word-space_pre-wrap"
         >
           <div className={styles.questionName}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
             {parse(state?.questionName)}
           </div>
           {state?.upload_file_name && (

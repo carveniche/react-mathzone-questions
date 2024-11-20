@@ -10,6 +10,7 @@ import SelectChoice from "../ChoicesType/SelectChoice/SelectChoice";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import { StaticMathField } from "../../ExternalPackages";
 import SelectChoiceHorizontalFillUpsEquationType from "../HorizontalFillUpsEquationType/ChoiceTypeHorizontalFillUpsEquationType/SelectChoiceHorizontalFillUpsEquationType/SelectChoiceHorizontalFillUpsEquationType";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function GenerateLine({ question, meter }) {
   var choiceType = question.choiceType;
   const {
@@ -18,6 +19,7 @@ export default function GenerateLine({ question, meter }) {
     setIsAnswerCorrect,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const [studAns, setStudAnswers] = useState([]);
   const [answered, setAnswered] = useState(false);
@@ -1079,6 +1081,9 @@ export default function GenerateLine({ question, meter }) {
       {redAlert && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={question?.questionName} />
+          )}
           {parse(question?.questionName, optionSelectStaticMathField)}
         </div>
         {question?.upload_file_name && (

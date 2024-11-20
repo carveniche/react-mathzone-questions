@@ -10,6 +10,7 @@ import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/common
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectChoice = (choices, answer) => {
   let n = choices?.length || 0;
@@ -53,6 +54,7 @@ export default function CountOnTensframe({ obj, meter }) {
     setChoicesId,
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
+    readQuestionText,
     isStudentAnswerResponse,
   } = useContext(ValidationContext);
   const handleSubmitAnswer = () => {
@@ -87,6 +89,9 @@ export default function CountOnTensframe({ obj, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={obj?.questionName} />
+          )}
           <HtmlParserComponent value={obj?.questionName} />
         </div>
         {obj?.upload_file_name && (

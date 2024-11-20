@@ -20,6 +20,7 @@ import {
   manupulateJsonData,
   manupulateQuestionContentHorizontal,
 } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForDragAndDrop = (selectChoice) => {
   let n = selectChoice.length || 0;
@@ -113,6 +114,7 @@ export default function PlaceValueChart({
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
 
   for (let i = 0; i < Number(totalRows); i++) {
@@ -192,6 +194,9 @@ export default function PlaceValueChart({
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
           {HtmlParser(state.questionName)}
         </div>
         {state?.upload_file_name && (

@@ -10,6 +10,7 @@ import { useRef } from "react";
 import SolveButton from "../SolveButton";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 // const validationForSelectMultipleSelect = (choices) => {
 
@@ -79,6 +80,7 @@ function MultipleOptionSelectChoice({
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
 
   const showAnswer = hasAnswerSubmitted;
@@ -134,6 +136,9 @@ function MultipleOptionSelectChoice({
           className="mathzone-color-indigo word-space_pre-wrap"
         >
           <div className={styles.questionName}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
             {parse(state?.questionName)}
           </div>
           {state?.upload_file_name && (

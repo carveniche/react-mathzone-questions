@@ -14,6 +14,7 @@ import {
   manupulateDataSelectChoice,
   manupulateQuestionContentHorizontal,
 } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
@@ -122,6 +123,7 @@ export default function MatchObjectHorizontal({
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
 
@@ -204,7 +206,12 @@ export default function MatchObjectHorizontal({
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles.questionName}>{parse(state?.questionName)}</div>
+        <div className={styles.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
+          {parse(state?.questionName)}
+        </div>
         {state?.upload_file_name && (
           <div>
             <img src={state?.upload_file_name} alt="image not found" />

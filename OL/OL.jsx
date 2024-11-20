@@ -8,6 +8,7 @@ import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { ProgressBorder } from "../../Modal2/modal2";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -23,6 +24,7 @@ function Ol({ obj, meter }) {
     setChoicesId,
     setStudentAnswerQuestion,
     studentAnswerQuestion,
+    readQuestionText,
   } = useContext(ValidationContext);
   meter = Number(meter) || 0;
   const onDragEnd = (result) => {
@@ -110,6 +112,9 @@ function Ol({ obj, meter }) {
       />
       <div id="studentAnswerResponse">
         <div className="mathzoneQuestionName">
+          {readQuestionText && (
+            <SpeakQuestionText type={"oldType"} readText={obj?.questionName} />
+          )}
           {parse(obj?.questionName, optionSelect)}
         </div>
         {obj?.upload_file_name && (

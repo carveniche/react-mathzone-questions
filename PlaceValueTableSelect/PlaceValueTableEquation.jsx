@@ -27,6 +27,7 @@ import {
   manupulateEquationTypeQuestion2Darr,
   manupulateQuestionContent1Darrayed,
 } from "../commonScript/commonScript";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const changeAnswerStatus = (
   val,
@@ -99,6 +100,7 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const input2Ref = useRef();
 
@@ -302,6 +304,9 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         <div className={styles.questionName}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
           {parse(state?.questionName, optionSelectStaticMathField)}
         </div>
         {state?.upload_file_name && (

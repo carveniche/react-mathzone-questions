@@ -14,6 +14,7 @@ import {
   findSelectedValue,
   numberQuestionContentQuestionContent,
 } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForKeyingType = (arr1, arr2) => {
   for (let item of arr2) {
     if (item?.isMissed == "true") {
@@ -71,6 +72,7 @@ export default function NumberBond({ obj, meter }) {
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   const inputRef = useRef();
 
@@ -126,7 +128,12 @@ export default function NumberBond({ obj, meter }) {
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
         {String(obj?.questionName).trim() && (
-          <div className={styles2.questionName}>{parse(obj?.questionName)}</div>
+          <div className={styles2.questionName}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={obj?.questionName} />
+            )}
+            {parse(obj?.questionName)}
+          </div>
         )}
         {obj?.upload_file_name && (
           <div>

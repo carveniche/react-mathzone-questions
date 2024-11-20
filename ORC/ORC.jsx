@@ -14,6 +14,7 @@ import HtmlParser from "react-html-parser";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const collectTextInputField = () => {
   let parent = document.getElementById("orcTextParent");
@@ -96,6 +97,7 @@ function ORC({ obj, question_text, meter }) {
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setStudentAnswerQuestion,
+    readQuestionText,
   } = useContext(ValidationContext);
   useEffect(() => {
     let whitePage = document.getElementById("quizWhitePage");
@@ -393,7 +395,12 @@ function ORC({ obj, question_text, meter }) {
       }
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className="mathzoneQuestionName" id="orc_question_type">
+        <div
+          className="mathzoneQuestionName"
+          style={{ display: "flex" }}
+          id="orc_question_type"
+        >
+          {readQuestionText && <SpeakQuestionText readText={question_text} />}
           {parse(question_text, optionSelect)}
         </div>
         {obj?.upload_file_name && (

@@ -11,6 +11,7 @@ import styles from "./OnlineQuiz.module.css";
 import OnlineQuizQuestionContent from "./OnlineQuizQuestionContent";
 import OnlineQuizSelectChoiceOption from "./OnlineQuizSelectChoiceOption";
 import SolveButton from "./SolveButton";
+import SpeakQuestionText from "./CommonFiles/PatternMatchers/SpeakQuestionText";
 function HorizontalPreviewClick({ obj, meter }) {
   meter = Number(meter) || 0;
   const [state, setState] = useState();
@@ -39,7 +40,11 @@ function HorizontalPreviewClick({ obj, meter }) {
     setStudentAnswerQuestion(jsonData);
     setShowAnswer(true);
   };
+  console.log("obj?.questionName", obj?.questionName);
 
+  var questionText = obj?.questionName
+    .replaceAll("<span>", "")
+    .replaceAll("</span>", "");
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -50,7 +55,8 @@ function HorizontalPreviewClick({ obj, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
+        <div className={styles.questionName} style={{ display: "flex" }}>
+          <SpeakQuestionText readText={questionText} />
           {HtmlParser(obj?.questionName)}
         </div>
         {obj?.upload_file_name && (
@@ -61,7 +67,7 @@ function HorizontalPreviewClick({ obj, meter }) {
         <div>
           <ConditionOnProgressBar meter={meter} />
         </div>
-        <div class={styles.contentParent}>
+        <div className={styles.contentParent}>
           {Boolean(obj?.rows) && Boolean(obj?.cols) && (
             <OnlineQuizQuestionContent
               totalRows={obj?.rows}

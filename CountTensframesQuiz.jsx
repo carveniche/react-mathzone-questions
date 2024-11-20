@@ -11,6 +11,7 @@ import ContentCountTensframeQuiz from "./ContentCountTensframeQuiz";
 import styles from "./OnlineQuiz.module.css";
 import OnlineQuizSelectChoiceOption from "./OnlineQuizSelectChoiceOption";
 import SolveButton from "./SolveButton";
+import SpeakQuestionText from "./CommonFiles/PatternMatchers/SpeakQuestionText";
 function CountTensFramesQuiz({
   state,
   totalRows,
@@ -26,6 +27,7 @@ function CountTensFramesQuiz({
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setChoicesId,
+    readQuestionText,
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
@@ -63,6 +65,9 @@ function CountTensFramesQuiz({
       )}
       <div id="studentAnswerResponse">
         <div className={`${styles.questionName}`}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
           {HtmlParser(state?.questionName)}
         </div>
         {state?.upload_file_name && (

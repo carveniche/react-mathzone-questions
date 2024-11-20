@@ -10,6 +10,7 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectMultipleSelect = (choices, multipicselect) => {
   let n = choices?.length || 0;
@@ -61,6 +62,7 @@ function OptMultPicEqn({
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const showAnswer = hasAnswerSubmitted;
   const setShowAnswer = setHasAnswerSubmitted;
@@ -115,6 +117,9 @@ function OptMultPicEqn({
           <div
             className={`${styles.questionName} ${styles.mathquill_mathzone_questionname}`}
           >
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
             {parse(state?.questionName, optionSelectStaticMathField)}
           </div>
           {state?.upload_file_name && (

@@ -24,6 +24,7 @@ import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgress
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import compareLatexData from "../../CommonJSFiles/compareLatexData";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef;
@@ -154,6 +155,7 @@ export default function HorizontalFillUpsEquationType({
     setIsAnswerCorrect,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const handleSubmitAnswer = () => {
     // if (hasAnswerSubmitted) return;
@@ -219,7 +221,10 @@ export default function HorizontalFillUpsEquationType({
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
+        {readQuestionText && (
+          <SpeakQuestionText readText={state?.questionName} />
+        )}
+        <div className={styles.questionName} style={{ display: "block" }}>
           {parse(state?.questionName, optionSelectStaticMathField)}
         </div>
         {state?.upload_file_name && (

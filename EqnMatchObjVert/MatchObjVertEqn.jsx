@@ -19,6 +19,7 @@ import {
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import oneDto2D from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import compareLatexData from "../../CommonJSFiles/compareLatexData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
   let n = arr?.length || 0;
@@ -144,6 +145,7 @@ export default function MatchObjVertEqn({
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
 
@@ -232,6 +234,9 @@ export default function MatchObjVertEqn({
         <div
           className={`${styles.questionName} ${styles.mathquill_mathzone_questionname}`}
         >
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
           {parse(state?.questionName, optionSelectStaticMathField)}
         </div>
         {state?.upload_file_name && (
