@@ -23,6 +23,9 @@ export default function SpeakQuestionText({ type, readText }) {
       if (readText.includes("img")) readText = removeImgTags(readText);
       if (type == "oldType") readText = convertMathToSpeech(readText);
       readText = replaceMathQuillSpans(readText);
+      readText = readText.replace(/(\d+)\s*-\s*(\d+)/g, (match, p1, p2) => {
+        return `${p1} minus ${p2}`;
+      });
       readText = readText
         .replaceAll("</div>", "")
         .replaceAll("<div>", "")
@@ -41,6 +44,7 @@ export default function SpeakQuestionText({ type, readText }) {
         readText
           .split(".")
           .map((line) => line.trim())
+          .filter((line) => !line.includes("■"))
           .filter(Boolean)
       );
     }
@@ -53,7 +57,6 @@ export default function SpeakQuestionText({ type, readText }) {
     };
 
     updateVoices();
-
     window.speechSynthesis.onvoiceschanged = updateVoices;
     const timer = setTimeout(() => {
       setCanStart(true);
@@ -81,17 +84,16 @@ export default function SpeakQuestionText({ type, readText }) {
     }
     const textNeedstoSpoken = text.join(". ");
     const utterance = new SpeechSynthesisUtterance(textNeedstoSpoken);
-    var indainAccentVoice;
-    if (indianAccent)
-      indainAccentVoice = voicesAvailable.filter(
-        (voice) =>
-          voice.lang === "en-IN" && voice.name.toLowerCase().includes("heera")
+    var voiceAccent;
+    if (indianAccent) {
+      voiceAccent = voicesAvailable.filter((voice) => voice.lang === "en-IN");
+    } else {
+      voiceAccent = voicesAvailable.filter(
+        (voice) => voice.lang === "en-US" && voice.name.includes("Mark")
       );
-
-    utterance.voice =
-      (indainAccentVoice && indainAccentVoice[0]) ||
-      voicesAvailable[7] ||
-      voicesAvailable[0];
+    }
+    console.log("voiceAccent", voiceAccent);
+    utterance.voice = voiceAccent && voiceAccent[0];
     if (voices.length === 0) {
       console.error("There was an error while generating speech:");
     }

@@ -55,6 +55,14 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
   state.question_text = state?.question_text
     .replaceAll(">,", "> ,")
     .replaceAll("<,", "< ,");
+  var combinedReadOutText = state?.question_text;
+  if (state?.fib_before_text)
+    combinedReadOutText =
+      combinedReadOutText + state?.fib_before_text + " blank ";
+  if (state?.fib_text)
+    combinedReadOutText = combinedReadOutText + state?.fib_text;
+  if (state?.after_question_text)
+    combinedReadOutText = combinedReadOutText + state?.after_question_text;
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -67,14 +75,11 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
         <CustomAlertBoxMathZone msg={"Please answer the question..."} />
       )}
       <div className="mathzoneQuestionName" id="studentAnswerResponse">
+        {readQuestionText && combinedReadOutText && (
+          <SpeakQuestionText type={"oldType"} readText={combinedReadOutText} />
+        )}
         {state?.question_text && (
-          <div style={{ display: "flex" }}>
-            {readQuestionText && (
-              <SpeakQuestionText
-                type={"oldType"}
-                readText={state?.question_text}
-              />
-            )}
+          <div>
             <div>{HtmlParser(state?.question_text)}</div>
           </div>
         )}

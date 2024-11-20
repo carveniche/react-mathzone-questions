@@ -55,7 +55,7 @@ function HorizontalPreviewClick({ obj, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles.questionName} style={{ display: "flex" }}>
+        <div className={styles.questionName}>
           <SpeakQuestionText readText={questionText} />
           {HtmlParser(obj?.questionName)}
         </div>

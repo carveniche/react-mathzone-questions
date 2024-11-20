@@ -70,7 +70,6 @@ export default function MultipleSelect({ state, meter, choiceId }) {
       <div id="studentAnswerResponse">
         <div
           className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
-          style={{ display: "flex" }}
         >
           {readQuestionText && (
             <SpeakQuestionText

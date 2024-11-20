@@ -395,11 +395,7 @@ function ORC({ obj, question_text, meter }) {
       }
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div
-          className="mathzoneQuestionName"
-          style={{ display: "flex" }}
-          id="orc_question_type"
-        >
+        <div className="mathzoneQuestionName" id="orc_question_type">
           {readQuestionText && <SpeakQuestionText readText={question_text} />}
           {parse(question_text, optionSelect)}
         </div>

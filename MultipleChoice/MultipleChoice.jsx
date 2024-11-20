@@ -58,7 +58,7 @@ export default function MultipleChoice({ state, meter, choiceId }) {
       <div id="studentAnswerResponse">
         <div
           className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
-          style={{ whiteSpace: "initial", display: "flex" }}
+          style={{ whiteSpace: "initial" }}
         >
           {readQuestionText && (
             <SpeakQuestionText type={"oldType"} readText={questionText} />
