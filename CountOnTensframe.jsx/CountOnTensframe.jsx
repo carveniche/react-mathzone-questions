@@ -88,9 +88,11 @@ export default function CountOnTensframe({ obj, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && <SpeakQuestionText readText={obj?.questionName} />}
         <div>
-          <div className={styles.questionName}>
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={obj?.questionName} />
+            )}
             <HtmlParserComponent value={obj?.questionName} />
           </div>
           {obj?.upload_file_name && (

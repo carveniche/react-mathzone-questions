@@ -58,12 +58,12 @@ export default function BlockBaseImage({ state, totalRows, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && (
-          <SpeakQuestionText readText={state?.questionName} />
-        )}
         <div>
-          <div className={styles.questionName}>
-            {HtmlParser(state.questionName)}
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div> {HtmlParser(state.questionName)}</div>
           </div>
           {state?.upload_file_name && (
             <div>

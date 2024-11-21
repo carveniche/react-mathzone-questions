@@ -105,6 +105,9 @@ export default function SpeakQuestionText({ type, readText }) {
           (voice.name.toLowerCase().includes("heera") ||
             voice.name.toLowerCase().includes("veena"))
       );
+      if (voiceAccent.length == 0) {
+        voiceAccent = voicesAvailable.filter((voice) => voice.lang === "en-IN");
+      }
     } else {
       voiceAccent = voicesAvailable.filter(
         (voice) =>
@@ -112,17 +115,21 @@ export default function SpeakQuestionText({ type, readText }) {
           (voice.name.toLowerCase().includes("zira") ||
             voice.name.toLowerCase().includes("samantha"))
       );
+      if (voiceAccent.length == 0) {
+        voiceAccent = voicesAvailable.filter((voice) => voice.lang === "en-US");
+      }
     }
     // fallback For Linux
-    if (voiceAccent.length == 0)
+    if (voiceAccent.length == 0) {
       voiceAccent = voicesAvailable.filter(
         (voice) => voice.name === "Google UK English Female"
       );
+    }
     // fallback For android
-    if (voiceAccent.length == 0)
+    if (voiceAccent.length == 0) {
       voiceAccent = voicesAvailable.filter((voice) => voice.lang === "en_IN");
-
-    utterance.voice = (voiceAccent && voiceAccent[0]) || voicesAvailable[0];
+    }
+    utterance.voice = voiceAccent && voiceAccent[0];
     utterance.pitch = 0.5;
     utterance.rate = indianAccent ? 0.75 : 0.7;
     if (voices.length === 0) {
@@ -239,8 +246,8 @@ export default function SpeakQuestionText({ type, readText }) {
         <Lottie
           onClick={readTheQuestionText}
           options={isSpeaking ? playingOptions : pausedOptions}
-          height={"50px"}
-          width={"50px"}
+          height={"40px"}
+          width={"35px"}
           cursor={"pointer"}
           style={{ margin: "0" }}
         />

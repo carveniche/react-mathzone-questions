@@ -114,14 +114,17 @@ function OptMultPicEqn({
         )}
         {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
         <div id="studentAnswerResponse" style={{ display: "flex" }}>
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
           <div>
             <div
               className={`${styles.questionName} ${styles.mathquill_mathzone_questionname}`}
+              style={{ display: "flex" }}
             >
-              {parse(state?.questionName, optionSelectStaticMathField)}
+              {readQuestionText && (
+                <SpeakQuestionText readText={state?.questionName} />
+              )}
+              <div>
+                {parse(state?.questionName, optionSelectStaticMathField)}
+              </div>
             </div>
             {state?.upload_file_name && (
               <div>

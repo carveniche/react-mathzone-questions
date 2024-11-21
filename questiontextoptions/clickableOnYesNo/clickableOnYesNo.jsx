@@ -48,12 +48,12 @@ export const ClickableOnYesNo = ({ data, meter }) => {
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmit} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && (
-          <SpeakQuestionText readText={data?.questionName} />
-        )}
         <div>
-          <div className={styles2.questionName}>
-            {HtmlParser(data?.questionName)}
+          <div className={styles2.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={data?.questionName} />
+            )}
+            <div> {HtmlParser(data?.questionName)}</div>
           </div>
           {data?.upload_file_name && (
             <div>

@@ -136,12 +136,12 @@ function MultipleOptionSelectChoice({
           style={{ display: "flex" }}
           className="mathzone-color-indigo word-space_pre-wrap"
         >
-          {readQuestionText && (
-            <SpeakQuestionText readText={state?.questionName} />
-          )}
           <div>
-            <div className={styles.questionName}>
-              {parse(state?.questionName)}
+            <div className={styles.questionName} style={{ display: "flex" }}>
+              {readQuestionText && (
+                <SpeakQuestionText readText={state?.questionName} />
+              )}
+              <div>{parse(state?.questionName)}</div>
             </div>
             {state?.upload_file_name && (
               <div>

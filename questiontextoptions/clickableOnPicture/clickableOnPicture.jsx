@@ -100,12 +100,12 @@ export const ClickableOnPic = ({ data, meter }) => {
       {!isStudentAnswerResponse && <SolveButton onClick={checkAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && (
-          <SpeakQuestionText readText={data?.questionName} />
-        )}
         <div>
-          <div className={styles2.questionName}>
-            {parse(data?.questionName)}
+          <div className={styles2.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={data?.questionName} />
+            )}
+            <div>{parse(data?.questionName)}</div>
           </div>
           {data?.upload_file_name && (
             <div>

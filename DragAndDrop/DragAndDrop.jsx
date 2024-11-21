@@ -177,7 +177,7 @@ export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
           {readQuestionText && (
             <SpeakQuestionText readText={state?.questionName} />
           )}
-          {parse(state?.questionName, optionSelectStaticMathField)}
+          <div>{parse(state?.questionName, optionSelectStaticMathField)}</div>
         </div>
         {state?.upload_file_name && (
           <div>

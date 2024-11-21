@@ -1080,12 +1080,14 @@ export default function GenerateLine({ question, meter }) {
       )}
       {redAlert && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && (
-          <SpeakQuestionText readText={question?.questionName} />
-        )}
         <div style={{ maxWidth: "100%" }}>
-          <div className={styles.questionName}>
-            {parse(question?.questionName, optionSelectStaticMathField)}
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={question?.questionName} />
+            )}
+            <div>
+              {parse(question?.questionName, optionSelectStaticMathField)}
+            </div>
           </div>
           {question?.upload_file_name && (
             <div>

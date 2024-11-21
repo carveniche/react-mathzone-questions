@@ -231,14 +231,15 @@ export default function MatchObjVertEqn({
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && (
-          <SpeakQuestionText readText={state?.questionName} />
-        )}
         <div>
           <div
             className={`${styles.questionName} ${styles.mathquill_mathzone_questionname}`}
-          >
-            {parse(state?.questionName, optionSelectStaticMathField)}
+          ></div>
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName, optionSelectStaticMathField)}</div>
           </div>
           {state?.upload_file_name && (
             <div>

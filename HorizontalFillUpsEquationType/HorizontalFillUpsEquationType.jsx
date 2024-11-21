@@ -221,12 +221,12 @@ export default function HorizontalFillUpsEquationType({
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && (
-          <SpeakQuestionText readText={state?.questionName} />
-        )}
         <div>
-          <div className={styles.questionName} style={{ display: "block" }}>
-            {parse(state?.questionName, optionSelectStaticMathField)}
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName, optionSelectStaticMathField)}</div>
           </div>
           {state?.upload_file_name && (
             <div>
