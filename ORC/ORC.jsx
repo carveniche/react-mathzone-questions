@@ -97,7 +97,6 @@ function ORC({ obj, question_text, meter }) {
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setStudentAnswerQuestion,
-    readQuestionText,
   } = useContext(ValidationContext);
   useEffect(() => {
     let whitePage = document.getElementById("quizWhitePage");
@@ -395,7 +394,6 @@ function ORC({ obj, question_text, meter }) {
       }
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && <SpeakQuestionText readText={question_text} />}
         <div>
           <div className="mathzoneQuestionName" id="orc_question_type">
             {parse(question_text, optionSelect)}

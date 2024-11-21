@@ -11,6 +11,7 @@ export default function SpeakQuestionText({ type, readText }) {
   const [voices, setVoices] = useState([]);
   const [canStart, setCanStart] = useState(false);
   const { indianAccent } = useContext(ValidationContext);
+  console.log("Given text", [readText]);
   console.log("Readable Text", text);
   function removeImgTags(inputHTML) {
     const imgTagRegex = /<img[^>]*>/g;
@@ -98,13 +99,30 @@ export default function SpeakQuestionText({ type, readText }) {
     const utterance = new SpeechSynthesisUtterance(textNeedstoSpoken);
     var voiceAccent;
     if (indianAccent) {
-      voiceAccent = voicesAvailable.filter((voice) => voice.lang === "en-IN");
+      voiceAccent = voicesAvailable.filter(
+        (voice) =>
+          voice.lang === "en-IN" &&
+          (voice.name.toLowerCase().includes("heera") ||
+            voice.name.toLowerCase().includes("veena"))
+      );
     } else {
       voiceAccent = voicesAvailable.filter(
-        (voice) => voice.lang === "en-US" && voice.name.includes("Mark")
+        (voice) =>
+          voice.lang === "en-US" &&
+          (voice.name.toLowerCase().includes("zira") ||
+            voice.name.toLowerCase().includes("samantha"))
       );
     }
-    utterance.voice = voiceAccent && voiceAccent[0];
+    // fallback For Linux
+    if (voiceAccent.length == 0)
+      voiceAccent = voicesAvailable.filter(
+        (voice) => voice.name === "Google UK English Female"
+      );
+    // fallback For android
+    if (voiceAccent.length == 0)
+      voiceAccent = voicesAvailable.filter((voice) => voice.lang === "en_IN");
+
+    utterance.voice = (voiceAccent && voiceAccent[0]) || voicesAvailable[0];
     utterance.pitch = 0.5;
     utterance.rate = indianAccent ? 0.75 : 0.7;
     if (voices.length === 0) {

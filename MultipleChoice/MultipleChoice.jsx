@@ -56,31 +56,33 @@ export default function MultipleChoice({ state, meter, choiceId }) {
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && (
-          <SpeakQuestionText type={"oldType"} readText={questionText} />
-        )}
         <div>
           <div
             className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
-            style={{ whiteSpace: "initial" }}
+            style={{ whiteSpace: "initial", display: "flex" }}
           >
-            {parse(state?.question_text)}
+            {readQuestionText && (
+              <SpeakQuestionText type={"oldType"} readText={questionText} />
+            )}
+            <div>{parse(state?.question_text)}</div>
           </div>
-          {String(state?.upload_file_name).trim() && (
+          <div>
+            {String(state?.upload_file_name).trim() && (
+              <div>
+                <img src={state?.upload_file_name} alt="image not found" />
+              </div>
+            )}
             <div>
-              <img src={state?.upload_file_name} alt="image not found" />
+              <ConditionOnProgressBar meter={meter} />
             </div>
-          )}
-          <div>
-            <ConditionOnProgressBar meter={meter} />
-          </div>
-          <div>
-            <SelectMultipleChoice
-              choices={state?.choice_data}
-              answerHasSelected={showAnswer}
-              inputRef={inputRef}
-              choiceId={choiceId}
-            />
+            <div>
+              <SelectMultipleChoice
+                choices={state?.choice_data}
+                answerHasSelected={showAnswer}
+                inputRef={inputRef}
+                choiceId={choiceId}
+              />
+            </div>
           </div>
         </div>
       </div>

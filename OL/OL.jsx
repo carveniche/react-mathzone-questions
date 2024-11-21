@@ -24,7 +24,6 @@ function Ol({ obj, meter }) {
     setChoicesId,
     setStudentAnswerQuestion,
     studentAnswerQuestion,
-    readQuestionText,
   } = useContext(ValidationContext);
   meter = Number(meter) || 0;
   const onDragEnd = (result) => {
@@ -111,9 +110,6 @@ function Ol({ obj, meter }) {
         answerHasSelected={hasAnswerSubmitted}
       />
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        {readQuestionText && (
-          <SpeakQuestionText type={"oldType"} readText={obj?.questionName} />
-        )}
         <div>
           <div className="mathzoneQuestionName">
             {parse(obj?.questionName, optionSelect)}
