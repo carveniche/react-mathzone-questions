@@ -51,7 +51,9 @@ export default function SpeakQuestionText({ type, readText }) {
         .replaceAll("<span>", " ")
         .replaceAll("</span>", " ")
         .replaceAll("<p>", " ")
-        .replaceAll("</p>", " ");
+        .replaceAll("</p>", " ")
+        .replaceAll("baseminus", "base ")
+        .replaceAll("♣", " ");
 
       setText(
         readText
