@@ -1040,7 +1040,7 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   width: 90%;
-  margin-top: 1.5rem;
+  margin-top: 20px;
   cursor: pointer;
 }
 
@@ -1234,6 +1234,7 @@
   display: flex;
   gap: 2rem;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .MatchObjectHorizontalTypeKeyingFlexBox3 > div {
@@ -1921,7 +1922,7 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   width: 90%;
-  margin-top: 1.5rem;
+  margin-top: 20px;
   cursor: pointer;
 }
 .PlaceValueTableSelectTypeSelectChoiceFlexBox2 > div {
