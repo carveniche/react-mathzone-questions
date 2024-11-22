@@ -50,9 +50,14 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
     setHasAnswerSubmitted(true);
     return;
   };
-  state.question_text = state?.question_text
-    .replaceAll(">,", "> ,")
-    .replaceAll("<,", "< ,");
+  var questionText;
+  try {
+    questionText = state?.question_text
+      .replaceAll(">,", "> ,")
+      .replaceAll("<,", "< ,");
+  } catch {
+    questionText = state?.question_text;
+  }
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -65,7 +70,7 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
         <CustomAlertBoxMathZone msg={"Please answer the question..."} />
       )}
       <div className="mathzoneQuestionName" id="studentAnswerResponse">
-        {state?.question_text && <div>{HtmlParser(state?.question_text)}</div>}
+        {questionText && <div>{HtmlParser(questionText)}</div>}
         {state?.upload_file_name && (
           <div>
             <img src={state?.upload_file_name} alt="Image not found" />
