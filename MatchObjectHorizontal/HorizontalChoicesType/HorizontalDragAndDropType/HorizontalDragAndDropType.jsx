@@ -22,7 +22,7 @@ export default function HorizontalDragAndDropType({
   const [handleDrag, handleDragStart] = useScrollBar();
   const [dragKey, setDragKey] = useState(0);
   const droppableContainerRef = useRef([]);
- 
+
   useEffect(() => {
     let arr = [];
 
@@ -107,7 +107,7 @@ export default function HorizontalDragAndDropType({
           key={index}
           className={styles.MatchObjectHorizontalTypeDragDropFlexBox}
           style={{
-            gap: items.length === 2 ? '5rem' : '2rem', 
+            gap: items.length === 2 ? "5rem" : "2rem",
           }}
         >
           {items?.map((item, i) =>
@@ -116,9 +116,12 @@ export default function HorizontalDragAndDropType({
                 key={i}
                 className={styles.MatchObjectHorizontalTypeDragDropFlexBox3}
                 style={{
-                  width: items.length === 2 
-                    ? `fit-content` 
-                    : `calc((100% - ${(items.length - 1) * 2}rem) / ${items.length})`,
+                  width:
+                    items.length === 2
+                      ? `fit-content`
+                      : `calc((100% - ${(items.length - 1) * 2}rem) / ${
+                          items.length
+                        })`,
                 }}
               >
                 <div>{HtmlParser(item?.imgvalue)}</div>
@@ -130,6 +133,7 @@ export default function HorizontalDragAndDropType({
                       show: item?.show,
                     })
                   }
+                  style={{ padding: "20px" }}
                 >
                   <b>
                     <HtmlParserComponent value={item?.numvalue} />
@@ -140,9 +144,12 @@ export default function HorizontalDragAndDropType({
               <div
                 className={styles.MatchObjectHorizontalTypeDragDropFlexBox3}
                 style={{
-                  width: items.length === 2 
-                    ? `fit-content` 
-                    : `calc((100% - ${(items.length - 1) * 2}rem) / ${items.length})`,
+                  width:
+                    items.length === 2
+                      ? `fit-content`
+                      : `calc((100% - ${(items.length - 1) * 2}rem) / ${
+                          items.length
+                        })`,
                 }}
                 key={i}
               >

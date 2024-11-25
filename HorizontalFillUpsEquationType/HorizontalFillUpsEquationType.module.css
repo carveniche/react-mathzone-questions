@@ -1289,6 +1289,7 @@
   display: flex;
   gap: 2rem;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .MatchObjectHorizontalTypeDragDropFlexBox3>div {
@@ -1304,7 +1305,7 @@
   display: flex;
   margin-top: 2rem;
   align-items: center;
-  gap: 10px;
+  gap: 50px;
   flex-wrap: wrap;
 }
 
@@ -1318,6 +1319,7 @@
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
+  height: 40vh;
 }
 
 .MatchObjectHorizontalTypeDragDropBox {
