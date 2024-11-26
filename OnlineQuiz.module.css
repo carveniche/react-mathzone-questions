@@ -5,6 +5,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "GothamRnd-Book";
   src: url("fonts/GothamRounded-Book.woff") format("woff");
@@ -12,6 +13,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 .flex {
   display: flex;
 }
@@ -23,9 +25,11 @@
 .flexGap2rem {
   gap: 1rem;
 }
+
 .marginTop1Rem {
   margin-top: 9px;
 }
+
 .flexWrap {
   flex-wrap: wrap;
 }
@@ -45,7 +49,7 @@
   border: 1px solid black;
 }
 
-.choicesType > div:nth-child(2) {
+.choicesType>div:nth-child(2) {
   padding-right: 1rem;
 }
 
@@ -99,7 +103,7 @@
   flex-wrap: wrap;
 }
 
-.horizontalNotSymbols > div {
+.horizontalNotSymbols>div {
   width: calc(40% - 2rem);
   min-width: 200px;
   align-items: center;
@@ -116,12 +120,14 @@
 
   color: #233584;
 }
+
 .ckeditrorAnswer input[type="radio"],
 .ckeditrorAnswer input[type="checkbox"] {
   width: 20px !important;
   height: 20px !important;
   margin-right: 8px !important;
 }
+
 .selectChoicesFont {
   font-size: 16px;
   font-style: normal;
@@ -169,14 +175,14 @@
   height: auto;
 }
 
-.whitePage > div:nth-child(3) {
+.whitePage>div:nth-child(3) {
   clear: both;
   height: auto;
   position: relative;
   height: inherit;
 }
 
-.mainPage2 .whitePage > div:nth-child(3) {
+.mainPage2 .whitePage>div:nth-child(3) {
   clear: both;
   height: auto;
   position: absolute;
@@ -188,7 +194,7 @@
   max-height: calc(100% - 88px);
 }
 
-.bodyPage > img {
+.bodyPage>img {
   position: absolute;
 }
 
@@ -256,7 +262,7 @@
   border-radius: 2px;
 }
 
-.border > div {
+.border>div {
   height: 2px;
   background-color: green;
   width: 20%;
@@ -371,8 +377,8 @@
   background: #fae0e0;
 }
 
-.red > div:nth-child(1),
-.green > div:nth-child(1) {
+.red>div:nth-child(1),
+.green>div:nth-child(1) {
   margin: 2rem;
   padding-top: 1rem;
   font-family: Montserrat;
@@ -469,15 +475,17 @@
   min-width: 45px !important;
   border-radius: 50% !important;
 }
+
 .roundcard_empty {
   min-width: 45px !important;
   border-radius: 50% !important;
 }
 
-.roundcard_empty > div {
+.roundcard_empty>div {
   min-width: 45px !important;
   border-radius: 50% !important;
 }
+
 .questionContent {
   font-size: 16px;
   font-style: normal;
@@ -530,7 +538,7 @@
   border-radius: 2px;
 }
 
-.border2 > div {
+.border2>div {
   height: 2px;
   background-color: green;
   width: 20%;
@@ -552,7 +560,7 @@
   border-radius: 2px;
 }
 
-.border3 > div {
+.border3>div {
   height: 2px;
   background-color: green;
   width: 20%;
@@ -567,7 +575,7 @@
   border-radius: 2px;
 }
 
-.border4 > div {
+.border4>div {
   height: 2px;
   background-color: green;
   width: 20%;
@@ -637,7 +645,7 @@
   clear: both;
 }
 
-#mathToolbar > div {
+#mathToolbar>div {
   word-break: break;
   height: 30px;
   font-size: 10px;
@@ -796,9 +804,11 @@
 .ckeditor {
   white-space: initial;
 }
+
 .ckeditor .questionName {
   white-space: initial;
 }
+
 @media only screen and (max-width: 1180px) {
   /* .mainPage2 {
       max-height: 80vh;
@@ -851,7 +861,7 @@
   cursor: pointer;
 }
 
-.blockBaseFlexBoxSelection > div {
+.blockBaseFlexBoxSelection>div {
   min-width: Calc(50% - 0.4rem);
   max-width: Calc(50% - 0.4rem);
 
@@ -881,7 +891,7 @@
   padding: 1rem;
 }
 
-.blockBaseFlexBoxSelection > div > div:nth-child(2) {
+.blockBaseFlexBoxSelection>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -898,7 +908,7 @@
   cursor: pointer;
 }
 
-.MultipleChoiceFlexBox > div {
+.MultipleChoiceFlexBox>div {
   min-width: Calc(50% - 0.5rem);
   max-width: 100%;
 
@@ -926,12 +936,12 @@
   height: auto;
 }
 
-.MultipleChoiceFlexBox > div > div {
+.MultipleChoiceFlexBox>div>div {
   min-width: auto;
   min-height: auto;
 }
 
-.MultipleChoiceFlexBox > div > div:nth-child(2) {
+.MultipleChoiceFlexBox>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -954,7 +964,7 @@
   flex-wrap: wrap;
 }
 
-.MatchObjectVerticalKeyingFlexBox3 > div {
+.MatchObjectVerticalKeyingFlexBox3>div {
   min-width: 90px;
   width: auto;
   flex-wrap: wrap;
@@ -962,7 +972,7 @@
   font-weight: 600;
 }
 
-.MatchObjectVerticalKeyingFlexBox3 > div {
+.MatchObjectVerticalKeyingFlexBox3>div {
   display: flex;
   justify-content: left;
 }
@@ -976,7 +986,7 @@
   cursor: pointer;
 }
 
-.MatchObjectVerticalVerticalFlexBox2 > div {
+.MatchObjectVerticalVerticalFlexBox2>div {
   width: auto;
 
   display: flex;
@@ -1004,14 +1014,14 @@
   padding: 1rem;
 }
 
-.MatchObjectVerticalVerticalFlexBox2 > div > div {
+.MatchObjectVerticalVerticalFlexBox2>div>div {
   min-width: 40px;
   min-height: 40px;
   width: 40px;
   aspect-ratio: 1/1;
 }
 
-.MatchObjectVerticalVerticalFlexBox2 > div > div:nth-child(2) {
+.MatchObjectVerticalVerticalFlexBox2>div>div:nth-child(2) {
   flex: 1;
   display: flex;
   align-items: center;
@@ -1030,7 +1040,7 @@
   flex-wrap: wrap;
 }
 
-.MatchObjectVerticalVerticalFlexBox3 > div {
+.MatchObjectVerticalVerticalFlexBox3>div {
   min-width: 90px;
   width: auto;
   flex-wrap: wrap;
@@ -1038,7 +1048,7 @@
   flex-wrap: wrap;
 }
 
-.MatchObjectVerticalVerticalFlexBox3 > div {
+.MatchObjectVerticalVerticalFlexBox3>div {
   display: flex;
   justify-content: left;
 }
@@ -1053,19 +1063,19 @@
   align-items: center;
 }
 
-.MatchObjectVerticalDragDropFlexBox3 > div {
+.MatchObjectVerticalDragDropFlexBox3>div {
   min-width: 90px;
   width: auto;
   flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
-.MatchObjectVerticalDragDropFlexBox3 > div {
+.MatchObjectVerticalDragDropFlexBox3>div {
   display: flex;
   justify-content: left;
 }
 
-.MatchObjectVerticalDragDropFlexBox3 > .fontSize {
+.MatchObjectVerticalDragDropFlexBox3>.fontSize {
   font-weight: 600;
 }
 
@@ -1077,7 +1087,7 @@
   min-width: 140px;
 }
 
-.MatchObjectVerticalDragDropBox > div {
+.MatchObjectVerticalDragDropBox>div {
   background-color: indigo;
   min-width: inherit;
   min-height: 50px;
@@ -1098,7 +1108,7 @@
   flex-wrap: wrap;
 }
 
-.MatchObjectVerticalDragDropBoxFlexBox2 > div {
+.MatchObjectVerticalDragDropBoxFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1113,7 +1123,7 @@
   cursor: pointer;
 }
 
-.CountOnTensframeSelectFlexBox > div {
+.CountOnTensframeSelectFlexBox>div {
   min-width: Calc(50% - 0.5rem);
   max-width: Calc(50% - 0.5rem);
 
@@ -1170,12 +1180,12 @@
   justify-content: space-between;
 }
 
-.RandomArrangmentDragDropKeyingFlexBox3 > div {
+.RandomArrangmentDragDropKeyingFlexBox3>div {
   width: auto;
   justify-content: center;
 }
 
-.RandomArrangmentDragDropKeyingFlexBox3 > div {
+.RandomArrangmentDragDropKeyingFlexBox3>div {
   display: flex;
 }
 
@@ -1191,7 +1201,7 @@
   }
 }
 
-.RandomArrangmentDragDropKeyingFlexBox > div {
+.RandomArrangmentDragDropKeyingFlexBox>div {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
@@ -1208,7 +1218,7 @@
   justify-content: space-between;
 }
 
-.RandomArrangmentDragDropDragDropFlexBox3 > div {
+.RandomArrangmentDragDropDragDropFlexBox3>div {
   display: flex;
   width: auto;
   justify-content: center;
@@ -1222,7 +1232,7 @@
   flex-wrap: wrap;
 }
 
-.RandomArrangmentDragDropDragDropFlexBox2 > div {
+.RandomArrangmentDragDropDragDropFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1234,13 +1244,13 @@
   gap: 4rem;
 }
 
-.RandomArrangmentDragDropDragDropFlexBox > div {
+.RandomArrangmentDragDropDragDropFlexBox>div {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
 }
 
-.RandomArrangmentDragDropDragDropBox > div {
+.RandomArrangmentDragDropDragDropBox>div {
   min-width: inherit;
   min-height: 50px;
   display: flex;
@@ -1268,12 +1278,12 @@
   justify-content: space-between;
 }
 
-.RandomArrangmentDragDropSelectChoiceFlexBox3 > div {
+.RandomArrangmentDragDropSelectChoiceFlexBox3>div {
   width: auto;
   justify-content: center;
 }
 
-.RandomArrangmentDragDropSelectChoiceFlexBox3 > div {
+.RandomArrangmentDragDropSelectChoiceFlexBox3>div {
   display: flex;
 }
 
@@ -1289,7 +1299,7 @@
   }
 }
 
-.RandomArrangmentDragDropSelectChoiceFlexBox > div {
+.RandomArrangmentDragDropSelectChoiceFlexBox>div {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
@@ -1305,7 +1315,7 @@
   flex-direction: column;
 }
 
-.MatchObjectHorizontalTypeKeyingFlexBox3 > div {
+.MatchObjectHorizontalTypeKeyingFlexBox3>div {
   display: flex;
   width: auto;
   flex-wrap: wrap;
@@ -1326,12 +1336,12 @@
   flex-direction: column;
 }
 
-.MatchObjectHorizontalTypeSelectChoiceFlexBox3 > div {
+.MatchObjectHorizontalTypeSelectChoiceFlexBox3>div {
   width: auto;
   justify-content: center;
 }
 
-.MatchObjectHorizontalTypeSelectChoiceFlexBox3 > div {
+.MatchObjectHorizontalTypeSelectChoiceFlexBox3>div {
   display: flex;
 }
 
@@ -1351,13 +1361,13 @@
   flex-direction: column;
 }
 
-.MatchObjectHorizontalTypeDragDropFlexBox3 > div {
+.MatchObjectHorizontalTypeDragDropFlexBox3>div {
   display: flex;
 
   flex-wrap: wrap;
 }
 
-.MatchObjectHorizontalTypeDragDropFlexBox3 > div {
+.MatchObjectHorizontalTypeDragDropFlexBox3>div {
   display: flex;
 }
 
@@ -1369,7 +1379,7 @@
   flex-wrap: wrap;
 }
 
-.MatchObjectHorizontalTypeDragDropFlexBox2 > div {
+.MatchObjectHorizontalTypeDragDropFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1391,7 +1401,7 @@
   border: 1px solid black;
 }
 
-.MatchObjectHorizontalTypeDragDropBox > div {
+.MatchObjectHorizontalTypeDragDropBox>div {
   min-width: inherit;
   min-height: 50px;
   display: flex;
@@ -1411,7 +1421,7 @@
   margin-bottom: 1rem;
 }
 
-.HorizontalPictureKeyingFlexBox > div {
+.HorizontalPictureKeyingFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1425,7 +1435,7 @@
   margin-bottom: 1rem;
 }
 
-.HorizontalPictureSelectChoiceFlexBox > div {
+.HorizontalPictureSelectChoiceFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1440,7 +1450,7 @@
   flex-wrap: wrap;
 }
 
-.HorizontalPictureDragDropFlexBox2 > div {
+.HorizontalPictureDragDropFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1454,11 +1464,12 @@
   margin-bottom: 2rem;
   flex-wrap: wrap;
 }
+
 .HorizontalPictureDragDropFlexBox td {
   padding: 10px;
 }
 
-.HorizontalPictureDragDropFlexBox > div {
+.HorizontalPictureDragDropFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1478,7 +1489,7 @@
   min-width: 80px;
 }
 
-.HorizontalPictureDragDropBox > div {
+.HorizontalPictureDragDropBox>div {
   min-width: inherit;
   min-height: 50px;
   display: flex;
@@ -1504,7 +1515,7 @@
   cursor: pointer;
 }
 
-.CompareOfImagesSelectChoiceFlexBox > div {
+.CompareOfImagesSelectChoiceFlexBox>div {
   min-width: Calc(50% - 0.4rem);
   max-width: Calc(50% - 0.4rem);
   flex: 1;
@@ -1533,7 +1544,7 @@
   padding: 1rem;
 }
 
-.CompareOfImagesSelectChoiceFlexBox > div > div:nth-child(2) {
+.CompareOfImagesSelectChoiceFlexBox>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -1575,7 +1586,7 @@
   flex-wrap: wrap;
 }
 
-.CompareDragOperatorKeyingFlexBox2 > div {
+.CompareDragOperatorKeyingFlexBox2>div {
   min-width: 64px;
   padding: 10px;
   width: auto;
@@ -1606,7 +1617,7 @@
   flex-wrap: wrap;
 }
 
-.CompareDragOperatorSelectChoiceFlexBox2 > div {
+.CompareDragOperatorSelectChoiceFlexBox2>div {
   min-width: 64px;
   padding: 10px;
   width: auto;
@@ -1619,7 +1630,7 @@
   align-items: center;
 }
 
-.CompareDragOperatorSelectChoiceFlexBox2 > #missedBox {
+.CompareDragOperatorSelectChoiceFlexBox2>#missedBox {
   min-width: 120px;
   padding: 10px;
   width: auto;
@@ -1636,7 +1647,7 @@
   cursor: pointer;
 }
 
-.CompareDragOperatorSelectChoiceFlexBox > div {
+.CompareDragOperatorSelectChoiceFlexBox>div {
   min-width: Calc(50% - 0.4rem);
   max-width: Calc(50% - 0.4rem);
 
@@ -1666,12 +1677,12 @@
   padding: 1rem;
 }
 
-.CompareDragOperatorSelectChoiceFlexBox > div > div {
+.CompareDragOperatorSelectChoiceFlexBox>div>div {
   min-width: auto;
   min-height: auto;
 }
 
-.CompareDragOperatorSelectChoiceFlexBox > div > div:nth-child(2) {
+.CompareDragOperatorSelectChoiceFlexBox>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -1688,7 +1699,7 @@
   flex-wrap: wrap;
 }
 
-.CompareDragOperatorDragDropFlexBox2 > div {
+.CompareDragOperatorDragDropFlexBox2>div {
   min-width: 64px;
   padding: 10px;
   width: auto;
@@ -1717,7 +1728,7 @@
   flex-wrap: wrap;
 }
 
-.CompareDragOperatorDragDropFlexBox > div {
+.CompareDragOperatorDragDropFlexBox>div {
   min-width: 120px;
   min-height: 50px;
   width: auto;
@@ -1733,7 +1744,7 @@
   align-items: center;
 }
 
-.CompareDragOperatorDragDropFlexBox2 > .DropBoxes {
+.CompareDragOperatorDragDropFlexBox2>.DropBoxes {
   min-width: 120px;
   min-height: 50px;
   width: auto;
@@ -1761,7 +1772,7 @@
   border: 1px solid black;
 }
 
-.PlaceValueChartKeyingGrid > div {
+.PlaceValueChartKeyingGrid>div {
   display: relative;
   display: flex;
   width: auto;
@@ -1773,15 +1784,15 @@
   height: auto;
 }
 
-.PlaceValueChartKeyingGrid > .borderBottom {
+.PlaceValueChartKeyingGrid>.borderBottom {
   border-top: 1px solid black;
 }
 
-.PlaceValueChartKeyingGrid > .rightBorder {
+.PlaceValueChartKeyingGrid>.rightBorder {
   border-right: 0px solid black;
 }
 
-.PlaceValueChartKeyingGrid > div > div {
+.PlaceValueChartKeyingGrid>div>div {
   word-break: break;
   height: auto;
 }
@@ -1800,7 +1811,7 @@
   overflow: auto;
 }
 
-.PlaceValuechartSelectChoiceGrid > div {
+.PlaceValuechartSelectChoiceGrid>div {
   display: relative;
   display: flex;
 
@@ -1812,15 +1823,15 @@
   height: auto;
 }
 
-.PlaceValuechartSelectChoiceGrid > .borderBottom {
+.PlaceValuechartSelectChoiceGrid>.borderBottom {
   border-top: 1px solid black;
 }
 
-.PlaceValuechartSelectChoiceGrid > .rightBorder {
+.PlaceValuechartSelectChoiceGrid>.rightBorder {
   border-right: 0px solid black;
 }
 
-.PlaceValuechartSelectChoiceGrid > div > div {
+.PlaceValuechartSelectChoiceGrid>div>div {
   word-break: break;
   height: auto;
 }
@@ -1843,7 +1854,7 @@
   max-width: inherit;
 }
 
-.PlaceValuechartSelectChoiceBox > div {
+.PlaceValuechartSelectChoiceBox>div {
   min-width: 100%;
   min-height: 50px;
   display: flex;
@@ -1868,7 +1879,7 @@
   border: 1px solid black;
 }
 
-.PlaceValueChartDragDropGrid > div {
+.PlaceValueChartDragDropGrid>div {
   display: relative;
   display: flex;
 
@@ -1880,15 +1891,15 @@
   height: auto;
 }
 
-.PlaceValueChartDragDropGrid > .borderBottom {
+.PlaceValueChartDragDropGrid>.borderBottom {
   border-top: 1px solid black;
 }
 
-.PlaceValueChartDragDropGrid > .rightBorder {
+.PlaceValueChartDragDropGrid>.rightBorder {
   border-right: 0px solid black;
 }
 
-.PlaceValueChartDragDropGrid > div > div {
+.PlaceValueChartDragDropGrid>div>div {
   word-break: break;
   height: auto;
 }
@@ -1902,7 +1913,7 @@
   flex-wrap: wrap;
 }
 
-.PlaceValueChartDragDropFlexBox2 > div {
+.PlaceValueChartDragDropFlexBox2>div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1917,7 +1928,7 @@
   word-break: break-word;
 }
 
-.PlaceValueChartDragDropFlexBox2 > div > div {
+.PlaceValueChartDragDropFlexBox2>div>div {
   min-width: 100%;
   min-height: 100%;
   display: flex;
@@ -1945,7 +1956,7 @@
   max-width: inherit;
 }
 
-.PlaceValueChartDragDropBox > div {
+.PlaceValueChartDragDropBox>div {
   min-width: 100%;
   min-height: 50px;
   display: flex;
@@ -1965,7 +1976,7 @@
   align-items: center;
 }
 
-.VerticalKeyingFlexBox > div {
+.VerticalKeyingFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1982,7 +1993,7 @@
   margin: 2rem 0;
 }
 
-.VerticalWithSymbolsFlexBox > div {
+.VerticalWithSymbolsFlexBox>div {
   width: auto;
   display: flex;
   flex-wrap: wrap;
@@ -1998,7 +2009,7 @@
   align-items: center;
 }
 
-.PlaceValueTableSelectKeyingFlexBox > div {
+.PlaceValueTableSelectKeyingFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2023,7 +2034,7 @@
   align-items: center;
 }
 
-.PlaceValueTableSelectTypeSelectChoiceFlexBox > div {
+.PlaceValueTableSelectTypeSelectChoiceFlexBox>div {
   display: table-cell;
   flex-direction: column;
   align-items: center;
@@ -2056,7 +2067,7 @@
   cursor: pointer;
 }
 
-.PlaceValueTableSelectTypeSelectChoiceFlexBox2 > div {
+.PlaceValueTableSelectTypeSelectChoiceFlexBox2>div {
   min-width: Calc(50% - 0.5rem);
   max-width: Calc(50% - 0.5rem);
 
@@ -2084,7 +2095,7 @@
   height: auto;
 }
 
-.PlaceValueTableSelectTypeSelectChoiceFlexBox2 > div > div:nth-child(2) {
+.PlaceValueTableSelectTypeSelectChoiceFlexBox2>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -2104,7 +2115,7 @@
   align-items: center;
 }
 
-.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox > div {
+.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox>div {
   display: table-cell;
   align-items: center;
   justify-content: center;
@@ -2132,7 +2143,7 @@
   flex-wrap: wrap;
 }
 
-.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox2 > div {
+.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2147,7 +2158,7 @@
   color: black;
 }
 
-.PlaceValueTableSelectFlexBoxDragDropTypeBox > div {
+.PlaceValueTableSelectFlexBoxDragDropTypeBox>div {
   min-width: inherit;
   min-height: 50px;
   display: flex;
@@ -2177,11 +2188,11 @@
   height: auto;
 }
 
-.OrcGrid > div:nth-child(even) {
+.OrcGrid>div:nth-child(even) {
   border: 1px solid black;
 }
 
-.OrcGrid > div {
+.OrcGrid>div {
   border: 1px solid black;
   display: flex;
   padding: 1rem;
@@ -2190,19 +2201,19 @@
   word-break: break;
 }
 
-.OrcGrid > .evenChild {
+.OrcGrid>.evenChild {
   min-height: 100px;
 
   height: auto;
 }
 
-.OrcGrid > div > div {
+.OrcGrid>div>div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.OrcGrid > .flexbox {
+.OrcGrid>.flexbox {
   display: flex;
   justify-content: center;
   font-weight: bold;
@@ -2218,7 +2229,7 @@
   height: auto;
 }
 
-.OrcDivBox > div {
+.OrcDivBox>div {
   margin: 0 0.21rem;
   border-bottom: 1px solid black;
   min-height: 30px;
@@ -2251,7 +2262,7 @@
   margin-bottom: 1rem;
 }
 
-.OrcDivBox2 > div {
+.OrcDivBox2>div {
   width: auto;
   display: flex;
   justify-content: center;
@@ -2271,11 +2282,11 @@
   margin: 2rem auto;
 }
 
-.OprcGrid > div:nth-child(even) {
+.OprcGrid>div:nth-child(even) {
   box-sizing: border-box;
 }
 
-.OprcGrid > div {
+.OprcGrid>div {
   border: 1px solid black;
   padding: 1rem;
   display: flex;
@@ -2285,14 +2296,14 @@
   height: auto;
 }
 
-.OprcGrid > .lastChild {
+.OprcGrid>.lastChild {
   min-height: 100px;
 
   height: auto;
   box-sizing: border-box;
 }
 
-.OprcGrid > div > div {
+.OprcGrid>div>div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2310,7 +2321,7 @@
   height: auto;
 }
 
-.OprcGridDivBox > div {
+.OprcGridDivBox>div {
   margin: 0.51rem;
   border-bottom: 1px solid black;
   min-height: 30px;
@@ -2342,7 +2353,7 @@
   border: 1px solid black;
 }
 
-.OprcGridDivBox2 > div {
+.OprcGridDivBox2>div {
   min-width: 30px;
   height: auto;
   width: auto;
@@ -2368,7 +2379,7 @@
   text-align: center;
 }
 
-.CountGridTenframesMultipleContentGrid > div {
+.CountGridTenframesMultipleContentGrid>div {
   border: 1px solid black;
   border-top: 0px;
   width: auto;
@@ -2379,19 +2390,19 @@
   align-items: center;
 }
 
-.CountGridTenframesMultipleContentGrid > .lowerBorder {
+.CountGridTenframesMultipleContentGrid>.lowerBorder {
   border-bottom: 0px;
 }
 
-.CountGridTenframesMultipleContentGrid > div {
+.CountGridTenframesMultipleContentGrid>div {
   border-right: 0px;
 }
 
-.CountGridTenframesMultipleContentGrid > div:nth-child(1) {
+.CountGridTenframesMultipleContentGrid>div:nth-child(1) {
   border-left: 0px;
 }
 
-.CountGridTenframesMultipleContentGrid > .leftBorder {
+.CountGridTenframesMultipleContentGrid>.leftBorder {
   border-left: 0;
 }
 
@@ -2406,21 +2417,21 @@
   text-align: center;
 }
 
-.TensframeContentGrid > div {
+.TensframeContentGrid>div {
   border: 1px solid black;
   height: 80px;
   border-top: 0px;
 }
 
-.TensframeContentGrid > .lowerBorder {
+.TensframeContentGrid>.lowerBorder {
   border-bottom: 0px;
 }
 
-.TensframeContentGrid > div {
+.TensframeContentGrid>div {
   border-right: 0px;
 }
 
-.TensframeContentGrid > div:nth-child(1) {
+.TensframeContentGrid>div:nth-child(1) {
   border-left: 0px;
 }
 
@@ -2467,7 +2478,7 @@
   margin: 0 auto;
 }
 
-.title2 > div {
+.title2>div {
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -2483,7 +2494,7 @@
   width: 96%;
 }
 
-.questionNoHeading > .mathZoneQuestionNo {
+.questionNoHeading>.mathZoneQuestionNo {
   font-size: 20px;
   font-weight: bold;
   flex-wrap: wrap;
@@ -2494,7 +2505,7 @@
   width: auto;
 }
 
-.questionNoHeading > .mathZonetitle {
+.questionNoHeading>.mathZonetitle {
   font-size: 20px;
   font-weight: bold;
   flex-wrap: wrap;
@@ -2522,12 +2533,7 @@
 }
 
 .mainPage2 .questionNoHeading .mathZoneLevel,
-.mainPage2
-  .questionNoHeading
-  .mathZoneQuestionNo
-  .mainPage2
-  .questionNoHeading
-  .mathZoneLevel,
+.mainPage2 .questionNoHeading .mathZoneQuestionNo .mainPage2 .questionNoHeading .mathZoneLevel,
 .mainPage2 .questionNoHeading .mathZoneQuestionNo {
   border-radius: 5px;
   padding: 5px;
@@ -2551,7 +2557,7 @@
   flex-wrap: wrap;
 }
 
-.VerticalDragDropFlexBox > div {
+.VerticalDragDropFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2566,7 +2572,7 @@
   margin-top: 4rem;
 }
 
-.VerticalDragDropFlexBox2 > div {
+.VerticalDragDropFlexBox2>div {
   width: 50px;
   height: 50px;
   gap: 1rem;
@@ -2584,7 +2590,7 @@
   align-items: center;
 }
 
-.NumberBondSelectChoiceFlexBox > div {
+.NumberBondSelectChoiceFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2615,7 +2621,7 @@
   cursor: pointer;
 }
 
-.NumberBondSelectChoiceFlexBox2 > div {
+.NumberBondSelectChoiceFlexBox2>div {
   min-width: Calc(50% - 0.5rem);
   max-width: Calc(50% - 0.5rem);
 
@@ -2643,7 +2649,7 @@
   height: auto;
 }
 
-.NumberBondSelectChoiceFlexBox2 > div > div:nth-child(2) {
+.NumberBondSelectChoiceFlexBox2>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -2661,7 +2667,7 @@
   flex-wrap: wrap;
 }
 
-.questionContent > div {
+.questionContent>div {
   min-width: 300px;
   flex-grow: 1;
 }
@@ -2683,7 +2689,7 @@
   cursor: pointer;
 }
 
-.multiSelectFlexBox > div {
+.multiSelectFlexBox>div {
   min-width: Calc(50% - 0.5rem);
   max-width: Calc(50% - 0.5rem);
 
@@ -2711,7 +2717,7 @@
   height: auto;
 }
 
-.multiSelectFlexBox div > div:nth-child(2) {
+.multiSelectFlexBox div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -2737,7 +2743,7 @@
   border-radius: 5px;
 }
 
-.MainOlBox > div {
+.MainOlBox>div {
   border-bottom: 1px solid black;
   width: 80%;
 
@@ -2759,9 +2765,11 @@
   font-weight: 700 !important;
   font-size: 18px;
 }
+
 .bodyPage span {
   line-height: 100% !important;
 }
+
 .bodyPage span:global(.mq-sup) var,
 .bodyPage span:global(.mq-sup) span,
 .bodyPage span:global(.mq-sup) sup {
@@ -2771,6 +2779,7 @@
 .bodyPage span:global(.mq-math-mode) sup:global(.mq-nthroot) {
   margin-right: -0.4em;
 }
+
 .outerBtnContainer {
   height: fit-content;
   margin: 0 auto;
@@ -2787,15 +2796,19 @@
 .bodyPage span:global(.mq-sup) sup {
   font-size: 12px !important;
 }
+
 .bodyPage span:global(.mq-math-mode) sup:global(.mq-nthroot) {
   margin-right: -0.4em;
 }
+
 .modalPositionRelative {
   float: none;
 }
+
 .bodyPage div:global(.power-font) {
   font-size: 12px !important;
 }
+
 .bodyPage div:global(.power-font) span {
   font-size: 12px !important;
 }
@@ -2803,6 +2816,7 @@
 .ckeditrorAnswer {
   position: relative !important;
 }
+
 .nextButtonMarginBottom {
   margin-bottom: 0;
 
@@ -2825,7 +2839,7 @@
   align-items: center;
 }
 
-.numberContainerPagination > button {
+.numberContainerPagination>button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2844,7 +2858,7 @@
   color: white;
 }
 
-.numberContainerPagination > button:hover {
+.numberContainerPagination>button:hover {
   background-color: lime;
   cursor: pointer;
 }
@@ -2886,11 +2900,12 @@
 .solutionText {
   color: tomato;
 }
+
 .solutionText {
   color: tomato;
 }
 
-.title2 > #titleStatus {
+.title2>#titleStatus {
   font-weight: bold !important;
   font-size: 24px !important;
 }
@@ -2920,7 +2935,7 @@
   border-radius: 50%;
 }
 
-.mainPage2 .bodyPage > .timerTime {
+.mainPage2 .bodyPage>.timerTime {
   font-family: "Roboto Mono", monospace !important;
   font-weight: 300;
   font-size: 16px !important;
@@ -2960,13 +2975,15 @@
   overflow-wrap: normal !important;
 }
 
-.whitePage > div img {
+.whitePage>div img {
   height: fit-content;
   display: initial;
 }
+
 #newTypeQuestion .questionName img {
   width: auto !important;
 }
+
 .buttonContainer {
   width: calc(100%);
   top: 50%;
@@ -2974,24 +2991,31 @@
   transform: translate(0, -50%);
   position: absolute;
 }
-.buttonContainer > div {
+
+.buttonContainer>div {
   position: absolute;
 }
+
 .buttonContainer .prevBtn {
   left: 40px;
 }
+
 .buttonContainer .nextBtn {
   right: 40px;
 }
+
 #mathZoneNextQuestion img {
   width: auto !important;
 }
+
 #mathZoneNextQuestion {
   white-space: pre-wrap;
 }
+
 #mathZoneNextQuestion .questionName {
   width: auto !important;
 }
+
 .studentTabContainer {
   display: flex;
   width: 80%;
@@ -2999,7 +3023,8 @@
   flex-wrap: wrap;
   gap: 10px;
 }
-.studentTabContainer > div {
+
+.studentTabContainer>div {
   padding: 5px;
   border-width: 1px;
   border-style: solid;
@@ -3007,13 +3032,16 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
 .closeButton {
   color: red;
 }
+
 .closeButton a:hover {
   text-decoration: underline !important;
   color: red !important;
 }
+
 /* Long division */
 
 .LongDivisonDragDropFlexBox3 {
@@ -3025,13 +3053,13 @@
   color: indigo;
 }
 
-.LongDivisonDragDropFlexBox3 > div {
+.LongDivisonDragDropFlexBox3>div {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.LongDivisonDragDropFlexBox3 > div {
+.LongDivisonDragDropFlexBox3>div {
   display: flex;
 }
 
@@ -3043,7 +3071,7 @@
   flex-wrap: wrap;
 }
 
-.LongDivisonDragDropFlexBox2 > div {
+.LongDivisonDragDropFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3064,7 +3092,8 @@
   min-width: 40px;
   border: 1px solid black;
 }
-.LongDivisonDragDropBoxRemainder > div{
+
+.LongDivisonDragDropBoxRemainder>div {
   width: 30px;
   height: 30px;
   display: flex;
@@ -3073,13 +3102,15 @@
   color: white;
   cursor: pointer;
 }
-.remainder_td{
+
+.remainder_td {
   width: 30px;
   height: 30px;
   max-width: 30px;
   max-height: 30px;
 }
-.LongDivisonDragDropBox > div {
+
+.LongDivisonDragDropBox>div {
   min-width: 40px;
   min-height: 40px;
   display: flex;
@@ -3088,22 +3119,23 @@
   color: white;
   cursor: pointer;
 }
+
 .mathquill_mathzone_questionname {
   flex-wrap: wrap;
 }
+
 .mathquill_mathzone_questionname span:global(.mq-math-mode) {
   font-size: inherit !important;
 }
 
-.mathquill_mathzone_questionname
-  span:global(.mq-math-mode)
-  span:global(.mq-root-block) {
+.mathquill_mathzone_questionname span:global(.mq-math-mode) span:global(.mq-root-block) {
   display: contents;
 }
 
 .longDivisonTable {
   vertical-align: top;
 }
+
 .longDivisonTable td {
   text-align: center;
   padding: 5px;
@@ -3114,14 +3146,16 @@
 
 .longDivisonTable td:nth-child(1) {
 
-  padding-left:0px;
+  padding-left: 0px;
 }
+
 .skippedQuestionTitle {
   text-align: center;
   width: 100%;
   margin-bottom: 1rem;
 }
-.skippedQuestionTitle > h1 {
+
+.skippedQuestionTitle>h1 {
   width: fit-content;
   color: #828282;
   margin: auto;
@@ -3134,9 +3168,11 @@
 .bodyPage2.old_question_type *:global(.top-new) {
   font-size: 12px;
 }
+
 .old_question_type {
   padding-top: 10px;
 }
+
 .bodyPage2:global(.old_question_type) div:global(.eq-c) {
   display: inline-block;
 }
@@ -3145,6 +3181,7 @@
   position: relative;
   top: 50px;
 }
+
 .row_2 {
   position: relative;
   top: -50px;
@@ -3155,6 +3192,7 @@
   position: relative;
   top: 18px;
 }
+
 .keyrow_2 {
   position: absolute;
   top: 45px;
@@ -3163,17 +3201,21 @@
   gap: 12px !important;
   justify-content: left;
 }
+
 .keyrow_2 td:nth-child(1) {
   display: none !important;
 }
+
 .keyrow_2 td {
   position: relative;
 }
+
 .quizCorrectInorrect {
   font-family: "GothamRnd-Medium";
   clear: both;
   margin-bottom: 1rem;
 }
+
 .correctAnswerBox {
   background-color: #dddddd;
   padding: 10px 20px;
@@ -3181,11 +3223,13 @@
   color: #666666;
   margin-bottom: 1rem;
 }
+
 .correctAnswerBox .correctAnswer {
   font-family: "GothamRnd-Medium";
   color: #444444;
 }
-.correctAnswer > h6 {
+
+.correctAnswer>h6 {
   margin: 0;
   margin-bottom: 10px;
   font-weight: 500;
@@ -3193,6 +3237,7 @@
   margin: 0;
   padding: 0;
 }
+
 .correctAnswer {
   display: flex;
 
@@ -3200,7 +3245,8 @@
   align-items: center;
   column-gap: 10px;
 }
-.correctAnswer2 > h6 {
+
+.correctAnswer2>h6 {
   font-weight: bold;
 }
 
@@ -3208,56 +3254,66 @@
 .tdspace td:nth-last-child(1) {
   padding-left: 6px;
 }
+
 .tdspace td:nth-last-child(2) {
- padding-left: 13px;
+  padding-left: 13px;
 }
+
 .tdspace td:nth-child(1),
 .tdspace_pd td:nth-child(1) {
   left: 9px !important;
 }
+
 .tdspace td,
-.tdspace_pd td{
+.tdspace_pd td {
   padding-left: 20px;
 }
 
 .contentParent img {
   user-select: none;
 }
+
 .orc_dragdrop img {
   pointer-events: none;
 }
-.questionImage{
+
+.questionImage {
   display: flex;
   padding: 50px 0;
   gap: 50px;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
-.checkNumLine{
+
+.checkNumLine {
   /* width: 50px; */
-  height: 30px; 
+  height: 30px;
   min-width: 25px;
   padding: 0;
-  margin:   0;
+  margin: 0;
   font-family: "GothamRnd-Book2";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
-  text-align: center; 
+  text-align: center;
 }
- .xline{
+
+.xline {
   display: flex;
   width: 100%;
- }
+}
+
 .botline {
   border-bottom: 2px solid #888888;
   width: -webkit-fill-available;
   /* margin-top: -9px; */
 }
-.arrowBotline{
+
+.arrowBotline {
   border-bottom: 2px solid #888888;
   top: -19px;
   left: 15px;
@@ -3265,65 +3321,81 @@ input::-webkit-inner-spin-button {
   position: relative;
 }
 
-.arrowRight .arrowBotline{ 
-  left: 19px; 
+.arrowRight .arrowBotline {
+  left: 19px;
 }
-.start,.end{
-  font-size :40px;
-  position:relative;
-  top:-15px;
+
+.start,
+.end {
+  font-size: 40px;
+  position: relative;
+  top: -15px;
   padding: 0 10px
 }
-.vertBar, .keyVertBar, .answeredVertBar{
-width:2px;
-background-color: #888888;
-height:10px; 
-position:relative; 
-/* left:50%; */
-top:-6px;
-border:1px solid #888888
+
+.vertBar,
+.keyVertBar,
+.answeredVertBar {
+  width: 2px;
+  background-color: #888888;
+  height: 10px;
+  position: relative;
+  /* left:50%; */
+  top: -6px;
+  border: 1px solid #888888
 }
-.section:hover  .vertBar {
-  width:10px;
-  height:10px;
-  cursor: pointer; 
+
+.section:hover .vertBar {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
   transform: scale(1.1);
-  background-color:red; 
-  border-radius:50%;  
-  top:-6px   ;
+  background-color: red;
+  border-radius: 50%;
+  top: -6px;
   /* display:none; */
 }
-.mapBox,.numMapBox{
-  margin: 6px 0; 
+
+.mapBox,
+.numMapBox {
+  margin: 6px 0;
 }
-.mapBox{ 
+
+.mapBox {
   top: 10px;
 }
-.numMapBox{
-  position: relative; 
+
+.numMapBox {
+  position: relative;
 }
-#ansFracStart,#ansFracNum,#ansFracInt{
+
+#ansFracStart,
+#ansFracNum,
+#ansFracInt {
   font-family: "GothamRnd-Book2";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
 }
-.answerNum{
+
+.answerNum {
   display: flex;
-  gap:5px;
+  gap: 5px;
   align-items: center;
   text-align: center;
 }
-.answerFrac{
+
+.answerFrac {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap:2px;    
+  gap: 2px;
 }
-.qMark{
-  border:2px solid black;
-  margin: 3px 0; 
+
+.qMark {
+  border: 2px solid black;
+  margin: 3px 0;
   /* padding:   3px; 
   height: 17px;
   width: 17px; */
@@ -3333,60 +3405,69 @@ border:1px solid #888888
 
   text-align: center;
 }
-.arrowLeft,.arrowRight{
-  width: fit-content; 
+
+.arrowLeft,
+.arrowRight {
+  width: fit-content;
   /* left:-20px; */
-  left:-2rem;
+  left: -2rem;
   top: -17px;
   position: relative;
   width: fit-content;
   height: fit-content;
 }
-.arrowLeft{
+
+.arrowLeft {
   /* left: 30px; */
-  left:2rem;
+  left: 2rem;
 }
-.ticktext, .answeredticktext{
+
+.ticktext,
+.answeredticktext {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   width: fit-content;
   /* min-width: 40px; */
   /* padding: 0 .5rem; */
-} 
-#horizontal_line{
-max-width: 100%;
-min-width: 10%;    
-display: flex;
-height: 20px;
-}
-.hori{ 
-display: flex; 
-/* justify-content:center; */
-width: 100%;
-height: fit-content;
-/* height: 175px; */
-overflow-x: auto;
-overflow-y: hidden;
-/* padding: 6rem 0; 4rem 0 7rem 0 */
-padding:  4rem 0 7rem 0;
 }
 
-.selected, .ansSelected{ 
-border-radius:50%;
-background-color:blue;
-width:10px;
-height:10px;
-position:relative;
-top:-6px;
-border:1px solid black;
+#horizontal_line {
+  max-width: 100%;
+  min-width: 10%;
+  display: flex;
+  height: 20px;
+}
+
+.hori {
+  display: flex;
+  /* justify-content:center; */
+  width: 100%;
+  height: fit-content;
+  /* height: 175px; */
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* padding: 6rem 0; 4rem 0 7rem 0 */
+  padding: 4rem 0 7rem 0;
+}
+
+.selected,
+.ansSelected {
+  border-radius: 50%;
+  background-color: blue;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: -6px;
+  border: 1px solid black;
 }
 
 /* .selected:hover, .ticktext:hover .selected{ 
   cursor: pointer;
   scale: 1.1;
 } */
-.section, .answeredSection{
+.section,
+.answeredSection {
   margin: 0;
   /* max-width: 125px; */
   /* min-width: 50px;  */
@@ -3408,22 +3489,23 @@ border:1px solid black;
     transform: scale(1);
     opacity: 1;
   }
+
   100% {
     transform: scale(10);
     opacity: 0;
   }
 }
 
-.gridBox{
+.gridBox {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   border-collapse: collapse;
   width: fit-content;
   border: 1px solid black;
 }
 
-.box{
+.box {
   width: 80px;
   height: 80px;
   border: 1px solid black;
@@ -3431,13 +3513,15 @@ border:1px solid black;
   align-items: center;
   justify-content: center;
 }
-.imgggg{
+
+.imgggg {
   margin: auto;
 }
 
 .strikethrough {
   position: relative;
 }
+
 .strikethrough:before {
   position: absolute;
   content: "";
