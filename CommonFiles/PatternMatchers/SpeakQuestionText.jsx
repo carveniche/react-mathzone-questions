@@ -245,13 +245,22 @@ export default function SpeakQuestionText({ type, readText }) {
   return (
     <>
       <div style={{ cursor: "pointer" }} onClick={readTheQuestionText}>
-        <Lottie
+        {/* <Lottie
           onClick={readTheQuestionText}
           options={isSpeaking ? playingOptions : pausedOptions}
           height={"40px"}
           width={"35px"}
           cursor={"pointer"}
           style={{ margin: "0" }}
+        /> */}
+        <img
+          style={{ width: "35px", height: "40px" }}
+          onClick={readTheQuestionText}
+          src={
+            isSpeaking
+              ? "https://advancedcodingtraining.s3.ap-south-1.amazonaws.com/images/PayingAudioAnimation.gif"
+              : "https://advancedcodingtraining.s3.ap-south-1.amazonaws.com/images/PlayAudioLottie.gif"
+          }
         />
       </div>
     </>
