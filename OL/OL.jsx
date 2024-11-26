@@ -8,6 +8,7 @@ import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { ProgressBorder } from "../../Modal2/modal2";
+import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -40,10 +41,49 @@ function Ol({ obj, meter }) {
   };
   const [questionContent, setQuetionContent] = useState([]);
 
+  const [inputState, setInputState] = useState([]);
+  const [selectState, setSelectState] = useState([]);
+  const [redAlert, setRedAlert] = useState(false);
+  const removeAllInputType = () => {
+    let parent = document.getElementById("studentAnswerResponse");
+    let inputType = parent.querySelectorAll("input");
+    var inputField = [];
+    var selectTag = [];
+    for (let item of inputType) {
+      inputField.push(item.value);
+    }
+    for (let item of inputType) {
+      item.maxLength = item.value.length;
+      item.value = "";
+      item.checked = false;
+    }
+    setInputState([...inputField]);
+
+    let selectOption = parent.querySelectorAll("select");
+    for (let select of selectOption) {
+      for (let option of select) {
+        select.addEventListener("change", (e) => {
+          for (let option of e.target.options) {
+            option.selected
+              ? option.setAttribute("selected", "selected")
+              : option.removeAttribute("selected");
+          }
+        });
+        if (option.selected) selectTag.push(option.value);
+      }
+    }
+    for (let select of selectOption) {
+      for (let option of select) {
+        option.selected = false;
+      }
+    }
+    setSelectState([...selectTag]);
+  };
   useEffect(() => {
     let temp = [...obj?.questionContent];
     temp = shuffle(temp);
     setQuetionContent([...temp]);
+    removeAllInputType();
   }, []);
   const inputRef = useRef([]);
   let currentIndex = 0;
@@ -88,7 +128,51 @@ function Ol({ obj, meter }) {
   };
 
   const handleSubmit = () => {
+    console.log({ selectState, inputState });
     if (hasAnswerSubmitted) return;
+    let parent = document.getElementById("studentAnswerResponse");
+    let inputType = parent.querySelectorAll("input");
+    let selectOption = parent.querySelectorAll("select");
+    var i = 0;
+    var s = 0;
+    var isWrong = false;
+    for (let item of inputType) {
+      if (item.value == "") {
+        setHasAnswerSubmitted(false);
+        setRedAlert(true);
+        return;
+      } else {
+        setRedAlert(false);
+        console.log(item.value, "-", i, "-", inputState[i]);
+        if (item.value !== inputState[i]) {
+          isWrong = true;
+        }
+        i++;
+      }
+    }
+
+    for (let items of selectOption) {
+      for (let item of items) {
+        if (item.value === "Select" && item.selected) {
+          setHasAnswerSubmitted(false);
+          setRedAlert(true);
+          return;
+        } else {
+          setRedAlert(false);
+          if (item.selected) {
+            console.log(item.value, "-", s, "-", selectState[s]);
+            if (item.value !== selectState[s]) isWrong = true;
+            s++;
+          }
+        }
+      }
+    }
+    console.log({ isWrong });
+    if (isWrong) {
+      setHasAnswerSubmitted(true);
+      setIsAnswerCorrect(false);
+      return;
+    }
     for (let i = 0; i < questionContent?.length; i++) {
       let items1 = questionContent[i];
       let items2 = obj?.questionContent[i];
@@ -104,6 +188,7 @@ function Ol({ obj, meter }) {
 
   return (
     <div>
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <SolveButton
         onClick={handleSubmit}
         answerHasSelected={hasAnswerSubmitted}
