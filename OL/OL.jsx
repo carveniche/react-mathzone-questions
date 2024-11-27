@@ -50,11 +50,12 @@ function Ol({ obj, meter }) {
     var inputField = [];
     var selectTag = [];
     for (let item of inputType) {
-      inputField.push(item.value);
+      if (item.required) inputField.push(item.value);
     }
     for (let item of inputType) {
       item.maxLength = item.value.length;
-      item.value = "";
+      item.style.textAlign = "center";
+      item.value = item.required ? "" : item.value;
       item.checked = false;
     }
     setInputState([...inputField]);
@@ -144,10 +145,12 @@ function Ol({ obj, meter }) {
       } else {
         setRedAlert(false);
         console.log(item.value, "-", i, "-", inputState[i]);
-        if (item.value !== inputState[i]) {
-          isWrong = true;
+        if (item.required) {
+          if (item.value !== inputState[i]) {
+            isWrong = true;
+          }
+          i++;
         }
-        i++;
       }
     }
 
@@ -168,11 +171,7 @@ function Ol({ obj, meter }) {
       }
     }
     console.log({ isWrong });
-    if (isWrong) {
-      setHasAnswerSubmitted(true);
-      setIsAnswerCorrect(false);
-      return;
-    }
+
     for (let i = 0; i < questionContent?.length; i++) {
       let items1 = questionContent[i];
       let items2 = obj?.questionContent[i];
@@ -181,6 +180,11 @@ function Ol({ obj, meter }) {
         setIsAnswerCorrect(false);
         return;
       }
+    }
+    if (isWrong) {
+      setHasAnswerSubmitted(true);
+      setIsAnswerCorrect(false);
+      return;
     }
     setHasAnswerSubmitted(true);
     setIsAnswerCorrect(true);

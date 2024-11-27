@@ -2976,7 +2976,7 @@
 }
 
 .whitePage>div img {
-  height: fit-content;
+  height: auto;
   display: initial;
 }
 

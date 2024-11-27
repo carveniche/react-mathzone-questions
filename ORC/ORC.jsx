@@ -80,7 +80,7 @@ const disabledCkeditor = () => {
   inputBox = parents?.querySelectorAll("input") || [];
   for (let item of inputBox) {
     if (item) {
-      item.setAttribute("disabled", true);
+      if (!item.required) item.setAttribute("disabled", true);
     }
   }
 };
@@ -156,6 +156,45 @@ function ORC({ obj, question_text, meter }) {
   };
 
   const [value, setValue] = useState({});
+  const [inputState, setInputState] = useState([]);
+  const [selectState, setSelectState] = useState([]);
+  const removeAllInputType = () => {
+    let parent = document.getElementById("studentAnswerResponse");
+    let inputType = parent.querySelectorAll("input");
+    var inputField = [];
+    var selectTag = [];
+    for (let item of inputType) {
+      if (item.required) inputField.push(item.value);
+    }
+    console.log("inputField", inputField);
+    for (let item of inputType) {
+      item.maxLength = item.value.length;
+      item.style.textAlign = "center";
+      item.value = item.required ? "" : item.value;
+      item.checked = false;
+    }
+    setInputState([...inputField]);
+
+    let selectOption = parent.querySelectorAll("select");
+    for (let select of selectOption) {
+      for (let option of select) {
+        select.addEventListener("change", (e) => {
+          for (let option of e.target.options) {
+            option.selected
+              ? option.setAttribute("selected", "selected")
+              : option.removeAttribute("selected");
+          }
+        });
+        if (option.selected) selectTag.push(option.value);
+      }
+    }
+    for (let select of selectOption) {
+      for (let option of select) {
+        option.selected = false;
+      }
+    }
+    setSelectState([...selectTag]);
+  };
   let currentIndex = 0;
   const handleChange = (e, i) => {
     e = e.latex();
@@ -229,6 +268,7 @@ function ORC({ obj, question_text, meter }) {
     let parent = document.getElementById("orcTextParent");
     if (parent) refreshPageLoad(parent, setInputText);
     setRefresh(false);
+    removeAllInputType();
   }, []);
   const [currentVirtualKeyBoard, setCurrentVirtualKeyBoard] = useState(-1);
   const handleClose = () => {
@@ -288,6 +328,45 @@ function ORC({ obj, question_text, meter }) {
 
   const handleSubmit = () => {
     if (hasAnswerSubmitted) return;
+    console.log({ selectState, inputState });
+    let parent = document.getElementById("studentAnswerResponse");
+    let inputType = parent.querySelectorAll("input");
+    let selectOption = parent.querySelectorAll("select");
+    var i = 0;
+    var s = 0;
+    var isWrong = false;
+    for (let item of inputType) {
+      if (item.value == "") {
+        setHasAnswerSubmitted(false);
+        setRedAlert(true);
+        return;
+      } else {
+        setRedAlert(false);
+        console.log(item.value, "-", i, "-", inputState[i]);
+        if (item.required) {
+          if (item.value !== inputState[i]) {
+            isWrong = true;
+          }
+          i++;
+        }
+      }
+    }
+    for (let items of selectOption) {
+      for (let item of items) {
+        if (item.value === "Select" && item.selected) {
+          setHasAnswerSubmitted(false);
+          setRedAlert(true);
+          return;
+        } else {
+          setRedAlert(false);
+          if (item.selected) {
+            console.log(item.value, "-", s, "-", selectState[s]);
+            if (item.value !== selectState[s]) isWrong = true;
+            s++;
+          }
+        }
+      }
+    }
     if (inputText.length > 0) {
       let temp = collectTextInputField(inputText);
       //testing for empty field
@@ -324,6 +403,12 @@ function ORC({ obj, question_text, meter }) {
       }
     }
 
+    console.log({ isWrong });
+    if (isWrong) {
+      setHasAnswerSubmitted(true);
+      setIsAnswerCorrect(false);
+      return;
+    }
     //testing correctIncorrect
 
     let temp = collectTextInputField();
