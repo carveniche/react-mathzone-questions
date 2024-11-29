@@ -27,6 +27,44 @@ function Oprc({ obj, meter }) {
   const [value, setValue] = useState({});
   const [dragKey, setDragKey] = useState(0);
   const droppableContainerRef = useRef([]);
+  const [inputState, setInputState] = useState([]);
+  const [selectState, setSelectState] = useState([]);
+  const removeAllInputType = () => {
+    let parent = document.getElementById("studentAnswerResponse");
+    let inputType = parent.querySelectorAll("input");
+    var inputField = [];
+    var selectTag = [];
+    for (let item of inputType) {
+      if (item.required) inputField.push(item.value);
+    }
+    for (let item of inputType) {
+      item.maxLength = item.value.length;
+      item.style.textAlign = "center";
+      item.value = item.required ? "" : item.value;
+      item.checked = false;
+    }
+    setInputState([...inputField]);
+
+    let selectOption = parent.querySelectorAll("select");
+    for (let select of selectOption) {
+      for (let option of select) {
+        select.addEventListener("change", (e) => {
+          for (let option of e.target.options) {
+            option.selected
+              ? option.setAttribute("selected", "selected")
+              : option.removeAttribute("selected");
+          }
+        });
+        if (option.selected) selectTag.push(option.value);
+      }
+    }
+    for (let select of selectOption) {
+      for (let option of select) {
+        option.selected = false;
+      }
+    }
+    setSelectState([...selectTag]);
+  };
   const optionSelect = {
     replace: (domNode) => {
       if (domNode?.attribs?.class) {
@@ -87,6 +125,7 @@ function Oprc({ obj, meter }) {
     droppableContainerRef.current = [...Array(Object.keys(temp2).length)].map(
       (item) => Array(temp2[0].length)
     );
+    removeAllInputType();
   }, []);
   const handleStop2 = (e, row, col) => {
     let value = dropState[row][col].val;
@@ -120,6 +159,45 @@ function Oprc({ obj, meter }) {
 
   const handleSubmit = () => {
     if (hasAnswerSubmit) return;
+    let parent = document.getElementById("studentAnswerResponse");
+    let inputType = parent.querySelectorAll("input");
+    let selectOption = parent.querySelectorAll("select");
+    console.log({ selectState, inputState });
+    var i = 0;
+    var s = 0;
+    var isWrong = false;
+    for (let item of inputType) {
+      if (item.value == "") {
+        setHasAnswerSubmitted(false);
+        setRedAlert(true);
+        return;
+      } else {
+        setRedAlert(false);
+        console.log(item.value, "-", i, "-", inputState[i]);
+        if (item.required) {
+          if (item.value !== inputState[i]) {
+            isWrong = true;
+          }
+          i++;
+        }
+      }
+    }
+    for (let items of selectOption) {
+      for (let item of items) {
+        if (item.value === "Select" && item.selected) {
+          setHasAnswerSubmitted(false);
+          setRedAlert(true);
+          return;
+        } else {
+          setRedAlert(false);
+          if (item.selected) {
+            console.log(item.value, "-", s, "-", selectState[s]);
+            if (item.value !== selectState[s]) isWrong = true;
+            s++;
+          }
+        }
+      }
+    }
     let n = obj?.orc_oprc_data[0]?.row_headers?.length || 0;
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < dropState[i].length; j++) {
@@ -141,6 +219,11 @@ function Oprc({ obj, meter }) {
         setHasAnswerSubmit(true);
         return;
       }
+    }
+    if (isWrong) {
+      setHasAnswerSubmitted(true);
+      setIsAnswerCorrect(false);
+      return;
     }
     setIsAnsweredCorrect(true);
     setHasAnswerSubmit(true);

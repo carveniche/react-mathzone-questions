@@ -52,9 +52,14 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
     setHasAnswerSubmitted(true);
     return;
   };
-  state.question_text = state?.question_text
-    .replaceAll(">,", "> ,")
-    .replaceAll("<,", "< ,");
+  var questionText;
+  try {
+    questionText = state?.question_text
+      .replaceAll(">,", "> ,")
+      .replaceAll("<,", "< ,");
+  } catch {
+    questionText = state?.question_text;
+  }
   var combinedReadOutText = state?.question_text;
   if (state?.fib_before_text)
     combinedReadOutText =
@@ -63,6 +68,7 @@ export default function FillInTheBlanks({ state, meter, choiceId }) {
     combinedReadOutText = combinedReadOutText + state?.fib_text;
   if (state?.after_question_text)
     combinedReadOutText = combinedReadOutText + state?.after_question_text;
+
   return (
     <div>
       {!isStudentAnswerResponse && (
