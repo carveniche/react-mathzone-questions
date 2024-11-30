@@ -255,12 +255,12 @@ export default function SpeakQuestionText({ type, readText }) {
         /> */}
         <img
           style={{ width: "35px", height: "40px" }}
-          onClick={readTheQuestionText}
           src={
             isSpeaking
               ? "https://advancedcodingtraining.s3.ap-south-1.amazonaws.com/images/PayingAudioAnimation.gif"
               : "https://advancedcodingtraining.s3.ap-south-1.amazonaws.com/images/PlayAudioLottie.gif"
           }
+          alt="ReadOut"
         />
       </div>
     </>
