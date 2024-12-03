@@ -39,7 +39,7 @@
 }
 
 .choiceType {
-  min-width: Calc(43% - 2rem);
+  min-width: calc(43% - 32px);
   min-height: 80px;
   flex-wrap: wrap;
   height: auto;
