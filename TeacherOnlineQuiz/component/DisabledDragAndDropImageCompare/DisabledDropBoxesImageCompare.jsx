@@ -88,7 +88,7 @@ gap:1rem;
 //justify-content:center;
     align-items:center;
 > div{
-    width:Calc((100% - ${props => props.totalRow}*2rem) / ${props => props.totalRows});
+    width:calc((100% - ${props => props.totalRow}*2rem) / ${props => props.totalRows});
     display:flex;
     flex-wrap:wrap;
     justify-content:center;

@@ -103,7 +103,7 @@
   border-radius: 12px;
 }
 .bodyPage {
-  width: Calc(98% - 2rem);
+  width: calc(98% - 2rem);
   margin: auto;
   padding: 1rem 0;
   position: relative;
@@ -379,7 +379,7 @@ height:auto;
 
 .choiceType2 {
   min-width: auto;
-  max-width: Calc((100% - 10px));
+  max-width: calc((100% - 10px));
   min-height: auto;
   width: 60px;
   flex-wrap: wrap;
@@ -694,8 +694,8 @@ height:auto;
   border: 1px solid black;
 
   height: auto;
-  min-width: Calc(50% - 0.5rem);
-  max-width: Calc(50% - 0.5rem);
+  min-width: calc(50% - 0.5rem);
+  max-width: calc(50% - 0.5rem);
 }
 .NumberBondSelectChoiceFlexBox2 > div > div {
   min-width: auto;

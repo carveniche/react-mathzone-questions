@@ -89,7 +89,7 @@ const FlexBox2 = styled.div`
   //justify-content:center;
   align-items: center;
   > div {
-    width: Calc(
+    width: calc(
       (100% - ${(props) => props.totalRow}*2rem) / ${(props) => props.totalRows}
     );
     display: flex;
@@ -113,8 +113,8 @@ const FlexBox = styled.div`
   margin-top: 0.1rem;
   cursor: pointer;
   > div {
-    min-width: Calc(50% - 0.4rem);
-    max-width: Calc(50% - 0.4rem);
+    min-width: calc(50% - 0.4rem);
+    max-width: calc(50% - 0.4rem);
 
     flex: 1;
     display: flex;

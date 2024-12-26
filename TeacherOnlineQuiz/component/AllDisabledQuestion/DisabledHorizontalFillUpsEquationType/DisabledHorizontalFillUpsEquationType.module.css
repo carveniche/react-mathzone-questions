@@ -398,7 +398,7 @@
 
 .choiceType2 {
   min-width: auto;
-  max-width: Calc((100% - 10px));
+  max-width: calc((100% - 10px));
   min-height: auto;
   width: 60px;
   flex-wrap: wrap;
@@ -658,7 +658,7 @@
   width: 96%;
   margin: auto;
   margin-top: 1rem;
-  height: Calc(85vh - 1rem - 72px);
+  height: calc(85vh - 1rem - 72px);
   position: relative;
 }
 
@@ -706,19 +706,19 @@
 
 @media only screen and (max-width: 1202px) {
   .mainPage {
-    max-height: Calc(80.5vh - 1rem - 72px);
+    max-height: calc(80.5vh - 1rem - 72px);
   }
 }
 
 @media only screen and (max-width: 1102px) {
   .mainPage {
-    max-height: Calc(78.4vh - 1rem - 72px);
+    max-height: calc(78.4vh - 1rem - 72px);
   }
 }
 
 @media only screen and (max-width: 1002px) {
   .mainPage {
-    max-height: Calc(75.4vh - 1rem - 72px);
+    max-height: calc(75.4vh - 1rem - 72px);
   }
 }
 
@@ -802,8 +802,8 @@
 }
 
 .blockBaseFlexBoxSelection>div {
-  min-width: Calc(50% - 0.4rem);
-  max-width: Calc(50% - 0.4rem);
+  min-width: calc(50% - 0.4rem);
+  max-width: calc(50% - 0.4rem);
 
   flex: 1;
   display: flex;
@@ -854,8 +854,8 @@
 }
 
 .MultipleChoiceFlexBox>div {
-  min-width: Calc(50% - 0.5rem);
-  max-width: Calc(50% - 0.5rem);
+  min-width: calc(50% - 0.5rem);
+  max-width: calc(50% - 0.5rem);
 
   flex: 1;
   display: flex;
@@ -1054,8 +1054,8 @@
 }
 
 .CountOnTensframeSelectFlexBox>div {
-  min-width: Calc(50% - 0.5rem);
-  max-width: Calc(50% - 0.5rem);
+  min-width: calc(50% - 0.5rem);
+  max-width: calc(50% - 0.5rem);
 
   flex: 1;
   display: flex;
@@ -1442,8 +1442,8 @@
 }
 
 .CompareOfImagesSelectChoiceFlexBox>div {
-  min-width: Calc(50% - 0.4rem);
-  max-width: Calc(50% - 0.4rem);
+  min-width: calc(50% - 0.4rem);
+  max-width: calc(50% - 0.4rem);
   flex: 1;
   display: flex;
   font-family: Montserrat;
@@ -1579,8 +1579,8 @@
 }
 
 .CompareDragOperatorSelectChoiceFlexBox>div {
-  min-width: Calc(50% - 0.4rem);
-  max-width: Calc(50% - 0.4rem);
+  min-width: calc(50% - 0.4rem);
+  max-width: calc(50% - 0.4rem);
 
   flex: 1;
   display: flex;
@@ -1979,8 +1979,8 @@
 }
 
 .PlaceValueTableSelectTypeSelectChoiceFlexBox2>div {
-  min-width: Calc(50% - 0.5rem);
-  max-width: Calc(50% - 0.5rem);
+  min-width: calc(50% - 0.5rem);
+  max-width: calc(50% - 0.5rem);
 
   flex: 1;
   display: flex;
@@ -2513,8 +2513,8 @@
 }
 
 .NumberBondSelectChoiceFlexBox2>div {
-  min-width: Calc(50% - 0.5rem);
-  max-width: Calc(50% - 0.5rem);
+  min-width: calc(50% - 0.5rem);
+  max-width: calc(50% - 0.5rem);
 
   flex: 1;
   display: flex;

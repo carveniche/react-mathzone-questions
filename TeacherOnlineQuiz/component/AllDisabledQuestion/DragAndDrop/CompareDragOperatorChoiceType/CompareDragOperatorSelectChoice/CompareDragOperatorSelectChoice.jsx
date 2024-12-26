@@ -83,8 +83,8 @@ const FlexBox = styled.div`
   margin-top: 0.1rem;
   cursor: pointer;
   > div {
-    min-width: Calc(50% - 0.4rem);
-    max-width: Calc(50% - 0.4rem);
+    min-width: calc(50% - 0.4rem);
+    max-width: calc(50% - 0.4rem);
 
     flex: 1;
     display: flex;
