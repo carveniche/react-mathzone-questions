@@ -324,7 +324,7 @@ function ORC({ obj, question_text, meter }) {
   inputs.forEach((input) => {
     afterQstTextInp.push(input.value);
     input.classList.toggle("AfterQstAns");
-    input.setAttribute("value", "");
+    input.setAttribute("value", input.value);
   });
 
   const handleSubmit = () => {
