@@ -27,6 +27,21 @@ export default function SolveButton({ onClick }) {
   };
   window.handleSubmit = handleSubmit;
 
+ function nextJsHandleSubmit() {
+    onClick();
+    let temp = false;
+    setHasAnswerSubmitted((prev) => {
+      setIsAnswerCorrect((isAnswer) => {
+        temp = prev ? (isAnswer ? 1 : 0) : -1;
+        return isAnswer;
+      });
+      return prev;
+    });
+    return temp;
+  };
+
+  window.nextJsHandleSubmit = nextJsHandleSubmit;
+
   return false ? (
     <>
       {hasAnswerSubmitted && (
