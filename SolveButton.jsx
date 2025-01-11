@@ -27,21 +27,23 @@ export default function SolveButton({ onClick }) {
   };
   window.handleSubmit = handleSubmit;
 
- function nextJsHandleSubmit() {
+  //  this function is for next js project 
+  const nextJsHandleSubmit = () => {
     onClick();
-    let temp = false;
-    setHasAnswerSubmitted((prev) => {
-      setIsAnswerCorrect((isAnswer) => {
-        temp = prev ? (isAnswer ? 1 : 0) : -1;
-        return isAnswer;
+    return new Promise((resolve) => {
+      setHasAnswerSubmitted((prev) => {
+        setIsAnswerCorrect((isAnswer) => {
+          let temp = prev ? (isAnswer ? 1 : 0) : -1;
+          resolve(temp); // Resolving after state update
+          return isAnswer; // Correct state update
+        });
+        return prev;
       });
-      return prev;
     });
-    return temp;
   };
-
+  
   window.nextJsHandleSubmit = nextJsHandleSubmit;
-
+  
   return false ? (
     <>
       {hasAnswerSubmitted && (
