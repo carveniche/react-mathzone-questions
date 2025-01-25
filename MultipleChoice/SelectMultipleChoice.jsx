@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
+import "../../../../../src/app/styles/mathgame.css"
 export default function SelectMultipleChoice({
   choices,
   inputRef,
@@ -48,7 +49,7 @@ export default function SelectMultipleChoice({
               key={i}
               onClick={() => handleChoiceSelection(i)}
             >
-              <div className="mathzone-circle-selectbox">
+              {/* <div className="mathzone-circle-selectbox">
                 {" "}
                 <b>{String.fromCharCode(65 + i)}</b>
               </div>
@@ -63,7 +64,7 @@ export default function SelectMultipleChoice({
                     <img src={value?.choice_image} />
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
           )
       )}
