@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
-import "../../../../../src/app/styles/mathgame.css"
+import "../../../styles/mathgame.css"
 export default function SelectMultipleChoice({
   choices,
   inputRef,
