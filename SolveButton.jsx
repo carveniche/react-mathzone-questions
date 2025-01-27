@@ -37,7 +37,6 @@ export default function SolveButton({ onClick }) {
   //  this function is for next js project 
   const nextJsHandleSubmit = () => {
     onClick();
-    setIsStudentAnswerResponse(false)
     return new Promise((resolve) => {
       setHasAnswerSubmitted((prev) => {
         setIsAnswerCorrect((isAnswer) => {
