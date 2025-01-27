@@ -20,6 +20,7 @@ import {
   manupulateJsonData,
   manupulateQuestionContentHorizontal,
 } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForDragAndDrop = (selectChoice) => {
   let n = selectChoice.length || 0;
@@ -113,6 +114,7 @@ export default function PlaceValueChart({
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
 
   for (let i = 0; i < Number(totalRows); i++) {
@@ -190,59 +192,63 @@ export default function PlaceValueChart({
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {HtmlParser(state.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        <div style={{ width: "100%" }}>
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{HtmlParser(state.questionName)}</div>
           </div>
-        )}
-        <div>
-          {!isStudentAnswerResponse && (
-            <ProgressBorder meter={meter + 1}>
-              <div></div>
-            </ProgressBorder>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
           )}
-        </div>
-        <div>
-          <div className={styles.contentParent}>
-            {state?.choiceType == "dragdrop" && (
-              <PlaceValueChartDragAndDrop
-                state={state}
-                totalRows={Number(totalRows)}
-                totalColumns={Number(totalColumns)}
-                dropRef={dropRef}
-                isAnswerSubmitted={hasAnswerSubmitted}
-                numberSystem={state?.numberSystem}
-              />
+          <div>
+            {!isStudentAnswerResponse && (
+              <ProgressBorder meter={meter + 1}>
+                <div></div>
+              </ProgressBorder>
             )}
-            {state?.choiceType == "keying" && (
-              <KeyingchoiceTypePlaceValueChart
-                content={state?.questionContent}
-                totalRows={Number(totalRows)}
-                totalColumns={Number(totalColumns)}
-                dropRef={dropRef}
-                isAnswerSubmitted={hasAnswerSubmitted}
-                numberSystem={state?.numberSystem}
-                state={state}
-              />
-            )}
-
-            {state?.choiceType == "selectchoice" && (
-              <SelectChoicePlaceValue
-                content={state?.questionContent}
-                totalRows={Number(totalRows)}
-                totalColumns={Number(totalColumns)}
-                dropRef={dropRef}
-                isAnswerSubmitted={hasAnswerSubmitted}
-                choices={state?.choices}
-                numberSystem={state?.numberSystem}
-                state={state}
-                studentAnswer={state[student_answer]}
-              />
-            )}
+          </div>
+          <div>
+            <div className={styles.contentParent}>
+              {state?.choiceType == "dragdrop" && (
+                <PlaceValueChartDragAndDrop
+                  state={state}
+                  totalRows={Number(totalRows)}
+                  totalColumns={Number(totalColumns)}
+                  dropRef={dropRef}
+                  isAnswerSubmitted={hasAnswerSubmitted}
+                  numberSystem={state?.numberSystem}
+                />
+              )}
+              {state?.choiceType == "keying" && (
+                <KeyingchoiceTypePlaceValueChart
+                  content={state?.questionContent}
+                  totalRows={Number(totalRows)}
+                  totalColumns={Number(totalColumns)}
+                  dropRef={dropRef}
+                  isAnswerSubmitted={hasAnswerSubmitted}
+                  numberSystem={state?.numberSystem}
+                  state={state}
+                />
+              )}
+              {state?.choiceType == "selectchoice" && (
+                <SelectChoicePlaceValue
+                  content={state?.questionContent}
+                  totalRows={Number(totalRows)}
+                  totalColumns={Number(totalColumns)}
+                  dropRef={dropRef}
+                  isAnswerSubmitted={hasAnswerSubmitted}
+                  choices={state?.choices}
+                  numberSystem={state?.numberSystem}
+                  state={state}
+                  studentAnswer={state[student_answer]}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -18,6 +18,7 @@ import oneDto2D, {
   student_answer,
 } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
   let n = arr?.length || 0;
@@ -106,6 +107,7 @@ export default function HorizontalFillUps({
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
 
@@ -186,7 +188,6 @@ export default function HorizontalFillUps({
     setStudentAnswerQuestion(jsonData);
     setHasAnswerSubmitted(true);
   };
-
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -196,29 +197,36 @@ export default function HorizontalFillUps({
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>{parse(state?.questionName)}</div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        <div>
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName)}</div>
           </div>
-        )}
-        <div className={styles.borderTopBottomMargin}>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <ContentHorizontalFillUps
-            content={state?.questionContent}
-            totalEmptyBox={totalEmptyBox}
-            inputRef={inputRef}
-            totalRows={totalRows}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            totalCols={totalCols}
-            choices={state?.choices}
-            choiceType={state?.choiceType}
-            studentAnswer={state[student_answer]}
-            questionType={state?.type}
-          />
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div className={styles.borderTopBottomMargin}>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <ContentHorizontalFillUps
+              content={state?.questionContent}
+              totalEmptyBox={totalEmptyBox}
+              inputRef={inputRef}
+              totalRows={totalRows}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              totalCols={totalCols}
+              choices={state?.choices}
+              choiceType={state?.choiceType}
+              studentAnswer={state[student_answer]}
+              questionType={state?.type}
+            />
+          </div>
         </div>
       </div>
     </div>

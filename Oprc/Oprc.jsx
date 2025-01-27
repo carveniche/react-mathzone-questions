@@ -12,7 +12,6 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
-
 function Oprc({ obj, meter }) {
   let currentIndex = 0;
   const inputRef = useRef([]);
@@ -29,6 +28,7 @@ function Oprc({ obj, meter }) {
   const droppableContainerRef = useRef([]);
   const [inputState, setInputState] = useState([]);
   const [selectState, setSelectState] = useState([]);
+  
   const removeAllInputType = () => {
     let parent = document.getElementById("studentAnswerResponse");
     let inputType = parent.querySelectorAll("input");
@@ -232,6 +232,23 @@ function Oprc({ obj, meter }) {
 
   meter = Number(meter) || 0;
   const [redAlert, setRedAlert] = useState(false);
+  
+  const injectTextValue = () => {
+    let parents = document.querySelector(".oprcMathzoneFibAfterText");
+    let inputs = parents?.querySelectorAll("input");
+    
+    if (inputs) {
+      inputs.forEach((input) => {
+        input.value = '';
+      });
+    }
+  };
+  
+  useEffect(() => {
+    injectTextValue();
+  }, []);
+  
+
   return (
     <div>
       <SolveButton onClick={handleSubmit} />
@@ -325,9 +342,12 @@ function Oprc({ obj, meter }) {
           </div>
         </div>
       </div>
-      <div id={styles.fibAfterText}>
-        <HtmlParserComponent value={obj?.after_question_text} />
+
+      <div id={styles.fibAfterText} className="oprcMathzoneFibAfterText">
+        {/* <HtmlParserComponent value={obj?.after_question_text} /> */}
+        {parse(obj?.after_question_text, optionSelect)}
       </div>
+
     </div>
   );
 }

@@ -14,6 +14,7 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { manupulateQuestionContent } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForKeyingChoiceType = (choices) => {
   let arr = choices?.current;
   let n = arr?.length || 0;
@@ -78,6 +79,7 @@ export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   for (let i = 0; i < Number(totalRows); i++) {
     let temp = new Array(Number(state.cols));
@@ -145,7 +147,22 @@ export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
       );
     }
   };
-
+  var combinedReadOutText = state?.questionName;
+  if (state.questionContent) {
+    var contentText = state.questionContent.reduce((acc, cont, index) => {
+      console.log("INDEX", index);
+      var fillerText =
+        index == 1
+          ? "is less than or geater than or equal to"
+          : index == 0
+          ? "which number"
+          : "what number";
+      return cont.isMissed == "true"
+        ? `${acc} ${fillerText}`
+        : `${acc} ${cont.value}`;
+    }, "");
+    combinedReadOutText = combinedReadOutText + "." + contentText;
+  }
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -156,8 +173,11 @@ export default function DragAndDrop({ state, totalRows, totalColumns, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse">
-        <div className={styles?.questionName}>
-        {parse(state?.questionName, optionSelectStaticMathField)}
+        <div className={styles?.questionName} style={{ display: "flex" }}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={state?.questionName} />
+          )}
+          <div>{parse(state?.questionName, optionSelectStaticMathField)}</div>
         </div>
         {state?.upload_file_name && (
           <div>

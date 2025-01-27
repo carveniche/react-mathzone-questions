@@ -10,6 +10,7 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
   let n = arr?.length || 0;
@@ -127,6 +128,7 @@ export default function RandomArrangmentDragDrop({
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
 
@@ -203,31 +205,38 @@ export default function RandomArrangmentDragDrop({
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>{parse(state?.questionName)}</div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        <div>
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName)}</div>
           </div>
-        )}
-        <div className={styles.borderTopBottomMargin}>
-          {!isStudentAnswerResponse && (
-            <ProgressBorder meter={meter + 1}>
-              <div></div>
-            </ProgressBorder>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
           )}
-        </div>
-        <div className={styles.contentParent}>
-          <ContentRandomArrangmentDragDrop
-            content={state?.questionContent}
-            totalEmptyBox={totalEmptyBox}
-            inputRef={inputRef}
-            totalRows={totalRows}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            totalCols={totalCols}
-            choices={state?.choices}
-            choiceType={state?.choiceType}
-          />
+          <div className={styles.borderTopBottomMargin}>
+            {!isStudentAnswerResponse && (
+              <ProgressBorder meter={meter + 1}>
+                <div></div>
+              </ProgressBorder>
+            )}
+          </div>
+          <div className={styles.contentParent}>
+            <ContentRandomArrangmentDragDrop
+              content={state?.questionContent}
+              totalEmptyBox={totalEmptyBox}
+              inputRef={inputRef}
+              totalRows={totalRows}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              totalCols={totalCols}
+              choices={state?.choices}
+              choiceType={state?.choiceType}
+            />
+          </div>
         </div>
       </div>
     </div>

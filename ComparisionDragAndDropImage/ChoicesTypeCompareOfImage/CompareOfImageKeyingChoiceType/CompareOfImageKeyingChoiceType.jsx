@@ -44,7 +44,7 @@ export default function CompareOfImageKeyingChoiceType({
       alignItems: "center",
     },
     InsideDiv: {
-      width: `Calc((100% - ${totalCols}*2rem) / ${totalCols})`,
+      width: `calc((100% - ${totalCols}*2rem) / ${totalCols})`,
       display: "flex",
       flexWrap: "wrap",
       justifyContent: "center",

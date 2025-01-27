@@ -9,6 +9,7 @@ import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/common
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import parse from "html-react-parser";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForSelectMultipleSelect = (choices) => {
   let n = choices?.length || 0;
   for (let i = 0; i < n; i++) {
@@ -31,6 +32,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const showAnswer = hasAnswerSubmitted;
   const setShowAnswer = setHasAnswerSubmitted;
@@ -76,29 +78,35 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
         <div
           id="studentAnswerResponse"
           className="mathzone-color-indigo word-space_pre-wrap"
+          style={{ display: "flex" }}
         >
-          <div className={styles.questionName}>
-            {parse(state?.questionName)}
-          </div>
-          {state?.upload_file_name && (
-            <div>
-              <img src={state?.upload_file_name} alt="image not found" />
-            </div>
-          )}
           <div>
-            <ConditionOnProgressBar meter={meter} />
-          </div>
-          <div className={styles.contentParent}>
-            {Boolean(totalRows) && (
-              <SelectChoiceOptionMultiplePicture
-                totalRows={totalRows}
-                choices={state?.questionContent}
-                totalColumns={state.col}
-                isAnswerSelected={showAnswer}
-                inputRef={inputRef}
-                studentAnswer={state[student_answer]}
-              />
+            <div className={styles.questionName} style={{ display: "flex" }}>
+              {readQuestionText && (
+                <SpeakQuestionText readText={state?.questionName} />
+              )}
+              <div>{parse(state?.questionName)}</div>
+            </div>
+            {state?.upload_file_name && (
+              <div>
+                <img src={state?.upload_file_name} alt="image not found" />
+              </div>
             )}
+            <div>
+              <ConditionOnProgressBar meter={meter} />
+            </div>
+            <div className={styles.contentParent}>
+              {Boolean(totalRows) && (
+                <SelectChoiceOptionMultiplePicture
+                  totalRows={totalRows}
+                  choices={state?.questionContent}
+                  totalColumns={state.col}
+                  isAnswerSelected={showAnswer}
+                  inputRef={inputRef}
+                  studentAnswer={state[student_answer]}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

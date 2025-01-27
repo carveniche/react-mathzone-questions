@@ -53,7 +53,6 @@ export default function SolveButton({ onClick }) {
   window.nextJsHandleSubmit = nextJsHandleSubmit;
   const hideShowSolution=()=>{
     setChoicesId("")
-    setHasAnswerSubmitted(false)
     // setIsStudentAnswerResponse(false)
     // setShowQuizResponseAsText(false)
     handleUpdateStudentAnswerResponse(true)

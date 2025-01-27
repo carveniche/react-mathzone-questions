@@ -3,7 +3,11 @@ import { useRef, useState, useEffect } from "react";
 import parse from "html-react-parser";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import { findSelectedValue, manupulateDataSelectChoice, manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import {
+  findSelectedValue,
+  manupulateDataSelectChoice,
+  manupulateQuestionContentHorizontal,
+} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
@@ -13,6 +17,7 @@ import SolveButton from "../SolveButton";
 import CompareOfImageKeyingChoiceType from "./ChoicesTypeCompareOfImage/CompareOfImageKeyingChoiceType/CompareOfImageKeyingChoiceType";
 import CompareOfImageSelectChoice from "./ChoicesTypeCompareOfImage/CompareOfImageKeyingSelectChoice/CompareOfImageSelectChoice";
 import DropBoxesImageCompare from "./DropBoxesImageCompare";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForKeyingChoiceType = (choices) => {
   let arr = choices?.current;
   let n = arr?.length || 0;
@@ -31,8 +36,10 @@ const validationForKeyingChoiceType = (choices) => {
     for (let j = 0; j < m; j++) {
       if (temp[j].isMissed == "true") {
         if (
-          !CompareTwoValue(String(temp[j]?.dropValue).trim()?.toLowerCase() ,
-          String(temp[j]?.value).trim()?.toLowerCase())
+          !CompareTwoValue(
+            String(temp[j]?.dropValue).trim()?.toLowerCase(),
+            String(temp[j]?.value).trim()?.toLowerCase()
+          )
         )
           return 1;
       }
@@ -89,31 +96,28 @@ export default function DragAndDropImageCompare({
     let temp = new Array(Number(state.cols));
     rows.push(temp);
   }
-const inputRef=useRef()
+  const inputRef = useRef();
   const dropRef = useRef(rows);
   const {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setChoicesId,
-    setStudentAnswerQuestion,isStudentAnswerResponse,setQuestionWithAnswer 
+    setStudentAnswerQuestion,
+    isStudentAnswerResponse,
+    setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
     if (state?.choiceType == "dragdrop") {
-      let n=inputRef?.current?.length||0
-      let twoDarray=inputRef.current||[]
+      let n = inputRef?.current?.length || 0;
+      let twoDarray = inputRef.current || [];
       for (let i = 0; i < n; i++) {
-        let m=twoDarray[i]?.length||0;
-        for (let j = 0; j < m; j++){
-          
-          if (
-            String(twoDarray[i][j]?.isMissed).trim() ===
-            "true"
-          ) {
-          
+        let m = twoDarray[i]?.length || 0;
+        for (let j = 0; j < m; j++) {
+          if (String(twoDarray[i][j]?.isMissed).trim() === "true") {
             if (!String(twoDarray[i][j]?.dropValue).trim()) {
-            
               setRedAlert(true);
               return;
             }
@@ -121,32 +125,38 @@ const inputRef=useRef()
         }
       }
       for (let i = 0; i < n; i++) {
-        let m=twoDarray[i]?.length||0;
-        for (let j = 0; j <m; j++)
-          if (
-            String(twoDarray[i][j]?.isMissed).trim() ===
-            "true"
-          ) {
+        let m = twoDarray[i]?.length || 0;
+        for (let j = 0; j < m; j++)
+          if (String(twoDarray[i][j]?.isMissed).trim() === "true") {
             if (
-             !CompareTwoValue(twoDarray[i][j]?.dropValue,twoDarray[i][j]?.value)
+              !CompareTwoValue(
+                twoDarray[i][j]?.dropValue,
+                twoDarray[i][j]?.value
+              )
             ) {
-              let result=manupulateQuestionContentHorizontal(inputRef.current,"dropValue")
-              state={...state,questionContent:result }
-              setQuestionWithAnswer(state)
+              let result = manupulateQuestionContentHorizontal(
+                inputRef.current,
+                "dropValue"
+              );
+              state = { ...state, questionContent: result };
+              setQuestionWithAnswer(state);
               setHasAnswerSubmitted(true);
               setIsAnswerCorrect(false);
               return;
             }
           }
       }
-      let result=manupulateQuestionContentHorizontal(inputRef.current,"dropValue")
-      state={...state,questionContent:result }
-      setQuestionWithAnswer(state)
+      let result = manupulateQuestionContentHorizontal(
+        inputRef.current,
+        "dropValue"
+      );
+      state = { ...state, questionContent: result };
+      setQuestionWithAnswer(state);
       setIsAnswerCorrect(true);
       setHasAnswerSubmitted(true);
       return;
     } else if (state?.choiceType == "keying") {
-      console.log('keying')
+      console.log("keying");
       let status = validationForKeyingChoiceType(dropRef);
       changeAnswerStatus(
         status,
@@ -155,13 +165,15 @@ const inputRef=useRef()
         setStudentAnswerQuestion,
         setRedAlert
       );
-      if(status!==0){
-        let result=manupulateQuestionContentHorizontal(dropRef?.current,"dropValue")
-        state={...state,questionContent:result}
-        setQuestionWithAnswer({...state})
+      if (status !== 0) {
+        let result = manupulateQuestionContentHorizontal(
+          dropRef?.current,
+          "dropValue"
+        );
+        state = { ...state, questionContent: result };
+        setQuestionWithAnswer({ ...state });
       }
     } else if (state?.choiceType == "selectchoice") {
-      
       let status = validationForSelectChoice(
         dropRef.current,
         state?.questionContent
@@ -173,66 +185,73 @@ const inputRef=useRef()
         setStudentAnswerQuestion,
         setRedAlert
       );
-      if(status!==0){
-        let value=findSelectedValue(dropRef?.current,"val")
-        state={...state,[student_answer]:value}
-        setQuestionWithAnswer({...state})
+      if (status !== 0) {
+        let value = findSelectedValue(dropRef?.current, "val");
+        state = { ...state, [student_answer]: value };
+        setQuestionWithAnswer({ ...state });
       }
     }
   };
   const [redAlert, setRedAlert] = useState(false);
   return (
     <div>
-      {!isStudentAnswerResponse&&<SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={!hasAnswerSubmitted}
-      />}
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={!hasAnswerSubmitted}
+        />
+      )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles?.questionName}>
-          {parse(state?.questionName)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
-        )}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
         <div>
-         <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          {state?.choiceType == "dragdrop" ? (
-            <DropBoxesImageCompare
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              state={state}
-              isAnswerSubmitted={!hasAnswerSubmitted}
-              dropRef={dropRef}
-              totalCols={Number(totalColumns)}
-              inputRef={inputRef}
-            />
-          ) : state?.choiceType == "keying" ? (
-            <CompareOfImageKeyingChoiceType
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              state={state}
-              isAnswerSubmitted={!hasAnswerSubmitted}
-              dropRef={dropRef}
-              totalCols={Number(totalColumns)}
-            />
-          ) : state?.choiceType == "selectchoice" ? (
-            <CompareOfImageSelectChoice
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              state={state}
-              isAnswerSubmitted={!hasAnswerSubmitted}
-              dropRef={dropRef}
-              totalCols={Number(totalColumns)}
-              studentAnswer={state[student_answer]}
-            />
-          ) : (
-            <h1>unsupported files types</h1>
+          <div className={styles?.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName)}</div>
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
           )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            {state?.choiceType == "dragdrop" ? (
+              <DropBoxesImageCompare
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                state={state}
+                isAnswerSubmitted={!hasAnswerSubmitted}
+                dropRef={dropRef}
+                totalCols={Number(totalColumns)}
+                inputRef={inputRef}
+              />
+            ) : state?.choiceType == "keying" ? (
+              <CompareOfImageKeyingChoiceType
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                state={state}
+                isAnswerSubmitted={!hasAnswerSubmitted}
+                dropRef={dropRef}
+                totalCols={Number(totalColumns)}
+              />
+            ) : state?.choiceType == "selectchoice" ? (
+              <CompareOfImageSelectChoice
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                state={state}
+                isAnswerSubmitted={!hasAnswerSubmitted}
+                dropRef={dropRef}
+                totalCols={Number(totalColumns)}
+                studentAnswer={state[student_answer]}
+              />
+            ) : (
+              <h1>unsupported files types</h1>
+            )}
+          </div>
         </div>
       </div>
     </div>

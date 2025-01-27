@@ -25,7 +25,7 @@ align-items:center;
     justify-content:center;
     border:1px solid black;
   min-height:60px;
-    width:Calc(100% / ${props=>props.totalCols});
+    width:calc(100% / ${props=>props.totalCols});
     height:auto;
     word-break: break-word;
     

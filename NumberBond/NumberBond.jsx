@@ -14,6 +14,7 @@ import {
   findSelectedValue,
   numberQuestionContentQuestionContent,
 } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForKeyingType = (arr1, arr2) => {
   for (let item of arr2) {
     if (item?.isMissed == "true") {
@@ -71,6 +72,7 @@ export default function NumberBond({ obj, meter }) {
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   const inputRef = useRef();
 
@@ -124,52 +126,58 @@ export default function NumberBond({ obj, meter }) {
     <div className={styles.MainTree}>
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmit} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        {String(obj?.questionName).trim() && (
-          <div className={styles2.questionName}>{parse(obj?.questionName)}</div>
-        )}
-        {obj?.upload_file_name && (
-          <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
-          </div>
-        )}
-        {Boolean(String(obj?.questionContentText).trim()) && (
-          <div className={styles2.questionName} style={{ marginTop: "0.2rem" }}>
-            {parse(obj?.questionContentText)}
-          </div>
-        )}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && <SpeakQuestionText readText={obj?.questionName} />}
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-
-        {obj?.isTableView === "true" && (
-          <div className={styles.tableFlex}>
-            {obj?.questionContent?.map(
-              (item, i) =>
-                i < 5 && (
-                  <div>
-                    {item?.isMissed === "false" ? (
-                      item?.value
-                    ) : (
-                      <input disabled={true} />
-                    )}
-                  </div>
-                )
-            )}
+          {String(obj?.questionName).trim() && (
+            <div className={styles2.questionName}>
+              {parse(obj?.questionName)}
+            </div>
+          )}
+          {obj?.upload_file_name && (
+            <div>
+              <img src={obj?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          {Boolean(String(obj?.questionContentText).trim()) && (
+            <div
+              className={styles2.questionName}
+              style={{ marginTop: "0.2rem" }}
+            >
+              {parse(obj?.questionContentText)}
+            </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
           </div>
-        )}
-
-        {obj?.choiceType === "keying" ? (
-          <NumberBondKeyingChoiceType datas={obj} inputRef={inputRef} />
-        ) : obj?.choiceType === "selectchoice" ? (
-          <NumberBondSelctChoice
-            datas={obj}
-            inputRef={inputRef}
-            studentAnswer={obj[student_answer]}
-          />
-        ) : (
-          <h1>Coming Soon...</h1>
-        )}
+          {obj?.isTableView === "true" && (
+            <div className={styles.tableFlex}>
+              {obj?.questionContent?.map(
+                (item, i) =>
+                  i < 5 && (
+                    <div>
+                      {item?.isMissed === "false" ? (
+                        item?.value
+                      ) : (
+                        <input disabled={true} />
+                      )}
+                    </div>
+                  )
+              )}
+            </div>
+          )}
+          {obj?.choiceType === "keying" ? (
+            <NumberBondKeyingChoiceType datas={obj} inputRef={inputRef} />
+          ) : obj?.choiceType === "selectchoice" ? (
+            <NumberBondSelctChoice
+              datas={obj}
+              inputRef={inputRef}
+              studentAnswer={obj[student_answer]}
+            />
+          ) : (
+            <h1>Coming Soon...</h1>
+          )}
+        </div>
       </div>
     </div>
   );

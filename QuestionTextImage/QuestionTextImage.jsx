@@ -10,6 +10,7 @@ import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/re
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function QuestionTextImage({ state, meter }) {
   meter = Number(meter) || 0;
   const [choosenAnswer, setChoosenAnswer] = useState(false);
@@ -19,6 +20,7 @@ export default function QuestionTextImage({ state, meter }) {
     setHasAnswerSubmitted,
     isStudentAnswerResponse,
     setQuestionWithAnswer,
+    readQuestionText,
   } = useContext(ValidationContext);
   const answerRef = useRef("");
   const handleSubmitAnswer = () => {
@@ -40,30 +42,35 @@ export default function QuestionTextImage({ state, meter }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {parse(state?.questionName, optionSelectStaticMathField)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
-        )}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <ContentQuestionTextImage
-            content={state?.questionContent}
-            contentText={state.ContentQuestionTextImage}
-          />
-          <SelectQuestionTextImage
-            choices={state?.choices}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            setChoosenAnswer={setChoosenAnswer}
-            studentAnswer={state[student_answer]}
-            answrerRef={answerRef}
-          />
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName, optionSelectStaticMathField)}</div>
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <ContentQuestionTextImage
+              content={state?.questionContent}
+              contentText={state.ContentQuestionTextImage}
+            />
+            <SelectQuestionTextImage
+              choices={state?.choices}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              setChoosenAnswer={setChoosenAnswer}
+              studentAnswer={state[student_answer]}
+              answrerRef={answerRef}
+            />
+          </div>
         </div>
       </div>
     </div>

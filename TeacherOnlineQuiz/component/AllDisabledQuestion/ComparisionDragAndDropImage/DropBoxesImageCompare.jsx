@@ -244,7 +244,7 @@ const FlexBox2 = styled.div`
   //justify-content:center;
   align-items: center;
   > div {
-    width: Calc(
+    width: calc(
       (100% - ${(props) => props.totalRow}*2rem) / ${(props) => props.totalRows}
     );
     display: flex;

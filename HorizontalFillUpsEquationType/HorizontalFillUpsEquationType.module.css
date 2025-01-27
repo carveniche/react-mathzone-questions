@@ -19,7 +19,7 @@
 }
 
 .choiceType {
-  min-width: Calc(43% - 2rem);
+  min-width: calc(43% - 32px);
   min-height: auto;
   flex-wrap: wrap;
   height: 60px;
@@ -29,7 +29,7 @@
   border: 1px solid black;
 }
 
-.choicesType > div:nth-child(2) {
+.choicesType>div:nth-child(2) {
   padding-right: 1rem;
 }
 
@@ -83,7 +83,7 @@
   flex-wrap: wrap;
 }
 
-.horizontalNotSymbols > div {
+.horizontalNotSymbols>div {
   width: calc(40% - 2rem);
   min-width: 200px;
   align-items: center;
@@ -142,14 +142,14 @@
   flex-direction: column;
 }
 
-.whitePage > div:nth-child(2) {
+.whitePage>div:nth-child(2) {
   clear: both;
   height: auto;
   position: relative;
   height: inherit;
 }
 
-.bodyPage > img {
+.bodyPage>img {
   position: absolute;
 }
 
@@ -213,7 +213,7 @@
   border-radius: 2px;
 }
 
-.border > div {
+.border>div {
   height: 2px;
   background-color: green;
   width: 20%;
@@ -321,8 +321,8 @@
   background: #fae0e0;
 }
 
-.red > div:nth-child(1),
-.green > div:nth-child(1) {
+.red>div:nth-child(1),
+.green>div:nth-child(1) {
   margin: 2rem;
   padding-top: 1rem;
   font-family: Montserrat;
@@ -417,7 +417,7 @@
 .DraggableBox {
   width: inherit;
   min-height: 50px;
-  height:auto;
+  height: auto;
   background-color: indigo;
   color: white;
   min-width: auto;
@@ -486,7 +486,7 @@
   border-radius: 2px;
 }
 
-.border2 > div {
+.border2>div {
   height: 2px;
   background-color: green;
   width: 20%;
@@ -508,7 +508,7 @@
   border-radius: 2px;
 }
 
-.border3 > div {
+.border3>div {
   height: 2px;
   background-color: green;
   width: 20%;
@@ -523,7 +523,7 @@
   border-radius: 2px;
 }
 
-.border4 > div {
+.border4>div {
   height: 2px;
   background-color: green;
   width: 20%;
@@ -569,50 +569,54 @@
 }
 
 /* virtual Keyboard */
-#mathToolbarContainer{
-    
-  width:300px;
-  height:auto;
-  padding-bottom:1rem;
+#mathToolbarContainer {
+
+  width: 300px;
+  height: auto;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   background-color: gray;
   border-radius: 7px;
   position: fixed;
-  top:0px;
-  z-index:1;
+  top: 0px;
+  z-index: 1;
 }
 
 /* mathToolbarContainer */
-#mathToolbar{
-  width:300px;
-  margin:0 1rem;
-  display:grid;
+#mathToolbar {
+  width: 300px;
+  margin: 0 1rem;
+  display: grid;
   position: relative;
-  gap:1rem;
-  grid-template-columns: repeat(6,31px);
-  clear:both;
+  gap: 1rem;
+  grid-template-columns: repeat(6, 31px);
+  clear: both;
 }
-#mathToolbar > div{
- word-break: break;;
- height:30px;
- font-size:10px;
- display: flex;
- justify-content: center;
- align-items: center;
 
- 
- cursor:pointer;
- 
-}
-#tooltipTopBar{
-  color:white;
+#mathToolbar>div {
+  word-break: break;
+  ;
+  height: 30px;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  cursor:pointer;
+
+  cursor: pointer;
+
 }
-.tooltipClose{
-  float:right;
-  margin-bottom:5px;
+
+#tooltipTopBar {
+  color: white;
+
+  cursor: pointer;
+}
+
+.tooltipClose {
+  float: right;
+  margin-bottom: 5px;
   margin-right: 10px;
 }
 
@@ -653,7 +657,7 @@
   width: 96%;
   margin: auto;
   margin-top: 1rem;
-  height: Calc(85vh - 1rem - 72px);
+  height: calc(85vh - 1rem - 72px);
   position: relative;
 }
 
@@ -691,7 +695,8 @@
   height: inherit;
   overflow: hidden;
 }
-.mainPage2 .bodyPage > .whitePage {
+
+.mainPage2 .bodyPage>.whitePage {
   height: 100%;
   max-height: 73vh;
   overflow-y: auto;
@@ -700,19 +705,19 @@
 
 @media only screen and (max-width: 1202px) {
   .mainPage {
-    max-height: Calc(80.5vh - 1rem - 72px);
+    max-height: calc(80.5vh - 1rem - 72px);
   }
 }
 
 @media only screen and (max-width: 1102px) {
   .mainPage {
-    max-height: Calc(78.4vh - 1rem - 72px);
+    max-height: calc(78.4vh - 1rem - 72px);
   }
 }
 
 @media only screen and (max-width: 1002px) {
   .mainPage {
-    max-height: Calc(75.4vh - 1rem - 72px);
+    max-height: calc(75.4vh - 1rem - 72px);
   }
 }
 
@@ -752,16 +757,19 @@
   .checkButton {
     top: 16%;
   }
-  .mainPage2 .bodyPage > .whitePage {
+
+  .mainPage2 .bodyPage>.whitePage {
     max-height: 70vh;
   }
 }
+
 @media only screen and (max-width: 950px) {
   .mainPage2 {
     max-height: 83vh;
     height: 83vh;
   }
-  .mainPage2 .bodyPage > .whitePage {
+
+  .mainPage2 .bodyPage>.whitePage {
     max-height: 73vh;
   }
 }
@@ -792,9 +800,9 @@
   cursor: pointer;
 }
 
-.blockBaseFlexBoxSelection > div {
-  min-width: Calc(50% - 0.4rem);
-  max-width: Calc(50% - 0.4rem);
+.blockBaseFlexBoxSelection>div {
+  min-width: calc(50% - 0.4rem);
+  max-width: calc(50% - 0.4rem);
 
   flex: 1;
   display: flex;
@@ -822,12 +830,12 @@
   padding: 1rem;
 }
 
-.blockBaseFlexBoxSelection > div > div {
+.blockBaseFlexBoxSelection>div>div {
   min-width: auto;
   min-height: auto;
 }
 
-.blockBaseFlexBoxSelection > div > div:nth-child(2) {
+.blockBaseFlexBoxSelection>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -844,9 +852,9 @@
   cursor: pointer;
 }
 
-.MultipleChoiceFlexBox > div {
-  min-width: Calc(50% - 0.5rem);
-  max-width: Calc(50% - 0.5rem);
+.MultipleChoiceFlexBox>div {
+  min-width: calc(50% - 0.5rem);
+  max-width: calc(50% - 0.5rem);
 
   flex: 1;
   display: flex;
@@ -872,12 +880,12 @@
   height: auto;
 }
 
-.MultipleChoiceFlexBox > div > div {
+.MultipleChoiceFlexBox>div>div {
   min-width: auto;
   min-height: auto;
 }
 
-.MultipleChoiceFlexBox > div > div:nth-child(2) {
+.MultipleChoiceFlexBox>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -897,14 +905,14 @@
   align-items: center;
 }
 
-.MatchObjectVerticalKeyingFlexBox3 > div {
+.MatchObjectVerticalKeyingFlexBox3>div {
   max-width: calc(50% - 2rem);
   min-width: 90px;
   width: auto;
   font-weight: 600;
 }
 
-.MatchObjectVerticalKeyingFlexBox3 > div {
+.MatchObjectVerticalKeyingFlexBox3>div {
   display: flex;
   justify-content: left;
 }
@@ -918,7 +926,7 @@
   cursor: pointer;
 }
 
-.MatchObjectVerticalVerticalFlexBox2 > div {
+.MatchObjectVerticalVerticalFlexBox2>div {
   width: auto;
 
   display: flex;
@@ -946,12 +954,12 @@
   padding: 1rem;
 }
 
-.MatchObjectVerticalVerticalFlexBox2 > div > div {
+.MatchObjectVerticalVerticalFlexBox2>div>div {
   min-width: auto;
   min-height: auto;
 }
 
-.MatchObjectVerticalVerticalFlexBox2 > div > div:nth-child(2) {
+.MatchObjectVerticalVerticalFlexBox2>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -966,13 +974,13 @@
   gap: 4rem;
 }
 
-.MatchObjectVerticalVerticalFlexBox3 > div {
+.MatchObjectVerticalVerticalFlexBox3>div {
   max-width: calc(50% - 2rem);
   min-width: 90px;
   width: auto;
 }
 
-.MatchObjectVerticalVerticalFlexBox3 > div {
+.MatchObjectVerticalVerticalFlexBox3>div {
   display: flex;
   justify-content: left;
 }
@@ -985,18 +993,18 @@
   align-items: center;
 }
 
-.MatchObjectVerticalDragDropFlexBox3 > div {
+.MatchObjectVerticalDragDropFlexBox3>div {
   max-width: calc(50% - 2rem);
   min-width: 90px;
   width: auto;
 }
 
-.MatchObjectVerticalDragDropFlexBox3 > div {
+.MatchObjectVerticalDragDropFlexBox3>div {
   display: flex;
   justify-content: left;
 }
 
-.MatchObjectVerticalDragDropFlexBox3 > .fontSize {
+.MatchObjectVerticalDragDropFlexBox3>.fontSize {
   font-weight: 600;
 }
 
@@ -1008,7 +1016,7 @@
   min-width: 140px;
 }
 
-.MatchObjectVerticalDragDropBox > div {
+.MatchObjectVerticalDragDropBox>div {
   background-color: indigo;
   min-width: inherit;
   min-height: 50px;
@@ -1029,7 +1037,7 @@
   flex-wrap: wrap;
 }
 
-.MatchObjectVerticalDragDropBoxFlexBox2 > div {
+.MatchObjectVerticalDragDropBoxFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1040,13 +1048,13 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   width: 90%;
-  margin-top: 1.5rem;
+  margin-top: 20px;
   cursor: pointer;
 }
 
-.CountOnTensframeSelectFlexBox > div {
-  min-width: Calc(50% - 0.5rem);
-  max-width: Calc(50% - 0.5rem);
+.CountOnTensframeSelectFlexBox>div {
+  min-width: calc(50% - 0.5rem);
+  max-width: calc(50% - 0.5rem);
 
   flex: 1;
   display: flex;
@@ -1101,12 +1109,12 @@
   justify-content: space-between;
 }
 
-.RandomArrangmentDragDropKeyingFlexBox3 > div {
+.RandomArrangmentDragDropKeyingFlexBox3>div {
   width: auto;
   justify-content: center;
 }
 
-.RandomArrangmentDragDropKeyingFlexBox3 > div {
+.RandomArrangmentDragDropKeyingFlexBox3>div {
   display: flex;
 }
 
@@ -1122,7 +1130,7 @@
   }
 }
 
-.RandomArrangmentDragDropKeyingFlexBox > div {
+.RandomArrangmentDragDropKeyingFlexBox>div {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
@@ -1139,7 +1147,7 @@
   justify-content: space-between;
 }
 
-.RandomArrangmentDragDropDragDropFlexBox3 > div {
+.RandomArrangmentDragDropDragDropFlexBox3>div {
   display: flex;
   width: auto;
   justify-content: center;
@@ -1153,7 +1161,7 @@
   flex-wrap: wrap;
 }
 
-.RandomArrangmentDragDropDragDropFlexBox2 > div {
+.RandomArrangmentDragDropDragDropFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1165,13 +1173,13 @@
   gap: 4rem;
 }
 
-.RandomArrangmentDragDropDragDropFlexBox > div {
+.RandomArrangmentDragDropDragDropFlexBox>div {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
 }
 
-.RandomArrangmentDragDropDragDropBox > div {
+.RandomArrangmentDragDropDragDropBox>div {
   min-width: inherit;
   min-height: 50px;
   display: flex;
@@ -1199,12 +1207,12 @@
   justify-content: space-between;
 }
 
-.RandomArrangmentDragDropSelectChoiceFlexBox3 > div {
+.RandomArrangmentDragDropSelectChoiceFlexBox3>div {
   width: auto;
   justify-content: center;
 }
 
-.RandomArrangmentDragDropSelectChoiceFlexBox3 > div {
+.RandomArrangmentDragDropSelectChoiceFlexBox3>div {
   display: flex;
 }
 
@@ -1220,7 +1228,7 @@
   }
 }
 
-.RandomArrangmentDragDropSelectChoiceFlexBox > div {
+.RandomArrangmentDragDropSelectChoiceFlexBox>div {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
@@ -1234,9 +1242,10 @@
   display: flex;
   gap: 2rem;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.MatchObjectHorizontalTypeKeyingFlexBox3 > div {
+.MatchObjectHorizontalTypeKeyingFlexBox3>div {
   display: flex;
   width: auto;
   justify-content: center;
@@ -1257,12 +1266,12 @@
   flex-direction: column;
 }
 
-.MatchObjectHorizontalTypeSelectChoiceFlexBox3 > div {
+.MatchObjectHorizontalTypeSelectChoiceFlexBox3>div {
   width: auto;
   justify-content: center;
 }
 
-.MatchObjectHorizontalTypeSelectChoiceFlexBox3 > div {
+.MatchObjectHorizontalTypeSelectChoiceFlexBox3>div {
   display: flex;
 }
 
@@ -1280,14 +1289,15 @@
   display: flex;
   gap: 2rem;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.MatchObjectHorizontalTypeDragDropFlexBox3 > div {
+.MatchObjectHorizontalTypeDragDropFlexBox3>div {
   width: auto;
   justify-content: center;
 }
 
-.MatchObjectHorizontalTypeDragDropFlexBox3 > div {
+.MatchObjectHorizontalTypeDragDropFlexBox3>div {
   display: flex;
 }
 
@@ -1295,11 +1305,11 @@
   display: flex;
   margin-top: 2rem;
   align-items: center;
-  gap: 10px;
+  gap: 50px;
   flex-wrap: wrap;
 }
 
-.MatchObjectHorizontalTypeDragDropFlexBox2 > div {
+.MatchObjectHorizontalTypeDragDropFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1309,6 +1319,7 @@
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
+  height: 40vh;
 }
 
 .MatchObjectHorizontalTypeDragDropBox {
@@ -1319,7 +1330,7 @@
   min-width: 96px;
 }
 
-.MatchObjectHorizontalTypeDragDropBox > div {
+.MatchObjectHorizontalTypeDragDropBox>div {
   min-width: inherit;
   min-height: 50px;
   display: flex;
@@ -1336,12 +1347,12 @@
   display: flex;
   align-items: center;
 
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   gap: 18px;
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
 }
 
-.HorizontalPictureKeyingFlexBox > div {
+.HorizontalPictureKeyingFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1352,10 +1363,10 @@
   display: flex;
   align-items: center;
   gap: 18px;
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
 }
 
-.HorizontalPictureSelectChoiceFlexBox > div {
+.HorizontalPictureSelectChoiceFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1369,7 +1380,8 @@
   gap: 2px;
   flex-wrap: wrap;
 }
-.HorizontalPictureDragDropFlexBox2 > div {
+
+.HorizontalPictureDragDropFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1383,11 +1395,13 @@
   margin-bottom: 1rem;
   flex-wrap: wrap;
 }
-.HorizontalPictureDragDropFlexBox > div {
+
+.HorizontalPictureDragDropFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .HorizontalPictureDragDropFlexBox .fontColor {
   color: indigo;
   font-size: 25px;
@@ -1401,7 +1415,8 @@
   text-align: center;
   min-width: 80px;
 }
-.HorizontalPictureDragDropBox > div {
+
+.HorizontalPictureDragDropBox>div {
   min-width: inherit;
   min-height: 50px;
   display: flex;
@@ -1426,9 +1441,10 @@
   margin-top: 0.1rem;
   cursor: pointer;
 }
-.CompareOfImagesSelectChoiceFlexBox > div {
-  min-width: Calc(50% - 0.4rem);
-  max-width: Calc(50% - 0.4rem);
+
+.CompareOfImagesSelectChoiceFlexBox>div {
+  min-width: calc(50% - 0.4rem);
+  max-width: calc(50% - 0.4rem);
   flex: 1;
   display: flex;
   font-family: Montserrat;
@@ -1454,11 +1470,13 @@
 
   padding: 1rem;
 }
-.CompareOfImagesSelectChoiceFlexBox > div > div {
+
+.CompareOfImagesSelectChoiceFlexBox>div>div {
   min-width: auto;
   min-height: auto;
 }
-.CompareOfImagesSelectChoiceFlexBox > div > div:nth-child(2) {
+
+.CompareOfImagesSelectChoiceFlexBox>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -1490,6 +1508,7 @@
   font-size: 20px;
   font-weight: bold;
 }
+
 /* Compare Drag Operator Keying*/
 .CompareDragOperatorKeyingFlexBox2 {
   display: flex;
@@ -1498,7 +1517,8 @@
   gap: 0.6rem;
   flex-wrap: wrap;
 }
-.CompareDragOperatorKeyingFlexBox2 > div {
+
+.CompareDragOperatorKeyingFlexBox2>div {
   min-width: 64px;
   padding: 10px;
   width: auto;
@@ -1510,12 +1530,13 @@
   flex-wrap: wrap;
   align-items: center;
 }
-.CompareDragOperatorKeyingFlexBox2 > #missedBox {
+
+.CompareDragOperatorKeyingFlexBox2>#missedBox {
   min-width: 120px;
   padding: 10px;
-  width:auto;
+  width: auto;
   min-height: 50px;
-  height:auto;
+  height: auto;
 }
 
 /* Compare Drag Operator SelectChoice */
@@ -1527,10 +1548,11 @@
   gap: 0.6rem;
   flex-wrap: wrap;
 }
-.CompareDragOperatorSelectChoiceFlexBox2 > div {
+
+.CompareDragOperatorSelectChoiceFlexBox2>div {
   min-width: 64px;
   padding: 10px;
-  width:auto;
+  width: auto;
   min-height: 50px;
   height: auto;
   border-radius: 10px;
@@ -1539,12 +1561,13 @@
   flex-wrap: wrap;
   align-items: center;
 }
-.CompareDragOperatorSelectChoiceFlexBox2 > #missedBox {
+
+.CompareDragOperatorSelectChoiceFlexBox2>#missedBox {
   min-width: 120px;
   padding: 10px;
-  width:auto;
+  width: auto;
   min-height: 50px;
-  height:auto;
+  height: auto;
 }
 
 .CompareDragOperatorSelectChoiceFlexBox {
@@ -1555,9 +1578,10 @@
   margin-top: 0.1rem;
   cursor: pointer;
 }
-.CompareDragOperatorSelectChoiceFlexBox > div {
-  min-width: Calc(50% - 0.4rem);
-  max-width: Calc(50% - 0.4rem);
+
+.CompareDragOperatorSelectChoiceFlexBox>div {
+  min-width: calc(50% - 0.4rem);
+  max-width: calc(50% - 0.4rem);
 
   flex: 1;
   display: flex;
@@ -1584,11 +1608,13 @@
 
   padding: 1rem;
 }
-.CompareDragOperatorSelectChoiceFlexBox > div > div {
+
+.CompareDragOperatorSelectChoiceFlexBox>div>div {
   min-width: auto;
   min-height: auto;
 }
-.CompareDragOperatorSelectChoiceFlexBox > div > div:nth-child(2) {
+
+.CompareDragOperatorSelectChoiceFlexBox>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
@@ -1605,7 +1631,7 @@
   flex-wrap: wrap;
 }
 
-.CompareDragOperatorDragDropFlexBox2 > div {
+.CompareDragOperatorDragDropFlexBox2>div {
   min-width: 64px;
   padding: 10px;
   width: auto;
@@ -1617,7 +1643,8 @@
   flex-wrap: wrap;
   align-items: center;
 }
-.CompareDragOperatorDragDropFlexBox2 > #missedBox {
+
+.CompareDragOperatorDragDropFlexBox2>#missedBox {
   min-width: 120px;
   padding: 10px;
   width: auto;
@@ -1632,7 +1659,8 @@
   gap: 1rem;
   flex-wrap: wrap;
 }
-.CompareDragOperatorDragDropFlexBox > div {
+
+.CompareDragOperatorDragDropFlexBox>div {
   min-width: 120px;
   min-height: 50px;
   width: auto;
@@ -1647,6 +1675,7 @@
   justify-content: center;
   align-items: center;
 }
+
 /* PlaceValueChart Keying */
 .PlaceValueChartKeyingGrid {
   display: Grid;
@@ -1659,7 +1688,7 @@
   border: 1px solid black;
 }
 
-.PlaceValueChartKeyingGrid > div {
+.PlaceValueChartKeyingGrid>div {
   display: relative;
   display: flex;
   width: auto;
@@ -1670,13 +1699,16 @@
   border-right: 1px solid black;
   height: auto;
 }
-.PlaceValueChartKeyingGrid > .borderBottom {
+
+.PlaceValueChartKeyingGrid>.borderBottom {
   border-top: 1px solid black;
 }
-.PlaceValueChartKeyingGrid > .rightBorder {
+
+.PlaceValueChartKeyingGrid>.rightBorder {
   border-right: 0px solid black;
 }
-.PlaceValueChartKeyingGrid > div > div {
+
+.PlaceValueChartKeyingGrid>div>div {
   word-break: break;
   height: auto;
 }
@@ -1694,7 +1726,8 @@
   border: 1px solid black;
   overflow: auto;
 }
-.PlaceValuechartSelectChoiceGrid > div {
+
+.PlaceValuechartSelectChoiceGrid>div {
   display: relative;
   display: flex;
 
@@ -1705,16 +1738,20 @@
   border-right: 1px solid black;
   height: auto;
 }
-.PlaceValuechartSelectChoiceGrid > .borderBottom {
+
+.PlaceValuechartSelectChoiceGrid>.borderBottom {
   border-top: 1px solid black;
 }
-.PlaceValuechartSelectChoiceGrid > .rightBorder {
+
+.PlaceValuechartSelectChoiceGrid>.rightBorder {
   border-right: 0px solid black;
 }
-.PlaceValuechartSelectChoiceGrid > div > div {
+
+.PlaceValuechartSelectChoiceGrid>div>div {
   word-break: break;
   height: auto;
 }
+
 .PlaceValuechartSelectChoiceBox {
   position: relative;
   cursor: pointer;
@@ -1732,7 +1769,8 @@
   color: white;
   max-width: inherit;
 }
-.PlaceValuechartSelectChoiceBox > div {
+
+.PlaceValuechartSelectChoiceBox>div {
   min-width: 100%;
   min-height: 50px;
   display: flex;
@@ -1757,7 +1795,7 @@
   border: 1px solid black;
 }
 
-.PlaceValueChartDragDropGrid > div {
+.PlaceValueChartDragDropGrid>div {
   display: relative;
   display: flex;
 
@@ -1768,13 +1806,16 @@
   border-right: 1px solid black;
   height: auto;
 }
-.PlaceValueChartDragDropGrid > .borderBottom {
+
+.PlaceValueChartDragDropGrid>.borderBottom {
   border-top: 1px solid black;
 }
-.PlaceValueChartDragDropGrid > .rightBorder {
+
+.PlaceValueChartDragDropGrid>.rightBorder {
   border-right: 0px solid black;
 }
-.PlaceValueChartDragDropGrid > div > div {
+
+.PlaceValueChartDragDropGrid>div>div {
   word-break: break;
   height: auto;
 }
@@ -1787,7 +1828,8 @@
 
   flex-wrap: wrap;
 }
-.PlaceValueChartDragDropFlexBox2 > div {
+
+.PlaceValueChartDragDropFlexBox2>div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1801,7 +1843,8 @@
   flex-wrap: wrap;
   word-break: break-word;
 }
-.PlaceValueChartDragDropFlexBox2 > div > div {
+
+.PlaceValueChartDragDropFlexBox2>div>div {
   min-width: 100%;
   min-height: 100%;
   display: flex;
@@ -1828,7 +1871,8 @@
   color: white;
   max-width: inherit;
 }
-.PlaceValueChartDragDropBox > div {
+
+.PlaceValueChartDragDropBox>div {
   min-width: 100%;
   min-height: 50px;
   display: flex;
@@ -1847,7 +1891,8 @@
   display: flex;
   align-items: center;
 }
-.VerticalKeyingFlexBox > div {
+
+.VerticalKeyingFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1863,7 +1908,8 @@
   gap: 1.2rem;
   margin: 2rem 0;
 }
-.VerticalWithSymbolsFlexBox > div {
+
+.VerticalWithSymbolsFlexBox>div {
   width: auto;
   display: flex;
   flex-wrap: wrap;
@@ -1876,7 +1922,8 @@
   display: flex;
   align-items: center;
 }
-.PlaceValueTableSelectKeyingFlexBox > div {
+
+.PlaceValueTableSelectKeyingFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1885,6 +1932,7 @@
   height: auto;
   word-break: break-word;
 }
+
 .PlaceValueTableSelectKeyingFlexBox input {
   min-width: 80px;
   width: auto;
@@ -1892,13 +1940,15 @@
   word-break: break-word;
   text-align: center;
 }
+
 /* PlaceValueTableSelect SelectChoice */
 .PlaceValueTableSelectTypeSelectChoiceFlexBox {
   display: flex;
 
   align-items: center;
 }
-.PlaceValueTableSelectTypeSelectChoiceFlexBox > div {
+
+.PlaceValueTableSelectTypeSelectChoiceFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1907,9 +1957,11 @@
   height: auto;
   word-break: break-word;
 }
+
 .PlaceValueTableSelectTypeSelectChoiceFlexBox * {
   font-weight: 600;
 }
+
 .PlaceValueTableSelectTypeSelectChoiceFlexBox input {
   max-width: 50px;
   width: 50;
@@ -1923,12 +1975,13 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   width: 90%;
-  margin-top: 1.5rem;
+  margin-top: 20px;
   cursor: pointer;
 }
-.PlaceValueTableSelectTypeSelectChoiceFlexBox2 > div {
-  min-width: Calc(50% - 0.5rem);
-  max-width: Calc(50% - 0.5rem);
+
+.PlaceValueTableSelectTypeSelectChoiceFlexBox2>div {
+  min-width: calc(50% - 0.5rem);
+  max-width: calc(50% - 0.5rem);
 
   flex: 1;
   display: flex;
@@ -1953,17 +2006,20 @@
 
   height: auto;
 }
-.PlaceValueTableSelectTypeSelectChoiceFlexBox2 > div > div {
+
+.PlaceValueTableSelectTypeSelectChoiceFlexBox2>div>div {
   min-width: auto;
   min-height: auto;
 }
-.PlaceValueTableSelectTypeSelectChoiceFlexBox2 > div > div:nth-child(2) {
+
+.PlaceValueTableSelectTypeSelectChoiceFlexBox2>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
   flex-wrap: wrap;
   word-break: break;
 }
+
 .PlaceValueTableSelectTypeSelectChoiceFlexBox2 .choiceImage {
   padding: 0;
 }
@@ -1975,7 +2031,8 @@
 
   align-items: center;
 }
-.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox > div {
+
+.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1985,6 +2042,7 @@
   height: auto;
   word-break: break-word;
 }
+
 .PlaceValueTableSelectFlexBoxDragDropTypeFlexBox input {
   min-width: 80px;
   width: auto;
@@ -2001,7 +2059,8 @@
   gap: 10px;
   flex-wrap: wrap;
 }
-.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox2 > div {
+
+.PlaceValueTableSelectFlexBoxDragDropTypeFlexBox2>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2015,7 +2074,8 @@
   min-width: 96px;
   color: black;
 }
-.PlaceValueTableSelectFlexBoxDragDropTypeBox > div {
+
+.PlaceValueTableSelectFlexBoxDragDropTypeBox>div {
   min-width: inherit;
   min-height: 50px;
   display: flex;
@@ -2027,11 +2087,13 @@
   width: inherit;
   height: inherit;
 }
+
 @media (max-width: 1000px) {
   .RandomArrangmentDragDropKeyingFlexBox {
     width: 90%;
   }
 }
+
 @media only screen and (max-width: 945px) {
   .checkButton {
     top: 11%;
@@ -2048,10 +2110,12 @@
   border: 1px solid black;
   height: auto;
 }
-.OrcGrid > div:nth-child(even) {
+
+.OrcGrid>div:nth-child(even) {
   border: 1px solid black;
 }
-.OrcGrid > div {
+
+.OrcGrid>div {
   border: 1px solid black;
   display: flex;
   padding: 1rem;
@@ -2059,17 +2123,20 @@
   align-items: center;
   word-break: break;
 }
-.OrcGrid > .evenChild {
+
+.OrcGrid>.evenChild {
   min-height: 100px;
 
   height: auto;
 }
-.OrcGrid > div > div {
+
+.OrcGrid>div>div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.OrcGrid > .flexbox {
+
+.OrcGrid>.flexbox {
   display: flex;
   justify-content: center;
   font-weight: bold;
@@ -2084,7 +2151,8 @@
 
   height: auto;
 }
-.OrcDivBox > div {
+
+.OrcDivBox>div {
   margin: 0 0.21rem;
   border-bottom: 1px solid black;
   min-height: 30px;
@@ -2096,6 +2164,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .OrcDivBox2 {
   width: calc(100% - 2rem);
 
@@ -2115,13 +2184,15 @@
   border: 1px solid black;
   margin-bottom: 1rem;
 }
-.OrcDivBox2 > div {
+
+.OrcDivBox2>div {
   width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid black;
 }
+
 .OrcDivBox2 .react-draggable {
   transform: translate(0, 0);
 }
@@ -2133,10 +2204,12 @@
   box-sizing: border-box;
   margin: 2rem auto;
 }
-.OprcGrid > div:nth-child(even) {
+
+.OprcGrid>div:nth-child(even) {
   box-sizing: border-box;
 }
-.OprcGrid > div {
+
+.OprcGrid>div {
   border: 1px solid black;
   padding: 1rem;
   display: flex;
@@ -2145,18 +2218,21 @@
   align-items: center;
   height: auto;
 }
-.OprcGrid > .lastChild {
+
+.OprcGrid>.lastChild {
   min-height: 100px;
 
   height: auto;
   box-sizing: border-box;
 }
-.OprcGrid > div > div {
+
+.OprcGrid>div>div {
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
 }
+
 .OprcGridDivBox {
   display: flex;
   gap: 0.4rem;
@@ -2167,7 +2243,8 @@
 
   height: auto;
 }
-.OprcGridDivBox > div {
+
+.OprcGridDivBox>div {
   margin: 0.51rem;
   border-bottom: 1px solid black;
   min-height: 30px;
@@ -2180,6 +2257,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .OprcGridDivBox2 {
   width: calc(60% - 2rem);
   position: relative;
@@ -2197,7 +2275,8 @@
   height: auto;
   border: 1px solid black;
 }
-.OprcGridDivBox2 > div {
+
+.OprcGridDivBox2>div {
   min-width: 30px;
   height: auto;
   width: auto;
@@ -2208,9 +2287,11 @@
   align-items: center;
   border-bottom: 1px solid black;
 }
+
 .OprcGridDivBox2 .react-draggable {
   transform: translate(0, 0);
 }
+
 /* count_tenframes_multiple content */
 .CountGridTenframesMultipleContentGrid {
   display: grid;
@@ -2220,7 +2301,8 @@
   height: auto;
   text-align: center;
 }
-.CountGridTenframesMultipleContentGrid > div {
+
+.CountGridTenframesMultipleContentGrid>div {
   border: 1px solid black;
   border-top: 0px;
   width: auto;
@@ -2230,17 +2312,20 @@
   justify-content: center;
   align-items: center;
 }
-.CountGridTenframesMultipleContentGrid > .lowerBorder {
+
+.CountGridTenframesMultipleContentGrid>.lowerBorder {
   border-bottom: 0px;
 }
-.CountGridTenframesMultipleContentGrid > div {
+
+.CountGridTenframesMultipleContentGrid>div {
   border-right: 0px;
 }
-.CountGridTenframesMultipleContentGrid > div:nth-child(1) {
+
+.CountGridTenframesMultipleContentGrid>div:nth-child(1) {
   border-left: 0px;
 }
 
-.CountGridTenframesMultipleContentGrid > .leftBorder {
+.CountGridTenframesMultipleContentGrid>.leftBorder {
   border-left: 0;
 }
 
@@ -2254,20 +2339,25 @@
 
   text-align: center;
 }
-.TensframeContentGrid > div {
+
+.TensframeContentGrid>div {
   border: 1px solid black;
   height: 80px;
   border-top: 0px;
 }
-.TensframeContentGrid > .lowerBorder {
+
+.TensframeContentGrid>.lowerBorder {
   border-bottom: 0px;
 }
-.TensframeContentGrid > div {
+
+.TensframeContentGrid>div {
   border-right: 0px;
 }
-.TensframeContentGrid > div:nth-child(1) {
+
+.TensframeContentGrid>div:nth-child(1) {
   border-left: 0px;
 }
+
 /* .TensframeContentGrid  > div:nth-child(${(props) => props.column}n+1) {
       border-left: 0px;
     }
@@ -2298,6 +2388,7 @@
 .mainPage2 .title {
   margin-bottom: 2rem;
 }
+
 .title2 {
   display: flex;
   justify-content: center;
@@ -2313,12 +2404,14 @@
   width: 80%;
   margin: 0 auto;
 }
-.title2 > div {
+
+.title2>div {
   display: flex;
   flex-wrap: wrap;
   text-align: center;
   justify-content: center;
 }
+
 .questionNoHeading {
   display: flex;
   width: 80%;
@@ -2327,13 +2420,15 @@
   justify-content: space-between;
   gap: 2rem;
 }
-.questionNoHeading > div {
+
+.questionNoHeading>div {
   font-size: 20px;
   font-weight: bold;
   flex-wrap: wrap;
   flex: 1;
 }
-.questionNoHeading > div:nth-child(2) {
+
+.questionNoHeading>div:nth-child(2) {
   flex: 2;
   text-align: center;
 }
@@ -2353,7 +2448,8 @@
   width: 100%;
   flex-wrap: wrap;
 }
-.VerticalDragDropFlexBox > div {
+
+.VerticalDragDropFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2361,12 +2457,14 @@
   height: 50px;
   font-size: 20px;
 }
+
 .VerticalDragDropFlexBox2 {
   display: flex;
   gap: 1rem;
   margin-top: 4rem;
 }
-.VerticalDragDropFlexBox2 > div {
+
+.VerticalDragDropFlexBox2>div {
   width: 50px;
   height: 50px;
   gap: 1rem;
@@ -2383,7 +2481,8 @@
   display: flex;
   align-items: center;
 }
-.NumberBondSelectChoiceFlexBox > div {
+
+.NumberBondSelectChoiceFlexBox>div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2392,9 +2491,11 @@
   height: auto;
   word-break: break-word;
 }
+
 .NumberBondSelectChoiceFlexBox * {
   font-weight: 600;
 }
+
 .NumberBondSelectChoiceFlexBox input {
   max-width: 50px;
   width: 50;
@@ -2411,9 +2512,10 @@
   margin-top: 2.5rem;
   cursor: pointer;
 }
-.NumberBondSelectChoiceFlexBox2 > div {
-  min-width: Calc(50% - 0.5rem);
-  max-width: Calc(50% - 0.5rem);
+
+.NumberBondSelectChoiceFlexBox2>div {
+  min-width: calc(50% - 0.5rem);
+  max-width: calc(50% - 0.5rem);
 
   flex: 1;
   display: flex;
@@ -2438,21 +2540,25 @@
 
   height: auto;
 }
-.NumberBondSelectChoiceFlexBox2 > div > div {
+
+.NumberBondSelectChoiceFlexBox2>div>div {
   min-width: auto;
   min-height: auto;
 }
-.NumberBondSelectChoiceFlexBox2 > div > div:nth-child(2) {
+
+.NumberBondSelectChoiceFlexBox2>div>div:nth-child(2) {
   flex: 1;
   display: flex;
 
   flex-wrap: wrap;
   word-break: break;
 }
+
 .NumberBondSelectChoiceFlexBox2 .choiceImage {
   padding: 0;
 }
-#symbolsWidthHeight{
-  min-width:30px;
-  min-height:31px;
+
+#symbolsWidthHeight {
+  min-width: 30px;
+  min-height: 31px;
 }

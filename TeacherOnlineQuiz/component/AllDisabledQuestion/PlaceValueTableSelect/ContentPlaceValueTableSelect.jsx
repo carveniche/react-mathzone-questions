@@ -49,7 +49,7 @@ color:${({backgroundColor})=>backgroundColor?"white":"unset"};
     flex:1;
     border:1px solid orange;
   min-height:60px;
-    width:Calc(100% / ${props=>props.totalCols});
+    width:calc(100% / ${props=>props.totalCols});
     height:100%;
     word-break: break-word;
     

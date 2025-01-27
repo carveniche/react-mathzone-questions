@@ -55,7 +55,7 @@ export default function CompareOfImageSelectChoice({
       fontSize:18,
     },
     InsideDiv: {
-      maxWidth: `Calc((100% - ${totalCols}*2rem) / ${totalCols})`,
+      maxWidth: `calc((100% - ${totalCols}*2rem) / ${totalCols})`,
       display: "flex",
       flexWrap: "wrap",
       justifyContent: "center",

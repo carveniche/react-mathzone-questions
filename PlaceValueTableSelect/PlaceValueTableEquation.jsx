@@ -27,6 +27,7 @@ import {
   manupulateEquationTypeQuestion2Darr,
   manupulateQuestionContent1Darrayed,
 } from "../commonScript/commonScript";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const changeAnswerStatus = (
   val,
@@ -99,6 +100,7 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const input2Ref = useRef();
 
@@ -300,58 +302,63 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {parse(state?.questionName, optionSelectStaticMathField)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
-        )}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          {state?.choiceType == "keying" ? (
-            <ContentPlaceValueTableSelectEquation
-              inputRefs={inputRefs}
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              inputRef={inputRef}
-              totalEmptyBox={totalEmptyBox}
-              hasAnswerSubmitted={hasAnswerSubmitted}
-              questionHead={state.questiontbHead}
-              totalCols={Number(state?.cols)}
-              input2Ref={input2Ref}
-              equationKeyingRef={equationKeyingRef}
-            />
-          ) : state?.choiceType == "dragdrop" ? (
-            <PlaceValueTableDragDrop
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              inputRef={inputRef}
-              totalEmptyBox={totalEmptyBox}
-              hasAnswerSubmitted={hasAnswerSubmitted}
-              questionHead={state.questiontbHead}
-              totalCols={Number(state?.cols)}
-              choices={state?.choices}
-            />
-          ) : state?.choiceType == "selectchoice" ? (
-            <PlaceValueTableSelectChoice
-              content={state.questionContent}
-              totalRows={Number(totalRows)}
-              inputRef={inputRef}
-              totalEmptyBox={totalEmptyBox}
-              hasAnswerSubmitted={hasAnswerSubmitted}
-              questionHead={state.questiontbHead}
-              totalCols={Number(state?.cols)}
-              choices={state?.choices}
-              studentAnswer={state[student_answer] || ""}
-            />
-          ) : (
-            <h1>Coming soon</h1>
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName, optionSelectStaticMathField)}</div>
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
           )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            {state?.choiceType == "keying" ? (
+              <ContentPlaceValueTableSelectEquation
+                inputRefs={inputRefs}
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+                questionHead={state.questiontbHead}
+                totalCols={Number(state?.cols)}
+                input2Ref={input2Ref}
+                equationKeyingRef={equationKeyingRef}
+              />
+            ) : state?.choiceType == "dragdrop" ? (
+              <PlaceValueTableDragDrop
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+                questionHead={state.questiontbHead}
+                totalCols={Number(state?.cols)}
+                choices={state?.choices}
+              />
+            ) : state?.choiceType == "selectchoice" ? (
+              <PlaceValueTableSelectChoice
+                content={state.questionContent}
+                totalRows={Number(totalRows)}
+                inputRef={inputRef}
+                totalEmptyBox={totalEmptyBox}
+                hasAnswerSubmitted={hasAnswerSubmitted}
+                questionHead={state.questiontbHead}
+                totalCols={Number(state?.cols)}
+                choices={state?.choices}
+                studentAnswer={state[student_answer] || ""}
+              />
+            ) : (
+              <h1>Coming soon</h1>
+            )}
+          </div>
         </div>
       </div>
     </div>

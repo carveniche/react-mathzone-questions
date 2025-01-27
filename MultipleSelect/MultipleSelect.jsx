@@ -9,7 +9,8 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-export default function MultipleSelect({ state, meter,choiceId }) {
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+export default function MultipleSelect({ state, meter, choiceId }) {
   meter = Number(meter) || 0;
   const inputRef = useRef();
   const {
@@ -17,9 +18,11 @@ export default function MultipleSelect({ state, meter,choiceId }) {
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
     setChoicesId,
-    setStudentAnswerQuestion,isStudentAnswerResponse
+    readQuestionText,
+    setStudentAnswerQuestion,
+    isStudentAnswerResponse,
   } = useContext(ValidationContext);
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) {
       return;
@@ -34,54 +37,60 @@ export default function MultipleSelect({ state, meter,choiceId }) {
       }
     }
     if (status == 0) {
-      setRedAlert(true)
+      setRedAlert(true);
       return;
     }
-    let choicesIdContainer=[]
-    for(let item of arr){
-      if(item?.show)
-      choicesIdContainer.push(item?.choice_id)
+    let choicesIdContainer = [];
+    for (let item of arr) {
+      if (item?.show) choicesIdContainer.push(item?.choice_id);
     }
-    for(let i=0;i<n;i++)
-    for (let i = 0; i < n; i++) {
-      if (arr[i].show != arr[i].correct) {
-        setChoicesId([...choicesIdContainer])
-        setIsAnswerCorrect(false);
-        setHasAnswerSubmitted(true);
-        return;
+    for (let i = 0; i < n; i++)
+      for (let i = 0; i < n; i++) {
+        if (arr[i].show != arr[i].correct) {
+          setChoicesId([...choicesIdContainer]);
+          setIsAnswerCorrect(false);
+          setHasAnswerSubmitted(true);
+          return;
+        }
       }
-    }
-    setChoicesId([...choicesIdContainer])
+    setChoicesId([...choicesIdContainer]);
     setIsAnswerCorrect(true);
     setHasAnswerSubmitted(true);
   };
 
   return (
     <div>
-      {!isStudentAnswerResponse&&<SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
-       {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div
-          className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
-        >
-          {HtmlParser(state?.question_text)}
-        </div>
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        {readQuestionText && (
+          <SpeakQuestionText type={"oldType"} readText={state?.question_text} />
+        )}
         <div>
-          <img src={state?.upload_file_name} />
-        </div>
-        <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div>
-          <SelectMultipleSelect
-            choices={state?.choice_data}
-            answerHasSelected={hasAnswerSubmitted}
-            inputRef={inputRef}
-            choiceId={choiceId}
-          />
+          <div
+            className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
+          >
+            {HtmlParser(state?.question_text)}
+          </div>
+          <div>
+            <img src={state?.upload_file_name} />
+          </div>
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div>
+            <SelectMultipleSelect
+              choices={state?.choice_data}
+              answerHasSelected={hasAnswerSubmitted}
+              inputRef={inputRef}
+              choiceId={choiceId}
+            />
+          </div>
         </div>
       </div>
     </div>

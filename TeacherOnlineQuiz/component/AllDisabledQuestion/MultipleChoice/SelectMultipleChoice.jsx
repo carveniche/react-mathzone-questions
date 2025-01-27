@@ -95,7 +95,7 @@ const FlexBox = styled.div`
     background-color: #cceea5;
   }
   > div {
-    min-width: Calc(50% - 0.5rem);
+    min-width: calc(50% - 0.5rem);
 
     flex: 1;
     display: flex;

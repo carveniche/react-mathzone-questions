@@ -10,6 +10,7 @@ import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import CompareTwoValue from "../compareTwoValue";
 import { manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
   let n = arr?.length || 0;
@@ -90,10 +91,7 @@ const validationForKeying = (inputRef) => {
     let m = arr[i]?.length || 0;
     for (let j = 0; j < m; j++) {
       if (arr[i][j].isMissed === "true")
-        if (
-          !CompareTwoValue(arr[i][j]?.dropVal,arr[i][j]?.numvalue) 
-        )
-          return 1;
+        if (!CompareTwoValue(arr[i][j]?.dropVal, arr[i][j]?.numvalue)) return 1;
     }
   }
   return 2;
@@ -115,7 +113,8 @@ export default function MatchObjectVertical({
     setChoicesId,
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
-    isStudentAnswerResponse
+    isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
 
@@ -129,39 +128,41 @@ export default function MatchObjectVertical({
     setTotalEmptyBox(totalEmptyBox);
     //setRows(rows);
   }, []);
-  const [redAlert,setRedAlert]=useState(false)
+  const [redAlert, setRedAlert] = useState(false);
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
 
-    if (state?.choiceType == "dragdrop"||state?.choiceType == "selectchoice") {
+    if (
+      state?.choiceType == "dragdrop" ||
+      state?.choiceType == "selectchoice"
+    ) {
       let status = validationForDragAndDrop(inputRef, setIsAnswerCorrect);
       if (status === 0) {
-        setRedAlert(true)
+        setRedAlert(true);
         return;
       } else if (status === 1) setIsAnswerCorrect(false);
       else {
         setIsAnswerCorrect(true);
       }
-    let result=manupulateQuestionContentHorizontal(inputRef?.current)
-    state={...state,questionContent:result}
-    setQuestionWithAnswer({...state})
-    
+      let result = manupulateQuestionContentHorizontal(inputRef?.current);
+      state = { ...state, questionContent: result };
+      setQuestionWithAnswer({ ...state });
     } else if (state?.choiceType == "keying") {
       let status = validationForKeying(inputRef);
       if (status === 0) {
-        setRedAlert(true)
+        setRedAlert(true);
         return;
       } else if (status === 1) setIsAnswerCorrect(false);
       else {
         setIsAnswerCorrect(true);
       }
-      let result=manupulateQuestionContentHorizontal(inputRef?.current)
-      state={...state,questionContent:result}
-      setQuestionWithAnswer({...state})
+      let result = manupulateQuestionContentHorizontal(inputRef?.current);
+      state = { ...state, questionContent: result };
+      setQuestionWithAnswer({ ...state });
     } else if (state?.choiceType == "selectchoice") {
       let val = validationForSelectChoice(inputRef, state?.questionContent);
       if (val === 0) {
-        setRedAlert(true)
+        setRedAlert(true);
         return;
       } else if (val === 1) {
         setIsAnswerCorrect(false);
@@ -171,7 +172,7 @@ export default function MatchObjectVertical({
     } else if (state?.choiceType == "multi select") {
       let val = validationForMultiSelect(inputRef?.current);
       if (val === 0) {
-        setRedAlert(true)
+        setRedAlert(true);
         return;
       } else if (val === 1) {
         setIsAnswerCorrect(false);
@@ -179,7 +180,7 @@ export default function MatchObjectVertical({
         setIsAnswerCorrect(true);
       }
     }
-    
+
     let jsonData = serializeResponse("studentAnswerResponse");
     setStudentAnswerQuestion(jsonData);
     setHasAnswerSubmitted(true);
@@ -187,34 +188,45 @@ export default function MatchObjectVertical({
 
   return (
     <div>
-     {!isStudentAnswerResponse&& <SolveButton
-        onClick={handleSubmitAnswer}
-        answerHasSelected={hasAnswerSubmitted}
-      />}
-       {redAlert&&!hasAnswerSubmitted&& <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>{parse(state?.questionName)}</div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+      {!isStudentAnswerResponse && (
+        <SolveButton
+          onClick={handleSubmitAnswer}
+          answerHasSelected={hasAnswerSubmitted}
+        />
+      )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        <div>
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName)}</div>
           </div>
-        )}
-        <div className={`${styles.borderTopBottomMargin}`}>
-          {!isStudentAnswerResponse&&<ProgressBorder meter={meter + 1}>
-            <div></div>
-          </ProgressBorder>}
-        </div>
-        <div className={styles.contentParent}>
-          <ContentMatchObjectVertical
-            content={state?.questionContent}
-            totalEmptyBox={totalEmptyBox}
-            inputRef={inputRef}
-            totalRows={totalRows}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            totalCols={totalCols}
-            choices={state?.choices}
-            choiceType={state?.choiceType}
-          />
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div className={`${styles.borderTopBottomMargin}`}>
+            {!isStudentAnswerResponse && (
+              <ProgressBorder meter={meter + 1}>
+                <div></div>
+              </ProgressBorder>
+            )}
+          </div>
+          <div className={styles.contentParent}>
+            <ContentMatchObjectVertical
+              content={state?.questionContent}
+              totalEmptyBox={totalEmptyBox}
+              inputRef={inputRef}
+              totalRows={totalRows}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              totalCols={totalCols}
+              choices={state?.choices}
+              choiceType={state?.choiceType}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ import {
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import oneDto2D from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import compareLatexData from "../../CommonJSFiles/compareLatexData";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
   let n = arr?.length || 0;
@@ -144,6 +145,7 @@ export default function MatchObjVertEqn({
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   let [totalEmptyBox, setTotalEmptyBox] = useState(0);
 
@@ -228,32 +230,38 @@ export default function MatchObjVertEqn({
         />
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div
-          className={`${styles.questionName} ${styles.mathquill_mathzone_questionname}`}
-        >
-          {parse(state?.questionName, optionSelectStaticMathField)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        <div>
+          <div
+            className={`${styles.questionName} ${styles.mathquill_mathzone_questionname}`}
+          ></div>
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName, optionSelectStaticMathField)}</div>
           </div>
-        )}
-        <div className={`${styles.borderTopBottomMargin}`}>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <ContMatchObjVerticalEqn
-            content={state?.questionContent}
-            totalEmptyBox={totalEmptyBox}
-            inputRef={inputRef}
-            totalRows={totalRows}
-            hasAnswerSubmitted={hasAnswerSubmitted}
-            totalCols={totalCols}
-            choices={state?.choices}
-            choiceType={state?.choiceType}
-            equationKeyingRef={equationKeyingRef}
-          />
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div className={`${styles.borderTopBottomMargin}`}>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <ContMatchObjVerticalEqn
+              content={state?.questionContent}
+              totalEmptyBox={totalEmptyBox}
+              inputRef={inputRef}
+              totalRows={totalRows}
+              hasAnswerSubmitted={hasAnswerSubmitted}
+              totalCols={totalCols}
+              choices={state?.choices}
+              choiceType={state?.choiceType}
+              equationKeyingRef={equationKeyingRef}
+            />
+          </div>
         </div>
       </div>
     </div>

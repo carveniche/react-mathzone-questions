@@ -9,6 +9,7 @@ import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 // let data = {
 //   operation: "addition",
 //   type: "hundreds_chart",
@@ -33,6 +34,7 @@ function HundredChart({ data, meter }) {
     setStudentAnswerQuestion,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const handleClick = (id, i) => {
@@ -92,7 +94,10 @@ function HundredChart({ data, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div className={styles.outer} id="studentAnswerResponse">
-        <div className={styles2.questionName}>
+        <div className={styles2.questionName} style={{ display: "flex" }}>
+          {readQuestionText && (
+            <SpeakQuestionText readText={data?.questionName} />
+          )}
           {HtmlParser(data?.questionName)}
         </div>
         {data?.upload_file_name && (

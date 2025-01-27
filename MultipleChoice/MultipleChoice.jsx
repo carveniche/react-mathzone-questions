@@ -9,6 +9,7 @@ import { ProgressBorder } from "../../Modal2/modal2";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function MultipleChoice({ state, meter, choiceId }) {
   meter = Number(meter) || 0;
   const inputRef = useRef();
@@ -16,6 +17,7 @@ export default function MultipleChoice({ state, meter, choiceId }) {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
     setIsAnswerCorrect,
+    readQuestionText,
     setChoicesId,
     setStudentAnswerQuestion,
     isStudentAnswerResponse,
@@ -45,33 +47,43 @@ export default function MultipleChoice({ state, meter, choiceId }) {
     }
     setRedAlert(true);
   };
+  var questionText = state?.question_text
+    .replaceAll("<br/>", "")
+    .replaceAll("<br>", "");
 
   return (
     <div id="multipleChoiceStudentAnswerResponse">
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div
-          className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
-          style={{ whiteSpace: "initial" }}
-        >
-          {parse(state?.question_text)}
-        </div>
-        {String(state?.upload_file_name).trim() && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
+        <div>
+          <div
+            className={`mathzoneQuestionName mathzoneMultipleChoicequestionName`}
+            style={{ whiteSpace: "initial", display: "flex" }}
+          >
+            {readQuestionText && (
+              <SpeakQuestionText type={"oldType"} readText={questionText} />
+            )}
+            <div>{parse(state?.question_text)}</div>
           </div>
-        )}
-        <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div>
-          <SelectMultipleChoice
-            choices={state?.choice_data}
-            answerHasSelected={showAnswer}
-            inputRef={inputRef}
-            choiceId={choiceId}
-          />
+          <div>
+            {String(state?.upload_file_name).trim() && (
+              <div>
+                <img src={state?.upload_file_name} alt="image not found" />
+              </div>
+            )}
+            <div>
+              <ConditionOnProgressBar meter={meter} />
+            </div>
+            <div>
+              <SelectMultipleChoice
+                choices={state?.choice_data}
+                answerHasSelected={showAnswer}
+                inputRef={inputRef}
+                choiceId={choiceId}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

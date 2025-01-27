@@ -24,6 +24,7 @@ import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgress
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import compareLatexData from "../../CommonJSFiles/compareLatexData";
 import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef;
@@ -154,6 +155,7 @@ export default function HorizontalFillUpsEquationType({
     setIsAnswerCorrect,
     setQuestionWithAnswer,
     isStudentAnswerResponse,
+    readQuestionText,
   } = useContext(ValidationContext);
   const handleSubmitAnswer = () => {
     // if (hasAnswerSubmitted) return;
@@ -218,31 +220,36 @@ export default function HorizontalFillUpsEquationType({
     <div className={styles.MainApp}>
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse">
-        <div className={styles.questionName}>
-          {parse(state?.questionName, optionSelectStaticMathField)}
-        </div>
-        {state?.upload_file_name && (
-          <div>
-            <img src={state?.upload_file_name} alt="image not found" />
-          </div>
-        )}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
         <div>
-          <ConditionOnProgressBar meter={meter} />
-        </div>
-        <div className={styles.contentParent}>
-          <ContentHorizontalFillUpsEquationType
-            content={state?.questionContent}
-            totalEmptyBox={totalEmptyBox}
-            inputRef={inputRef}
-            totalRows={totalRows}
-            hasAnswerSubmitted={false}
-            totalCols={totalCols}
-            choices={state?.choices}
-            choiceType={state?.choiceType}
-            studentAnswer={state[student_answer]}
-            equationKeyingRef={equationKeyingRef}
-          />
+          <div className={styles.questionName} style={{ display: "flex" }}>
+            {readQuestionText && (
+              <SpeakQuestionText readText={state?.questionName} />
+            )}
+            <div>{parse(state?.questionName, optionSelectStaticMathField)}</div>
+          </div>
+          {state?.upload_file_name && (
+            <div>
+              <img src={state?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ConditionOnProgressBar meter={meter} />
+          </div>
+          <div className={styles.contentParent}>
+            <ContentHorizontalFillUpsEquationType
+              content={state?.questionContent}
+              totalEmptyBox={totalEmptyBox}
+              inputRef={inputRef}
+              totalRows={totalRows}
+              hasAnswerSubmitted={false}
+              totalCols={totalCols}
+              choices={state?.choices}
+              choiceType={state?.choiceType}
+              studentAnswer={state[student_answer]}
+              equationKeyingRef={equationKeyingRef}
+            />
+          </div>
         </div>
       </div>
     </div>

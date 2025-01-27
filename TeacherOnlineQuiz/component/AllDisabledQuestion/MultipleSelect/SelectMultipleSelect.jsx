@@ -46,8 +46,8 @@ width:90%;
 margin-Top: 1.5rem;
 cursor: pointer;
 > div{
-    min-width:Calc(50% - 0.5rem);
-    max-width:Calc(50% - 0.5rem);
+    min-width:calc(50% - 0.5rem);
+    max-width:calc(50% - 0.5rem);
     
     flex:1;
     display:flex;

@@ -8,6 +8,7 @@ import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { ProgressBorder } from "../../Modal2/modal2";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -192,58 +193,62 @@ function Ol({ obj, meter }) {
 
   return (
     <div>
-      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <SolveButton
         onClick={handleSubmit}
         answerHasSelected={hasAnswerSubmitted}
       />
-      <div id="studentAnswerResponse">
-        <div className="mathzoneQuestionName">
-          {parse(obj?.questionName, optionSelect)}
-        </div>
-        {obj?.upload_file_name && (
-          <div>
-            <img src={obj?.upload_file_name} alt="image not found" />
-          </div>
-        )}
+      {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
+      <div id="studentAnswerResponse" style={{ display: "flex" }}>
         <div>
-          <ProgressBorder meter={meter + 1}>
-            <div></div>
-          </ProgressBorder>
-        </div>
-        <div className={`${styles.contentParent}`}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div
-                  className="mathzoneMainOlBox"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {questionContent.map((item, index) => (
-                    <Draggable
-                      isDragDisabled={hasAnswerSubmitted}
-                      key={String(index)}
-                      draggableId={String(index)}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          {parse(item, optionSelect)}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-          <div id="mathzoneFibAfterText">{parse(obj?.text, optionSelect)}</div>
+          <div className="mathzoneQuestionName">
+            {parse(obj?.questionName, optionSelect)}
+          </div>
+          {obj?.upload_file_name && (
+            <div>
+              <img src={obj?.upload_file_name} alt="image not found" />
+            </div>
+          )}
+          <div>
+            <ProgressBorder meter={meter + 1}>
+              <div></div>
+            </ProgressBorder>
+          </div>
+          <div className={`${styles.contentParent}`}>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="droppable">
+                {(provided, snapshot) => (
+                  <div
+                    className="mathzoneMainOlBox"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {questionContent.map((item, index) => (
+                      <Draggable
+                        isDragDisabled={hasAnswerSubmitted}
+                        key={String(index)}
+                        draggableId={String(index)}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            {parse(item, optionSelect)}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+            <div id="mathzoneFibAfterText">
+              {parse(obj?.text, optionSelect)}
+            </div>
+          </div>
         </div>
       </div>
     </div>

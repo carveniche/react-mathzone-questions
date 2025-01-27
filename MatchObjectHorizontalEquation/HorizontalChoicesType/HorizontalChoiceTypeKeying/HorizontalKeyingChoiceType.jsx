@@ -148,6 +148,7 @@ export default function HorizontalKeyingChoiceType({
                     onChange={(e) => {
                       handleChange(e.target.value, item.row, item.col, true);
                     }}
+                    maxLength={item.value.length}
                     onFocus={() => handleFocus(index, i, true)}
                   />
                 ) : hasAnswerSubmitted || isStudentAnswerResponse ? (
@@ -181,6 +182,7 @@ export default function HorizontalKeyingChoiceType({
                         ? inputState[`${item.row}row${item.col}col`]
                         : ""
                     }
+                    maxLength={item.value.length}
                     style={{
                       minWidth: "80px",
                       width: "auto",
