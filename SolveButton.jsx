@@ -37,6 +37,7 @@ export default function SolveButton({ onClick }) {
   //  this function is for next js project 
   const nextJsHandleSubmit = () => {
     onClick();
+    // setIsStudentAnswerResponse(false)
     return new Promise((resolve) => {
       setHasAnswerSubmitted((prev) => {
         setIsAnswerCorrect((isAnswer) => {
@@ -52,9 +53,15 @@ export default function SolveButton({ onClick }) {
   window.nextJsHandleSubmit = nextJsHandleSubmit;
   const hideShowSolution=()=>{
     setChoicesId("")
+    // setHasAnswerSubmitted(false)
+    // // setIsStudentAnswerResponse(false)
+    // // setShowQuizResponseAsText(false)
+    // handleUpdateStudentAnswerResponse(true)
     // setIsStudentAnswerResponse(false)
-    // setShowQuizResponseAsText(false)
- 
+    // setResponseUrl(false)
+    // setIsAnswerCorrect(false)
+    // setStudentAnswerQuestion("")
+    // setQuestionWithAnswer({})
     }
     window.reactMathzoneHideSolution = hideShowSolution;
 
