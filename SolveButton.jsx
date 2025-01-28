@@ -35,20 +35,52 @@ export default function SolveButton({ onClick }) {
   window.handleSubmit = handleSubmit;
 
   //  this function is for next js project 
+  // const nextJsHandleSubmit = () => {
+  //   // Ensure `onClick` is a valid function
+  //   console.log("nextJsHandleSubmit clicked")
+
+  //   if (typeof onClick !== "function") {
+  //     console.error("onClick is not a function");
+  //     return Promise.reject("onClick is not a function");
+  //   }
+  
+  //   onClick();
+  
+  //   return new Promise((resolve) => {
+  //     let tempResult = -1; // Default value
+  
+  //     // Update states safely
+  //     setHasAnswerSubmitted((prev) => {
+  //       console.log("Previous hasAnswerSubmitted:", prev);
+
+  //       tempResult = prev ? (isAnswerCorrect ? 1 : 0) : -1; // Determine temp result
+  //       return prev;
+  //     });
+  
+  //     // Update correctness
+  //     setIsAnswerCorrect((isAnswer) => {
+  //       console.log("Answer correctness:", isAnswer);
+
+  //       tempResult = isAnswer ? 1 : tempResult; // Adjust based on correctness
+  //       resolve(tempResult); // Resolve with final result
+  //       return isAnswer; // Update state correctly
+  //     });
+  //   });
+  // };
   const nextJsHandleSubmit = () => {
+    console.log("nextJsHandleSubmit clicked2")
     onClick();
-    // setIsStudentAnswerResponse(false)
-    return new Promise((resolve) => {
-      setHasAnswerSubmitted((prev) => {
-        setIsAnswerCorrect((isAnswer) => {
-          let temp = prev ? (isAnswer ? 1 : 0) : -1;
-          resolve(temp); // Resolving after state update
-          return isAnswer; // Correct state update
-        });
-        return prev;
+    let temp = false;
+    setHasAnswerSubmitted((prev) => {
+      setIsAnswerCorrect((isAnswer) => {
+        temp = prev ? (isAnswer ? 1 : 0) : -1;
+        return isAnswer;
       });
+      return prev;
     });
+    return temp;
   };
+  
   
   window.nextJsHandleSubmit = nextJsHandleSubmit;
   const hideShowSolution=()=>{
