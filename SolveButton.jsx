@@ -54,12 +54,7 @@ export default function SolveButton({ onClick }) {
     setChoicesId("")
     // setIsStudentAnswerResponse(false)
     // setShowQuizResponseAsText(false)
-    handleUpdateStudentAnswerResponse(true)
-    setIsStudentAnswerResponse(false)
-    setResponseUrl(false)
-    setIsAnswerCorrect(false)
-    setStudentAnswerQuestion("")
-    setQuestionWithAnswer({})
+ 
     }
     window.reactMathzoneHideSolution = hideShowSolution;
 
