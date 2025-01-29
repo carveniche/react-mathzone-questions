@@ -37,36 +37,36 @@ export default function SolveButton({ onClick }) {
   window.handleSubmit = handleSubmit;
 
   //  this function is for next js project 
-  const nextJsHandleSubmit = () => {
-    // Ensure `onClick` is a valid function
-    console.log("nextJsHandleSubmit clicked")
+  // const nextJsHandleSubmit = () => {
+  //   // Ensure `onClick` is a valid function
+  //   console.log("nextJsHandleSubmit clicked")
 
-    if (typeof onClick !== "function") {
-      console.error("onClick is not a function");
-      return Promise.reject("onClick is not a function");
-    }
+  //   if (typeof onClick !== "function") {
+  //     console.error("onClick is not a function");
+  //     return Promise.reject("onClick is not a function");
+  //   }
   
-    onClick();
+  //   onClick();
   
-    return new Promise((resolve) => {
-      let tempResult = -1; // Default value
+  //   return new Promise((resolve) => {
+  //     let tempResult = -1; // Default value
   
-      setHasAnswerSubmitted((prev) => {
-        console.log("Previous hasAnswerSubmitted:", prev);
+  //     setHasAnswerSubmitted((prev) => {
+  //       console.log("Previous hasAnswerSubmitted:", prev);
 
-        tempResult = prev ? (isAnswerCorrect ? 1 : 0) : -1; 
-        return prev;
-      });
+  //       tempResult = prev ? (isAnswerCorrect ? 1 : 0) : -1; 
+  //       return prev;
+  //     });
   
-      setIsAnswerCorrect((isAnswer) => {
-        console.log("Answer correctness:", isAnswer);
+  //     setIsAnswerCorrect((isAnswer) => {
+  //       console.log("Answer correctness:", isAnswer);
 
-        tempResult = isAnswer ? 1 : tempResult; // Adjust based on correctness
-        resolve(tempResult); // Resolve with final result
-        return isAnswer; // Update state correctly
-      });
-    });
-  };
+  //       tempResult = isAnswer ? 1 : tempResult; // Adjust based on correctness
+  //       resolve(tempResult); // Resolve with final result
+  //       return isAnswer; // Update state correctly
+  //     });
+  //   });
+  // };
  
   
   
