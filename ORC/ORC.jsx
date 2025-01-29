@@ -14,6 +14,9 @@ import HtmlParser from "react-html-parser";
 import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
+import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import React_Base_Api from "../ReactConfigApi";
+
 const collectTextInputField = () => {
   let parent = document.getElementById("orcTextParent");
   if (!parent) {
@@ -755,7 +758,7 @@ function ORC({ obj, question_text, meter }) {
                 ref={(el) => (ref.current[11] = el)}
               >
                 <img
-                  src={`https://www.begalileo.com/assets/new_home/mathquill_p.gif`}
+                  src={`${React_Base_Api}/assets/new_home/mathquill_p.gif`}
                   className="xbase"
                   alt="xbase"
                 />
