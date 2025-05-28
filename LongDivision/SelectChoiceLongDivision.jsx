@@ -146,7 +146,7 @@ export default function LongDivisonSelectChoice({
             }`}
             onClick={() => handleChoiceSelection(i)}
           >
-            <div className="mathzone-circle-selectbox">
+            <div className={`mathzone-circle-selectbox ${styles.circle}`}>
               {" "}
               <b>{String.fromCharCode(65 + i)}</b>
             </div>

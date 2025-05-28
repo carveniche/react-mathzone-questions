@@ -109,7 +109,7 @@ export default function ContentVertical({
             className={styles.VerticalKeyingFlexBox}
             style={{
               borderTop: `${
-                index === totalRows - 1 ? 2 : 0
+                index !==0 && index %2==0 ? 2 : 0
               }px solid black`,
               borderBottom: `${index === totalRows - 1 ? 2 : 0}px solid black`,
               width: `${totalCols * 35}px`,

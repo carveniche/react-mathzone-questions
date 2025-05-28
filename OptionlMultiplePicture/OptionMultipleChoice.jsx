@@ -67,7 +67,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
         )
         // <p>{JSON.stringify(state?.questionImage)}</p>
       }
-      <div>
+      <div className="w-full">
         {!isStudentAnswerResponse && (
           <SolveButton
             onClick={handleSubmitAnswer}
@@ -80,7 +80,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
           className="mathzone-color-indigo word-space_pre-wrap"
           style={{ display: "flex" }}
         >
-          <div>
+          <div className="w-full">
             <div className={styles.questionName} style={{ display: "flex" }}>
               {readQuestionText && (
                 <SpeakQuestionText readText={state?.questionName} />

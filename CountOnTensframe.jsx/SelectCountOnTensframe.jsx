@@ -30,15 +30,15 @@ export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer
       <div className={styles.CountOnTensframeSelectFlexBox}>
         {choicesState?.map((value, i) => (
           <div
-            className={`${(isStudentAnswerResponse&&String(studentAnswer)?.trim()===String(value?.value)?.trim())?styles.selectedChoiceType:
+            className={`${styles.choiceType} ${(isStudentAnswerResponse&&String(studentAnswer)?.trim()===String(value?.value)?.trim())?styles.selectedChoiceType:
               value.show
                 ? styles.selectedChoiceType
-                : styles.prevSelectionAnswerSelection
+                : styles.choiceType
             }`}
             key={i}
             onClick={() => handleChoiceSelection(i)}
           >
-            <div className="mathzone-circle-selectbox">
+            <div className={`mathzone-circle-selectbox ${styles.circle}`}>
               {" "}
               <b>{String.fromCharCode(65 + i)}</b>
             </div>

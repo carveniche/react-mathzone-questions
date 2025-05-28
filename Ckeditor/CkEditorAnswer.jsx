@@ -51,7 +51,7 @@ export default function CkEditorAnswer({
 
   var noBorder = str.replaceAll(" ", "").includes(`border="0"`);
 
-  console.log({ longdiv });
+  // console.log({ longdiv });
 
   return (
     <div>

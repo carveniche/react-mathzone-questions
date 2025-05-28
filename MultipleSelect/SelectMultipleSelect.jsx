@@ -29,13 +29,14 @@ export default function SelectMultipleSelect({
   };
 
   inputRef.current = choicesState;
+ 
   return (
     <div className={styles.multiSelectFlexBox}>
       {choicesState?.map(
         (value, i) =>
           (value.choices || value?.choice_image) && (
             <div
-              className={`${styles.flex}  ${
+              className={`${styles.choicebox} ${
                 isStudentAnswerResponse &&
                 choiceId?.includes(String(value?.choice_id)?.trim())
                   ? styles.selectedChoiceType
@@ -43,7 +44,18 @@ export default function SelectMultipleSelect({
                   ? styles.selectedChoiceType
                   : styles.prevSelectionAnswerSelection
               }`}
-              style={{ padding: `${value?.choice_image ? 0 : 1}rem 1rem` }}
+              
+                            // className={`${styles.choicebox} ${answerHasSelected || isStudentAnswerResponse
+                            //     ? value?.correct == true
+                            //       ? styles.green
+                            //       : value?.show && styles.red
+              
+                            //     : value?.show ? styles.selectedChoiceType : ''
+                            //   }`}
+              
+              
+
+              // style={{ padding: `${value?.choice_image ? 0 : 1}rem 1rem` }}
               key={i}
               onClick={() => handleChoiceSelection(i)}
             >

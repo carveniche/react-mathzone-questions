@@ -76,9 +76,8 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
         {choicesState?.map((value, i) => (
           <div
             style={{ color: "initial", fontWeight: "initial" }}
-            className={`${styles.flex} ${styles.choiceType} ${
-              styles.selectChoicesFont
-            } ${(isStudentAnswerResponse&&String(value?.value)?.trim()===String(studentAnswer)?.trim())?styles.selectedChoiceType:
+            className={` ${styles.choiceType} 
+            ${(isStudentAnswerResponse&&String(value?.value)?.trim()===String(studentAnswer)?.trim())?styles.selectedChoiceType:
               value.show
                 ? styles.selectedChoiceType
                 : styles.prevSelectionAnswerSelection
@@ -86,7 +85,7 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
             key={i}
             onClick={() => handleChoiceSelection(i)}
           >
-            <div className="mathzone-circle-selectbox">
+            <div className={`mathzone-circle-selectbox ${styles.circle}`}>
               {" "}
               <b>{String.fromCharCode(65 + i)}</b>
             </div>

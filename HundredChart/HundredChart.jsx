@@ -114,21 +114,21 @@ function HundredChart({ data, meter }) {
           <div className={styles.HundredChartFlexBox}>
             {data.choices.map((k, i) => (
               <div
-                className={
-                  isStudentAnswerResponse &&
+                className={ `${styles2.choicebox} 
+                  ${isStudentAnswerResponse &&
                   Number(k) === Number(data[student_answer])
-                    ? styles.answer1
+                    ? styles2.selectedChoiceType
                     : prevState == i
-                    ? styles.answer1
-                    : styles.answer
-                }
+                    ? styles2.selectedChoiceType
+                    : ""
+                  }` }
                 onClick={() => {
                   handleClick(k, i);
                 }}
                 key={i}
               >
-                <div className={`${styles.circle} mathzone-circle-selectbox`}>
-                  {String.fromCharCode(65 + i)}
+                <div className={`${styles2.circle} mathzone-circle-selectbox `}>
+                    <b>{String.fromCharCode(65 + i)}</b>
                 </div>
                 <div className={styles.ans}>{Number(k)}</div>
               </div>

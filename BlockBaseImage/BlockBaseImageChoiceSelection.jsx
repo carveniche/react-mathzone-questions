@@ -14,7 +14,7 @@ export default function BlockBaseImageChoiceSelection({
   valueRef,
   studentAnswer,
 }) {
-  const [prevSelect, setPrevSelect] = useState(0);
+  const [prevSelect, setPrevSelect] = useState(null);
   const { isStudentAnswerResponse } = useContext(ValidationContext);
   const choicesBoxRef = useRef([]);
 
@@ -23,10 +23,10 @@ export default function BlockBaseImageChoiceSelection({
       return;
     }
     if (prevSelect > -1)
-      choicesBoxRef.current[
-        prevSelect
-      ].className = `${styles.prevSelectionAnswerSelection} `;
-    choicesBoxRef.current[i].className = `  ${styles.selectedChoiceType} `;
+    //   choicesBoxRef.current[
+    //     prevSelect
+    //   ].className = `${styles.prevSelectionAnswerSelection} `;
+    //  choicesBoxRef.current[i].className = `  ${styles.selectedChoiceType} `;
     setPrevSelect(i);
     //console.log(choicesBoxRef.current[i].children[1].textContent)
     if (
@@ -38,6 +38,7 @@ export default function BlockBaseImageChoiceSelection({
     setHasOptionSelected(true);
     valueRef.current = String(choicesBoxRef.current[i].children[1].textContent);
   };
+ 
   return (
     <>
       <div className={styles.blockBaseFlexBoxSelection}>
@@ -46,15 +47,19 @@ export default function BlockBaseImageChoiceSelection({
             key={i}
             onClick={() => handleChoiceSelection(i)}
             ref={(el) => (choicesBoxRef.current[i] = el)}
-            className={`${
-              isStudentAnswerResponse &&
-              String(value)?.trim() === String(studentAnswer)?.trim()
+
+            className={`${styles.choiceType} 
+            ${isStudentAnswerResponse && String(value).trim() === String(studentAnswer).trim()
                 ? styles.selectedChoiceType
-                : ""
-            }`}
+              : prevSelect === i
+                ? styles.selectedChoiceType
+                : styles.choiceType
+              }  `}
+
           >
-            <div className="mathzone-circle-selectbox">
-              {String.fromCharCode(65 + i)}
+            <div className={`mathzone-circle-selectbox ${styles.circle}`}>
+              {" "}
+              <b>{String.fromCharCode(65 + i)}</b>
             </div>
             <div key={i}>{HtmlParser(value)}</div>
           </div>

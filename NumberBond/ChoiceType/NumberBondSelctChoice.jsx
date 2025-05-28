@@ -215,7 +215,7 @@ function NumberBondSelctChoice({ datas, inputRef, studentAnswer }) {
       <div className={styles2.NumberBondSelectChoiceFlexBox2}>
         {choicesState?.map((value, i) => (
           <div
-            className={`${styles2.flex}  ${
+            className={`${styles2.choicebox}  ${
               isStudentAnswerResponse &&
               String(value?.value)?.trim() === String(studentAnswer)
                 ? styles2.selectedChoiceType
@@ -227,7 +227,7 @@ function NumberBondSelctChoice({ datas, inputRef, studentAnswer }) {
             key={i}
             onClick={() => handleChoiceSelection(i)}
           >
-            <div className="mathzone-circle-selectbox">
+            <div className={`mathzone-circle-selectbox ${styles.circle}`}>
               {" "}
               <b>{String.fromCharCode(65 + i)}</b>
             </div>

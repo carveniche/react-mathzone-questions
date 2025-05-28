@@ -40,22 +40,24 @@
 
 .choiceType {
   min-width: calc(43% - 32px);
-  min-height: 80px;
+  min-height: 45px;
   flex-wrap: wrap;
   height: auto;
   width: auto;
+  display: flex;
+  align-items: center;
   gap: 2rem;
-  padding-right: 1rem;
-  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 5px;
+   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  /* border: 1px solid black; */
 }
 
 .choicesType>div:nth-child(2) {
   padding-right: 1rem;
 }
 
-.selectedChoiceType {
-  background-color: #b9c2fc;
-}
+
 
 .bodyPage .wrongAnswer {
   color: red !important;
@@ -367,17 +369,63 @@
     background-color: white;
   } */
 
+.choicebox {
+  display: flex;
+  cursor: pointer;
+  border: none !important;
+  gap: 2rem;
+  padding: 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border: none;
+}
+
+.selectedChoiceType .circle {
+  border: 1px solid #233584;
+}
+
+
+.selectedChoiceType {
+  background-color: #b9c2fc;
+  /* border-color: #3F51B5; */
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
 .green {
   color: #6caf20;
   background: #cceea5;
+  /* border-color: #80da1b; */
 }
 
 .red {
   color: #eb5953;
   background: #fae0e0;
+  /* border-color: #ee4741; */
 }
 
-.red>div:nth-child(1),
+.green .circle {
+  border: 1px solid green;
+}
+
+.green>.circle>b,
+.green>div {
+  color: green;
+}
+
+.red .circle {
+  border: 1px solid #ee4741;
+}
+
+.red>.circle>b ,
+.red>div{
+  color: #ee4741;
+}
+
+
+/* .red>div:nth-child(1),
 .green>div:nth-child(1) {
   margin: 2rem;
   padding-top: 1rem;
@@ -388,7 +436,7 @@
   line-height: 27px;
   letter-spacing: 0em;
   text-align: left;
-}
+} */
 
 .solutionPage {
   margin-left: 2rem;
@@ -732,7 +780,7 @@
   display: block;
   justify-content: center;
   align-items: center;
-position: relative;
+  position: relative;
   z-index: 1;
 }
 
@@ -861,7 +909,7 @@ position: relative;
   cursor: pointer;
 }
 
-.blockBaseFlexBoxSelection>div {
+/* .blockBaseFlexBoxSelection>div {
   min-width: calc(50% - 0.4rem);
   max-width: calc(50% - 0.4rem);
 
@@ -889,7 +937,7 @@ position: relative;
   height: auto;
 
   padding: 1rem;
-}
+} */
 
 .blockBaseFlexBoxSelection>div>div:nth-child(2) {
   flex: 1;
@@ -1123,7 +1171,7 @@ position: relative;
   cursor: pointer;
 }
 
-.CountOnTensframeSelectFlexBox>div {
+/* .CountOnTensframeSelectFlexBox>div {
   min-width: calc(50% - 0.5rem);
   max-width: calc(50% - 0.5rem);
 
@@ -1150,7 +1198,7 @@ position: relative;
 
   height: auto;
   min-height: 60px;
-}
+} */
 
 .TensframeButtonBox {
   width: 80px;

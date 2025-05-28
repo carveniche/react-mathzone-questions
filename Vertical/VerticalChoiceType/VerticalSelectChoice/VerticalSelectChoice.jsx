@@ -74,9 +74,13 @@ export default function VerticalSelect({
           <div
             key={i}
             onClick={() => handleChoiceSelection(i)}
-            className={`${isStudentAnswerResponse&&String(value.val)?.trim()===String(studentAnswer)?.trim()?styles.selectedChoiceType:value?.show ? styles.selectedChoiceType : ""}`}
+            className={`${styles.choicebox} ${isStudentAnswerResponse&&String(value.val)?.trim()===String(studentAnswer)?.trim()?styles.selectedChoiceType:value?.show ? styles.selectedChoiceType : ""}`}
           >
-            <div className="mathzone-circle-selectbox">{String.fromCharCode(65 + i)}</div>
+
+            <div className={`mathzone-circle-selectbox ${styles.circle}`}>
+              {" "}
+              <b>{String.fromCharCode(65 + i)}</b>
+            </div>
             <div key={i}>{HtmlParser(value.val)}</div>
           </div>
         ))}

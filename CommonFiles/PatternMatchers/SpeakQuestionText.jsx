@@ -11,14 +11,14 @@ export default function SpeakQuestionText({ type, readText }) {
   const [voices, setVoices] = useState([]);
   const [canStart, setCanStart] = useState(false);
   const { indianAccent } = useContext(ValidationContext);
-  console.log("Given text", [readText]);
-  console.log("Readable Text", text);
+
   function removeImgTags(inputHTML) {
     const imgTagRegex = /<img[^>]*>/g;
     return inputHTML.replace(imgTagRegex, "");
   }
 
-  useEffect(() => {
+  useEffect(() => {   
+
     if (readText.length > 0) {
       if (readText.includes("img")) readText = removeImgTags(readText);
       if (type == "oldType") readText = convertMathToSpeech(readText);

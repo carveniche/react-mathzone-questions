@@ -15,6 +15,7 @@ function SelectChoiceOptionMultiplePicture({
   totalColumns,
   inputRef,
   studentAnswer,
+  hasAnswerSubmitted
 }) {
   const [flag, setFlag] = useState();
   const { isStudentAnswerResponse } = useContext(ValidationContext);
@@ -48,6 +49,7 @@ function SelectChoiceOptionMultiplePicture({
     setRows([...rows]);
   };
   inputRef.current = rows;
+
   return (
     <div>
       <div
@@ -60,32 +62,34 @@ function SelectChoiceOptionMultiplePicture({
           gridTemplateColumns: `repeat(${flag ? 2 : 2},1fr)`,
         }}
       >
-        {rows?.map((item, i) => (
+        {rows?.map((item, i) => {
+          return(
           <div
             key={i}
-            style={{
-              gap: "2rem",
-
-              display: "flex",
-              cursor: "pointer",
-              // flexWrap: "wrap",
-              border: " 1px solid black",
-              padding: "1rem",
-              borderRadius: "5px",
-              fontWeight: "bold",
-              alignItems: "center",
-            }}
             onClick={() => selectOptionHandler(i)}
-            className={`${
+
+             className={` ${styles.choicebox}  ${
               isStudentAnswerResponse &&
-              String(item?.value)?.trim() === String(studentAnswer)?.trim()
+                String(item?.value)?.trim() === String(studentAnswer)?.trim()
                 ? styles.selectedChoiceType
                 : item.show
                 ? styles.selectedChoiceType
-                : styles.prevSelectionAnswerSelection
+                : ""
             }`}
+
+            // className={`${styles.choicebox} ${
+            //     isStudentAnswerResponse
+            //       ?  
+            //       item?.selected =="true" ? 
+            //        String(item?.value)?.trim() === String(studentAnswer)?.trim()
+            //        ? styles.green
+            //        : styles.red
+            //     :''
+            //       : item?.show && styles.selectedChoiceType
+            //     }`}
+
           >
-            <div className="mathzone-circle-selectbox">
+            <div className={`mathzone-circle-selectbox ${styles.circle}`}>
               {" "}
               <b>{String.fromCharCode(65 + i)}</b>
             </div>
@@ -100,9 +104,12 @@ function SelectChoiceOptionMultiplePicture({
               {HtmlParser(item.value)}
             </div>
           </div>
-        ))}
+        )
+})}
       </div>
     </div>
   );
 }
 export default SelectChoiceOptionMultiplePicture;
+
+

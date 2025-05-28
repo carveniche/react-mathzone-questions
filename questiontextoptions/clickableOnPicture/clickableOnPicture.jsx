@@ -45,8 +45,11 @@ export const ClickableOnPic = ({ data, meter }) => {
   meter = Number(meter) || 0;
   const [questionContent, setQuestionContent] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [arrangement,setArrangement] = useState("regular");
 
   useEffect(() => {
+
+    console.log(data?.arrangement)
     let totalRows = Number(data?.row) || 0;
     let arr = [];
     let studentAnswer = "";
@@ -60,7 +63,9 @@ export const ClickableOnPic = ({ data, meter }) => {
           arr.push({ ...item, show: false });
       });
     }
-
+if(data?.arrangement){
+  setArrangement(data?.arrangement)
+}
     setQuestionContent([...arr]);
   }, []);
   const [redAlert, setRedAlert] = useState(false);
@@ -94,13 +99,12 @@ export const ClickableOnPic = ({ data, meter }) => {
     setQuestionWithAnswer({ ...data, [student_answer]: selectedAnswer });
     setHasAnswerSubmitted(true);
   };
-
   return (
-    <div>
+    <>
       {!isStudentAnswerResponse && <SolveButton onClick={checkAnswer} />}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
-      <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        <div>
+      <div id="studentAnswerResponse" >
+        <>
           <div className={styles2.questionName} style={{ display: "flex" }}>
             {readQuestionText && (
               <SpeakQuestionText readText={data?.questionName} />
@@ -115,9 +119,9 @@ export const ClickableOnPic = ({ data, meter }) => {
           <div>
             <ConditionOnProgressBar meter={meter} />
           </div>
-          <div>
+            <>
             <div
-              totalCols={Number(data?.col) || 0}
+              totalcols={Number(data?.col) || 0}
               className={styles2.QuestiontextoptionsGrid}
               style={{
                 gridTemplateColumns: `repeat(${Number(data?.col) || 1}, 1fr)`,
@@ -126,6 +130,7 @@ export const ClickableOnPic = ({ data, meter }) => {
               {questionContent?.map((e, i) => {
                 return (
                   <div
+                  key={i}
                     className={styles.frame}
                     style={{
                       background:
@@ -143,6 +148,8 @@ export const ClickableOnPic = ({ data, meter }) => {
                     }}
                   >
                     <Pattern
+                      keyVal={i}
+                      arrangement={arrangement}
                       count={questionContent[i]?.count}
                       imgUrl={questionContent[i]?.value}
                     />
@@ -150,10 +157,10 @@ export const ClickableOnPic = ({ data, meter }) => {
                 );
               })}
             </div>
-          </div>
-        </div>
+          </>
+        </>
       </div>
-    </div>
+    </>
   );
 };
 
