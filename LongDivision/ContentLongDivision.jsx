@@ -6,8 +6,9 @@ import LongDivsionSelectChoice from "./SelectChoiceLongDivision";
 
 
 
-export default function ContentLongDivsion({content,hasAnswerSubmitted,totalEmptyBox,inputRef,choices,totalRows,choiceType})
+export default function ContentLongDivsion({content,hasAnswerSubmitted,totalEmptyBox,inputRef,choices,totalRows,choiceType,studentAnswer })
 {
+    
    
     return <div>
         {
@@ -19,7 +20,7 @@ export default function ContentLongDivsion({content,hasAnswerSubmitted,totalEmpt
         
         }
         {
-            choiceType=='selectchoice'&&<LongDivsionSelectChoice content={content} inputRef={inputRef} totalEmptyBox={totalEmptyBox} totalRows={totalRows} answerHasSelected={hasAnswerSubmitted} choices={choices}/>
+            choiceType=='selectchoice'&&<LongDivsionSelectChoice content={content} inputRef={inputRef} totalEmptyBox={totalEmptyBox} totalRows={totalRows} answerHasSelected={hasAnswerSubmitted} choices={choices} studentAnswer={studentAnswer}/>
         }
           
     </div>

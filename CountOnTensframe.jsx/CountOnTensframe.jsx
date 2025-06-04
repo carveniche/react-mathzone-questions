@@ -112,6 +112,7 @@ export default function CountOnTensframe({ obj, meter }) {
               choices={obj?.choices}
               inputRef={inputRef}
               studentAnswer={obj[student_answer]}
+              correctAnswer={obj?.answerCount}
             />
           </div>
         </div>

@@ -1034,7 +1034,7 @@
   cursor: pointer;
 }
 
-.MatchObjectVerticalVerticalFlexBox2>div {
+/* .MatchObjectVerticalVerticalFlexBox2>div {
   width: auto;
 
   display: flex;
@@ -1060,14 +1060,14 @@
   height: auto;
 
   padding: 1rem;
-}
+} */
 
-.MatchObjectVerticalVerticalFlexBox2>div>div {
+/* .MatchObjectVerticalVerticalFlexBox2>div>div {
   min-width: 40px;
   min-height: 40px;
   width: 40px;
   aspect-ratio: 1/1;
-}
+} */
 
 .MatchObjectVerticalVerticalFlexBox2>div>div:nth-child(2) {
   flex: 1;
@@ -2118,33 +2118,6 @@
   cursor: pointer;
 }
 
-.PlaceValueTableSelectTypeSelectChoiceFlexBox2>div {
-  min-width: calc(50% - 0.5rem);
-  max-width: calc(50% - 0.5rem);
-
-  flex: 1;
-  display: flex;
-
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px;
-  letter-spacing: 0em;
-  text-align: left;
-  align-items: center;
-  padding-left: 18px;
-  color: #233584;
-  border-radius: 12px;
-  word-break: break;
-  min-height: auto;
-  height: 60px;
-
-  gap: 2rem;
-
-  border: 1px solid black;
-
-  height: auto;
-}
 
 .PlaceValueTableSelectTypeSelectChoiceFlexBox2>div>div:nth-child(2) {
   flex: 1;
@@ -2645,7 +2618,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   min-height: 60px;
   height: auto;
   word-break: break-word;
@@ -2695,7 +2668,7 @@
 
   gap: 2rem;
 
-  border: 1px solid black;
+  /* border: 1px solid black; */
 
   height: auto;
 }
@@ -2762,8 +2735,6 @@
   height: 60px;
 
   gap: 2rem;
-
-  border: 1px solid black;
 
   height: auto;
 }

@@ -4,6 +4,8 @@ import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import { makeBond } from "../GlobalBond/MakeBond";
 import styles2 from "../../OnlineQuiz.module.css";
 import styles from "../NumberBond.module.css";
+import SelectChoiceCommon from "../../../CommonJsxComponent/SelectChoiceCommon";
+import getSelectChoiceMissedValue from "../../../CommonJsxComponent/GetSelectChoiceMissedValue";
 const RenderBinaryTree = ({ node }) => {
   const { left, right, element } = node;
   useEffect(() => {
@@ -142,13 +144,21 @@ function insertLevelOrder(arr, root, i) {
   return { ...root };
 }
 function NumberBondSelctChoice({ datas, inputRef, studentAnswer }) {
+
+    const [choicesState, setChoicesState] = useState([]);
+  const { hasAnswerSubmitted,setStudentAnswerChoice, setCurrectAnswer,
+    isStudentAnswerResponse } =
+    useContext(ValidationContext);
+
+
   let [obj3, setObj3] = useState({});
-  const [line, setLine] = useState("");
-  const [inputState, setInputState] = useState({});
+  // const [line, setLine] = useState("");
+  // const [inputState, setInputState] = useState({});
   let prev = useRef(0);
   useEffect(() => {
     manupulatingData(datas?.questionContent);
   }, []);
+  
 
   const [resize, setResize] = useState(true);
   const manupulatingData = (obj) => {
@@ -185,26 +195,29 @@ function NumberBondSelctChoice({ datas, inputRef, studentAnswer }) {
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-
+    const correctMissedAnswer=getSelectChoiceMissedValue(datas?.questionContent);
+  setCurrectAnswer(correctMissedAnswer);
     let arr = [];
     datas?.choices?.map((item) => {
       let obj = { value: item, show: false };
       arr.push({ ...obj });
     });
+    
     setChoicesState([...arr]);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const [choicesState, setChoicesState] = useState([]);
-  const { hasAnswerSubmitted, isStudentAnswerResponse } =
-    useContext(ValidationContext);
+
   const handleChoiceSelection = (i) => {
     if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     choicesState[prev.current].show = false;
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
     prev.current = i;
+
+    setStudentAnswerChoice(choicesState[i]?.value)
+   
   };
   inputRef.current = [...choicesState];
   return (
@@ -213,6 +226,15 @@ function NumberBondSelctChoice({ datas, inputRef, studentAnswer }) {
         <RenderBinaryTree node={obj3} />
       )}
       <div className={styles2.NumberBondSelectChoiceFlexBox2}>
+
+        <SelectChoiceCommon
+          choices={choicesState}
+          studentAnswer={studentAnswer}
+          handleChoiceSelection={handleChoiceSelection}
+        />
+        
+
+{/*         
         {choicesState?.map((value, i) => (
           <div
             className={`${styles2.choicebox}  ${
@@ -233,7 +255,7 @@ function NumberBondSelctChoice({ datas, inputRef, studentAnswer }) {
             </div>
             <div>{<div key={i}>{HtmlParser(value?.value)}</div>}</div>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

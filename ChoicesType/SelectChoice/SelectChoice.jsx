@@ -7,6 +7,8 @@ import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../../OnlineQuiz.module.css";
 import HorizontalSelectChoice from "./HorizontalSelectChoice";
+import SelectChoiceCommon from "../../../CommonJsxComponent/SelectChoiceCommon";
+import getSelectChoiceMissedValue from "../../../CommonJsxComponent/GetSelectChoiceMissedValue";
 export default function SelectChoice({
   choices,
   inputRef,
@@ -19,9 +21,12 @@ export default function SelectChoice({
   const [row, setRow] = useState([]);
   let [choicesState, setChoicesState] = useState([]);
 
-  const { isStudentAnswerResponse } = useContext(ValidationContext);
+  const { isStudentAnswerResponse,setCurrectAnswer,setStudentAnswerChoice } = useContext(ValidationContext);
   let prev = useRef(0);
   useEffect(() => {
+     const correctMissedAnswer=  getSelectChoiceMissedValue(content)
+     setCurrectAnswer(correctMissedAnswer);
+
     let arr2 = [];
     choices?.map((item) => {
       let obj = { value: item, show: false };
@@ -42,12 +47,14 @@ export default function SelectChoice({
 
     setChoicesState([...arr2]);
   }, []);
+
   const handleChoiceSelection = (i) => {
     if (answerHasSelected || isStudentAnswerResponse) return;
     choicesState[prev.current].show = false;
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
     prev.current = i;
+    setStudentAnswerChoice(choicesState[i]?.value)
   };
   inputRef.current = choicesState;
 
@@ -79,7 +86,15 @@ export default function SelectChoice({
       <div
         className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}
       >
-        {choicesState?.map((value, i) => (
+
+         <SelectChoiceCommon 
+                choices={choicesState} 
+                studentAnswer={studentAnswer} 
+                handleChoiceSelection={handleChoiceSelection}
+                />
+
+
+        {/* {choicesState?.map((value, i) => (
           <div
             className={`${styles.flex} ${styles.choiceType} ${
               styles.selectChoicesFont
@@ -100,7 +115,7 @@ export default function SelectChoice({
             </div>
             <div key={i}>{HtmlParser(value?.value)}</div>
           </div>
-        ))}
+        ))} */}
       </div>
     </>
   );

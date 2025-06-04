@@ -29,25 +29,31 @@ export default function VerticalWithSymbols({
     isStudentAnswerResponse,
     setQuestionWithAnswer,
     readQuestionText,
+    setCurrectAnswer
   } = useContext(ValidationContext);
+
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
     if (!choiceRef.current) {
       setRedAlert(true);
       return;
     }
-
-    if (String(choiceRef.current.textContent).trim() === String(state?.answer))
+    if (String(choiceRef.current).trim() === String(state?.answer))
       setIsAnswerCorrect(true);
     else setIsAnswerCorrect(false);
     setHasAnswerSubmitted(true);
     setQuestionWithAnswer({
       ...state,
-      [student_answer]: choiceRef.current.textContent,
+      [student_answer]: choiceRef.current,
     });
   };
 
   const choiceRef = useRef(null);
+
+  useEffect(() => {
+    setCurrectAnswer(state?.answer)
+  },[])
+
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -78,6 +84,7 @@ export default function VerticalWithSymbols({
               content={state?.questionContent}
               contentText={state.ContentQuestionTextImage}
             />
+            
             <SelectVerticalSymbols
               choices={state?.choices}
               choiceRef={choiceRef}

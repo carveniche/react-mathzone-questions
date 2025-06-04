@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState, useRef } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styles from "../OnlineQuiz.module.css";
@@ -7,23 +7,30 @@ import {
   RightPranthesis,
   TopBorder,
 } from "./DragDropLongDivision";
+import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
+import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
+import getSelectChoiceMissedValue from "../../CommonJsxComponent/GetSelectChoiceMissedValue";
 export default function LongDivisonSelectChoice({
   choices,
   inputRef,
   answerHasSelected,
   content,
   totalRows,
+  studentAnswer
 }) {
+  const {setStudentAnswerChoice,setCurrectAnswer}=useContext(ValidationContext)
   const [row, setRow] = useState([]);
   let [choicesState, setChoicesState] = useState([]);
   let prev = useRef(0);
   useEffect(() => {
+      const correctMissedAnswer=  getSelectChoiceMissedValue(content)
+      setCurrectAnswer(correctMissedAnswer);
+
     let arr2 = [];
     choices?.map((item) => {
       let obj = { value: item, show: false };
       arr2.push({ ...obj });
     });
-
     let arr = [];
     arr = Object.assign([], content);
     arr = arr.map((item) => {
@@ -34,12 +41,14 @@ export default function LongDivisonSelectChoice({
     setRow([...arr]);
     setChoicesState([...arr2]);
   }, []);
+
   const handleChoiceSelection = (i) => {
     if (answerHasSelected) return;
     choicesState[prev.current].show = false;
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
     prev.current = i;
+    setStudentAnswerChoice(choicesState[i]?.value);
   };
   inputRef.current = choicesState;
   const defaultBorderRef = useRef(3);
@@ -134,7 +143,14 @@ export default function LongDivisonSelectChoice({
       <div
         className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}
       >
-        {choicesState?.map((value, i) => (
+
+        <SelectChoiceCommon 
+                choices={choicesState} 
+                studentAnswer={studentAnswer} 
+                handleChoiceSelection={handleChoiceSelection}
+                />
+
+        {/* {choicesState?.map((value, i) => (
           <div
             key={i}
             className={`${styles.flex} ${styles.choiceType} ${
@@ -152,7 +168,7 @@ export default function LongDivisonSelectChoice({
             </div>
             <div key={i}>{HtmlParser(value?.value)}</div>
           </div>
-        ))}
+        ))} */}
       </div>
     </>
   );

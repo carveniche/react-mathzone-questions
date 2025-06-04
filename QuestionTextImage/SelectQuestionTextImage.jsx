@@ -36,7 +36,8 @@ export default function SelectQuestionTextImage({
     answrerRef.current = choices[i]?.image;
     setPrevSelect(i);
   };
-
+ 
+console.log(choices,"choices")
   return (
     <div
       className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices} ${styles.questiontextImage}`}
