@@ -81,7 +81,7 @@ export default function ContentPlaceValueTableSelect({
           </div>
         ))}
       </div>
-      <div className={styles.PlaceValueTableSelectTypeSelectChoiceFlexBox2}>
+      <>
 
 
         <SelectChoiceCommon
@@ -91,7 +91,7 @@ export default function ContentPlaceValueTableSelect({
           handleChoiceSelection={handleChoiceSelection}
         />
 
-      </div>
+      </>
     </div>
   );
 }

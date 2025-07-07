@@ -47,15 +47,13 @@ export default function BlockBaseImageChoiceSelection({
       valueRef.current = choiceState[i]?.value;
       if( choiceState[i]?.value === correctAnswer) {
         setIsAnswerCorrect(true);
-      }
+      } 
     };
 
 
   return (
     <>
-      <div className={styles.blockBaseFlexBoxSelection}>
-
-
+    
         <SelectChoiceCommon
           type={"htmlparse"}
           choices={choiceState}
@@ -64,7 +62,7 @@ export default function BlockBaseImageChoiceSelection({
         />
 
 
-      </div>
+    
     </>
   );
 }

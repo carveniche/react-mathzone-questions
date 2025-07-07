@@ -55,9 +55,7 @@ function SelectChoiceHorizontalNotSymbol({
     }, []);
   
     return (
-      <div
-        className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}
-      >
+      <>
   
   
         <SelectChoiceCommon
@@ -68,7 +66,7 @@ function SelectChoiceHorizontalNotSymbol({
         />
   
   
-      </div>
+      </>
     );
   }
   export default SelectChoiceHorizontalNotSymbol;

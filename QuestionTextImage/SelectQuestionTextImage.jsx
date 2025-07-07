@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "../OnlineQuiz.module.css";
 import { useState, useRef } from "react";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import parse from "html-react-parser";
+import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
 const isDirectParse = (str) => {
   let flag = str.includes("mq-selectable");
   return !flag ? parse(str) : parse(str, optionSelectStaticMathField);
@@ -17,51 +18,52 @@ export default function SelectQuestionTextImage({
 }) {
   const [prevSelect, setPrevSelect] = useState(0);
   const choicesBoxRef = useRef([]);
-  const { setIsAnswerCorrect, isStudentAnswerResponse } =
+  const { setIsAnswerCorrect, isStudentAnswerResponse,setCurrectAnswer } =
     useContext(ValidationContext);
-  const handleSelect = (e, i) => {
+  let [choiceState, setChoicesState] = useState([]);
+  useEffect(() => {
+    let arr = [];
+    choices?.map((item) => {
+      let obj = { value: item.image, show: false ,option:item?.option};
+      if(item?.option === "true") {
+        setCurrectAnswer(item.image);
+      }
+      arr.push({ ...obj });
+    });
+    setChoicesState([...arr]);
+
+  }, []);
+
+
+  const handleChoiceSelection = (i) => {
     if (hasAnswerSubmitted || isStudentAnswerResponse) {
       return;
     }
-    choicesBoxRef.current[
-      prevSelect
-    ].className = `${styles.flex} ${styles.choiceType} ${styles.prevSelectionAnswerSelection} ${styles.selectChoicesFont}`;
-    choicesBoxRef.current[
-      i
-    ].className = `${styles.flex} ${styles.choiceType} ${styles.selectedChoiceType} ${styles.selectChoicesFont}`;
-    choices[i]?.option === "true"
-      ? setIsAnswerCorrect(true)
-      : setIsAnswerCorrect(false);
-    setChoosenAnswer(true);
-    answrerRef.current = choices[i]?.image;
+    console.log(i, choiceState  ,"i");
+    choiceState[prevSelect].show = false;
+    choiceState[i].show = true;
+    setChoicesState([...choiceState]);
+    answrerRef.current = choices[i]?.value;
     setPrevSelect(i);
+    setChoosenAnswer(true);
+    if(choices[i]?.option === "true") {
+      setIsAnswerCorrect(true);
+     
+    }else{
+      setIsAnswerCorrect(false)
+    }
+
   };
- 
-console.log(choices,"choices")
+
   return (
-    <div
-      className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices} ${styles.questiontextImage}`}
-    >
-      {choices.map((item, i) => (
-        <div
-          className={`${styles.flex} ${styles.choiceType} ${
-            styles.selectChoicesFont
-          } ${
-            isStudentAnswerResponse &&
-            String(item?.image)?.trim() === String(studentAnswer)?.trim() &&
-            styles.selectedChoiceType
-          }`}
-          key={i}
-          name={item.option}
-          onClick={(e) => handleSelect(e, i)}
-          ref={(el) => (choicesBoxRef.current[i] = el)}
-        >
-          <div className="mathzone-circle-selectbox">
-            <b>{String.fromCharCode(65 + i)}</b>
-          </div>
-          <div>{isDirectParse(item.image)}</div>
-        </div>
-      ))}
-    </div>
+    <>
+
+      <SelectChoiceCommon
+        choices={choiceState}
+        studentAnswer={studentAnswer}
+        handleChoiceSelection={handleChoiceSelection}
+      />
+
+    </>
   );
 }

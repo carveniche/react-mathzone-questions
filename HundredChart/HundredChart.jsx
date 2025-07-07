@@ -141,7 +141,7 @@ function HundredChart({ data, meter }) {
         <div>
           <div className={styles.bottom}>{arr}</div>
 
-          <div className={styles.HundredChartFlexBox}>
+          <>
 
   
                    <SelectChoiceCommon
@@ -151,7 +151,7 @@ function HundredChart({ data, meter }) {
                      handleChoiceSelection={handleChoiceSelection}
                    />
 
-          </div>
+          </>
         </div>
       </div>
     </div>

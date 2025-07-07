@@ -44,7 +44,7 @@ export default function SelectMultipleChoice({
   inputRef.current = choicesState;
   
   return (
-    <div className="mathzoneMultipleChoiceFlexBox .word-space_pre-wrap">
+    <>
 
        <SelectChoiceCommonOld
               type={"htmlparse"}
@@ -54,6 +54,6 @@ export default function SelectMultipleChoice({
             />
 
    
-    </div>
+    </>
   );
 }

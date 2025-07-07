@@ -1,5 +1,6 @@
 export default function jsonDataTesting() {
-  let obj ={
+
+    var data2 ={
     "status": true,
     "question_no": 1,
     "total": 10,
@@ -7,8 +8,8 @@ export default function jsonDataTesting() {
         {
             "question_id": 97543,
             "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"options_multiple_pictures\",\"questionName\":\"Which base-10 blocks show the number 256?&nbsp;\",\"row\":1,\"col\":4,\"questionContent\":[[{\"row\":1,\"col\":1,\"value\":\"<img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Hundred.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Hundred.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\">\",\"selected\":\"false\"},{\"row\":1,\"col\":2,\"value\":\"<img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Green-Hundred.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Green-Hundred.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Green-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Green-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Green-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Green-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Green-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/4(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/4(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/4(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/4(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/4(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/4(1).png\\\">\",\"selected\":\"true\"},{\"row\":1,\"col\":3,\"value\":\"<img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Red-Hundred.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/2(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/2(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/2(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/2(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/2(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/2(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Red-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Red-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Red-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Red-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Red-Ten.png\\\">\",\"selected\":\"false\"},{\"row\":1,\"col\":4,\"value\":\"<img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Yellow-Hundred.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Yellow-Hundred.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/1(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/1(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/1(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/1(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/1(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Yellow-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Yellow-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Yellow-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Yellow-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Yellow-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Yellow-Ten.png\\\">\",\"selected\":\"false\"}]],\"solution\":{\"model\":[{\"val\":\"2 hundreds 5 tens 6 ones\"}]},\"answer\":\"true\",\"studentAnswer\":\"<img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Hundred.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Hundred.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/Blue-Ten.png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\"><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/BaseTenBlocks/3(1).png\\\">\",\"readOutMathZoneText\":false}",
-            "question_type": "options_multiple_pictures",
+            "question_text": "{\"operation\":\"addition\",\"type\":\"vertical\",\"rows\":\"3\",\"cols\":\"3\",\"questionName\":\"Find the missing number.&nbsp;\",\"questionContent\":[[{\"row\":0,\"col\":0,\"value\":\"\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":0,\"col\":1,\"value\":\"6\",\"isMissed\":\"true\",\"studentAnswer\":\"6\"},{\"row\":0,\"col\":2,\"value\":\"0\",\"isMissed\":\"true\",\"studentAnswer\":\"0\"}],[{\"row\":1,\"col\":0,\"value\":\"+\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":1,\"col\":1,\"value\":\"2\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":1,\"col\":2,\"value\":\"0\",\"isMissed\":\"false\",\"studentAnswer\":\"\"}],[{\"row\":2,\"col\":0,\"value\":\"\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":2,\"col\":1,\"value\":\"8\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":2,\"col\":2,\"value\":\"0\",\"isMissed\":\"false\",\"studentAnswer\":\"\"}]],\"solution\":{\"model\":[{\"val\":\"60 + 20 = 80\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"5\",\"7\",\"6\",\"0\"],\"choiceType\":\"dragdrop\",\"choiceCount\":4,\"readOutMathZoneText\":true,\"indianAccent\":true,\"upload_file_name\":\"\"}",
+            "question_type": "vertical",
             "upload_file_name": "",
             "level": "level1",
             "fib_text": null,
@@ -17,17 +18,25 @@ export default function jsonDataTesting() {
             "choice_data": [],
             "orc_oprc_data": [],
             "ol_data": []
-        }
+
+        },
+
+
     ],
+ 'level_progress' : { level: "level3", position: 10 },
+ 'subsequent_question' : [1, 0, null],
     "lice_class_id": 4,
     "tag_id": 1458,
     "level": "level1",
     "live_class_practice_id": null,
-    "message": "Quiz started successfully"
+    "message": "Quiz started successfully",
+    "readOutMathZoneText": true,
+    "indianAccent": true
 }
-  return obj;
+  return data2;
 
-
+//  'level_progress' : { level: "level1", position: 100 },
+//  'subsequent_question' : [1, 0, null],
   let obj2 = {
     status: true,
     question_no: 1,

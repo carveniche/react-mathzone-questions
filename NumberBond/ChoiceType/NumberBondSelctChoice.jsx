@@ -225,7 +225,7 @@ function NumberBondSelctChoice({ datas, inputRef, studentAnswer }) {
       {resize && Object.keys(obj3).length > 0 && (
         <RenderBinaryTree node={obj3} />
       )}
-      <div className={styles2.NumberBondSelectChoiceFlexBox2}>
+      <>
 
         <SelectChoiceCommon
           choices={choicesState}
@@ -256,7 +256,7 @@ function NumberBondSelctChoice({ datas, inputRef, studentAnswer }) {
             <div>{<div key={i}>{HtmlParser(value?.value)}</div>}</div>
           </div>
         ))} */}
-      </div>
+      </>
     </div>
   );
 }

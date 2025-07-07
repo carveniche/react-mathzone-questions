@@ -50,7 +50,6 @@ export default function MultipleChoice({ state, meter, choiceId }) {
   var questionText = state?.question_text
     .replaceAll("<br/>", "")
     .replaceAll("<br>", "");
-
   return (
     <div id="multipleChoiceStudentAnswerResponse">
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
@@ -67,7 +66,7 @@ export default function MultipleChoice({ state, meter, choiceId }) {
             <div>{parse(state?.question_text)}</div>
           </div>
           <div>
-            {String(state?.upload_file_name).trim() && (
+            {state?.upload_file_name?.trim() && (
               <div>
                 <img src={state?.upload_file_name} alt="image not found" />
               </div>

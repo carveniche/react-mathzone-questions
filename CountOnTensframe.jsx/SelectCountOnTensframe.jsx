@@ -30,8 +30,7 @@ export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer
   console.log("----------------")
   inputRef.current = choicesState;
   return (
-    < >
-      <div className={styles.CountOnTensframeSelectFlexBox}>
+    <>
          <SelectChoiceCommon
                 type={"htmlparse"}
                 choices={choicesState}
@@ -39,7 +38,6 @@ export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer
                 handleChoiceSelection={handleChoiceSelection}
               />
         
-      </div>
     </>
   );
 }

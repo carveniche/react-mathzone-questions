@@ -140,9 +140,7 @@ export default function LongDivisonSelectChoice({
           </tbody>
         </table>
       </div>
-      <div
-        className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}
-      >
+      <>
 
         <SelectChoiceCommon 
                 choices={choicesState} 
@@ -169,7 +167,7 @@ export default function LongDivisonSelectChoice({
             <div key={i}>{HtmlParser(value?.value)}</div>
           </div>
         ))} */}
-      </div>
+      </>
     </>
   );
 }

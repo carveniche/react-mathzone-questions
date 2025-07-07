@@ -83,7 +83,7 @@ export default function VerticalDragDrop({
   inputRef.current = [...dropState];
   return (
     <div>
-      <div style={{ marginTop: "4rem" }}>
+      <div style={{ marginTop: "2px" }}>
         {dropState?.map((items, index) => (
           <div
             className={styles.VerticalDragDropFlexBox}

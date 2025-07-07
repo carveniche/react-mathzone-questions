@@ -79,18 +79,17 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
           )}
         </div>
       ))}
-      <div
-        className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} mathzone-color-indigo ${styles.boxChoices}`}
-      >
+    
+       <>
         <SelectChoiceCommon 
         choices={choicesState} 
         studentAnswer={studentAnswer} 
         handleChoiceSelection={handleChoiceSelection}
         />
+       </>
 
 
      
-      </div>
     </>
   );
 }

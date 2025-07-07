@@ -82,7 +82,7 @@ export default function VerticalSelect({
         ))}
       </div>
       
-      <div className={`${styles.MatchObjectVerticalVerticalFlexBox2} mathzone-color-indigo`}>
+      <>
         {/* {choiceState?.map((value, i) => (
           <div
             key={i}
@@ -105,7 +105,7 @@ export default function VerticalSelect({
           handleChoiceSelection={handleChoiceSelection}
         />
 
-      </div>
+      </>
     </div>
   );
 }

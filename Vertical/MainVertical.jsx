@@ -202,9 +202,8 @@ export function MainVerticalCorrectAnswer({ data }) {
   return (
     <div className={styles.correctAnswerBox}>
       <div className={`${styles.correctAnswer} ${styles.correctAnswer2}`}>
-        <h6>The correct answer is:</h6>
-        <div>
-          <div style={{ marginTop: "4rem" }}>
+        <>
+          <div style={{ marginTop: "1px" }}>
             {row?.map((items, index) => {
 
               const keyingStyle = {
@@ -260,7 +259,7 @@ export function MainVerticalCorrectAnswer({ data }) {
             })}
           </div>
 
-        </div>
+        </>
       </div>
     </div>
   );

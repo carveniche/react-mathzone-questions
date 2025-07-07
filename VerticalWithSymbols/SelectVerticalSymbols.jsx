@@ -65,14 +65,14 @@ export default function SelectVerticalSymbols({choices,choiceRef,hasAnswerSubmit
 
 
     return (
-     <div   className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}>
+     <>
         <SelectChoiceCommon
           type={"htmlparse"}
           choices={choiceState}
           studentAnswer={studentAnswer}
           handleChoiceSelection={handleChoiceSelection}
         />
-        </div>
+        </>
     )
 }
 

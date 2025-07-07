@@ -62,16 +62,7 @@ console.log(choices,"choices")
   inputRef.current = rows;
   return (
     <div className="mathzone-color-indigo">
-      <div
-        style={{
-          display: "grid",
-          width: "90%",
-          marginTop: "1rem",
-          gap: "1rem",
-          position: "relative",
-          gridTemplateColumns: `repeat(${flag ? 2 : 2},1fr)`,
-        }}
-      >
+      <>
 
         <SelectChoiceCommon 
                 choices={rows} 
@@ -80,7 +71,7 @@ console.log(choices,"choices")
                 />
 
 
-      </div>
+      </>
     </div>
   );
 }
