@@ -8,8 +8,8 @@ export default function jsonDataTesting() {
         {
             "question_id": 97543,
             "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"vertical\",\"rows\":\"3\",\"cols\":\"3\",\"questionName\":\"Find the missing number.&nbsp;\",\"questionContent\":[[{\"row\":0,\"col\":0,\"value\":\"\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":0,\"col\":1,\"value\":\"6\",\"isMissed\":\"true\",\"studentAnswer\":\"6\"},{\"row\":0,\"col\":2,\"value\":\"0\",\"isMissed\":\"true\",\"studentAnswer\":\"0\"}],[{\"row\":1,\"col\":0,\"value\":\"+\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":1,\"col\":1,\"value\":\"2\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":1,\"col\":2,\"value\":\"0\",\"isMissed\":\"false\",\"studentAnswer\":\"\"}],[{\"row\":2,\"col\":0,\"value\":\"\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":2,\"col\":1,\"value\":\"8\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":2,\"col\":2,\"value\":\"0\",\"isMissed\":\"false\",\"studentAnswer\":\"\"}]],\"solution\":{\"model\":[{\"val\":\"60 + 20 = 80\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"5\",\"7\",\"6\",\"0\"],\"choiceType\":\"dragdrop\",\"choiceCount\":4,\"readOutMathZoneText\":true,\"indianAccent\":true,\"upload_file_name\":\"\"}",
-            "question_type": "vertical",
+            "question_text": "{\"operation\":\"addition\",\"type\":\"long_division\",\"rows\":5,\"cols\":2,\"diviser\":2,\"rowtable\":4,\"questionName\":\"dwfvf3erfbv\",\"questionContent\":[[{\"row\":0,\"col\":0},{\"row\":0,\"col\":1,\"value\":\"2\",\"isMissed\":\"false\"}],[{\"row\":1,\"col\":0,\"value\":\"\",\"isMissed\":\"false\"},{\"row\":1,\"col\":1,\"value\":\"5\",\"isMissed\":\"false\"}],[{\"row\":2,\"col\":0,\"value\":\"-\",\"isMissed\":\"-\"},{\"row\":2,\"col\":1,\"value\":\"5\",\"isMissed\":\"true\"}],[{\"row\":3,\"col\":0},{\"row\":3,\"col\":1,\"value\":\"5\",\"isMissed\":\"true\"}]],\"solution\":{\"model\":[{\"val\":\"zscx\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"5\",\"\",\"5\"],\"choiceType\":\"dragdrop\",\"choiceCount\":3}",
+            "question_type": "long_division",
             "upload_file_name": "",
             "level": "level1",
             "fib_text": null,
@@ -18,22 +18,16 @@ export default function jsonDataTesting() {
             "choice_data": [],
             "orc_oprc_data": [],
             "ol_data": []
-
-        },
-
-
+        }
     ],
- 'level_progress' : { level: "level3", position: 10 },
- 'subsequent_question' : [1, 0, null],
     "lice_class_id": 4,
     "tag_id": 1458,
     "level": "level1",
     "live_class_practice_id": null,
-    "message": "Quiz started successfully",
-    "readOutMathZoneText": true,
-    "indianAccent": true
+    "message": "Quiz started successfully"
 }
   return data2;
+
 
 //  'level_progress' : { level: "level1", position: 100 },
 //  'subsequent_question' : [1, 0, null],
