@@ -30,16 +30,23 @@ const validateSelectChoice = (inputRef, setChoicesId, setChoices) => {
   }
   return 0;
 };
+
 const collectCheckedItem = (targetType) => {
   let parent = document.getElementById("parentIdQuizEditorOnline");
   let inputTag = parent.querySelectorAll("input");
 
   let temp = [];
   for (let items of inputTag) {
+    
     if (items.type == targetType) {
       temp.push(items.checked);
     }
+
+    // if(items.type == "radio") {
+    //  temp.push(items.name="radio");
+    // }
   }
+
 
   return temp;
 };
@@ -468,7 +475,6 @@ function CkEditor({ str, meter, choiceData, upload_file_name }) {
     str.replaceAll(" ", "").includes("border-top:thinsolid");
 
   var noBorder = str.replaceAll(" ", "").includes(`border="0"`);
-
   return (
     <div
       className={`${`${GenStyles.MainApp} ${GenStyles.ckeditor} multipleChoiceStudentAnswerResponse`} ${

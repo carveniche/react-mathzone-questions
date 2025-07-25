@@ -7,6 +7,8 @@ import HtmlParser from "react-html-parser";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
 import { optionSelectStaticMathField } from "../../../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
+import SelectChoiceCommon from "../../../../CommonJsxComponent/SelectChoiceCommon";
+import getSelectChoiceMissedValue from "../../../../CommonJsxComponent/GetSelectChoiceMissedValue";
 export default function ContentPlaceValueTableSelect({
   content,
   inputRef,
@@ -16,9 +18,16 @@ export default function ContentPlaceValueTableSelect({
   studentAnswer,
 }) {
 
+    const { hasAnswerSubmitted, setStudentAnswerChoice, isStudentAnswerResponse,setCurrectAnswer } =
+    useContext(ValidationContext);
   let [choicesState, setChoicesState] = useState([]);
   let prev = useRef(0);
   useEffect(() => {
+
+      const correctMissedAnswer=  getSelectChoiceMissedValue(choices,"option");
+      console.log(correctMissedAnswer,"correctMissedAnswer")
+      setCurrectAnswer(correctMissedAnswer);
+
     let arr = [];
     choices?.map((item) => {
       let obj = { ...item, show: false };
@@ -26,14 +35,14 @@ export default function ContentPlaceValueTableSelect({
     });
     setChoicesState([...arr]);
   }, []);
-  const { hasAnswerSubmitted, isStudentAnswerResponse } =
-    useContext(ValidationContext);
+
   const handleChoiceSelection = (i) => {
     if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     choicesState[prev.current].show = false;
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
     prev.current = i;
+    setStudentAnswerChoice(choicesState[i]?.value);
   };
   inputRef.current = [...choicesState];
   return (
@@ -72,35 +81,17 @@ export default function ContentPlaceValueTableSelect({
           </div>
         ))}
       </div>
-      <div className={styles.PlaceValueTableSelectTypeSelectChoiceFlexBox2}>
-        {choicesState?.map((value, i) => (
-          <div
-            className={`${styles.flex}  ${
-              isStudentAnswerResponse &&
-              String(value?.value)?.trim() === String(studentAnswer)?.trim()
-                ? styles.selectedChoiceType
-                : value.show
-                ? styles.selectedChoiceType
-                : styles.prevSelectionAnswerSelection
-            }`}
-            style={{ padding: `${value?.choice_image ? 0.5 : 1}rem 1rem` }}
-            key={i}
-            onClick={() => handleChoiceSelection(i)}
-          >
-            <div className="mathzone-circle-selectbox">
-              {" "}
-              <b>{String.fromCharCode(65 + i)}</b>
-            </div>
-            <div>{<div key={i}>
-             
+      <>
 
-              {JSON.stringify(value?.value).includes("mq-selectable") ? 
-      parse(value?.value, optionSelectStaticMathField) : 
-      HtmlParser(value?.value)}
-              </div>}</div>
-          </div>
-        ))}
-      </div>
+
+        <SelectChoiceCommon
+          type={"htmlparse"}
+          choices={choicesState}
+          studentAnswer={studentAnswer}
+          handleChoiceSelection={handleChoiceSelection}
+        />
+
+      </>
     </div>
   );
 }

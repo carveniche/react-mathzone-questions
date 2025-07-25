@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRef } from "react";
 import HtmlParser from 'react-html-parser';
 import HtmlParserComponent from '../../CommonJSFiles/HtmlParserComponent';
 import { ValidationContext } from '../../MainOnlineQuiz/MainOnlineQuizPage';
 import CompareTwoValue from '../compareTwoValue';
 import styles from "../OnlineQuiz.module.css";
-let prevSelectionAnswerSelection = -1;
+import SelectChoiceCommon from '../../CommonJsxComponent/SelectChoiceCommon';
 function SelectChoiceHorizontalNotSymbol({
   choices,
   correctAnswer,
@@ -15,52 +15,59 @@ function SelectChoiceHorizontalNotSymbol({
   valueRef,
   studentAnswer
 }) {
-  const selectOptionsChoiceRef = useRef([]);
-  const {isStudentAnswerResponse}=useContext(ValidationContext)
-  const selectOptionHandler = (index) => {
-    if(isStudentAnswerResponse)
-    return
-    if (!isAnswerSelected) {
-      if (prevSelectionAnswerSelection > -1) {
-        selectOptionsChoiceRef.current[
-          prevSelectionAnswerSelection
-        ].className = `${styles.flex} ${styles.choiceType} ${styles.prevSelectionAnswerSelection} ${styles.selectChoicesFont}`;
-      }
-      selectOptionsChoiceRef.current[
-        index
-      ].className = `${styles.flex} ${styles.choiceType} ${styles.selectedChoiceType} ${styles.selectChoicesFont}`;
-      prevSelectionAnswerSelection = index;
-      let choosenAnswer = selectOptionsChoiceRef.current[index].children[1].textContent;
-    
-      if (CompareTwoValue(choosenAnswer,correctAnswer)) {
-        setIsAnswerCorrect(true)
-      } else {
-        setIsAnswerCorrect(false)
-      }
-      valueRef.current=choosenAnswer
-      setanswerHasSelected(true);
-    }
-  };
+  const { hasAnswerSubmitted, isStudentAnswerResponse, setCurrectAnswer, setStudentAnswerChoice } =
+      useContext(ValidationContext);
+    let [choiceState, setChoicesState] = useState([]);
+    const prevRef = useRef(0)
   
-  return <div
-  className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}
->
-  {choices?.map((item, index) => (
-    <div
-      key={index}
-      className={`${styles.flex} ${styles.choiceType} ${styles.selectChoicesFont} ${isStudentAnswerResponse&&String(item)?.trim()==String(studentAnswer)?.trim()&&styles.selectedChoiceType}`}
-      ref={(el) => (selectOptionsChoiceRef.current[index] = el)}
-      onClick={() => selectOptionHandler(index)}
-    >
-      <div className="mathzone-circle-selectbox">
-        <b>{String.fromCharCode(65 + index)}</b>
-      </div>
-      <div style={{paddingRight:"1rem"}}><HtmlParserComponent value={item}/></div>
-    </div>
-  ))}
-</div>
+    const handleChoiceSelection = (i) => {
+      if (hasAnswerSubmitted  || isStudentAnswerResponse) return;
+      if (!isAnswerSelected) {
+  
+        choiceState[prevRef.current].show = false;
+        choiceState[i].show = true;
+        prevRef.current = i;
+        setChoicesState([...choiceState]);
+        setStudentAnswerChoice(choiceState[i]?.value);
+        valueRef.current = choiceState[i]?.value;
+        if (String(choiceState[i]?.value).trim() === String(correctAnswer).trim()) {
+          setIsAnswerCorrect(true);
+        } else {
+          setIsAnswerCorrect(false);
+        }
+        setanswerHasSelected(true);
+      }
+    };
+  
+  
+  
+  
+    useEffect(() => {
+      setCurrectAnswer(correctAnswer)  
+      let arr = [];
+      choices?.map((item) => {
+        let obj = { value: item, show: false };
+        arr.push({ ...obj });
+      });
+      setChoicesState([...arr]);
+  
+  
+    }, []);
+  
+    return (
+      <>
+  
+  
+        <SelectChoiceCommon
+          type={"htmlparse"}
+          choices={choiceState}
+          studentAnswer={studentAnswer}
+          handleChoiceSelection={handleChoiceSelection}
+        />
+  
+  
+      </>
+    );
   }
-export default SelectChoiceHorizontalNotSymbol;
-
-
-
+  export default SelectChoiceHorizontalNotSymbol;
+  

@@ -118,6 +118,7 @@ export default function LongDivsion({ state, totalRows, totalCols, meter }) {
   totalRows = Number(totalRows);
   totalCols = Number(totalCols);
   //let [rows, setRows] = useState([]);
+  
   const {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
@@ -167,7 +168,7 @@ export default function LongDivsion({ state, totalRows, totalCols, meter }) {
       setQuestionWithAnswer({ ...state, questionContent: result });
     } else if (state?.choiceType == "selectchoice") {
       let val = validationForSelectChoice(inputRef, state?.questionContent);
-      console.log({ val });
+     
       if (val === 0) {
         setRedAlert(true);
         return;
@@ -199,6 +200,7 @@ export default function LongDivsion({ state, totalRows, totalCols, meter }) {
     setStudentAnswerQuestion(jsonData);
     setHasAnswerSubmitted(true);
   };
+
 
   return (
     <div>
@@ -235,6 +237,7 @@ export default function LongDivsion({ state, totalRows, totalCols, meter }) {
               totalCols={totalCols}
               choices={state?.choices}
               choiceType={state?.choiceType}
+              studentAnswer={state['studentAnswer']}
             />
           </div>
         </div>

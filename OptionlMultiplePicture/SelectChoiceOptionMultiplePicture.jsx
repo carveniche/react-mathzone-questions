@@ -5,6 +5,7 @@ import styles from "../OnlineQuiz.module.css";
 import styled from "styled-components";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
 
 function SelectChoiceOptionMultiplePicture({
   choices,
@@ -15,13 +16,15 @@ function SelectChoiceOptionMultiplePicture({
   totalColumns,
   inputRef,
   studentAnswer,
+  hasAnswerSubmitted
 }) {
   const [flag, setFlag] = useState();
-  const { isStudentAnswerResponse } = useContext(ValidationContext);
+  const { isStudentAnswerResponse, setStudentAnswerChoice, setCurrectAnswer } = useContext(ValidationContext);
   let prevRef = useRef(0);
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
+
     let flag = false;
     let rows = [];
     for (let i = 0; i < Number(totalRows); i++) {
@@ -33,76 +36,41 @@ function SelectChoiceOptionMultiplePicture({
         if (text.includes("img") && text.includes("src")) {
           flag = true;
         }
+
+        if (item.selected === "true" || item.selected === true) {
+          setCurrectAnswer(item.value);
+        }
       });
     }
 
     setRows([...rows]);
-  }, [choices[0]?.[0]?.value]);
+    console.log(choices,"choices in select choice option multiple picture");
+  }, [choices]);
   // }, []);
 
-  const selectOptionHandler = (i) => {
+  const handleChoiceSelection = (i) => {
     if (isAnswerSelected || isStudentAnswerResponse) return;
     rows[prevRef.current].show = false;
     rows[i].show = true;
     prevRef.current = i;
+    setStudentAnswerChoice(rows[i]?.value)
     setRows([...rows]);
   };
   inputRef.current = rows;
+
   return (
-    <div>
-      <div
-        style={{
-          display: "grid",
-          width: "90%",
-          marginTop: "1rem",
-          gap: "1rem",
-          position: "relative",
-          gridTemplateColumns: `repeat(${flag ? 2 : 2},1fr)`,
-        }}
-      >
-        {rows?.map((item, i) => (
-          <div
-            key={i}
-            style={{
-              gap: "2rem",
+    <>
+     
+        <SelectChoiceCommon
+          type={"htmlparse"}
+          choices={rows}
+          studentAnswer={studentAnswer}
+          handleChoiceSelection={handleChoiceSelection}
+        />
 
-              display: "flex",
-              cursor: "pointer",
-              // flexWrap: "wrap",
-              border: " 1px solid black",
-              padding: "1rem",
-              borderRadius: "5px",
-              fontWeight: "bold",
-              alignItems: "center",
-            }}
-            onClick={() => selectOptionHandler(i)}
-            className={`${
-              isStudentAnswerResponse &&
-              String(item?.value)?.trim() === String(studentAnswer)?.trim()
-                ? styles.selectedChoiceType
-                : item.show
-                ? styles.selectedChoiceType
-                : styles.prevSelectionAnswerSelection
-            }`}
-          >
-            <div className="mathzone-circle-selectbox">
-              {" "}
-              <b>{String.fromCharCode(65 + i)}</b>
-            </div>
-            <div
-              style={{
-                flexWrap: "wrap",
-                gap: "4px",
-
-                display: "flex",
-              }}
-            >
-              {HtmlParser(item.value)}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
 export default SelectChoiceOptionMultiplePicture;
+
+

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styles from "./custom.module.css";
 import { useState } from "react";
 import styles2 from "../OnlineQuiz.module.css";
@@ -10,6 +10,7 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
 // let data = {
 //   operation: "addition",
 //   type: "hundreds_chart",
@@ -35,18 +36,44 @@ function HundredChart({ data, meter }) {
     setQuestionWithAnswer,
     isStudentAnswerResponse,
     readQuestionText,
+    setCurrectAnswer,
+    setStudentAnswerChoice,
+    
   } = useContext(ValidationContext);
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  const handleClick = (id, i) => {
+  let [choiceState, setChoicesState] = useState([]);
+    const prevRef = useRef(0);
+    useEffect(() => { 
+   
+       //const correctMissedAnswer=  getSelectChoiceMissedValue(content)
+       setCurrectAnswer(data?.answer);
+       let arr = [];
+       data.choices?.map((item) => {
+         let obj = { value: item, show: false };
+         arr.push({ ...obj });
+       });
+       setChoicesState([...arr]);
+   
+     }, []);
+
+
+  const handleChoiceSelection = (i) => {
     if (hasAnswerSubmitted || isStudentAnswerResponse) return;
-    if (Number(id) === Number(data.answer)) {
+    const { value } = choiceState[i];
+       choiceState[prevRef.current].show = false;
+      choiceState[i].show = true;
+      setStudentAnswerChoice(choiceState[i]?.value);
+      prevRef.current = i;
+
+    if (Number(value) === Number(data.answer)) {
       setIsAnswerCorrect(true);
     } else {
       setIsAnswerCorrect(false);
     }
-    setSelectedAnswer(Number(id));
+    setSelectedAnswer(Number(value));
     setPrevState(i);
   };
+
   let arr = [];
 
   for (let i = 0; i < 10; i++) {
@@ -75,6 +102,7 @@ function HundredChart({ data, meter }) {
     );
   }
   const [redAlert, setRedAlert] = useState(false);
+
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     if (prevState == -1) {
@@ -84,6 +112,8 @@ function HundredChart({ data, meter }) {
     setQuestionWithAnswer({ ...data, [student_answer]: selectedAnswer });
     setHasAnswerSubmitted(true);
   };
+
+
   return (
     <div>
       {!isStudentAnswerResponse && (
@@ -111,29 +141,17 @@ function HundredChart({ data, meter }) {
         <div>
           <div className={styles.bottom}>{arr}</div>
 
-          <div className={styles.HundredChartFlexBox}>
-            {data.choices.map((k, i) => (
-              <div
-                className={
-                  isStudentAnswerResponse &&
-                  Number(k) === Number(data[student_answer])
-                    ? styles.answer1
-                    : prevState == i
-                    ? styles.answer1
-                    : styles.answer
-                }
-                onClick={() => {
-                  handleClick(k, i);
-                }}
-                key={i}
-              >
-                <div className={`${styles.circle} mathzone-circle-selectbox`}>
-                  {String.fromCharCode(65 + i)}
-                </div>
-                <div className={styles.ans}>{Number(k)}</div>
-              </div>
-            ))}
-          </div>
+          <>
+
+  
+                   <SelectChoiceCommon
+                    type={"number"}
+                     choices={choiceState}
+                     studentAnswer={data["studentAnswer"]}
+                     handleChoiceSelection={handleChoiceSelection}
+                   />
+
+          </>
         </div>
       </div>
     </div>

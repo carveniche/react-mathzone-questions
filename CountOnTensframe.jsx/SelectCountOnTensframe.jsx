@@ -3,10 +3,11 @@ import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styled from "styled-components";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../OnlineQuiz.module.css";
-export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer }) {
+import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
+export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer,correctAnswer }) {
   let [choicesState, setChoicesState] = useState([]);
   const prev = useRef(0);
-  const { hasAnswerSubmitted,isStudentAnswerResponse } = useContext(ValidationContext);
+  const { hasAnswerSubmitted,isStudentAnswerResponse ,setStudentAnswerChoice,setCurrectAnswer} = useContext(ValidationContext);
   const handleChoiceSelection = (i) => {
     if (hasAnswerSubmitted||isStudentAnswerResponse) return;
 
@@ -14,8 +15,11 @@ export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
     prev.current = i;
+    setStudentAnswerChoice(choicesState[i]?.value);
   };
+
   useEffect(() => {
+     setCurrectAnswer(correctAnswer);
     let arr = [];
     choices?.map((item) => {
       let obj = { value: item, show: false };
@@ -26,27 +30,14 @@ export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer
   console.log("----------------")
   inputRef.current = choicesState;
   return (
-    < >
-      <div className={styles.CountOnTensframeSelectFlexBox}>
-        {choicesState?.map((value, i) => (
-          <div
-            className={`${(isStudentAnswerResponse&&String(studentAnswer)?.trim()===String(value?.value)?.trim())?styles.selectedChoiceType:
-              value.show
-                ? styles.selectedChoiceType
-                : styles.prevSelectionAnswerSelection
-            }`}
-            key={i}
-            onClick={() => handleChoiceSelection(i)}
-          >
-            <div className="mathzone-circle-selectbox">
-              {" "}
-              <b>{String.fromCharCode(65 + i)}</b>
-            </div>
-
-            <div key={i}>{HtmlParser(value.value)}</div>
-          </div>
-        ))}
-      </div>
+    <>
+         <SelectChoiceCommon
+                type={"htmlparse"}
+                choices={choicesState}
+                studentAnswer={studentAnswer}
+                handleChoiceSelection={handleChoiceSelection}
+              />
+        
     </>
   );
 }

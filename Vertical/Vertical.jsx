@@ -26,7 +26,7 @@ const validationForSelectChoice = (choices, questionContent) => {
   let n = choices?.length;
   for (let items of choices) {
     if (items.show) {
-      val = items.val;
+      val = items.value;
       break;
     }
   }
@@ -34,6 +34,7 @@ const validationForSelectChoice = (choices, questionContent) => {
   let arr = questionContent;
   for (let rows of arr) {
     for (let items of rows) {
+
       if (items.isMissed === "true") {
         if (String(items.value).trim() === String(val).trim()) {
           return 2;
@@ -42,6 +43,7 @@ const validationForSelectChoice = (choices, questionContent) => {
     }
   }
 };
+
 const changeAnswerStatus = (
   val,
   setIsAnswerCorrect,
@@ -49,6 +51,8 @@ const changeAnswerStatus = (
   setStudentAnswerQuestion,
   setRedAlert
 ) => {
+
+  
   if (val === 0) {
     setRedAlert(true);
     return;
@@ -110,6 +114,7 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
         inputRef.current,
         state?.questionContent
       );
+      console.log(status,"status")
       changeAnswerStatus(
         status,
         setIsAnswerCorrect,
@@ -118,8 +123,7 @@ export default function Vertical({ state, totalRows, totalCols, meter }) {
         setRedAlert
       );
       if (status !== 0) {
-        let value = findSelectedValue(inputRef?.current, "val");
-
+        let value = findSelectedValue(inputRef?.current, "value");
         setQuestionWithAnswer({ ...state, [student_answer]: value });
       }
     } else if (state?.choiceType == "dragdrop") {

@@ -31,7 +31,6 @@ export function CorrectLongDvision2({data}){
   return (
     <div className={styles.correctAnswerBox}>
     <div className={`${styles.correctAnswer} ${styles.correctAnswer2}`}>
-    <h6>The correct answer is:</h6>
 
     <div style={{ width: "fit-content" }}>
        

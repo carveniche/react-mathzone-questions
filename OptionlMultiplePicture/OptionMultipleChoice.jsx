@@ -33,11 +33,13 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
     setQuestionWithAnswer,
     isStudentAnswerResponse,
     readQuestionText,
+    studentAnswerChoice
   } = useContext(ValidationContext);
   const showAnswer = hasAnswerSubmitted;
   const setShowAnswer = setHasAnswerSubmitted;
   const inputRef = useRef();
   const [redAlert, setRedAlert] = useState(false);
+
   const handleSubmitAnswer = () => {
     if (showAnswer) return;
     let val = validationForSelectMultipleSelect(inputRef?.current);
@@ -47,6 +49,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
       return;
     } else if (val == 1) setIsAnswerCorrect(false);
     else if (val == 2) setIsAnswerCorrect(true);
+    console.log(studentAnswerChoice,"")
     let value = findSelectedValue(inputRef?.current, "value");
 
     setQuestionWithAnswer({ ...state, [student_answer]: value });
@@ -67,7 +70,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
         )
         // <p>{JSON.stringify(state?.questionImage)}</p>
       }
-      <div>
+      <div className="w-full">
         {!isStudentAnswerResponse && (
           <SolveButton
             onClick={handleSubmitAnswer}
@@ -80,7 +83,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
           className="mathzone-color-indigo word-space_pre-wrap"
           style={{ display: "flex" }}
         >
-          <div>
+          <div className="w-full">
             <div className={styles.questionName} style={{ display: "flex" }}>
               {readQuestionText && (
                 <SpeakQuestionText readText={state?.questionName} />

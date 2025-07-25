@@ -5,6 +5,7 @@ import styled from "styled-components";
 import styles from "../../../OnlineQuiz.module.css";
 import { optionSelectStaticMathField } from "../../replaceDomeNode/ReplaceDomNode";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
+import SelectChoiceCommon from "../../../../CommonJsxComponent/SelectChoiceCommon";
 export default function SelectChoiceHorizontalFillUpsEquationType({
   choices,
   inputRef,
@@ -14,6 +15,8 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
   studentAnswer,
   choiceType
 }) {
+  const {hasAnswerSubmitted,setStudentAnswerChoice,isStudentAnswerResponse,setCurrectAnswer}=useContext(ValidationContext)
+
   const [row, setRow] = useState([]);
   let [choicesState, setChoicesState] = useState([]);
   let prev = useRef(0);
@@ -33,13 +36,17 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
       content?.map((item) => {
         
         item.row == i && temp.push(item);
+         if(item.selected){
+          setCurrectAnswer(item.value);
+        }
+
       });
       arr.push(temp);
     }
     setRow([...arr]);
     setChoicesState([...arr2]);
   }, []);
-  const {hasAnswerSubmitted,isStudentAnswerResponse}=useContext(ValidationContext)
+  
   const handleChoiceSelection = (i) => {
   
     if (hasAnswerSubmitted||isStudentAnswerResponse) return;
@@ -47,8 +54,10 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
     prev.current = i;
+    setStudentAnswerChoice(choicesState[i]?.value)
   };
   inputRef.current = choicesState;
+
   return (
     <>
       {row?.map((items, index) => (
@@ -70,32 +79,17 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
           )}
         </div>
       ))}
-      <div
-        className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} mathzone-color-indigo ${styles.boxChoices}`}
-      >
-        {choicesState?.map((value, i) => (
-          <div
-            style={{ color: "initial", fontWeight: "initial" }}
-            className={`${styles.flex} ${styles.choiceType} ${
-              styles.selectChoicesFont
-            } ${(isStudentAnswerResponse&&String(value?.value)?.trim()===String(studentAnswer)?.trim())?styles.selectedChoiceType:
-              value.show
-                ? styles.selectedChoiceType
-                : styles.prevSelectionAnswerSelection
-            }`}
-            key={i}
-            onClick={() => handleChoiceSelection(i)}
-          >
-            <div className="mathzone-circle-selectbox">
-              {" "}
-              <b>{String.fromCharCode(65 + i)}</b>
-            </div>
-            <div key={i}>
-              {parse(value?.value, optionSelectStaticMathField)}
-            </div>
-          </div>
-        ))}
-      </div>
+    
+       <>
+        <SelectChoiceCommon 
+        choices={choicesState} 
+        studentAnswer={studentAnswer} 
+        handleChoiceSelection={handleChoiceSelection}
+        />
+       </>
+
+
+     
     </>
   );
 }

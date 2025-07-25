@@ -1,42 +1,87 @@
-import React, { useContext, useRef } from "react"
+import React, { useContext, useEffect, useRef } from "react"
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styles from "../OnlineQuiz.module.css";
 import styled from "styled-components"
 import {useState} from "react"
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
+import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
 export default function SelectVerticalSymbols({choices,choiceRef,hasAnswerSubmitted,studentAnswer})
 {
-    const selectOptionsChoiceRef = useRef([]);
-    const [prevSelectionAnswerSelection,setPrevSelectionAnswerSelection]=useState(0)
-    const {isStudentAnswerResponse}=useContext(ValidationContext)
-    const handleSelect=(e,i)=>{
-        if(hasAnswerSubmitted||isStudentAnswerResponse)
-        {
-            return
-        }
-        selectOptionsChoiceRef.current[
-            prevSelectionAnswerSelection
-          ].className = `${styles.flex} ${styles.choiceType} ${styles.prevSelectionAnswerSelection} ${styles.selectChoicesFont}`;
-        selectOptionsChoiceRef.current[
-            i
-          ].className = `${styles.flex} ${styles.choiceType} ${styles.selectedChoiceType} ${styles.selectChoicesFont}`
+    // const selectOptionsChoiceRef = useRef([]);
+    // const [prevSelectionAnswerSelection,setPrevSelectionAnswerSelection]=useState(0)
+    // const handleSelect=(e,i)=>{
+    //     if(hasAnswerSubmitted||isStudentAnswerResponse)
+    //     {
+    //         return
+    //     }
+    //     selectOptionsChoiceRef.current[
+    //         prevSelectionAnswerSelection
+    //       ].className = `${styles.flex} ${styles.choiceType} ${styles.prevSelectionAnswerSelection} ${styles.selectChoicesFont}`;
+    //     selectOptionsChoiceRef.current[
+    //         i
+    //       ].className = `${styles.flex} ${styles.choiceType} ${styles.selectedChoiceType} ${styles.selectChoicesFont}`
        
-          choiceRef.current=selectOptionsChoiceRef.current[i].children[1]
+    //       choiceRef.current=selectOptionsChoiceRef.current[i].children[1]
           
       
-        setCurrentChoice(i)
-        setPrevSelectionAnswerSelection(i)
+    //     setCurrentChoice(i)
+    //     setPrevSelectionAnswerSelection(i)
 
-    }
-    const [currentChoice,setCurrentChoice]=useState(-1)
-    return <div   className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}>
+    // }
+    // const [currentChoice,setCurrentChoice]=useState(-1)
+    // console.log(choices,"choices")
+
+
+    
+     const {isStudentAnswerResponse,setCurrectAnswer,setStudentAnswerChoice}=useContext(ValidationContext)
+      let [choiceState, setChoicesState] = useState([]);
+        const prevRef = useRef(0);
+      
+        useEffect(() => {
+      
+          //const correctMissedAnswer=  getSelectChoiceMissedValue(content)
+          //setCurrectAnswer(correctMissedAnswer);
+         // setCurrectAnswer(correctAnswer);
+          let arr = [];
+          choices?.map((item) => {
+            let obj = { value: item, show: false };
+            arr.push({ ...obj });
+          });
+          setChoicesState([...arr]);
+      
+        }, []);
+      
+        const handleChoiceSelection = (i) => {
+          if (hasAnswerSubmitted||isStudentAnswerResponse) return;
+          choiceState[prevRef.current].show = false;
+          choiceState[i].show = true;
+          prevRef.current = i;
+          setChoicesState([...choiceState]);
+          setStudentAnswerChoice(choiceState[i]?.value);
+          
+          choiceRef.current = choiceState[i]?.value;
+          
+        };
+
+
+    return (
+     <>
+        <SelectChoiceCommon
+          type={"htmlparse"}
+          choices={choiceState}
+          studentAnswer={studentAnswer}
+          handleChoiceSelection={handleChoiceSelection}
+        />
+        </>
+    )
+}
+
+{/* <div   className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}>
         {choices.map((item,i)=><div className={`${styles.flex} ${styles.choiceType} ${styles.selectChoicesFont} ${isStudentAnswerResponse&&(String(item)?.trim()===String(studentAnswer)?.trim())&&styles.selectedChoiceType}`} key={i} onClick={(e)=>handleSelect(e,i)} ref={(el) => (selectOptionsChoiceRef.current[i] = el)}>
             <div className="mathzone-circle-selectbox"><b>{String.fromCharCode(65+i)}</b></div>
             <div>{HtmlParser(item)}</div>
         </div  >)}
-    </div>
-}
-
+    </div> */}
 const FlexBox=styled.div`
 margin:1rem;
 display:flex;

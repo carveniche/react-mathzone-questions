@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import parse from "html-react-parser";
 import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
@@ -20,7 +20,9 @@ export default function GenerateLine({ question, meter }) {
     setQuestionWithAnswer,
     isStudentAnswerResponse,
     readQuestionText,
+    setCurrectAnswer
   } = useContext(ValidationContext);
+  
   const [studAns, setStudAnswers] = useState([]);
   const [answered, setAnswered] = useState(false);
   const [redAlert, setRedAlert] = useState(false);
@@ -42,8 +44,11 @@ export default function GenerateLine({ question, meter }) {
   var numsDisplayed = question.numbersDisplayed;
 
   function handleSubmitAnswer() {
+
+    
     var isWrong = false;
     var isEmpty = false;
+    var student_answer ;
     if (choiceType == "keying" && !isWrong && !isEmpty) {
       if (question.isFraction) {
         var studFracNums = document.getElementsByClassName("ansFracNums");
@@ -104,6 +109,7 @@ export default function GenerateLine({ question, meter }) {
           if (solution[i] != ansArray[i]) isWrong = true;
         }
       }
+      student_answer=answers
     } else if (choiceType == "mapping" && !isWrong && !isEmpty) {
       if (studAns.length != question.ansArray.length) isEmpty = true;
       studAns.forEach((ans) => {
@@ -137,6 +143,7 @@ export default function GenerateLine({ question, meter }) {
         if (typeof selectedOption == "undefined") isEmpty = true;
         if (selectedOption != question.ansArray[0]) isWrong = true;
       }
+      student_answer= selectedOption;
     }
 
     if (isEmpty) {
@@ -148,8 +155,12 @@ export default function GenerateLine({ question, meter }) {
     else setIsAnswerCorrect(true);
     setHasAnswerSubmitted(true);
     setAnswered(true);
-    setQuestionWithAnswer({ ...question, [student_answer]: studAns });
+    const studentFinalAnswer = studAns.length > 0 ? studAns : student_answer;
+    setQuestionWithAnswer({ ...question, "student_answer": studentFinalAnswer });
   }
+
+
+
 
   function setFractionsSelected(e) {
     if (choiceType !== "mapping") return;
@@ -225,7 +236,7 @@ export default function GenerateLine({ question, meter }) {
     var index = 0;
     var inp = 0;
     var endIsThere = false;
-
+    setCurrectAnswer(question.ansArray.join(''))
     var fracInterval = parseInt(question.interval);
     var fracStart = parseInt(question.start);
     if (question.isFraction) interval = 1;
@@ -1117,8 +1128,8 @@ export default function GenerateLine({ question, meter }) {
                     </svg>
                     <div className={styles.arrowBotline}></div>
                   </div>
-                  {lines.map((line) => (
-                    <>{line}</>
+                  {lines.map((line,i) => (
+                    <React.Fragment key={i}>{line}</React.Fragment>
                   ))}
                   <div className={styles.arrowRight}>
                     <svg

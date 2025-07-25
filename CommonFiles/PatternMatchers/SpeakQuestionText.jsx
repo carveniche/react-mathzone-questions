@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import audioPaused from "./AudioPaused.json";
 import audioPlaying from "./AudioPlaying.json";
-
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import Lottie from "react-lottie";
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 
@@ -11,14 +11,14 @@ export default function SpeakQuestionText({ type, readText }) {
   const [voices, setVoices] = useState([]);
   const [canStart, setCanStart] = useState(false);
   const { indianAccent } = useContext(ValidationContext);
-  console.log("Given text", [readText]);
-  console.log("Readable Text", text);
+
   function removeImgTags(inputHTML) {
     const imgTagRegex = /<img[^>]*>/g;
     return inputHTML.replace(imgTagRegex, "");
   }
 
-  useEffect(() => {
+  useEffect(() => {   
+
     if (readText.length > 0) {
       if (readText.includes("img")) readText = removeImgTags(readText);
       if (type == "oldType") readText = convertMathToSpeech(readText);
@@ -253,7 +253,8 @@ export default function SpeakQuestionText({ type, readText }) {
           cursor={"pointer"}
           style={{ margin: "0" }}
         /> */}
-        <img
+        <VolumeUpIcon sx={volumeupStyle(isSpeaking)}/>
+        {/* <img
           style={{ width: "35px", height: "40px" }}
           src={
             isSpeaking
@@ -261,11 +262,12 @@ export default function SpeakQuestionText({ type, readText }) {
               : "https://advancedcodingtraining.s3.ap-south-1.amazonaws.com/images/PlayAudioLottie.gif"
           }
           alt="ReadOut"
-        />
+        /> */}
       </div>
     </>
   );
 }
+
 function convertMathToSpeech(htmlContent) {
   const parser = new DOMParser();
   htmlContent = htmlContent.replace(
@@ -288,3 +290,13 @@ function convertMathToSpeech(htmlContent) {
 
   return readableText;
 }
+
+const volumeupStyle = (isSpeaking) => ({
+  color: isSpeaking ? '#86C440' : '#32C7FF',
+  fontSize: 30,
+  cursor: 'pointer',
+  '&:hover': {
+    transform: 'scale(1.05)',
+    color: isSpeaking ? '#6aa92e' : '#1da8e0',
+  },
+});

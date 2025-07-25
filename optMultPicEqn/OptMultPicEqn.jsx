@@ -52,7 +52,6 @@ function OptMultPicEqn({
   multipicselect,
 }) {
   meter = Number(meter) || 0;
-
   const [redAlert, setRedAlert] = useState(false);
   const {
     hasAnswerSubmitted,

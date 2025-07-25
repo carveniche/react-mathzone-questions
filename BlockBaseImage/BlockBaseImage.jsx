@@ -13,17 +13,7 @@ import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D"
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 export default function BlockBaseImage({ state, totalRows, meter }) {
-  meter = Number(meter) || 0;
-  totalRows = Number(totalRows);
-  const [redAlert, setRedAlert] = useState(false);
-  let rows = [];
-  for (let i = 0; i < totalRows; i++) {
-    let temp = [];
-    state.questionContent.map((items) =>
-      items.map((item) => item.row == i && temp.push(item.value))
-    );
-    rows.push(temp);
-  }
+
   const {
     hasAnswerSubmitted,
     setHasAnswerSubmitted,
@@ -34,6 +24,21 @@ export default function BlockBaseImage({ state, totalRows, meter }) {
     isStudentAnswerResponse,
     readQuestionText,
   } = useContext(ValidationContext);
+  const [redAlert, setRedAlert] = useState(false);
+      meter = Number(meter) || 0;
+  totalRows = Number(totalRows);
+  let rows = [];
+  useEffect(() => {
+
+  for (let i = 0; i < totalRows; i++) {
+    let temp = [];
+    state.questionContent.map((items) =>
+      items.map((item) => item.row == i && temp.push(item.value))
+    );
+    rows.push(temp);
+  }
+} , [])
+
   const valueRef = useRef();
   const [hasOptionSelected, setHasOptionSelected] = useState(false);
   const handleSubmitAnswer = () => {
@@ -47,6 +52,7 @@ export default function BlockBaseImage({ state, totalRows, meter }) {
     let jsonData = serializeResponse("studentAnswerResponse");
     setStudentAnswerQuestion(jsonData);
   };
+  console.log(state,"state")
 
   return (
     <div>

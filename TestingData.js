@@ -1,8 +1,37 @@
 export default function jsonDataTesting() {
-  let obj ={"status":true,"question_no":1,"total":10,"question_data":[{"question_id":21503,"html_type":false,"operation":null,"question_text":"\u003cp\u003eDrag and drop the correct digit:\u003c/p\u003e\r\n","question_type":"oprc","upload_file_name":"","level":"level1","fib_text":null,"fib_before_text":null,"after_question_text":"\u003cp\u003eHence 2 tens 3 ones + 4 tens 5 ones\u0026nbsp;⇒\u0026nbsp;23 + 45 =\u0026nbsp;\u003cinput maxlength=\"2\" name=\"a\" required=\"required\" size=\"2\" type=\"text\" value=\"68\"\u003e\u003c/p\u003e\r\n","choice_data":[],"orc_oprc_data":[{"rows":null,"columns":null,"row_headers":["2 tens 3 ones","4 tens 5\u0026nbsp;ones","Sum them up"],"column_headers":["Tens","Ones"],"response":[["2"],["3"],["4"],["5"],["6"],["8"]],"extra_options":""}],"ol_data":[]}],"lice_class_id":4,"tag_id":838,"level":"level1","live_class_practice_id":null,"message":"Quiz started successfully"}
-  return obj;
+
+    var data2 ={
+    "status": true,
+    "question_no": 1,
+    "total": 10,
+    "question_data":[
+    {
+        "question_id": 24880,
+        "html_type": false,
+        "operation": "addition",
+        "question_text": "{\"operation\":\"addition\",\"type\":\"verticalwithsymbols\",\"rows\":\"3\",\"cols\":\"1\",\"questionName\":\"<p>How many&nbsp;<img data-cke-saved-src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/FlowersAndPlants/Green-Flower.png\\\" src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/FlowersAndPlants/Green-Flower.png\\\">&nbsp;are there in all?&nbsp;</p>\",\"questionContentText\":\"\",\"questionContent\":[[{\"row\":1,\"col\":1,\"value\":\"<img data-cke-saved-src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/FlowersAndPlants/Green-Flower.png\\\" src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/FlowersAndPlants/Green-Flower.png\\\" style=\\\"text-align: start; width: 35px !important;\\\">\"}],[{\"row\":2,\"col\":1,\"value\":\"+\"}],[{\"row\":3,\"col\":1,\"value\":\"<img data-cke-saved-src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/FlowersAndPlants/Green-Flower.png\\\" src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/FlowersAndPlants/Green-Flower.png\\\" style=\\\"text-align: start; width: 35px !important;\\\">\"}]],\"solution\":{\"model\":[{\"val\":\"<p>1 + 1 = 2</p>\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"0\",\"1\",\"2\",\"3\"],\"choiceType\":\"selectchoice\",\"choiceCount\":4,\"answer\":\"2\"}",
+        "question_type": "verticalwithsymbols",
+        "upload_file_name": "",
+        "level": "level1",
+        "fib_text": null,
+        "fib_before_text": null,
+        "after_question_text": null,
+        "choice_data": [],
+        "orc_oprc_data": [],
+        "ol_data": []
+    }
+],
+    "lice_class_id": 4,
+    "tag_id": 1458,
+    "level": "level1",
+    "live_class_practice_id": null,
+    "message": "Quiz started successfully"
+}
+  return data2;
 
 
+//  'level_progress' : { level: "level1", position: 100 },
+//  'subsequent_question' : [1, 0, null],
   let obj2 = {
     status: true,
     question_no: 1,

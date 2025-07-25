@@ -82,7 +82,7 @@ function CountTensFramesQuiz({
           <div>
             <ConditionOnProgressBar meter={meter} />
           </div>
-          <div class={styles.contentParent}>
+          <div className={styles.contentParent}>
             {Boolean(totalRows) && (
               <ContentCountTensframeQuiz
                 totalRows={totalRows}

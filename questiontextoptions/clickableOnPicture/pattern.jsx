@@ -1,5 +1,5 @@
 import parse from "html-react-parser"
-export const Pattern = ({imgUrl,count}) =>{
+export const Pattern = ({keyVal,arrangement,imgUrl,count}) =>{
     let patt = [];
     let im = [];
     let i=0,n=count;
@@ -21,9 +21,12 @@ export const Pattern = ({imgUrl,count}) =>{
         }
         patt.push(im)
     }
-    return<div>
-        {patt.map((e)=>{
-           return <div style={{textAlign:"center"}}>{ e.map( (val,i)=>parse(val)  ) }</div>
+    return<div key={keyVal}>
+        {patt.map((e,i)=>{
+           return <div style={{display:`${arrangement=="regular"? "flex":'block'}`}} key={i}>
+            { e.map( (val,i)=>parse(val)  ) }
+            </div>
         })}
     </div>
 }
+
