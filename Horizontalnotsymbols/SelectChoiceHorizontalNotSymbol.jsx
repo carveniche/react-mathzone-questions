@@ -43,14 +43,14 @@ function SelectChoiceHorizontalNotSymbol({
   
   
     useEffect(() => {
+     
       setCurrectAnswer(correctAnswer)  
       let arr = [];
       choices?.map((item) => {
-        let obj = { value: item, show: false };
+        let obj = { value: item, show:  false };
         arr.push({ ...obj });
       });
       setChoicesState([...arr]);
-  
   
     }, []);
   

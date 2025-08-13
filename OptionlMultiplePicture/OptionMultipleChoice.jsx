@@ -22,7 +22,6 @@ const validationForSelectMultipleSelect = (choices) => {
   return 0;
 };
 function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
-  console.log({ state, totalRows, meter });
   meter = Number(meter) || 0;
   const {
     hasAnswerSubmitted,

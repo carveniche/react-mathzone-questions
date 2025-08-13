@@ -84,7 +84,6 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
 
   meter = Number(meter) || 0;
   let totalEmptyBox = 0;
-  console.log("this is state", state);
 
   state.questionContent?.map((items) =>
     items.map((item) => item.isMissed !== "false" && totalEmptyBox++)

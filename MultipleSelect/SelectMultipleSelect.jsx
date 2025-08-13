@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useState, useRef } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
-import styles from "../OnlineQuiz.module.css";
+import styles from "../../../OnlineQuizPage/component/choices.module.css";
 import styled from "styled-components";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 export default function SelectMultipleSelect({
@@ -35,6 +35,7 @@ export default function SelectMultipleSelect({
   }, []);
 
   const handleChoiceSelection = (i) => {
+   
     if (answerHasSelected || isStudentAnswerResponse) return;
     choicesState[i].show = !choicesState[i].show;
     setChoicesState([...choicesState]);
@@ -48,7 +49,7 @@ export default function SelectMultipleSelect({
 
 
   return (
-    <div className={styles.multiSelectFlexBox}>
+    <div className={styles.choices_wrapper}>
       {choicesState?.map((item, i) => {
         const valueTrimmed = String(item?.choice_id).trim();
         const studentAnswerTrimmed = (choiceId || []).map(id => String(id).trim());
@@ -59,7 +60,7 @@ export default function SelectMultipleSelect({
         // During student response view
         const isSelectedByStudent = isStudentAnswerResponse && studentAnswerTrimmed.includes(valueTrimmed);
         const isCorrectAnswer = isStudentAnswerResponse && correctAnswerTrimmed.includes(valueTrimmed);
-        const isIncorrectAnswer = isStudentAnswerResponse && !correctAnswerTrimmed.includes(valueTrimmed) 
+        const isIncorrectAnswer = isStudentAnswerResponse && !correctAnswerTrimmed.includes(valueTrimmed)
 
         // During submission
         const isAnswerSubmitted = hasAnswerSubmitted;
@@ -73,6 +74,7 @@ export default function SelectMultipleSelect({
           isVisible ? styles.selectedChoiceType : styles.prevSelectionAnswerSelection,
           isCorrectAtSubmit && styles.green,
           isIncorrectAtSubmit && styles.red,
+          (isAnswerSubmitted || isStudentAnswerResponse)   && styles.notHoverClass
         ]);
 
         const className = Array.from(classList).filter(Boolean).join(" ");
@@ -84,16 +86,18 @@ export default function SelectMultipleSelect({
               key={i}
               onClick={() => handleChoiceSelection(i)}
             >
+              <div className={styles.choiceTypeInner}>
                 <div className={`mathzone-circle-selectbox ${styles.circle}`}>
-                <b>{String.fromCharCode(65 + i)}</b>
-              </div>
-              <div className={`${styles.flex} ${styles.flexDirectionColumn}`}>
-                {item.choices && <div>{HtmlParser(item.choices)}</div>}
-                {item?.choice_image && (
-                  <div className="choiceImage">
-                    <img src={item?.choice_image} />
-                  </div>
-                )}
+                  <b>{String.fromCharCode(65 + i)}</b>
+                </div>
+                <div className={`${styles.flex} ${styles.flexDirectionColumn}`}>
+                  {item.choices && <div>{HtmlParser(item.choices)}</div>}
+                  {item?.choice_image && (
+                    <div className="choiceImage">
+                      <img src={item?.choice_image} />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           )
