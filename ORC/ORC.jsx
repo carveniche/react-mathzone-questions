@@ -116,6 +116,7 @@ function ORC({ obj, question_text, meter }) {
       if (hasAnswerSubmitted) inp.setAttribute("readonly", true);
     });
   }, [hasAnswerSubmitted]);
+ 
   useEffect(() => {
     let temp = [];
     obj?.orc_oprc_data[0]?.response?.map((items) =>

@@ -86,7 +86,6 @@ function OptMultPicEqn({
     } else {
       value = findSelectedValue(inputRef.current, "value");
     }
-    console.log("value", value);
 
     setQuestionWithAnswer({ ...state, [student_answer]: value });
     setShowAnswer(true);

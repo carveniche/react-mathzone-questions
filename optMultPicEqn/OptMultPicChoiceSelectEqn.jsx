@@ -18,7 +18,6 @@ function OptMultPicChoiceSelectEqn({
   let prevRef = useRef(0);
   const [rows, setRows] = useState([]);
   const { isStudentAnswerResponse,setCurrectAnswer,setStudentAnswerChoice } = useContext(ValidationContext);
-console.log(choices,"choices")
   useEffect(() => {
     let flag = false;
     let rows = [];
@@ -32,6 +31,9 @@ console.log(choices,"choices")
         if (text.includes("img") && text.includes("src")) {
           flag = true;
         }
+        if (item.selected === "true" || item.selected === true) {
+          setCurrectAnswer(item.value);
+        }
       });
     }
     // setFlag(flag);
@@ -40,7 +42,6 @@ console.log(choices,"choices")
   }, []);
 
   const handleChoiceSelection = (i) => {
-    console.log("this is multipicselect", multipicselect);
     if (isAnswerSelected || isStudentAnswerResponse) return;
     if (!multipicselect) {
       rows[prevRef.current].show = false;
@@ -51,14 +52,12 @@ console.log(choices,"choices")
     } else {
       // Toggle the show property
       rows[i].show = !rows[i].show;
-      console.log("show status", rows[i].show);
       prevRef.current = i;
       setRows([...rows]);
     }
   };
 
-  console.log("this is studentAnswer", studentAnswer);
-  console.log("this is row", rows);
+ 
   inputRef.current = rows;
   return (
     <div className="mathzone-color-indigo">

@@ -12,10 +12,13 @@ export default function SelectMultipleSelect({
 }) {
   let [choicesState, setChoicesState] = useState([]);
   const { isStudentAnswerResponse, hasAnswerSubmitted, setStudentAnswerChoice, currectAnswer, setCurrectAnswer } = useContext(ValidationContext);
-  choiceId = choiceId?.map((item) => item.toString());
+  let student_answer = []; 
+  if(typeof choiceId =="string"){
+   student_answer = JSON.parse(choiceId);
+   }
+  student_answer = student_answer?.map((item) => item.toString());
   let prev = useRef(0);
   useEffect(() => {
-    console.log(choices, "choices")
     let arr = [];
     choices?.map((item) => {
       let obj = { ...item, show: false };
@@ -30,7 +33,6 @@ export default function SelectMultipleSelect({
       .map((item) => item.choice_id);
 
     setCurrectAnswer(correctMissedAnswer);
-
     setChoicesState([...arr]);
   }, []);
 
@@ -52,11 +54,10 @@ export default function SelectMultipleSelect({
     <div className={styles.choices_wrapper}>
       {choicesState?.map((item, i) => {
         const valueTrimmed = String(item?.choice_id).trim();
-        const studentAnswerTrimmed = (choiceId || []).map(id => String(id).trim());
+        const studentAnswerTrimmed = (student_answer || []).map(id => String(id).trim());
         const correctAnswerTrimmed = (currectAnswer || []).map(id => String(id).trim());
 
         const isVisible = item?.show;
-
         // During student response view
         const isSelectedByStudent = isStudentAnswerResponse && studentAnswerTrimmed.includes(valueTrimmed);
         const isCorrectAnswer = isStudentAnswerResponse && correctAnswerTrimmed.includes(valueTrimmed);
@@ -87,7 +88,7 @@ export default function SelectMultipleSelect({
               onClick={() => handleChoiceSelection(i)}
             >
               <div className={styles.choiceTypeInner}>
-                <div className={`mathzone-circle-selectbox ${styles.circle}`}>
+                <div className={`${styles.circle}`}>
                   <b>{String.fromCharCode(65 + i)}</b>
                 </div>
                 <div className={`${styles.flex} ${styles.flexDirectionColumn}`}>

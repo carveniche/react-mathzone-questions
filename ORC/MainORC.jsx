@@ -56,7 +56,7 @@ import ORC from "./ORC";
 //   "question_no":1,
 //   "message":"next question added"
 // }
-console.log("v3.2");
+
 export default function MainOrc({ obj2, meter }) {
   return (
     <ORC
