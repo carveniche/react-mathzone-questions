@@ -1,10 +1,11 @@
-
-.choices_wrapper{
+.choices_wrapper {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   transition: all 0.5s linear;
+  margin-top: 10px;
 }
+
 .choiceTypeInner {
   flex-wrap: wrap;
   height: auto;
@@ -40,16 +41,18 @@
   /* border: 1px solid black; */
 }
 
-.choiceType:hover .choiceTypeInner{
+.choiceType:not(.selectedChoiceType):hover .choiceTypeInner,
+.choiceType:not(.selectedChoiceType):active .choiceTypeInner {
   background: var(--Secondary-Surface-Subtle, #F1F4FD);
-  border-color:#F1F4FD ;
-
+  border-color: #F1F4FD;
 }
-.choiceType:hover {
+
+.choiceType:not(.selectedChoiceType):hover,
+.choiceType:not(.selectedChoiceType):active,
+.choicesType:not(.selectedChoiceType):focus {
   padding-bottom: 10px;
   background: var(--Secondary-Text-Default, #0C1E64);
 }
-
 
 .choicesType>div:nth-child(2) {
   padding-right: 1rem;
@@ -69,19 +72,32 @@
   border: none;
 }
 
+.circle {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1.5px solid lightgray;
+  min-width: 40px;
+  aspect-ratio: 1/1;
+
+}
+
 .selectedChoiceType .circle {
   border: 1px solid #FFC421;
 }
 
 
 .selectedChoiceType {
- background: #FFC421;
- padding-bottom: 10px;
+  background: #FFC421;
+  padding-bottom: 10px;
   /* border-color: #3F51B5; */
 }
-.selectedChoiceType .choiceTypeInner{
-border: 1px solid #FFC421;
-background: #FFF9E7;
+
+.selectedChoiceType .choiceTypeInner {
+  border: 1px solid #FFC421;
+  background: #FFF9E7;
 }
 
 .green {
@@ -95,11 +111,19 @@ background: #FFF9E7;
   background: #FF0F0F;
   /* border-color: #ee4741; */
 }
-.red .choiceTypeInner{
-background: #FFEBEB;
-border-color:#FFEBEB ;
+
+.selectedChoiceType .choice_text,
+.selectedChoiceType .choice_text *,
+.selectedChoiceType .circle b {
+  color: #FFC421;
 }
-.green .choiceTypeInner{
+
+.red .choiceTypeInner {
+  background: #FFEBEB;
+  border-color: #FFEBEB;
+}
+
+.green .choiceTypeInner {
   background-color: #C0EDD9;
   border-color: #C0EDD9;
 }
@@ -108,8 +132,9 @@ border-color:#FFEBEB ;
   border: 1px solid green;
 }
 
-.green>.circle>b,
-.green>div {
+.green .circle b,
+.green .choice_text,
+.green .choice_text * {
   color: green;
 }
 
@@ -117,14 +142,17 @@ border-color:#FFEBEB ;
   border: 1px solid #ee4741;
 }
 
-.red>.circle>b,
-.red>.choice_text {
+.red .circle b,
+.red .choice_text,
+.red .choice_text * {
   color: #ee4741;
 }
-.choice_text{
+
+.choice_text {
   white-space: normal;
 }
-.notHoverClass{
+
+.notHoverClass {
   pointer-events: none !important;
   cursor: default !important;
 }
