@@ -7,7 +7,6 @@
 }
 
 .choiceTypeInner {
-  flex-wrap: wrap;
   height: auto;
   width: auto;
   display: flex;

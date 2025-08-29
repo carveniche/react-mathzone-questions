@@ -51,7 +51,7 @@ cursor: pointer;
     
     flex:1;
     display:flex;
-font-family: Montserrat;
+font-family: var(--fn);
 font-size: 16px;
 font-style: normal;
 font-weight: 600;

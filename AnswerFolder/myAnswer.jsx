@@ -115,7 +115,7 @@ const AnswerBox = styled.div`
   padding-left: 1rem;
   height: 60px;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   border-radius: 5px;
 
   align-items: center;

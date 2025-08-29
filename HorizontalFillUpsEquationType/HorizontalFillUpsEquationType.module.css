@@ -91,7 +91,7 @@
 
 /* Actual code */
 .questionName {
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -102,7 +102,7 @@
 }
 
 .selectChoicesFont {
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -288,7 +288,7 @@
 
   height: 35px;
 
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
@@ -325,7 +325,7 @@
 .green>div:nth-child(1) {
   margin: 2rem;
   padding-top: 1rem;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -385,7 +385,7 @@
 .modalsParent {
   position: relative;
   border-radius: 11px;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -434,7 +434,7 @@
 }
 
 .questionContent {
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -445,7 +445,7 @@
 
 .solutionText {
   margin-bottom: 0.3rem;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 22px;
   font-style: normal;
   font-weight: 700;
@@ -533,7 +533,7 @@
 .modalsParent2 {
   position: relative;
   border-radius: 11px;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -556,7 +556,7 @@
   float: right;
   border: 1px solid #d3d8e3;
   cursor: pointer;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
@@ -806,7 +806,7 @@
 
   flex: 1;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -858,7 +858,7 @@
 
   flex: 1;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -930,7 +930,7 @@
   width: auto;
 
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -1058,7 +1058,7 @@
 
   flex: 1;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -1447,7 +1447,7 @@
   max-width: calc(50% - 0.4rem);
   flex: 1;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -1585,7 +1585,7 @@
 
   flex: 1;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -1985,7 +1985,7 @@
 
   flex: 1;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -2473,7 +2473,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
 }
 
 /* NumberBond Select Choice */
@@ -2519,7 +2518,7 @@
 
   flex: 1;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;

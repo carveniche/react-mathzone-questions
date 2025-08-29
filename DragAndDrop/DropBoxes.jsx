@@ -185,7 +185,8 @@ export default function DropBoxes({
                   <div
                     ref={(el) => (dragRef.current[i] = el)}
                     key={i}
-                    className={styles.bgIndigo_roundcard}
+                    className={`${styles.bgIndigo_roundcard}`}
+
                     style={{ cursor: "pointer" }}
                   >
                     <HtmlParserComponent value={parse(dragState[i]?.value, optionSelectStaticMathField)} />

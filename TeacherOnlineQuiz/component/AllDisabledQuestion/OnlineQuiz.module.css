@@ -78,7 +78,7 @@
 
 /* Actual code */
 .questionName {
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -90,7 +90,7 @@
 }
 
 .selectChoicesFont {
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -271,7 +271,7 @@ border-radius: 24px;;
 
   height: 35px;
 
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
@@ -306,7 +306,7 @@ height:auto;
 .green > div:nth-child(1) {
   margin: 2rem;
   padding-top: 1rem;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -366,7 +366,7 @@ height:auto;
 .modalsParent {
   position: relative;
   border-radius: 11px;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -415,7 +415,7 @@ height:auto;
 }
 
 .questionContent {
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -426,7 +426,7 @@ height:auto;
 
 .solutionText {
   margin-bottom: 0.3rem;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 22px;
   font-style: normal;
   font-weight: 700;
@@ -525,7 +525,7 @@ height:auto;
 .modalsParent2 {
   position: relative;
   border-radius: 11px;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -548,7 +548,7 @@ height:auto;
   float: right;
   border: 1px solid #d3d8e3;
   cursor: pointer;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
@@ -674,7 +674,7 @@ height:auto;
 
   flex: 1;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;

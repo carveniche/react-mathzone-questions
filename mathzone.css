@@ -893,7 +893,7 @@ td.ldivision_left {
   max-width: 100%;
   flex: 1;
   display: flex;
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -940,7 +940,7 @@ td.ldivision_left {
 }
 
 .mathzoneQuestionName {
-  font-family: Montserrat;
+  font-family: var(--fn);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
