@@ -3,6 +3,7 @@ import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styled from "styled-components";
 import styles from "../OnlineQuiz.module.css";
 export default function BlockBaseQuestionContent({ questionContent }) {
+  console.log(questionContent,"questionContent")
   return (
     <>
       <div style={Styles.FlexBox}>

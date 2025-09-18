@@ -22,7 +22,7 @@ export default function SelectMultipleChoice({
 
   useEffect(() => {
     let arr = [];
-    choices?.map((item) => {
+    choices?.map((item,index) => {
       if(item.correct==="true" || item.correct===true){ 
         setCurrectAnswer(item.choice_id)
       }

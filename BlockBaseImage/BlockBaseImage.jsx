@@ -25,19 +25,23 @@ export default function BlockBaseImage({ state, totalRows, meter }) {
     readQuestionText,
   } = useContext(ValidationContext);
   const [redAlert, setRedAlert] = useState(false);
+  const [imageRows, setImageRows] = useState([]);
       meter = Number(meter) || 0;
   totalRows = Number(totalRows);
-  let rows = [];
-  useEffect(() => {
 
+  useEffect(() => {
   for (let i = 0; i < totalRows; i++) {
     let temp = [];
     state.questionContent.map((items) =>
       items.map((item) => item.row == i && temp.push(item.value))
     );
-    rows.push(temp);
+   
+
+    imageRows.push(temp);
+    setImageRows([...imageRows]);
   }
 } , [])
+console.log(imageRows,"rows")
 
   const valueRef = useRef();
   const [hasOptionSelected, setHasOptionSelected] = useState(false);
@@ -80,7 +84,7 @@ export default function BlockBaseImage({ state, totalRows, meter }) {
             <ConditionOnProgressBar meter={meter} />
           </div>
           <div className={styles.contentParent}>
-            <BlockBaseQuestionContent questionContent={rows} />
+            <BlockBaseQuestionContent questionContent={imageRows  } />
             <BlockBaseImageChoiceSelection
               choices={state.choices}
               correctAnswer={state.answer}
