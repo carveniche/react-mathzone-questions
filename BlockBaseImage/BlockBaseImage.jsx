@@ -41,7 +41,6 @@ export default function BlockBaseImage({ state, totalRows, meter }) {
     setImageRows([...imageRows]);
   }
 } , [])
-console.log(imageRows,"rows")
 
   const valueRef = useRef();
   const [hasOptionSelected, setHasOptionSelected] = useState(false);

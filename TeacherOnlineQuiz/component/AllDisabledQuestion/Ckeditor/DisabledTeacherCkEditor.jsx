@@ -1,5 +1,5 @@
- import HTMLReactParser from "html-react-parser";
-import React, { useEffect, useRef } from "react";
+import HTMLReactParser from "html-react-parser";
+import React, { useEffect, useRef, useState } from "react";
 import { useContext } from "react";
 import { StaticMathField } from "../../../../../ExternalPackages";
 import ConditionOnProgressBar from "../../../../../CommonJsxComponent/ConditionOnProgressBar";
@@ -7,11 +7,12 @@ import { ValidationContext } from "../../../../../MainOnlineQuiz/MainOnlineQuizP
 import SolutionMultipleChoice from "../../../../MultipleChoice/SolutionMultipleChoice";
 
 import styles from "../../../../OnlineQuiz.module.css";
-import SelectMultipleChoice from "../MultipleChoice/SelectMultipleChoice";
+import SelectMultipleChoice from "../../../../MultipleChoice/SelectMultipleChoice";
+// import SelectMultipleChoice from "../MultipleChoice/SelectMultipleChoice";
 const disabledEditor = (parentRef) => {
-if(!parentRef.current)
-return
-let parent = parentRef.current?.querySelector("#removeQuizEditor");
+  if (!parentRef.current)
+    return
+  let parent = parentRef.current?.querySelector("#removeQuizEditor");
   let inputTag = parent?.querySelectorAll("input");
   for (let items of inputTag) {
     items.disabled = true;
@@ -21,13 +22,23 @@ let parent = parentRef.current?.querySelector("#removeQuizEditor");
     items.disabled = true;
   }
 };
-export default function DisabledTeacherCkEditor({ str, meter, choiceData,resultView,upload_file_name,choiceId }) {
+export default function DisabledTeacherCkEditor({ obj, str, meter, choiceData, resultView, upload_file_name, choiceId }) {
   let inputRef1 = useRef([]);
+  const [choice_id, setChoice_id] = useState(null);
   const {
-    
+    hasAnswerSubmitted,
     isStudentAnswerResponse
   } = useContext(ValidationContext);
   meter = Number(meter) || 0;
+
+  useEffect(() => {
+    if (obj?.question_data && obj?.question_data[0]?.student_answer) {
+      setChoice_id(obj?.question_data[0]?.student_answer);
+    }
+  }, [obj]);
+
+  const choice_data = choiceData.map((item) => { item.choice_id = item.id; return item })
+
   const optionSelect = {
     replace: (domNode) => {
       if (domNode?.attribs?.class) {
@@ -58,33 +69,40 @@ export default function DisabledTeacherCkEditor({ str, meter, choiceData,resultV
   useEffect(() => {
     disabledEditor(parentRef);
   }, []);
-  const parentRef=useRef(null)
+  const parentRef = useRef(null)
   return (
     <div className={styles.ckeditor} ref={parentRef}>
-    <div
-      style={{ clear: "both" }}
-      id="removeQuizEditor"
-      className={`${styles.ckeditorQuestionName} ckEditorResetValue`}
-    >
-         {upload_file_name&&<div><img src={upload_file_name} alt="image not found"/></div>}
-      <div>
-       <ConditionOnProgressBar meter={meter}/>
+      <div
+        style={{ clear: "both" }}
+        id="removeQuizEditor"
+        className={`${styles.ckeditorQuestionName} ckEditorResetValue`}
+      >
+        {upload_file_name && <div><img src={upload_file_name} alt="image not found" /></div>}
+        <div>
+          <ConditionOnProgressBar meter={meter} />
+        </div>
+        <div>{HTMLReactParser(str, optionSelect)}</div>
       </div>
-     <form> {HTMLReactParser(str, optionSelect)}</form>
-      
-      {Boolean(choiceData?.length) && (
+
+      {Boolean(choice_data?.length) && (
+        // <SelectMultipleChoice
+        //   choices={choiceData}
+        //   answerHasSelected={true}
+        //   inputRef={inputRef1}
+        //   resultView={resultView}
+        //   choiceId={choiceId}
+        // />
+
         <SelectMultipleChoice
-          choices={choiceData}
-          answerHasSelected={true}
+          choiceId={choice_id}
+          answerHasSelected={hasAnswerSubmitted}
           inputRef={inputRef1}
-          resultView={resultView}
-          choiceId={choiceId}
+          choices={choice_data}
         />
       )}
-      {choiceData?.length > 0 &&!isStudentAnswerResponse&& (
-        <SolutionMultipleChoice model={choiceData} type={"Ckeditor"} />
+      {choice_data?.length > 0 && !isStudentAnswerResponse && (
+        <SolutionMultipleChoice model={choice_data} type={"Ckeditor"} />
       )}
-    </div>
     </div>
   );
 }

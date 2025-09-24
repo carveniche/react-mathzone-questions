@@ -1,12 +1,102 @@
 export default function jsonDataTesting() {
-
-    var data2 = {
+    
+    let t = {
     "question_data": [
         {
-            "question_text": "{\"operation\":\"addition\",\"type\":\"number_line_addition\",\"choiceType\":\"keying\",\"questionName\":\"Complete the number line using skip counting by 5.\\n\",\"start\":\"20\",\"end\":\"45\",\"interval\":\"5\",\"solution\":{\"model\":[{\"val\":\"When we skip counting by 5, starting from 20 up to 45, the sequence is:\\n20, 25, 30, 35, 40, and 45.\"},{\"val\":\"Thus, the missing numbers are: 25, 30, and 40.\"}],\"sidebyside\":[]},\"numbersDisplayed\":true,\"isFraction\":false,\"ansArray\":[25,30,40],\"readOutMathZoneText\":false,\"indianAccent\":false}",
-            "question_type": "number_line_addition"
+            "question_id": 58019,
+            "operation": "addition",
+            "question_text": "{\"operation\":\"addition\",\"type\":\"options_multiple_pictures\",\"questionName\":\"How long is the torch?<div><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/G2-measurements/Scale-05.png\\\"><br><div><br></div></div>\",\"row\":1,\"col\":4,\"questionContent\":[[{\"row\":1,\"col\":1,\"value\":\"8 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":2,\"value\":\"11 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":3,\"value\":\"10 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":4,\"value\":\"9 cm\",\"selected\":\"true\"}]],\"solution\":{\"model\":[{\"val\":\"The torch is 9 cm long\"}]},\"answer\":\"true\",\"upload_file_name\":\"\",\"studentAnswer\":\"11 cm\"}",
+            "question_type": "options_multiple_pictures",
+            "upload_file_name": "",
+            "level": "level1",
+            "fib_text": null,
+            "fib_before_text": null,
+            "after_question_text": null,
+            "choice_data": [],
+            "orc_oprc_data": [],
+            "ol_data": [],
+            "correct": false,
+            "correct_choice": null,
+            "detailed_response": "",
+            "ai_feedback": "",
+            "question_status": "Incorrect",
+            "student_answer": false,
+            "student_response": "{\"operation\":\"addition\",\"type\":\"options_multiple_pictures\",\"questionName\":\"How long is the torch?<div><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/G2-measurements/Scale-05.png\\\"><br><div><br></div></div>\",\"row\":1,\"col\":4,\"questionContent\":[[{\"row\":1,\"col\":1,\"value\":\"8 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":2,\"value\":\"11 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":3,\"value\":\"10 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":4,\"value\":\"9 cm\",\"selected\":\"true\"}]],\"solution\":{\"model\":[{\"val\":\"The torch is 9 cm long\"}]},\"answer\":\"true\",\"upload_file_name\":\"\",\"studentAnswer\":\"11 cm\"}",
+            "correct_answer": null
         }
     ]
+}
+return t
+
+    var data2 = {
+    "status": true,
+    "question_no": 1,
+    "total": 10,
+    "question_data": [
+        {
+            "question_text": "<p>Jack played table tennis for 48&nbsp;mins on Saturday and 55 mins on Sunday. How many minutes did he spend playing table tennis over the weekend?</p>\r\n",
+            "choice_data": [
+                {
+                    "id": 1825,
+                    "choices": "<p>93</p>\r\n",
+                    "correct": false,
+                    "solution": "",
+                    "distractor": "<p>Student added the&nbsp;digits correctly, but did not add&nbsp;regrouped ones to the tens digit.</p>\r\n",
+                    "diagnostic_question_id": 471,
+                    "created_at": "2018-01-06T04:30:12.000Z",
+                    "updated_at": "2022-07-05T12:35:34.000Z",
+                    "sub_concept_id": 5435,
+                    "choice_id": 1825
+                },
+                {
+                    "id": 1826,
+                    "choices": "<p>913</p>\r\n",
+                    "correct": false,
+                    "solution": "",
+                    "distractor": "<p>Student added the tens and ones place digits correctly, but did not correctly regroup the solution.</p>\r\n",
+                    "diagnostic_question_id": 471,
+                    "created_at": "2018-01-06T04:30:12.000Z",
+                    "updated_at": "2022-07-05T12:35:34.000Z",
+                    "sub_concept_id": 5435,
+                    "choice_id": 1826
+                },
+                {
+                    "id": 1827,
+                    "choices": "<p>103</p>\r\n",
+                    "correct": true,
+                    "solution": "",
+                    "distractor": "<p>Student added and regrouped correctly.</p>\r\n",
+                    "diagnostic_question_id": 471,
+                    "created_at": "2018-01-06T04:30:12.000Z",
+                    "updated_at": "2022-07-05T12:35:34.000Z",
+                    "sub_concept_id": 5435,
+                    "choice_id": 1827
+                },
+                {
+                    "id": 1828,
+                    "choices": "<p>113</p>\r\n",
+                    "correct": false,
+                    "solution": "",
+                    "distractor": "<p>Student regrouped correctly, Added the carry-over&nbsp;digit to the tens place wrongly.</p>\r\n\r\n<p>&nbsp;</p>\r\n",
+                    "diagnostic_question_id": 471,
+                    "created_at": "2018-01-06T04:30:12.000Z",
+                    "updated_at": "2022-07-05T12:35:34.000Z",
+                    "sub_concept_id": 5435,
+                    "choice_id": 1828
+                }
+            ],
+            "question_type": "ckeditor",
+            "question_id": 471,
+            "upload_file_name": ""
+        }
+    ],
+    "lice_class_id": 4,
+    "tag_id": 2196,
+    "level": "level3",
+    "live_class_practice_id": null,
+    "message": "Quiz started successfully",
+    "readOutMathZoneText": true,
+    "indianAccent": false
 }
 return data2;
 
