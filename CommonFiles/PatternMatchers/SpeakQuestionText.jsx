@@ -244,7 +244,7 @@ export default function SpeakQuestionText({ type, readText }) {
   }
   return (
     <>
-      <div style={{ cursor: "pointer" }} onClick={readTheQuestionText}>
+      <div style={{ cursor: "pointer",width:"30px" }} onClick={readTheQuestionText}>
         {/* <Lottie
           onClick={readTheQuestionText}
           options={isSpeaking ? playingOptions : pausedOptions}

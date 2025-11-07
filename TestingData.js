@@ -1,12 +1,107 @@
 export default function jsonDataTesting() {
     
-    let t = {
+//     let t ={
+//     "question_data": [
+//         {
+//             "question_text": "{\"operation\":\"addition\",\"type\":\"horizontal_fill_ups\",\"rows\":\"1\",\"cols\":\"7\",\"questionName\":\"Order the number from greatest to smallest.\",\"questionContent\":[{\"row\":0,\"col\":0,\"value\":\"1278965\",\"isMissed\":\"true\"},{\"row\":0,\"col\":1,\"value\":\">\",\"isMissed\":\"false\"},{\"row\":0,\"col\":2,\"value\":\"1145798\",\"isMissed\":\"true\"},{\"row\":0,\"col\":3,\"value\":\">\",\"isMissed\":\"false\"},{\"row\":0,\"col\":4,\"value\":\"1045787\",\"isMissed\":\"true\"},{\"row\":0,\"col\":5,\"value\":\">\",\"isMissed\":\"false\"},{\"row\":0,\"col\":6,\"value\":\"157658\",\"isMissed\":\"true\"}],\"solution\":{\"model\":[{\"val\":\"1278965 > 1145798 > 1045787 > 157658\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"1278965\",\"157658\",\"1145798\",\"1045787\"],\"choiceType\":\"dragdrop\",\"choiceCount\":4,\"readOutMathZoneText\":false,\"indianAccent\":false}",
+//             "question_type": "horizontal_fill_ups"
+//         }
+//     ]
+// }
+let t={
     "question_data": [
+    {
+        "id": 48112,
+        "question_name": null,
+        "question_text": "Identify the alternate angles, if l &DoubleVerticalBar;  m cut by line p",
+        "question_type": "multi select",
+        "level": "level1",
+        "sub_concept_id": 5809,
+        "created_at": "2020-10-08T12:38:43.000Z",
+        "updated_at": "2024-11-01T11:11:47.000Z",
+        "upload_file_name": "https://d1ttopz56pc27j.cloudfront.net/old_questions/VII_MAT0502_Q3_A.png?Expires=1762402195&Signature=AZ8wtWJfbxXRu7kwJBjQInqLXDq6Qu9YMZruVmV1xo0q6sEzVqx2E42ZFhHzetJRkxRkm99Q834RdvDjcNkwuV4U9Yu9NVShzidbwWg-LB07FKmx-KlBh9Imo9oHIo3CWc5duqnb4toL1Um2VHROV42y8EQLCN2eN3LVfvNUMl2Jfr7i-LOq7Y6baalXKpsyp~E2oilqkhvyNuhZFB1BCwHonk6FfYx9bt3mUeXeb0QT60vHygdqpQ3igs7kMY4aTPj8OHkEf4ebsFLSCnUFiYUE7L4ZgSe32oerp0iyYxPAo5Joet1UpMRWlN3c15T12LvCvzefop7VnW5sSt1yLQ__&Key-Pair-Id=APKAICORD66RPKDMHT4Q",
+        "upload_content_type": null,
+        "upload_file_size": null,
+        "upload_updated_at": null,
+        "fib_text": null,
+        "fib_before_text": null,
+        "math_type": false,
+        "solution": null,
+        "after_question_text": null,
+        "exercise_id": 467,
+        "to_alexa": false,
+        "operation": null,
+        "created_by": null,
+        "updated_by": null,
+        "html_type": true,
+        "sample_question": false,
+        "conceptual": false,
+        "choice_type": null,
+        "ai_generated_question": null,
+        "priority_level": "P1",
+        "learning_example": false,
+        "que_active": true,
+        "converted_from": null,
+        "is_converted": false,
+        "new_que_id": null,
+        "choice_data": [
+            {
+                "choice_id": 122298,
+                "choices": "&ang;1 and &ang;4",
+                "correct": true,
+                "choice_image": "",
+                "solution": "Clearly, &ang;1 and &ang;4, &ang;2 and &ang;3 are alternate angles<br> So, option A and D are correct.",
+                "solution_image": "",
+                "solution1": "",
+                "solution1_image": "",
+                "solution2": "",
+                "solution2_image": ""
+            },
+            {
+                "choice_id": 122299,
+                "choices": "&ang;2 and &ang;5",
+                "correct": false,
+                "choice_image": "",
+                "solution": "",
+                "solution_image": "",
+                "solution1": "",
+                "solution1_image": "",
+                "solution2": "",
+                "solution2_image": ""
+            },
+            {
+                "choice_id": 122300,
+                "choices": "&ang;1 and &ang;6",
+                "correct": false,
+                "choice_image": "",
+                "solution": "",
+                "solution_image": "",
+                "solution1": "",
+                "solution1_image": "",
+                "solution2": "",
+                "solution2_image": ""
+            },
+            {
+                "choice_id": 122301,
+                "choices": "&ang;2 and &ang;3",
+                "correct": true,
+                "choice_image": "",
+                "solution": "Clearly, &ang;1 and &ang;4, &ang;2 and &ang;3 are alternate angles<br> So, option A and D are correct.",
+                "solution_image": "",
+                "solution1": "",
+                "solution1_image": "",
+                "solution2": "",
+                "solution2_image": ""
+            }
+        ]
+    }
+],
+    "learning_example": [
         {
-            "question_id": 58019,
+            "question_id": 135114,
             "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"options_multiple_pictures\",\"questionName\":\"How long is the torch?<div><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/G2-measurements/Scale-05.png\\\"><br><div><br></div></div>\",\"row\":1,\"col\":4,\"questionContent\":[[{\"row\":1,\"col\":1,\"value\":\"8 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":2,\"value\":\"11 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":3,\"value\":\"10 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":4,\"value\":\"9 cm\",\"selected\":\"true\"}]],\"solution\":{\"model\":[{\"val\":\"The torch is 9 cm long\"}]},\"answer\":\"true\",\"upload_file_name\":\"\",\"studentAnswer\":\"11 cm\"}",
-            "question_type": "options_multiple_pictures",
+            "question_text": "{\"operation\":\"addition\",\"type\":\"place_value_table_select\",\"rows\":\"1\",\"cols\":\"2\",\"questionName\":\"Is the given evaluation correct for when <span class=\\\"mq-selectable\\\">$x=3$</span>?\",\"questionContent\":[[{\"row\":0,\"col\":0,\"value\":\"<span class=\\\"mq-selectable\\\">$3x^2+4x-1$</span> \"},{\"row\":0,\"col\":1,\"value\":\"38\"}]],\"questiontbHead\":[{\"row\":0,\"value\":\"Expression\"},{\"row\":1,\"value\":\"Value\"}],\"solution\":{\"model\":[{\"val\":\"For the expression <span class=\\\"mq-selectable\\\">$3x^2+4x-1$</span>, \"},{\"val\":\"<span class=\\\"mq-selectable\\\">$\\\\text{When}\\\\ x=3,\\\\ 3(3)^2+4(3)-1=27+12-1=38$</span> \"},{\"val\":\"So, the value of <span class=\\\"mq-selectable\\\">$3x^2+4x-1$</span> is 38.\"},{\"val\":\"Therefore, the given evaluation is correct.\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[{\"value\":\"No\",\"option\":\"false\"},{\"value\":\"Yes\",\"option\":\"true\"}],\"choiceType\":\"selectchoice\",\"pvts_text_head\":\"\"}",
+            "question_type": "place_value_table_select",
             "upload_file_name": "",
             "level": "level1",
             "fib_text": null,
@@ -15,19 +110,26 @@ export default function jsonDataTesting() {
             "choice_data": [],
             "orc_oprc_data": [],
             "ol_data": [],
-            "correct": false,
+            "correct": null,
             "correct_choice": null,
-            "detailed_response": "",
-            "ai_feedback": "",
-            "question_status": "Incorrect",
-            "student_answer": false,
-            "student_response": "{\"operation\":\"addition\",\"type\":\"options_multiple_pictures\",\"questionName\":\"How long is the torch?<div><img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/G2-measurements/Scale-05.png\\\"><br><div><br></div></div>\",\"row\":1,\"col\":4,\"questionContent\":[[{\"row\":1,\"col\":1,\"value\":\"8 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":2,\"value\":\"11 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":3,\"value\":\"10 cm\",\"selected\":\"false\"},{\"row\":1,\"col\":4,\"value\":\"9 cm\",\"selected\":\"true\"}]],\"solution\":{\"model\":[{\"val\":\"The torch is 9 cm long\"}]},\"answer\":\"true\",\"upload_file_name\":\"\",\"studentAnswer\":\"11 cm\"}",
-            "correct_answer": null
+            "solution_image": null,
+            "solution1_image": null,
+            "solution2_image": null,
+            "question_audio": null
         }
-    ]
+    ],
+    "sub_concept": "Algebra",
+    "tag_name": "Evaluate Algebraic Expressions",
+    "level_progress": [
+        0,
+        0,
+        0
+    ],
+    "level_completed": false,
+    "subsequent_correct": 0
 }
-return t
 
+return t ;
     var data2 = {
     "status": true,
     "question_no": 1,
@@ -98,7 +200,7 @@ return t
     "readOutMathZoneText": true,
     "indianAccent": false
 }
-return data2;
+// return data2;
 
     //  'level_progress' : { level: "level1", position: 100 },
     //  'subsequent_question' : [1, 0, null],
@@ -114,8 +216,8 @@ return data2;
                 // "question_text": "{\"operation\":\"addition\",\"type\":\"horizontal_fill_ups\",\"rows\":\"1\",\"cols\":\"1\",\"questionName\":\"3 + 6 + 6 is as same as 9 + ____\",\"questionContent\":[{\"row\":0,\"col\":0,\"value\":\"6\",\"isMissed\":\"true\"}],\"solution\":{\"model\":[{\"val\":\"3 + 6 + 6 is as same as 9 + 6\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"5\",\"6\",\"7\",\"8\"],\"choiceType\":\"selectchoice\",\"choiceCount\":4}",
                 // "question_type": "horizontal_fill_ups",
                 question_text:
-                    JSON.stringify({ "operation": "addition", "type": "short_division", "rows": "242", "cols": "5324", "diviser": "22", "questionName": "Complete the division by using short division.", "questionContent": [[{ "row": 0, "col": 0 }, { "row": 0, "col": 1, "value": "", "isMissed": "false" }, { "row": 0, "col": 2, "value": "2", "isMissed": "true" }, { "row": 0, "col": 3, "value": "4", "isMissed": "true" }, { "row": 0, "col": 4, "value": "2", "isMissed": "true" }, { "row": 0, "col": 5, "value": "R" }, { "row": 0, "col": 6, "value": "0", "isMissed": "true" }], [{ "row": 1, "col": 0, "value": "22", "isMissed": "false" }, { "row": 1, "col": 1, "value": "5", "isMissed": "false" }, { "row": 1, "col": 2, "value": "3", "isMissed": "false" }, { "row": 1, "col": 3, "value": "2", "isMissed": "false" }, { "row": 1, "col": 4, "value": "4", "isMissed": "false" }, { "row": 1, "col": 5 }, { "row": 1, "col": 6 }], [{ "row": 2, "col": 0 }, { "row": 2, "col": 1, "re_value": "5", "re_isMissed": "true" }]], "solution": { "model": [{ "val": "5324 ÷ 22 = 242 R 0." }], "sidebyside": [], "srows": null, "scols": null }, "choices": ["9", "4", "2", "4", "2", "0", "5"], "choiceType": "dragdrop", "choiceCount": 7, "re_istrue": "true" }),
-                // JSON.stringify({"operation":"addition","type":"number_line_addition","choiceType":"selectchoice","questionName":"45612","start":"1","end":"3","interval":"5","solution":{"model":[{"val":"sadf"}],"sidebyside":[]},"numbersDisplayed":false,"isFraction":true,"ansArray":["2 3 5"],"choices":["<span id=\"861\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"206\"><span mathquill-command-id=\"207\">9</span><span mathquill-command-id=\"209\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"211\"><span class=\"mq-numerator\" mathquill-block-id=\"213\"><span mathquill-command-id=\"212\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"215\"><span mathquill-command-id=\"214\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;","<span id=\"310\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"228\"><span mathquill-command-id=\"229\">9</span><span mathquill-command-id=\"231\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"233\"><span class=\"mq-numerator\" mathquill-block-id=\"235\"><span mathquill-command-id=\"234\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"237\"><span mathquill-command-id=\"236\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;","<span id=\"21\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{8}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"269\"><span mathquill-command-id=\"270\">9</span><span mathquill-command-id=\"272\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"274\"><span class=\"mq-numerator\" mathquill-block-id=\"276\"><span mathquill-command-id=\"275\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"278\"><span mathquill-command-id=\"277\">8</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;","2 3 5"]}),
+                    // JSON.stringify({ "operation": "addition", "type": "short_division", "rows": "242", "cols": "5324", "diviser": "22", "questionName": "Complete the division by using short division.", "questionContent": [[{ "row": 0, "col": 0 }, { "row": 0, "col": 1, "value": "", "isMissed": "false" }, { "row": 0, "col": 2, "value": "2", "isMissed": "true" }, { "row": 0, "col": 3, "value": "4", "isMissed": "true" }, { "row": 0, "col": 4, "value": "2", "isMissed": "true" }, { "row": 0, "col": 5, "value": "R" }, { "row": 0, "col": 6, "value": "0", "isMissed": "true" }], [{ "row": 1, "col": 0, "value": "22", "isMissed": "false" }, { "row": 1, "col": 1, "value": "5", "isMissed": "false" }, { "row": 1, "col": 2, "value": "3", "isMissed": "false" }, { "row": 1, "col": 3, "value": "2", "isMissed": "false" }, { "row": 1, "col": 4, "value": "4", "isMissed": "false" }, { "row": 1, "col": 5 }, { "row": 1, "col": 6 }], [{ "row": 2, "col": 0 }, { "row": 2, "col": 1, "re_value": "5", "re_isMissed": "true" }]], "solution": { "model": [{ "val": "5324 ÷ 22 = 242 R 0." }], "sidebyside": [], "srows": null, "scols": null }, "choices": ["9", "4", "2", "4", "2", "0", "5"], "choiceType": "dragdrop", "choiceCount": 7, "re_istrue": "true" }),
+                 JSON.stringify({"operation":"addition","type":"number_line_addition","choiceType":"selectchoice","questionName":"45612","start":"1","end":"3","interval":"5","solution":{"model":[{"val":"sadf"}],"sidebyside":[]},"numbersDisplayed":false,"isFraction":true,"ansArray":["2 3 5"],"choices":["<span id=\"861\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"206\"><span mathquill-command-id=\"207\">9</span><span mathquill-command-id=\"209\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"211\"><span class=\"mq-numerator\" mathquill-block-id=\"213\"><span mathquill-command-id=\"212\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"215\"><span mathquill-command-id=\"214\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;","<span id=\"310\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"228\"><span mathquill-command-id=\"229\">9</span><span mathquill-command-id=\"231\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"233\"><span class=\"mq-numerator\" mathquill-block-id=\"235\"><span mathquill-command-id=\"234\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"237\"><span mathquill-command-id=\"236\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;","<span id=\"21\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{8}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"269\"><span mathquill-command-id=\"270\">9</span><span mathquill-command-id=\"272\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"274\"><span class=\"mq-numerator\" mathquill-block-id=\"276\"><span mathquill-command-id=\"275\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"278\"><span mathquill-command-id=\"277\">8</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;","2 3 5"]}),
                 // JSON.stringify({"operation":"addition","type":"number_line_addition","choiceType":"selectchoice","questionName":"awesrdg","start":"1","end":"3","interval":"8","solution":{"model":[{"val":"sadf"}],"sidebyside":[]},"numbersDisplayed":false,"isFraction":true,"ansArray":["2 2 8"],"choices":["<span class=\"mq-selectable\">$4\\frac{6}{5}$</span> <span class=\"mq-selectable\">$4\\frac{6}{5}$</span> ","<span class=\"mq-selectable\">$4\\frac{6}{5}$</span> ","<span class=\"mq-selectable\">$4\\frac{6}{5}$</span> ","2 2 8"]}),
                 // JSON.stringify({"operation":"addition","type":"number_line_addition","choiceType":"keying","questionName":"ertfh","start":"1","end":"6","interval":"3","solution":{"model":[{"val":"wsaesrg"}],"sidebyside":[]},"numbersDisplayed":false,"isFraction":true,"ansArray":["3 1 3"],"choices":["<span class=\"mq-selectable\">$5\\frac{5}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"178\"><span mathquill-command-id=\"179\">5</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"181\"><span class=\"mq-numerator\" mathquill-block-id=\"183\"><span mathquill-command-id=\"182\">5</span></span><span class=\"mq-denominator\" mathquill-block-id=\"185\"><span mathquill-command-id=\"184\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span> ","<span class=\"mq-selectable\">$5\\frac{5}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"196\"><span mathquill-command-id=\"197\">5</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"199\"><span class=\"mq-numerator\" mathquill-block-id=\"201\"><span mathquill-command-id=\"200\">5</span></span><span class=\"mq-denominator\" mathquill-block-id=\"203\"><span mathquill-command-id=\"202\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span> ","<span class=\"mq-selectable\">$5\\frac{5}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"214\"><span mathquill-command-id=\"215\">5</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"217\"><span class=\"mq-numerator\" mathquill-block-id=\"219\"><span mathquill-command-id=\"218\">5</span></span><span class=\"mq-denominator\" mathquill-block-id=\"221\"><span mathquill-command-id=\"220\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span> ","3 1 3"]}),
                 // JSON.stringify({"operation":"addition","type":"number_line_addition","choiceType":"selectchoice","questionName":"asihdbsjbdv","start":"1","end":"5","interval":"3","solution":{"model":[{"val":"sadsfd"}],"sidebyside":[]},"numbersDisplayed":false,"isFraction":true,"ansArray":["2 1 3"],"choices":["$4\\frac{4}{5}$445​​ ","$4\\frac{4}{7}$447​​ ","$4\\frac{4}{8}$448​​ ","2 1 3"]}),
