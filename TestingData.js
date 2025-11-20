@@ -1,107 +1,15 @@
 export default function jsonDataTesting() {
     
-//     let t ={
-//     "question_data": [
-//         {
-//             "question_text": "{\"operation\":\"addition\",\"type\":\"horizontal_fill_ups\",\"rows\":\"1\",\"cols\":\"7\",\"questionName\":\"Order the number from greatest to smallest.\",\"questionContent\":[{\"row\":0,\"col\":0,\"value\":\"1278965\",\"isMissed\":\"true\"},{\"row\":0,\"col\":1,\"value\":\">\",\"isMissed\":\"false\"},{\"row\":0,\"col\":2,\"value\":\"1145798\",\"isMissed\":\"true\"},{\"row\":0,\"col\":3,\"value\":\">\",\"isMissed\":\"false\"},{\"row\":0,\"col\":4,\"value\":\"1045787\",\"isMissed\":\"true\"},{\"row\":0,\"col\":5,\"value\":\">\",\"isMissed\":\"false\"},{\"row\":0,\"col\":6,\"value\":\"157658\",\"isMissed\":\"true\"}],\"solution\":{\"model\":[{\"val\":\"1278965 > 1145798 > 1045787 > 157658\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"1278965\",\"157658\",\"1145798\",\"1045787\"],\"choiceType\":\"dragdrop\",\"choiceCount\":4,\"readOutMathZoneText\":false,\"indianAccent\":false}",
-//             "question_type": "horizontal_fill_ups"
-//         }
-//     ]
-// }
-let t={
+    let t ={
+    "status": true,
+    "question_no": 1,
+    "total": 10,
     "question_data": [
-    {
-        "id": 48112,
-        "question_name": null,
-        "question_text": "Identify the alternate angles, if l &DoubleVerticalBar;  m cut by line p",
-        "question_type": "multi select",
-        "level": "level1",
-        "sub_concept_id": 5809,
-        "created_at": "2020-10-08T12:38:43.000Z",
-        "updated_at": "2024-11-01T11:11:47.000Z",
-        "upload_file_name": "https://d1ttopz56pc27j.cloudfront.net/old_questions/VII_MAT0502_Q3_A.png?Expires=1762402195&Signature=AZ8wtWJfbxXRu7kwJBjQInqLXDq6Qu9YMZruVmV1xo0q6sEzVqx2E42ZFhHzetJRkxRkm99Q834RdvDjcNkwuV4U9Yu9NVShzidbwWg-LB07FKmx-KlBh9Imo9oHIo3CWc5duqnb4toL1Um2VHROV42y8EQLCN2eN3LVfvNUMl2Jfr7i-LOq7Y6baalXKpsyp~E2oilqkhvyNuhZFB1BCwHonk6FfYx9bt3mUeXeb0QT60vHygdqpQ3igs7kMY4aTPj8OHkEf4ebsFLSCnUFiYUE7L4ZgSe32oerp0iyYxPAo5Joet1UpMRWlN3c15T12LvCvzefop7VnW5sSt1yLQ__&Key-Pair-Id=APKAICORD66RPKDMHT4Q",
-        "upload_content_type": null,
-        "upload_file_size": null,
-        "upload_updated_at": null,
-        "fib_text": null,
-        "fib_before_text": null,
-        "math_type": false,
-        "solution": null,
-        "after_question_text": null,
-        "exercise_id": 467,
-        "to_alexa": false,
-        "operation": null,
-        "created_by": null,
-        "updated_by": null,
-        "html_type": true,
-        "sample_question": false,
-        "conceptual": false,
-        "choice_type": null,
-        "ai_generated_question": null,
-        "priority_level": "P1",
-        "learning_example": false,
-        "que_active": true,
-        "converted_from": null,
-        "is_converted": false,
-        "new_que_id": null,
-        "choice_data": [
-            {
-                "choice_id": 122298,
-                "choices": "&ang;1 and &ang;4",
-                "correct": true,
-                "choice_image": "",
-                "solution": "Clearly, &ang;1 and &ang;4, &ang;2 and &ang;3 are alternate angles<br> So, option A and D are correct.",
-                "solution_image": "",
-                "solution1": "",
-                "solution1_image": "",
-                "solution2": "",
-                "solution2_image": ""
-            },
-            {
-                "choice_id": 122299,
-                "choices": "&ang;2 and &ang;5",
-                "correct": false,
-                "choice_image": "",
-                "solution": "",
-                "solution_image": "",
-                "solution1": "",
-                "solution1_image": "",
-                "solution2": "",
-                "solution2_image": ""
-            },
-            {
-                "choice_id": 122300,
-                "choices": "&ang;1 and &ang;6",
-                "correct": false,
-                "choice_image": "",
-                "solution": "",
-                "solution_image": "",
-                "solution1": "",
-                "solution1_image": "",
-                "solution2": "",
-                "solution2_image": ""
-            },
-            {
-                "choice_id": 122301,
-                "choices": "&ang;2 and &ang;3",
-                "correct": true,
-                "choice_image": "",
-                "solution": "Clearly, &ang;1 and &ang;4, &ang;2 and &ang;3 are alternate angles<br> So, option A and D are correct.",
-                "solution_image": "",
-                "solution1": "",
-                "solution1_image": "",
-                "solution2": "",
-                "solution2_image": ""
-            }
-        ]
-    }
-],
-    "learning_example": [
         {
-            "question_id": 135114,
+            "question_id": 97543,
             "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"place_value_table_select\",\"rows\":\"1\",\"cols\":\"2\",\"questionName\":\"Is the given evaluation correct for when <span class=\\\"mq-selectable\\\">$x=3$</span>?\",\"questionContent\":[[{\"row\":0,\"col\":0,\"value\":\"<span class=\\\"mq-selectable\\\">$3x^2+4x-1$</span> \"},{\"row\":0,\"col\":1,\"value\":\"38\"}]],\"questiontbHead\":[{\"row\":0,\"value\":\"Expression\"},{\"row\":1,\"value\":\"Value\"}],\"solution\":{\"model\":[{\"val\":\"For the expression <span class=\\\"mq-selectable\\\">$3x^2+4x-1$</span>, \"},{\"val\":\"<span class=\\\"mq-selectable\\\">$\\\\text{When}\\\\ x=3,\\\\ 3(3)^2+4(3)-1=27+12-1=38$</span> \"},{\"val\":\"So, the value of <span class=\\\"mq-selectable\\\">$3x^2+4x-1$</span> is 38.\"},{\"val\":\"Therefore, the given evaluation is correct.\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[{\"value\":\"No\",\"option\":\"false\"},{\"value\":\"Yes\",\"option\":\"true\"}],\"choiceType\":\"selectchoice\",\"pvts_text_head\":\"\"}",
-            "question_type": "place_value_table_select",
+            "question_text": "{\"operation\":\"addition\",\"type\":\"horizontal_fill_ups\",\"rows\":\"1\",\"cols\":\"1\",\"questionName\":\"Which fraction does the point represent on the number line below? \\n<img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/03Fractionnumberline/FNL_49.png\\\">\\n\",\"questionContent\":[{\"row\":0,\"col\":0,\"value\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{5}{4}$</span> \",\"isMissed\":\"true\"}],\"solution\":{\"model\":[{\"val\":\"The given number line is divided into 8 parts which lies between 0 and 2.\"},{\"val\":\"Each part is represented by <span class=\\\"mq-selectable\\\">$\\\\frac{2}{8}=\\\\frac{1}{4}$</span> \"},{\"val\":\"The marked point is 5 parts and is represented by<span class=\\\"mq-selectable\\\">$\\\\frac{5}{4}.$</span> \"},{\"val\":\"Hence, the point marked on the number line represents <span class=\\\"mq-selectable\\\">$\\\\frac{5}{4}.$</span> \"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"<span class=\\\"mq-selectable\\\">$\\\\frac{5}{4}$</span> \"],\"choiceType\":\"keying\",\"choiceCount\":1}",
+            "question_type": "horizontal_fill_ups",
             "upload_file_name": "",
             "level": "level1",
             "fib_text": null,
@@ -110,24 +18,17 @@ let t={
             "choice_data": [],
             "orc_oprc_data": [],
             "ol_data": [],
-            "correct": null,
-            "correct_choice": null,
-            "solution_image": null,
-            "solution1_image": null,
-            "solution2_image": null,
-            "question_audio": null
+            question_text_audio:"http://webaudioapi.com/samples/audio-tag/chrono.mp3",
         }
     ],
-    "sub_concept": "Algebra",
-    "tag_name": "Evaluate Algebraic Expressions",
-    "level_progress": [
-        0,
-        0,
-        0
-    ],
-    "level_completed": false,
-    "subsequent_correct": 0
+    "lice_class_id": 4,
+    "tag_id": 1458,
+    "level": "level1",
+    "live_class_practice_id": null,
+    "message": "Quiz started successfully",
+    practice_tag_completion:true
 }
+
 
 return t ;
     var data2 = {
@@ -189,7 +90,8 @@ return t ;
             ],
             "question_type": "ckeditor",
             "question_id": 471,
-            "upload_file_name": ""
+            "upload_file_name": "",
+            question_text_audio:"http://webaudioapi.com/samples/audio-tag/chrono.mp3",
         }
     ],
     "lice_class_id": 4,
@@ -200,7 +102,7 @@ return t ;
     "readOutMathZoneText": true,
     "indianAccent": false
 }
-// return data2;
+return data2;
 
     //  'level_progress' : { level: "level1", position: 100 },
     //  'subsequent_question' : [1, 0, null],

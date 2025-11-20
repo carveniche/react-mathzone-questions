@@ -49,7 +49,6 @@ export default function SelectMultipleSelect({
 
   inputRef.current = choicesState;
 
-
   return (
     <div className={styles.choices_wrapper}>
       {choicesState?.map((item, i) => {
@@ -59,10 +58,10 @@ export default function SelectMultipleSelect({
 
         const isVisible = item?.show;
         // During student response view
-        const isSelectedByStudent = isStudentAnswerResponse && studentAnswerTrimmed.includes(valueTrimmed);
+        // const isSelectedByStudent = isStudentAnswerResponse && studentAnswerTrimmed.includes(valueTrimmed);
         const isCorrectAnswer = isStudentAnswerResponse && correctAnswerTrimmed.includes(valueTrimmed);
-        const isIncorrectAnswer = isStudentAnswerResponse && !correctAnswerTrimmed.includes(valueTrimmed)
-
+        const isIncorrectAnswer = isStudentAnswerResponse && !item.correct && studentAnswerTrimmed.includes(valueTrimmed)
+       
         // During submission
         const isAnswerSubmitted = hasAnswerSubmitted;
         const isCorrectAtSubmit = isAnswerSubmitted && correctAnswerTrimmed.includes(valueTrimmed);
@@ -70,9 +69,9 @@ export default function SelectMultipleSelect({
 
         const classList = new Set([
           styles.choiceType,
+          isVisible ? styles.selectedChoiceType : styles.prevSelectionAnswerSelection,
           isIncorrectAnswer && styles.red,
           isCorrectAnswer && styles.green,
-          isVisible ? styles.selectedChoiceType : styles.prevSelectionAnswerSelection,
           isCorrectAtSubmit && styles.green,
           isIncorrectAtSubmit && styles.red,
           (isAnswerSubmitted || isStudentAnswerResponse)   && styles.notHoverClass
