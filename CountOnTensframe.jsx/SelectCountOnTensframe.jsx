@@ -3,7 +3,7 @@ import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styled from "styled-components";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../OnlineQuiz.module.css";
-import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
+import SelectChoiceCommon from "../CommonFiles/SelectChoiceCommon";
 export default function SelectCountOnTensframe({ choices, inputRef,studentAnswer,correctAnswer }) {
   let [choicesState, setChoicesState] = useState([]);
   const prev = useRef(0);

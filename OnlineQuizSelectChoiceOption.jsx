@@ -4,7 +4,7 @@ import { useRef } from "react";
 import HtmlParserComponent from "../CommonJSFiles/HtmlParserComponent";
 import { ValidationContext } from "../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "./OnlineQuiz.module.css";
-import SelectChoiceCommon from "../CommonJsxComponent/SelectChoiceCommon";
+import SelectChoiceCommon from "./CommonFiles/SelectChoiceCommon";
 let prevSelectionAnswerSelection = -1;
 function OnlineQuizSelectChoiceOption({
   choices,

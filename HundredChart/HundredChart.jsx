@@ -10,7 +10,7 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
-import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
+import SelectChoiceCommon from "../CommonFiles/SelectChoiceCommon";
 // let data = {
 //   operation: "addition",
 //   type: "hundreds_chart",

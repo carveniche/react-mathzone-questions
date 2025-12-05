@@ -7,7 +7,7 @@ import HtmlParser from "react-html-parser";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
 import { optionSelectStaticMathField } from "../../../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
-import SelectChoiceCommon from "../../../../CommonJsxComponent/SelectChoiceCommon";
+import SelectChoiceCommon from "../../../CommonFiles/SelectChoiceCommon";
 import getSelectChoiceMissedValue from "../../../../CommonJsxComponent/GetSelectChoiceMissedValue";
 export default function ContentPlaceValueTableSelect({
   content,

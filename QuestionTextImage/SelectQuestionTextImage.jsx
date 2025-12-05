@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import parse from "html-react-parser";
-import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
+import SelectChoiceCommon from "../CommonFiles/SelectChoiceCommon";
 const isDirectParse = (str) => {
   let flag = str.includes("mq-selectable");
   return !flag ? parse(str) : parse(str, optionSelectStaticMathField);

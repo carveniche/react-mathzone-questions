@@ -7,8 +7,8 @@ import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../../OnlineQuiz.module.css";
 import HorizontalSelectChoice from "./HorizontalSelectChoice";
-import SelectChoiceCommon from "../../../CommonJsxComponent/SelectChoiceCommon";
 import getSelectChoiceMissedValue from "../../../CommonJsxComponent/GetSelectChoiceMissedValue";
+import SelectChoiceCommon from "../../CommonFiles/SelectChoiceCommon";
 export default function SelectChoice({
   choices,
   inputRef,
@@ -85,7 +85,7 @@ export default function SelectChoice({
       )}
    
 
-         <SelectChoiceCommon 
+         <SelectChoiceCommon
                 choices={choicesState} 
                 studentAnswer={studentAnswer} 
                 handleChoiceSelection={handleChoiceSelection}

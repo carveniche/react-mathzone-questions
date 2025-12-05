@@ -4,7 +4,7 @@ import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import styles from "../OnlineQuiz.module.css";
-import { SelectChoiceCommonOld } from "../../CommonJsxComponent/SelectChoiceCommon";
+import { SelectChoiceCommonOld } from "../CommonFiles/SelectChoiceCommon";
 export default function SelectMultipleChoice({
   choices,
   inputRef,

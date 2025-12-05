@@ -5,7 +5,7 @@ import HtmlParserComponent from '../../CommonJSFiles/HtmlParserComponent';
 import { ValidationContext } from '../../MainOnlineQuiz/MainOnlineQuizPage';
 import CompareTwoValue from '../compareTwoValue';
 import styles from "../OnlineQuiz.module.css";
-import SelectChoiceCommon from '../../CommonJsxComponent/SelectChoiceCommon';
+import SelectChoiceCommon from '../CommonFiles/SelectChoiceCommon';
 function SelectChoiceHorizontalNotSymbol({
   choices,
   correctAnswer,

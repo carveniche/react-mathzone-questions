@@ -7,9 +7,9 @@ import {
   RightPranthesis,
   TopBorder,
 } from "./DragDropLongDivision";
-import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import getSelectChoiceMissedValue from "../../CommonJsxComponent/GetSelectChoiceMissedValue";
+import SelectChoiceCommon from "../CommonFiles/SelectChoiceCommon";
 export default function LongDivisonSelectChoice({
   choices,
   inputRef,
@@ -142,7 +142,7 @@ export default function LongDivisonSelectChoice({
       </div>
       <>
 
-        <SelectChoiceCommon 
+        <SelectChoiceCommon
                 choices={choicesState} 
                 studentAnswer={studentAnswer} 
                 handleChoiceSelection={handleChoiceSelection}

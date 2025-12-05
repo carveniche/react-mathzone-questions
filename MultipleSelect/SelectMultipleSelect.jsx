@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useState, useRef } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
-import styles from "../../../OnlineQuizPage/component/choices.module.css";
+import styles from "../CommonFiles/ModuleStyles/choices.module.css";
 import styled from "styled-components";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 export default function SelectMultipleSelect({

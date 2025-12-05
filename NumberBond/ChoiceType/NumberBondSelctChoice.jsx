@@ -4,8 +4,8 @@ import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import { makeBond } from "../GlobalBond/MakeBond";
 import styles2 from "../../OnlineQuiz.module.css";
 import styles from "../NumberBond.module.css";
-import SelectChoiceCommon from "../../../CommonJsxComponent/SelectChoiceCommon";
 import getSelectChoiceMissedValue from "../../../CommonJsxComponent/GetSelectChoiceMissedValue";
+import SelectChoiceCommon from "../../CommonFiles/SelectChoiceCommon";
 const RenderBinaryTree = ({ node }) => {
   const { left, right, element } = node;
   useEffect(() => {

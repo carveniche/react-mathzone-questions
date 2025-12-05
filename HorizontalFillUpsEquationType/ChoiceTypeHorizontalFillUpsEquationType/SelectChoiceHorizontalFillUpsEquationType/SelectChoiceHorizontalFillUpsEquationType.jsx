@@ -5,7 +5,8 @@ import styled from "styled-components";
 import styles from "../../../OnlineQuiz.module.css";
 import { optionSelectStaticMathField } from "../../replaceDomeNode/ReplaceDomNode";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import SelectChoiceCommon from "../../../../CommonJsxComponent/SelectChoiceCommon";
+import SelectChoiceCommon from "../../../CommonFiles/SelectChoiceCommon";
+
 export default function SelectChoiceHorizontalFillUpsEquationType({
   choices,
   inputRef,
@@ -81,7 +82,7 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
       ))}
     
        <>
-        <SelectChoiceCommon 
+        <SelectChoiceCommon
         choices={choicesState} 
         studentAnswer={studentAnswer} 
         handleChoiceSelection={handleChoiceSelection}

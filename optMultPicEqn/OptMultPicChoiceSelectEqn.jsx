@@ -4,7 +4,7 @@ import styles from "../OnlineQuiz.module.css";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
+import SelectChoiceCommon from "../CommonFiles/SelectChoiceCommon";
 
 function OptMultPicChoiceSelectEqn({
   multipicselect,
@@ -63,7 +63,7 @@ function OptMultPicChoiceSelectEqn({
     <div className="mathzone-color-indigo">
       <>
 
-        <SelectChoiceCommon 
+        <SelectChoiceCommon
                 choices={rows} 
                 studentAnswer={studentAnswer} 
                 handleChoiceSelection={handleChoiceSelection}

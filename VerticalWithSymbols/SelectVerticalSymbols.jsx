@@ -4,7 +4,7 @@ import styles from "../OnlineQuiz.module.css";
 import styled from "styled-components"
 import {useState} from "react"
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import SelectChoiceCommon from "../../CommonJsxComponent/SelectChoiceCommon";
+import SelectChoiceCommon from "../CommonFiles/SelectChoiceCommon";
 export default function SelectVerticalSymbols({choices,choiceRef,hasAnswerSubmitted,studentAnswer})
 {
     // const selectOptionsChoiceRef = useRef([]);
