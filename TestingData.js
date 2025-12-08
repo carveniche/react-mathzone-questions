@@ -1,108 +1,97 @@
 export default function jsonDataTesting() {
-    
-    let t ={
-    "status": true,
-    "question_no": 1,
-    "total": 10,
-    "question_data": [
-        {
-            "question_id": 97543,
-            "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"horizontal_fill_ups\",\"rows\":\"1\",\"cols\":\"1\",\"questionName\":\"Which fraction does the point represent on the number line below? \\n<img src=\\\"https://d3dcvy2gdld2e8.cloudfront.net/03Fractionnumberline/FNL_49.png\\\">\\n\",\"questionContent\":[{\"row\":0,\"col\":0,\"value\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{5}{4}$</span> \",\"isMissed\":\"true\"}],\"solution\":{\"model\":[{\"val\":\"The given number line is divided into 8 parts which lies between 0 and 2.\"},{\"val\":\"Each part is represented by <span class=\\\"mq-selectable\\\">$\\\\frac{2}{8}=\\\\frac{1}{4}$</span> \"},{\"val\":\"The marked point is 5 parts and is represented by<span class=\\\"mq-selectable\\\">$\\\\frac{5}{4}.$</span> \"},{\"val\":\"Hence, the point marked on the number line represents <span class=\\\"mq-selectable\\\">$\\\\frac{5}{4}.$</span> \"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"<span class=\\\"mq-selectable\\\">$\\\\frac{5}{4}$</span> \"],\"choiceType\":\"keying\",\"choiceCount\":1}",
-            "question_type": "horizontal_fill_ups",
-            "upload_file_name": "",
-            "level": "level1",
-            "fib_text": null,
-            "fib_before_text": null,
-            "after_question_text": null,
-            "choice_data": [],
-            "orc_oprc_data": [],
-            "ol_data": [],
-            question_text_audio:"http://webaudioapi.com/samples/audio-tag/chrono.mp3",
-        }
-    ],
-    "lice_class_id": 4,
-    "tag_id": 1458,
-    "level": "level1",
-    "live_class_practice_id": null,
-    "message": "Quiz started successfully",
-    practice_tag_completion:true
-}
+
+    let t = {
+        "status": true,
+        "question_no": 1,
+        "total": 10,
+        "question_data": [
+            {
+                "question_text": "{\"operation\":\"addition\",\"type\":\"horizontal_fill_ups\",\"rows\":\"1\",\"cols\":\"3\",\"questionName\":\"Fill in the blanks.\",\"questionContent\":[{\"row\":0,\"col\":0,\"value\":\"5.5 hl =\",\"isMissed\":\"false\"},{\"row\":0,\"col\":1,\"value\":\"5500.00\",\"isMissed\":\"true\"},{\"row\":0,\"col\":2,\"value\":\"dl\",\"isMissed\":\"false\"}],\"solution\":{\"model\":[{\"val\":\"To convert from hectoliters (hl) to deciliters (dl), you need to know that 1 hectoliter is equal to 1000 deciliters.\"},{\"val\":\"So, to convert 5.5 hl to dl:\"},{\"val\":\"5.5 hl × 1000 dl/hl = 5500 dl\"},{\"val\":\"Therefore, 5.5 hl = 5500 dl.\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[\"5500\"],\"choiceType\":\"keying\",\"choiceCount\":1,\"readOutMathZoneText\":false,\"indianAccent\":false}",
+                "question_type": "horizontal_fill_ups"
+            }
+        ],
+        "lice_class_id": 4,
+        "tag_id": 1458,
+        "level": "level1",
+        "live_class_practice_id": null,
+        "message": "Quiz started successfully",
+        practice_tag_completion: true
+    }
 
 
-return t ;
+    return t;
     var data2 = {
-    "status": true,
-    "question_no": 1,
-    "total": 10,
-    "question_data": [
-        {
-            "question_text": "<p>Jack played table tennis for 48&nbsp;mins on Saturday and 55 mins on Sunday. How many minutes did he spend playing table tennis over the weekend?</p>\r\n",
-            "choice_data": [
-                {
-                    "id": 1825,
-                    "choices": "<p>93</p>\r\n",
-                    "correct": false,
-                    "solution": "",
-                    "distractor": "<p>Student added the&nbsp;digits correctly, but did not add&nbsp;regrouped ones to the tens digit.</p>\r\n",
-                    "diagnostic_question_id": 471,
-                    "created_at": "2018-01-06T04:30:12.000Z",
-                    "updated_at": "2022-07-05T12:35:34.000Z",
-                    "sub_concept_id": 5435,
-                    "choice_id": 1825
-                },
-                {
-                    "id": 1826,
-                    "choices": "<p>913</p>\r\n",
-                    "correct": false,
-                    "solution": "",
-                    "distractor": "<p>Student added the tens and ones place digits correctly, but did not correctly regroup the solution.</p>\r\n",
-                    "diagnostic_question_id": 471,
-                    "created_at": "2018-01-06T04:30:12.000Z",
-                    "updated_at": "2022-07-05T12:35:34.000Z",
-                    "sub_concept_id": 5435,
-                    "choice_id": 1826
-                },
-                {
-                    "id": 1827,
-                    "choices": "<p>103</p>\r\n",
-                    "correct": true,
-                    "solution": "",
-                    "distractor": "<p>Student added and regrouped correctly.</p>\r\n",
-                    "diagnostic_question_id": 471,
-                    "created_at": "2018-01-06T04:30:12.000Z",
-                    "updated_at": "2022-07-05T12:35:34.000Z",
-                    "sub_concept_id": 5435,
-                    "choice_id": 1827
-                },
-                {
-                    "id": 1828,
-                    "choices": "<p>113</p>\r\n",
-                    "correct": false,
-                    "solution": "",
-                    "distractor": "<p>Student regrouped correctly, Added the carry-over&nbsp;digit to the tens place wrongly.</p>\r\n\r\n<p>&nbsp;</p>\r\n",
-                    "diagnostic_question_id": 471,
-                    "created_at": "2018-01-06T04:30:12.000Z",
-                    "updated_at": "2022-07-05T12:35:34.000Z",
-                    "sub_concept_id": 5435,
-                    "choice_id": 1828
-                }
-            ],
-            "question_type": "ckeditor",
-            "question_id": 471,
-            "upload_file_name": "",
-            question_text_audio:"http://webaudioapi.com/samples/audio-tag/chrono.mp3",
-        }
-    ],
-    "lice_class_id": 4,
-    "tag_id": 2196,
-    "level": "level3",
-    "live_class_practice_id": null,
-    "message": "Quiz started successfully",
-    "readOutMathZoneText": true,
-    "indianAccent": false
-}
-return data2;
+        "status": true,
+        "question_no": 1,
+        "total": 10,
+        "question_data": [
+            {
+                "question_text": "<p>Jack played table tennis for 48&nbsp;mins on Saturday and 55 mins on Sunday. How many minutes did he spend playing table tennis over the weekend?</p>\r\n",
+                "choice_data": [
+                    {
+                        "id": 1825,
+                        "choices": "<p>93</p>\r\n",
+                        "correct": false,
+                        "solution": "",
+                        "distractor": "<p>Student added the&nbsp;digits correctly, but did not add&nbsp;regrouped ones to the tens digit.</p>\r\n",
+                        "diagnostic_question_id": 471,
+                        "created_at": "2018-01-06T04:30:12.000Z",
+                        "updated_at": "2022-07-05T12:35:34.000Z",
+                        "sub_concept_id": 5435,
+                        "choice_id": 1825
+                    },
+                    {
+                        "id": 1826,
+                        "choices": "<p>913</p>\r\n",
+                        "correct": false,
+                        "solution": "",
+                        "distractor": "<p>Student added the tens and ones place digits correctly, but did not correctly regroup the solution.</p>\r\n",
+                        "diagnostic_question_id": 471,
+                        "created_at": "2018-01-06T04:30:12.000Z",
+                        "updated_at": "2022-07-05T12:35:34.000Z",
+                        "sub_concept_id": 5435,
+                        "choice_id": 1826
+                    },
+                    {
+                        "id": 1827,
+                        "choices": "<p>103</p>\r\n",
+                        "correct": true,
+                        "solution": "",
+                        "distractor": "<p>Student added and regrouped correctly.</p>\r\n",
+                        "diagnostic_question_id": 471,
+                        "created_at": "2018-01-06T04:30:12.000Z",
+                        "updated_at": "2022-07-05T12:35:34.000Z",
+                        "sub_concept_id": 5435,
+                        "choice_id": 1827
+                    },
+                    {
+                        "id": 1828,
+                        "choices": "<p>113</p>\r\n",
+                        "correct": false,
+                        "solution": "",
+                        "distractor": "<p>Student regrouped correctly, Added the carry-over&nbsp;digit to the tens place wrongly.</p>\r\n\r\n<p>&nbsp;</p>\r\n",
+                        "diagnostic_question_id": 471,
+                        "created_at": "2018-01-06T04:30:12.000Z",
+                        "updated_at": "2022-07-05T12:35:34.000Z",
+                        "sub_concept_id": 5435,
+                        "choice_id": 1828
+                    }
+                ],
+                "question_type": "ckeditor",
+                "question_id": 471,
+                "upload_file_name": "",
+                question_text_audio: "http://webaudioapi.com/samples/audio-tag/chrono.mp3",
+            }
+        ],
+        "lice_class_id": 4,
+        "tag_id": 2196,
+        "level": "level3",
+        "live_class_practice_id": null,
+        "message": "Quiz started successfully",
+        "readOutMathZoneText": true,
+        "indianAccent": false
+    }
+    return data2;
 
     //  'level_progress' : { level: "level1", position: 100 },
     //  'subsequent_question' : [1, 0, null],
@@ -119,7 +108,7 @@ return data2;
                 // "question_type": "horizontal_fill_ups",
                 question_text:
                     // JSON.stringify({ "operation": "addition", "type": "short_division", "rows": "242", "cols": "5324", "diviser": "22", "questionName": "Complete the division by using short division.", "questionContent": [[{ "row": 0, "col": 0 }, { "row": 0, "col": 1, "value": "", "isMissed": "false" }, { "row": 0, "col": 2, "value": "2", "isMissed": "true" }, { "row": 0, "col": 3, "value": "4", "isMissed": "true" }, { "row": 0, "col": 4, "value": "2", "isMissed": "true" }, { "row": 0, "col": 5, "value": "R" }, { "row": 0, "col": 6, "value": "0", "isMissed": "true" }], [{ "row": 1, "col": 0, "value": "22", "isMissed": "false" }, { "row": 1, "col": 1, "value": "5", "isMissed": "false" }, { "row": 1, "col": 2, "value": "3", "isMissed": "false" }, { "row": 1, "col": 3, "value": "2", "isMissed": "false" }, { "row": 1, "col": 4, "value": "4", "isMissed": "false" }, { "row": 1, "col": 5 }, { "row": 1, "col": 6 }], [{ "row": 2, "col": 0 }, { "row": 2, "col": 1, "re_value": "5", "re_isMissed": "true" }]], "solution": { "model": [{ "val": "5324 ÷ 22 = 242 R 0." }], "sidebyside": [], "srows": null, "scols": null }, "choices": ["9", "4", "2", "4", "2", "0", "5"], "choiceType": "dragdrop", "choiceCount": 7, "re_istrue": "true" }),
-                 JSON.stringify({"operation":"addition","type":"number_line_addition","choiceType":"selectchoice","questionName":"45612","start":"1","end":"3","interval":"5","solution":{"model":[{"val":"sadf"}],"sidebyside":[]},"numbersDisplayed":false,"isFraction":true,"ansArray":["2 3 5"],"choices":["<span id=\"861\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"206\"><span mathquill-command-id=\"207\">9</span><span mathquill-command-id=\"209\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"211\"><span class=\"mq-numerator\" mathquill-block-id=\"213\"><span mathquill-command-id=\"212\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"215\"><span mathquill-command-id=\"214\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;","<span id=\"310\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"228\"><span mathquill-command-id=\"229\">9</span><span mathquill-command-id=\"231\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"233\"><span class=\"mq-numerator\" mathquill-block-id=\"235\"><span mathquill-command-id=\"234\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"237\"><span mathquill-command-id=\"236\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;","<span id=\"21\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{8}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"269\"><span mathquill-command-id=\"270\">9</span><span mathquill-command-id=\"272\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"274\"><span class=\"mq-numerator\" mathquill-block-id=\"276\"><span mathquill-command-id=\"275\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"278\"><span mathquill-command-id=\"277\">8</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;","2 3 5"]}),
+                    JSON.stringify({ "operation": "addition", "type": "number_line_addition", "choiceType": "selectchoice", "questionName": "45612", "start": "1", "end": "3", "interval": "5", "solution": { "model": [{ "val": "sadf" }], "sidebyside": [] }, "numbersDisplayed": false, "isFraction": true, "ansArray": ["2 3 5"], "choices": ["<span id=\"861\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"206\"><span mathquill-command-id=\"207\">9</span><span mathquill-command-id=\"209\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"211\"><span class=\"mq-numerator\" mathquill-block-id=\"213\"><span mathquill-command-id=\"212\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"215\"><span mathquill-command-id=\"214\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;", "<span id=\"310\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"228\"><span mathquill-command-id=\"229\">9</span><span mathquill-command-id=\"231\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"233\"><span class=\"mq-numerator\" mathquill-block-id=\"235\"><span mathquill-command-id=\"234\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"237\"><span mathquill-command-id=\"236\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;", "<span id=\"21\" class=\"mq-replacable mq-math-mode\" contenteditable=\"false\"><span class=\"mq-selectable\">$98\\frac{8}{8}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"269\"><span mathquill-command-id=\"270\">9</span><span mathquill-command-id=\"272\">8</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"274\"><span class=\"mq-numerator\" mathquill-block-id=\"276\"><span mathquill-command-id=\"275\">8</span></span><span class=\"mq-denominator\" mathquill-block-id=\"278\"><span mathquill-command-id=\"277\">8</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span></span>&nbsp;", "2 3 5"] }),
                 // JSON.stringify({"operation":"addition","type":"number_line_addition","choiceType":"selectchoice","questionName":"awesrdg","start":"1","end":"3","interval":"8","solution":{"model":[{"val":"sadf"}],"sidebyside":[]},"numbersDisplayed":false,"isFraction":true,"ansArray":["2 2 8"],"choices":["<span class=\"mq-selectable\">$4\\frac{6}{5}$</span> <span class=\"mq-selectable\">$4\\frac{6}{5}$</span> ","<span class=\"mq-selectable\">$4\\frac{6}{5}$</span> ","<span class=\"mq-selectable\">$4\\frac{6}{5}$</span> ","2 2 8"]}),
                 // JSON.stringify({"operation":"addition","type":"number_line_addition","choiceType":"keying","questionName":"ertfh","start":"1","end":"6","interval":"3","solution":{"model":[{"val":"wsaesrg"}],"sidebyside":[]},"numbersDisplayed":false,"isFraction":true,"ansArray":["3 1 3"],"choices":["<span class=\"mq-selectable\">$5\\frac{5}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"178\"><span mathquill-command-id=\"179\">5</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"181\"><span class=\"mq-numerator\" mathquill-block-id=\"183\"><span mathquill-command-id=\"182\">5</span></span><span class=\"mq-denominator\" mathquill-block-id=\"185\"><span mathquill-command-id=\"184\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span> ","<span class=\"mq-selectable\">$5\\frac{5}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"196\"><span mathquill-command-id=\"197\">5</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"199\"><span class=\"mq-numerator\" mathquill-block-id=\"201\"><span mathquill-command-id=\"200\">5</span></span><span class=\"mq-denominator\" mathquill-block-id=\"203\"><span mathquill-command-id=\"202\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span> ","<span class=\"mq-selectable\">$5\\frac{5}{4}$</span><span class=\"mq-root-block mq-hasCursor\" mathquill-block-id=\"214\"><span mathquill-command-id=\"215\">5</span><span class=\"mq-fraction mq-non-leaf\" mathquill-command-id=\"217\"><span class=\"mq-numerator\" mathquill-block-id=\"219\"><span mathquill-command-id=\"218\">5</span></span><span class=\"mq-denominator\" mathquill-block-id=\"221\"><span mathquill-command-id=\"220\">4</span></span><span style=\"display:inline-block;width:0\">​</span></span><span class=\"mq-cursor\">​</span></span> ","3 1 3"]}),
                 // JSON.stringify({"operation":"addition","type":"number_line_addition","choiceType":"selectchoice","questionName":"asihdbsjbdv","start":"1","end":"5","interval":"3","solution":{"model":[{"val":"sadsfd"}],"sidebyside":[]},"numbersDisplayed":false,"isFraction":true,"ansArray":["2 1 3"],"choices":["$4\\frac{4}{5}$445​​ ","$4\\frac{4}{7}$447​​ ","$4\\frac{4}{8}$448​​ ","2 1 3"]}),
@@ -151,7 +140,7 @@ return data2;
         message: "Quiz started successfully",
     };
 
-     return obj2;
+    return obj2;
     //  obj.question_data[0].question_type=obj2.type
     //  obj.question_data[0].question_text=JSON.stringify(obj2)
     //   return { ...obj }; 
