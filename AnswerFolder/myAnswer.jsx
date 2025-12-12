@@ -12,7 +12,6 @@ import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
 import oldQuestionWithNoHtmlQuestion from "../../CommonJSFiles/oldQuestionWithNoHtmlQuestion";
 import QuestionWithNoHtmlContent from "../../CommonJsxComponent/QuestionWithNoHtmlContent";
 import SkippedQuestionViewer from "./SkippedQuestionViewer";
-
 export default function MyAnswer({
   obj,
   type,
