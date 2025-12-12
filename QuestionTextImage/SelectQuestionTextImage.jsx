@@ -18,7 +18,7 @@ export default function SelectQuestionTextImage({
 }) {
   const [prevSelect, setPrevSelect] = useState(0);
   const choicesBoxRef = useRef([]);
-  const { setIsAnswerCorrect, isStudentAnswerResponse,setCurrectAnswer } =
+  const { setIsAnswerCorrect,setStudentAnswerChoice, isStudentAnswerResponse,setCurrectAnswer } =
     useContext(ValidationContext);
   let [choiceState, setChoicesState] = useState([]);
   useEffect(() => {
@@ -39,13 +39,13 @@ export default function SelectQuestionTextImage({
     if (hasAnswerSubmitted || isStudentAnswerResponse) {
       return;
     }
-    console.log(i, choiceState  ,"i");
     choiceState[prevSelect].show = false;
     choiceState[i].show = true;
     setChoicesState([...choiceState]);
     answrerRef.current = choices[i]?.value;
     setPrevSelect(i);
     setChoosenAnswer(true);
+    setStudentAnswerChoice(choiceState[i]?.value);
     if(choices[i]?.option === "true") {
       setIsAnswerCorrect(true);
      
