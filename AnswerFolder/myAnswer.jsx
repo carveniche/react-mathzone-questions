@@ -43,13 +43,13 @@ export default function MyAnswer({
         obj?.correct !== undefined && (
           <div className={styles.answerBoxContainer}>
             <AnswerBox
-              background={
-                obj?.correct == true
-                  ? "#cceea5"
-                  : obj?.correct == false
-                  ? "#fae0e0"
-                  : "initial"
-              }
+              // background={
+              //   obj?.correct == true
+              //     ? "#cceea5"
+              //     : obj?.correct == false
+              //     ? "#fae0e0"
+              //     : "initial"
+              // }
               color={
                 obj?.correct == true
                   ? "#6caf20"
@@ -59,9 +59,15 @@ export default function MyAnswer({
               }
             >
               {obj?.correct == true
-                ? "Correct Answer"
+                ? <img
+                  src={`https://d2jhdcglwxx007.cloudfront.net/correct.png`}
+                  alt="correct/incorrect"
+                />
                 : obj?.correct == false
-                ? "Incorrect Answer"
+                ? <img
+                    src={`https://d2jhdcglwxx007.cloudfront.net/incorrect.png`}
+                    alt="correct/incorrect"
+                  />
                 : ""}
             </AnswerBox>
             {!timerStatus && (

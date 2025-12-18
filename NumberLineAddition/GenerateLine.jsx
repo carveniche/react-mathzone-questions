@@ -103,13 +103,15 @@ export default function GenerateLine({ question, meter }) {
           isDecimal ? parseFloat(ans.value) : parseInt(ans.value)
         );
         solution = solution.sort((a, b) => b - a);
+        answers = solution
         var ansArray = question.ansArray.sort((a, b) => b - a);
         for (var i = 0; i < question.ansArray.length; i++) {
           if (isNaN(solution[i])) isEmpty = true;
           if (solution[i] != ansArray[i]) isWrong = true;
         }
       }
-      student_answer=answers
+    
+      student_answer= answers
     } else if (choiceType == "mapping" && !isWrong && !isEmpty) {
       if (studAns.length != question.ansArray.length) isEmpty = true;
       studAns.forEach((ans) => {

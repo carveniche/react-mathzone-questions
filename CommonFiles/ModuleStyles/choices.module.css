@@ -32,7 +32,7 @@
   background: var(--Greyscale-Surface-White, #FFF);
   transition: all 0.1s linear;
   position: relative;
-  z-index: 2;
+  z-index: 0;
   border-radius: 12px;
   cursor: pointer;
 
@@ -110,7 +110,9 @@
   background: #FF0F0F;
   /* border-color: #ee4741; */
 }
-
+ .circle b{
+  font-weight: bold;
+ }
 .selectedChoiceType .choice_text,
 .selectedChoiceType .choice_text *,
 .selectedChoiceType .circle b {
