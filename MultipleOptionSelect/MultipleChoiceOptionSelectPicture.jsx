@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import styles from "../OnlineQuiz.module.css";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styled from "styled-components";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 
 function MultipleChoiceOptionSelectPicture (
   {choices,

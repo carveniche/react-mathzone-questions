@@ -9,11 +9,11 @@ import {
 import styles from "../../../OnlineQuiz.module.css";
 import parse from "html-react-parser";
 import {
-  EditableMathField,
+EditableMathField,
   StaticMathField,
-} from "../../../../ExternalPackages";
+} from "../../../CommonJSFiles/ExternalPackages";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 export default function ChoiceKeyMatchObjVertEqn({
   inputRef,
   content,

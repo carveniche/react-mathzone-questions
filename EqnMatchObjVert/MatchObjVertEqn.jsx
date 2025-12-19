@@ -9,16 +9,16 @@ import ContMatchObjVerticalEqn from "./ContMatchObjVerticalEqn";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import { collectDataAtCompileTimeMatchObjectVerticalEqn } from "./EqnMatchObjVertCollectData/EqnMatchObjVertCollectData";
 import { oldAndNewData } from "../HorizontalFillUpsEquationType/CollectAnswerDataHorizontalFillUpsEquation/CollectAnswerDataHorizontalFillUpsEquation";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
 import {
   deleteKeysFromArray,
   manupulateEquationTypeQuestion1D,
   manupulateQuestionContent1Darray,
   manupulateQuestionContentHorizontal,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import oneDto2D from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import compareLatexData from "../../CommonJSFiles/compareLatexData";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
+import oneDto2D from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import compareLatexData from "../CommonJSFiles/compareLatexData";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Vertical from "./Vertical";
 import styles from "../../component/OnlineQuiz.module.css";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
 
 // let obj={
 //     "operation":"addition",

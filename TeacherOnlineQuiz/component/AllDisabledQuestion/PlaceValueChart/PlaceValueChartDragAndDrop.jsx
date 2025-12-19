@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import styles from "../OnlineQuiz.module.css";
 import Draggable from "react-draggable";
 import HtmlParser from "react-html-parser";
-import numberSystemConverter from "../../../../../CommonJSFiles/numberSystemConverter";
+import numberSystemConverter from "../../../../CommonJSFiles/numberSystemConverter";
 const elementFinds = (target, xyAxis, checkState) => {
   if (xyAxis[0] == undefined) return false;
 

@@ -6,8 +6,8 @@ import {
   GridPlaceValueTable,
   HeaderRowPlaceValueTable,
 } from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { useEffect } from "react";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 export default function ContentPlaceValueTableSelect({

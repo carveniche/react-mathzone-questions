@@ -3,7 +3,7 @@ import styles from "./clickableOnYesNo.module.css"
 import styles2 from "../../OnlineQuiz.module.css";
 import { Pattern } from "./pattern"
 import HtmlParser from "react-html-parser/lib/HtmlParser";
-import { ProgressBorder } from "../../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../../CommonJsxComponent/ProgressBorder";
 // let data = {
 //     operation: "addition",
 //     type: "countofobjectsyesno",

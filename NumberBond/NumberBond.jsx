@@ -7,13 +7,13 @@ import NumberBondSelctChoice from "./ChoiceType/NumberBondSelctChoice";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import CompareTwoValue from "../compareTwoValue";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import {
   findSelectedValue,
   numberQuestionContentQuestionContent,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForKeyingType = (arr1, arr2) => {
   for (let item of arr2) {

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { DivBox, DivBox2, Grid, TextBox } from "./ORC";
 import parse from "html-react-parser";
 import styles from "../OnlineQuiz.module.css";
-import { StaticMathField } from "../../ExternalPackages";
+import { StaticMathField } from "../CommonJSFiles/ExternalPackages";
 const disabledOrcAnswered = () => {
   let parent = document.getElementById("disabledOrcAnswered");
   if (!parent) return;

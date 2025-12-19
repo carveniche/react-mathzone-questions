@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useRef, useState,useEffect } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+
 
 
 
@@ -10,6 +10,7 @@ import SolveButton from "../SolveButton";
 import CompareOfImageKeyingChoiceType from "./ChoicesTypeCompareOfImage/CompareOfImageKeyingChoiceType/CompareOfImageKeyingChoiceType";
 import CompareOfImageSelectChoice from "./ChoicesTypeCompareOfImage/CompareOfImageKeyingSelectChoice/CompareOfImageSelectChoice";
 import DropBoxesImageCompare from "./DropBoxesImageCompare";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 const validationForKeyingChoiceType=(choices)=>{
 let arr=choices?.current
 let n=arr?.length||0

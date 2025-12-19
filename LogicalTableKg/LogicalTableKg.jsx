@@ -4,11 +4,11 @@ import { useContext, useState } from "react";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import SolveButton from "../SolveButton";
 import styles2 from "../OnlineQuiz.module.css";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import { logicalTableKgQuestionContent } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
+import { logicalTableKgQuestionContent } from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 // let data = {
 //   operation: "addition",
 //   type: "logical_table_kg",

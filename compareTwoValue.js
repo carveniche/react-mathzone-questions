@@ -1,4 +1,4 @@
-import { symbolCollection } from "../CommonJSFiles/replacingJsonData"
+import { symbolCollection } from "./CommonJSFiles/replacingJsonData"
 
 export default function CompareTwoValue(a,b){
    
@@ -9,3 +9,7 @@ export default function CompareTwoValue(a,b){
 
     return false
 }
+
+// export function normalizeNumberInput(){
+//     return <></>
+// }

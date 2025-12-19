@@ -6,11 +6,11 @@ import SolveButton from "../SolveButton";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import ContentRandomArrangmentDragDrop from "./ContentRandomArrangmentDragDrop";
-import { ProgressBorder } from "../../Modal2/modal2";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { manupulateQuestionContentHorizontal } from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import ProgressBorder from "../CommonJsxComponent/ProgressBorder";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
   let n = arr?.length || 0;

@@ -6,7 +6,7 @@ import styles from "../OnlineQuiz.module.css";
 
 import CompareDragOperatorKeyingChoiceType from "./CompareDragOperatorChoiceType/CompareDragOperatorKeyingChoiceType/CompareDragOperatorKeyingChoiceType";
 import CompareDragOperatorSelectChoice from "./CompareDragOperatorChoiceType/CompareDragOperatorSelectChoice/CompareDragOperatorSelectChoice";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 
 const validationForKeyingChoiceType = (choices) => {
   let arr = choices?.current;

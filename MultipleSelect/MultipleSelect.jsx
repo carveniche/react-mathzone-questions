@@ -5,10 +5,8 @@ import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import SelectMultipleSelect from "./SelectMultipleSelect";
-import { ProgressBorder } from "../../Modal2/modal2";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function MultipleSelect({ state, meter, choiceId }) {
   meter = Number(meter) || 0;

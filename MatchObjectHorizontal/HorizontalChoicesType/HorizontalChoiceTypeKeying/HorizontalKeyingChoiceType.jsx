@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styled from "styled-components";
-import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import HtmlParserComponent from "../../.././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../../../OnlineQuiz.module.css";
 export default function HorizontalKeyingChoiceType({

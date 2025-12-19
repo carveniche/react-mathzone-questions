@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import Draggable from "react-draggable";
 import parse from "html-react-parser";
 import styled from "styled-components";
-import { dragdropPointCordinate } from "../../../../../CommonFunction/dragdropPointCordinate";
-import { useScrollBar } from "../../../../../CommonFunction/useScrollBar";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ParserComponent from "../../../../CommonJSFiles/ParserComponent";
+import { dragdropPointCordinate } from "../../../CommonJSFiles/dragdropPointCordinate";
+import { useScrollBar } from "../../../CommonJSFiles/useScrollBar";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../../../OnlineQuiz.module.css";
 import { optionSelectStaticMathField } from "../../../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import { validateCoordiante } from "../../../ChoicesType/validateCoordinates";
+import ParserComponent from "../../../CommonJSFiles/ParserComponent";
 export default function HorizontalDragAndDropType({
   content,
   choices,

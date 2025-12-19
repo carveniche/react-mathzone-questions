@@ -4,8 +4,8 @@ import { useState } from "react";
 import styles from "../OnlineQuiz.module.css";
 
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 export default function ContentVertical({
   content,
   totalRows,

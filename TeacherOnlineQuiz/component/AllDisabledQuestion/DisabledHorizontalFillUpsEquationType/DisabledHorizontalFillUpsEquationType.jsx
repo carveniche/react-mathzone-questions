@@ -5,8 +5,9 @@ import styles from "./DisabledHorizontalFillUpsEquationType.module.css";
 
 import parse from "html-react-parser";
 import { optionSelectStaticMathField } from "../../../../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+
 import DisabledContentHorizontalFillUpsEquationType from "./DisabledContentHorizontalFillUpsEquationType";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 
 export default function DisabledHorizontalFillUpsEquationType({
   state,

@@ -4,7 +4,7 @@ import styles from "../../../OnlineQuiz.module.css";
 import HtmlParser from "react-html-parser";
 import styled from "styled-components"
 import TensframeContent from "../../../TensFrame/TensFrameContent";
-import { ProgressBorder } from "../../../../Modal2/modal2";
+import ProgressBorder from "../../../CommonJsxComponent/ProgressBorder";
 export default function DisabledTensFrame({ state, totalRows, totalColumns,meter }) {
 meter=Number(meter)
     let boxesImageRef = useRef([])

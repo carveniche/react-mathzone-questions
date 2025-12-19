@@ -3,7 +3,7 @@ import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
-import HtmlParserComponent from "../../../CommonJSFiles/HtmlParserComponent";
+import HtmlParserComponent from "../.././CommonJSFiles/HtmlParserComponent";
 export default function HorizontalSelectChoice({ row }) {
   return (
     <Table sx={{ border: 0, maxWidth: "100%", width: "fit-content" }}>

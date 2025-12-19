@@ -1,17 +1,18 @@
 import React, { useContext, useEffect } from "react";
 import { useRef, useState } from "react";
 import HtmlParser from "react-html-parser";
-import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
-import { serializeResponse } from "../CommonJSFiles/gettingResponse";
-import HtmlParserComponent from "../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../CommonJsxComponent/ConditionOnProgressBar";
+import { serializeResponse } from "./CommonJSFiles/gettingResponse";
+import HtmlParserComponent from "./CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "./CommonJSFiles/ManupulateJsonData/oneDto2D";
+
 import { ValidationContext } from "../MainOnlineQuiz/MainOnlineQuizPage";
 import ContentCountTensframeQuiz from "./ContentCountTensframeQuiz";
 import styles from "./OnlineQuiz.module.css";
 import OnlineQuizSelectChoiceOption from "./OnlineQuizSelectChoiceOption";
 import SolveButton from "./SolveButton";
 import SpeakQuestionText from "./CommonFiles/PatternMatchers/SpeakQuestionText";
+import CustomAlertBoxMathZone from "./CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from "./CommonJsxComponent/ConditionOnProgressBar";
 function CountTensFramesQuiz({
   state,
   totalRows,

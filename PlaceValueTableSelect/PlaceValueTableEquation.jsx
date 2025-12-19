@@ -1,28 +1,28 @@
 import React, { useContext, useRef, useState } from "react";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import SolveButton from "../SolveButton";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
 import styles from "../OnlineQuiz.module.css";
 import parse from "html-react-parser";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import ContentPlaceValueTableSelect from "./ContentPlaceValueTableSelect";
 import PlaceValueTableDragDrop from "./PlaceValueTableChoiceType/PlaceValueTableDragDrop/PlaceValueTableDragDrop";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import PlaceValueTableSelectChoice from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
 import {
   findSelectedValue,
   manupulateEquationTypeQuestion1D,
   manupulateQuestionContent1Darray,
   manupulateQuestionContentHorizontal,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
 import ContentPlaceValueTableSelectEquation from "./ContentPlaceValueTableSelectEquation";
 
 import { useEffect } from "react";
 import { collectDataAtCompileTimed } from "./CollectAnswerdataplacevalueequation";
-import compareLatexData from "../../CommonJSFiles/compareLatexData";
+import compareLatexData from "../CommonJSFiles/compareLatexData";
 import {
   manupulateEquationTypeQuestion2Darr,
   manupulateQuestionContent1Darrayed,

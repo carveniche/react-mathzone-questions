@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
 import { useEffect, useRef, useState } from "react";
 import HtmlParser from "react-html-parser";
-import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
-import { serializeResponse } from "../CommonJSFiles/gettingResponse";
-import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../CommonJsxComponent/ConditionOnProgressBar";
+
+import { serializeResponse } from "./CommonJSFiles/gettingResponse";
+import { student_answer } from "./CommonJSFiles/ManupulateJsonData/oneDto2D";
+
 import { ValidationContext } from "../MainOnlineQuiz/MainOnlineQuizPage";
-import { ProgressBorder } from "../Modal2/modal2";
 import styles from "./OnlineQuiz.module.css";
 import OnlineQuizQuestionContent from "./OnlineQuizQuestionContent";
 import OnlineQuizSelectChoiceOption from "./OnlineQuizSelectChoiceOption";
 import SolveButton from "./SolveButton";
 import SpeakQuestionText from "./CommonFiles/PatternMatchers/SpeakQuestionText";
+import CustomAlertBoxMathZone from "./CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from "./CommonJsxComponent/ConditionOnProgressBar";
 function HorizontalPreviewClick({ obj, meter }) {
   meter = Number(meter) || 0;
   const [state, setState] = useState();

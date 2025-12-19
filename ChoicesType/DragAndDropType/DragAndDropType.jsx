@@ -3,11 +3,12 @@ import Draggable from "react-draggable";
 import styled from "styled-components";
 import styles from "../../OnlineQuiz.module.css";
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
-import HtmlParserComponent from "../../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import { dragdropPointCordinate } from "../../../../CommonFunction/dragdropPointCordinate";
-import { useScrollBar } from "../../../../CommonFunction/useScrollBar";
+import HtmlParserComponent from "../.././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+
+import { useScrollBar } from "../../CommonJSFiles/useScrollBar";
 import { validateCoordiante } from "../validateCoordinates";
+import { dragdropPointCordinate } from "../../CommonJSFiles/dragdropPointCordinate";
 export default function DragAndDropType({
   content,
   choices,

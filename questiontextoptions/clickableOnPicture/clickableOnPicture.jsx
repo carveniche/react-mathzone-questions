@@ -6,10 +6,10 @@ import { useContext, useEffect, useState } from "react";
 import SolveButton from "../../SolveButton";
 import styled from "styled-components";
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
-import CustomAlertBoxMathZone from "../../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../../CommonJsxComponent/ConditionOnProgressBar";
-import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
+import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../../CommonFiles/PatternMatchers/SpeakQuestionText";
+import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 // let data = {
 //   operation: "addition",
 //   type: "questiontextoptions",

@@ -1,13 +1,13 @@
 import HTMLReactParser from "html-react-parser";
 import React, { useEffect, useRef, useState } from "react";
 import { useContext } from "react";
-import { StaticMathField } from "../../../../../ExternalPackages";
-import ConditionOnProgressBar from "../../../../../CommonJsxComponent/ConditionOnProgressBar";
 import { ValidationContext } from "../../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import SolutionMultipleChoice from "../../../../MultipleChoice/SolutionMultipleChoice";
 
 import styles from "../../../../OnlineQuiz.module.css";
 import SelectMultipleChoice from "../../../../MultipleChoice/SelectMultipleChoice";
+import ConditionOnProgressBar from "../../../../CommonJsxComponent/ConditionOnProgressBar";
+import { StaticMathField } from "../../../../CommonJSFiles/ExternalPackages";
 // import SelectMultipleChoice from "../MultipleChoice/SelectMultipleChoice";
 const disabledEditor = (parentRef) => {
   if (!parentRef.current)

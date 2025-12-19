@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import HtmlParser from "react-html-parser";
 import styles from "../OnlineQuiz.module.css";
 import styled from "styled-components"
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
+
 export default function FillInTheBlanks({ state,meter }) {
   const [inputState, setInputState] = useState("");
   meter=Number(meter)||0

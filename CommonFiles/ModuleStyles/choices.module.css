@@ -110,7 +110,9 @@
   background: #FF0F0F;
   /* border-color: #ee4741; */
 }
-
+ .circle b{
+  font-weight: bold;
+ }
 .selectedChoiceType .choice_text,
 .selectedChoiceType .choice_text *,
 .selectedChoiceType .circle b {

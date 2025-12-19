@@ -1,11 +1,11 @@
 import React from "react";
 import HtmlParser from "react-html-parser";
-import { ProgressBorder } from "../../../../Modal2/modal2";
 import MyAnswer from "../../../AnswerFolder/myAnswer";
 import styles from "../../../OnlineQuiz.module.css";
 import DisabledQuizSolution from "../DisabledQuizSolution";
 import parse from "html-react-parser";
 import DisabledSelectChoiceOptionMultiplePicture from "./DisabledSelectChoiceOptionMultiplePicture";
+import ProgressBorder from "../../../CommonJsxComponent/ProgressBorder";
 
 function DisabledOptionMultipleChoice({ state, totalRows, meter }) {
   meter = Number(meter);

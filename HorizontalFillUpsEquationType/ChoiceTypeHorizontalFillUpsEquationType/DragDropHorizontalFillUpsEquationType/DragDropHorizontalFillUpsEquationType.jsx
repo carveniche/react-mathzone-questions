@@ -5,9 +5,9 @@ import styles from "../../HorizontalFillUpsEquationType.module.css";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import { optionSelectStaticMathField } from "../../replaceDomeNode/ReplaceDomNode";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import { useScrollBar } from "../../../../../CommonFunction/useScrollBar";
-import { dragdropPointCordinate } from "../../../../../CommonFunction/dragdropPointCordinate";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { useScrollBar } from "../../../CommonJSFiles/useScrollBar";
+import { dragdropPointCordinate } from "../../../CommonJSFiles/dragdropPointCordinate";
 import { validateCoordiante } from "../../../ChoicesType/validateCoordinates";
 export default function ContentHorizontalFillUpsEquationType({
   content,

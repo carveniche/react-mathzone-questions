@@ -3,13 +3,13 @@ import { useContext } from "react";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../OnlineQuiz.module.css";
 import parse from "html-react-parser";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import MultipleChoiceOptionSelectPicture from "./MultipleChoiceOptionSelectPicture";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { useRef } from "react";
 import SolveButton from "../SolveButton";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { findSelectedValue } from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 // const validationForSelectMultipleSelect = (choices) => {

@@ -5,7 +5,7 @@ import styles from "../OnlineQuiz.module.css";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import KeyingchoiceTypePlaceValueChart from "./choiceType/Keying/KeyingchoiceTypePlaceValueChart";
 import SelectChoicePlaceValue from "./choiceType/SelectChoicePlaceValue/SelectChoicePlaceValue";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 const validationForDragAndDrop = (selectChoice) => {
   let n = selectChoice.length || 0;
   for (let i = 0; i < n; i++) {

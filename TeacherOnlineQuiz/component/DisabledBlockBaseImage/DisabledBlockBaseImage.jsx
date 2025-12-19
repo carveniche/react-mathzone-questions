@@ -2,7 +2,7 @@ import BlockBaseQuestionContent from "../../../BlockBaseImage/BlockBaseQuestionC
 import styles from "../../../OnlineQuiz.module.css";
 import HtmlParser from "react-html-parser/lib/HtmlParser"
 import DisabledBlockBaseImageChoiceSelection from "./DisabledBlockBaseImageChoiceSelection";
-import { ProgressBorder } from "../../../../Modal2/modal2";
+import ProgressBorder from "../../../CommonJsxComponent/ProgressBorder";
 export default function DisabledBlockBaseImage({ state, totalRows,meter }) {
   meter=Number(meter)||0
   totalRows = Number(totalRows)

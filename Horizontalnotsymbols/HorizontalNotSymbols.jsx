@@ -5,13 +5,12 @@ import OnlineQuizSolutionModel from "../OnlineQuizSolutionModel";
 import styles from "../OnlineQuiz.module.css";
 import ContentHorizontalNotSymbols from "./ContentHorizontalNotSymbols";
 import SelectChoiceHorizontalNotSymbol from "./SelectChoiceHorizontalNotSymbol";
-import { Modal2, ProgressBorder } from "../../Modal2/modal2";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 function HorizontalNotSymbols({ state, totalRows, meter }) {
   meter = Number(meter) || 0;

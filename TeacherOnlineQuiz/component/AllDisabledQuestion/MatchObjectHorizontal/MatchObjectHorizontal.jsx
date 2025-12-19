@@ -5,7 +5,7 @@ import styles from "../OnlineQuiz.module.css"
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import parse from "html-react-parser";
 import ContentMatchObjectHorizontal from "./ContentMatchObjectHorizontal";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 
 
 const validationForSelectChoice=(inputRef,content)=>{

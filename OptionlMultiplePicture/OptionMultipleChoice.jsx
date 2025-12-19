@@ -4,10 +4,10 @@ import styles from "../OnlineQuiz.module.css";
 import SelectChoiceOptionMultiplePicture from "./SelectChoiceOptionMultiplePicture";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { findSelectedValue } from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import parse from "html-react-parser";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForSelectMultipleSelect = (choices) => {
@@ -69,7 +69,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
         )
         // <p>{JSON.stringify(state?.questionImage)}</p>
       }
-      <div className="w-full">
+      <div className="_w-full">
         {!isStudentAnswerResponse && (
           <SolveButton
             onClick={handleSubmitAnswer}
@@ -82,7 +82,7 @@ function OptionMultipleChoice({ state, totalRows, meter, response = false }) {
           className="mathzone-color-indigo word-space_pre-wrap"
           style={{ display: "flex" }}
         >
-          <div className="w-full">
+          <div className="_w-full">
             <div className={styles.questionName} style={{ display: "flex" }}>
               {readQuestionText && (
                 <SpeakQuestionText readText={state?.questionName} />

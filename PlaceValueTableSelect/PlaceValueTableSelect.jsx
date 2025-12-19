@@ -6,17 +6,16 @@ import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import PlaceValueTableDragDrop from "./PlaceValueTableChoiceType/PlaceValueTableDragDrop/PlaceValueTableDragDrop";
-import { ProgressBorder } from "../../Modal2/modal2";
 import PlaceValueTableSelectChoice from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import {
   findSelectedValue,
   manupulateQuestionContentHorizontal,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const changeAnswerStatus = (
   val,

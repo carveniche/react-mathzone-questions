@@ -3,7 +3,8 @@ import HtmlParser from "react-html-parser/lib/HtmlParser";
 import ContentHorizontal from "./ContentHorizontal";
 import { useRef } from "react";
 import styles from "../OnlineQuiz.module.css";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
+
 export default function Horizontal({ state, meter }) {
   let totalEmptyBox = 0;
   state?.questionContent?.map((items) =>

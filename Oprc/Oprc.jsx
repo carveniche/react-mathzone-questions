@@ -1,17 +1,17 @@
 import styles from "../OnlineQuiz.module.css";
 import parse from "html-react-parser";
-import { EditableMathField, StaticMathField } from "../../ExternalPackages";
+import { EditableMathField, StaticMathField } from "../CommonJSFiles/ExternalPackages";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Draggable from "react-draggable";
 import SolveButton from "../SolveButton";
 import shuffle from "shuffle-array";
-import { ProgressBorder } from "../../Modal2/modal2";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
-import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
+import { dragdropPointCordinate } from "../CommonJSFiles/dragdropPointCordinate";
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
+import ProgressBorder from "../CommonJsxComponent/ProgressBorder";
 function Oprc({ obj, meter }) {
   let currentIndex = 0;
   const inputRef = useRef([]);

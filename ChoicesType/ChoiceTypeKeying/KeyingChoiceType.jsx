@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
-import HtmlParserComponent from "../../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import HtmlParserComponent from "../.././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../../OnlineQuiz.module.css";
 export default function VerticalKeyingChoiceType({

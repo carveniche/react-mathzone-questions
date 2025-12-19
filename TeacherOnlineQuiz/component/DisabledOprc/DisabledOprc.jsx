@@ -1,10 +1,10 @@
 import styles from "../../../OnlineQuiz.module.css";
 import parse from "html-react-parser";
-import { StaticMathField } from "../../component/../../../ExternalPackages";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import shuffle from "shuffle-array";
 import OprcAnswered from "../../../Oprc/OprcAnswered";
+import { StaticMathField } from "../../../CommonJSFiles/ExternalPackages";
 function DisabledOprc({ obj }) {
   const optionSelect = {
     replace: (domNode) => {

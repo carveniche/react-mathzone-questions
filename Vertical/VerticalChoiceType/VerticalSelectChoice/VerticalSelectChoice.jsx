@@ -3,9 +3,9 @@ import { useState } from "react";
 import styles from "../../../OnlineQuiz.module.css";
 import HtmlParser from "react-html-parser";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
-import getSelectChoiceMissedValue from "../../../../CommonJsxComponent/GetSelectChoiceMissedValue";
+import HtmlParserComponent from "../../.././CommonJSFiles/HtmlParserComponent";
 import SelectChoiceCommon from "../../../CommonFiles/SelectChoiceCommon";
+import getSelectChoiceMissedValue from "../../../CommonJsxComponent/GetSelectChoiceMissedValue";
 export default function VerticalSelect({
   content,
   totalRows,

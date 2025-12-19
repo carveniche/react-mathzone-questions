@@ -4,12 +4,12 @@ import styles from "../OnlineQuiz.module.css";
 import SelectCountOnTensframe from "./SelectCountOnTensframe";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import SolveButton from "../SolveButton";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { findSelectedValue } from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectChoice = (choices, answer) => {

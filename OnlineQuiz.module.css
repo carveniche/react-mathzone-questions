@@ -3375,10 +3375,11 @@ input::-webkit-inner-spin-button {
 
 .arrowBotline {
   border-bottom: 2px solid #888888;
-  top: -27px;
+  top:50%;
   left: 15px;
   width: 25px;
-  position: relative;
+  transform: translateY(-50%);
+  position: absolute;
 }
 
 .arrowRight .arrowBotline {
@@ -3474,7 +3475,7 @@ input::-webkit-inner-spin-button {
   top: -17px;
   position: relative;
   width: fit-content;
-  height: fit-content;
+  height: 36px;
 }
 
 .arrowLeft {

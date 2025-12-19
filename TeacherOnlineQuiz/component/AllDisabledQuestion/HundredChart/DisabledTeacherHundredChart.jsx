@@ -4,7 +4,8 @@ import { useState } from "react";
 import styles2 from "../OnlineQuiz.module.css"
 import styled from "styled-components"
 import HtmlParser from "react-html-parser/lib/HtmlParser";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
+
 // let data = {
 //   operation: "addition",
 //   type: "hundreds_chart",

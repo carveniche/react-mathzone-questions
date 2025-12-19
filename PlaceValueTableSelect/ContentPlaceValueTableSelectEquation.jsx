@@ -6,8 +6,8 @@ import {
   GridPlaceValueTable,
   HeaderRowPlaceValueTable,
 } from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { useEffect } from "react";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import parse from "html-react-parser";
@@ -16,7 +16,7 @@ import {
   mathQuilEditorChecker,
   optionSelectStaticMathField,
 } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
-import { EditableMathField, StaticMathField } from "../../ExternalPackages";
+import { EditableMathField, StaticMathField } from "../CommonJSFiles/ExternalPackages";
 
 export default function ContentPlaceValueTableSelectEquation({
   inputRefs,

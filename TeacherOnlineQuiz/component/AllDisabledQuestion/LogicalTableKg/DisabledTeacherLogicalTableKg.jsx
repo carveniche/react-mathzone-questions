@@ -2,7 +2,7 @@ import parse from "html-react-parser";
 import styles from "./custom.module.css";
 import { useContext, useEffect, useState } from "react";
 import styles2 from "../OnlineQuiz.module.css";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 // let data = {
 //   operation: "addition",
 //   type: "logical_table_kg",
