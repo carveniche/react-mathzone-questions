@@ -1,11 +1,12 @@
 import { useContext, useEffect } from "react"
-import MainFillInTheBlanks from "../component/FillInTheBlacks/MainFillInTheBlanks"
-import HorizontalPreviewClick from "../component/HorizontalPreviewClick"
-import MainMultipleChoice from "../component/MultipleChoice/MainMultipleChoice"
-import MainMultipleSelect from "../component/MultipleSelect/MainMultipleSelect"
-import DisabledTeacherCkEditor from "../component/TeacherOnlineQuiz/component/AllDisabledQuestion/Ckeditor/DisabledTeacherCkEditor"
-import jsonDataTesting from "../component/TestingData"
-import { ValidationContext } from "../MainOnlineQuiz/MainOnlineQuizPage"
+import MainFillInTheBlanks from "../FillInTheBlacks/MainFillInTheBlanks"
+import HorizontalPreviewClick from "../HorizontalPreviewClick"
+import MainMultipleChoice from "../MultipleChoice/MainMultipleChoice"
+import MainMultipleSelect from "../MultipleSelect/MainMultipleSelect"
+import DisabledTeacherCkEditor from "../TeacherOnlineQuiz/component/AllDisabledQuestion/Ckeditor/DisabledTeacherCkEditor"
+import jsonDataTesting from "../TestingData"
+import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage"
+// import { ValidationContext } from "../MainOnlineQuiz/MainOnlineQuizPage"
 
 export default function QuestionWithNoHtmlContent({type,choicesId,obj,studentResponse}){
     const {handleUpdateStudentAnswerResponse}=useContext(ValidationContext)

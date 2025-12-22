@@ -5,13 +5,15 @@ import styles from "../OnlineQuiz.module.css";
 import parse, { htmlToDOM } from "html-react-parser";
 import NumberBondAnswerRespone from "./NumberBondAnswerResponse/NumberBondAnswerRespone";
 import CkeditorAnswerRes from "./CkeditorAnswerRes";
-import CommonStudentResponse from "../../CommonJSFiles/CommonStudentResponse";
+
 import { ValidationContextProvider } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import newTypeQuestionChecker from "../../CommonJSFiles/newTypeQuestionChecker";
+import newTypeQuestionChecker from "../CommonJSFiles/newTypeQuestionChecker";
 import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
-import oldQuestionWithNoHtmlQuestion from "../../CommonJSFiles/oldQuestionWithNoHtmlQuestion";
-import QuestionWithNoHtmlContent from "../../CommonJsxComponent/QuestionWithNoHtmlContent";
+import oldQuestionWithNoHtmlQuestion from "../CommonJSFiles/oldQuestionWithNoHtmlQuestion";
+import QuestionWithNoHtmlContent from "../CommonJsxComponent/QuestionWithNoHtmlContent";
 import SkippedQuestionViewer from "./SkippedQuestionViewer";
+import CommonStudentResponse from "../CommonJSFiles/CommonStudentResponse";
+
 
 export default function MyAnswer({
   obj,
