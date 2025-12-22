@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import audioPaused from "./AudioPaused.json";
 import audioPlaying from "./AudioPlaying.json";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import Lottie from "react-lottie";
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 
 export default function SpeakQuestionText({ type, readText }) {

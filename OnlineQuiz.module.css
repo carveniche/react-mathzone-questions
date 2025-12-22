@@ -3343,11 +3343,11 @@ border-color:#FFEBEB ;
   gap: 50px;
 }
 
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
+} */
 
 .checkNumLine {
   /* width: 50px; */
