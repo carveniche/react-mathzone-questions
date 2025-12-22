@@ -5,15 +5,15 @@ import SolveButton from "../SolveButton";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import ContentMatchObjectHorizontal from "./ContentMatchObjectHorizontal";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import oneDto2D from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
+import oneDto2D from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import {
   findSelectedValue,
   manupulateDataSelectChoice,
   manupulateQuestionContentHorizontal,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectChoice = (inputRef, content) => {

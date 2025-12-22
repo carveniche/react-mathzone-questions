@@ -3,12 +3,13 @@ import { useRef, useState } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import Draggable from "react-draggable";
 import styles from "../OnlineQuiz.module.css";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import { useScrollBar } from "../../../CommonFunction/useScrollBar";
-import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
+
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
+import { dragdropPointCordinate } from "../CommonJSFiles/dragdropPointCordinate";
+import { useScrollBar } from "../CommonJSFiles/useScrollBar";
 export default function DropBoxesImageCompare({
   content,
   totalRows,

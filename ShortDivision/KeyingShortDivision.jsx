@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../OnlineQuiz.module.css";
 import styled from "styled-components";

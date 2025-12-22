@@ -3,7 +3,7 @@ import HtmlParser from "react-html-parser";
 import {useRef} from "react";
 import styles from "../OnlineQuiz.module.css";
 import SelectMultipleChoice from "./SelectMultipleChoice";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 
 
 

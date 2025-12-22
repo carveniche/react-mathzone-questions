@@ -4,7 +4,7 @@ import HtmlParser from "react-html-parser/lib/HtmlParser";
 import styles from "../OnlineQuiz.module.css";
 import styled from "styled-components";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SelectChoiceCommon from "../CommonFiles/SelectChoiceCommon";
 
 function SelectChoiceOptionMultiplePicture({

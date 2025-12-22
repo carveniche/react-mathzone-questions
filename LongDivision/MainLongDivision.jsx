@@ -2,7 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import LongDivision from './LongDivision'
 // import Solution from "../../MainOnlineQuiz/Solution.module.css";
 import styles from "../OnlineQuiz.module.css";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
 
 import {
   BottomBorder,

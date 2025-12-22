@@ -5,17 +5,17 @@ import SolveButton from "../SolveButton";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import oneDto2D, {
   student_answer,
-} from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+} from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import {
   findSelectedValue,
   manupulateDataSelectChoice,
   manupulateQuestionContentHorizontal,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import ContentLongDivsion from "./ContentLongDivision";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 

@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import styles from "../../../OnlineQuiz.module.css";
 import { number } from "prop-types";
 import HtmlParser from "react-html-parser";
-import numberSystemConverter from "../../../../../../../CommonJSFiles/numberSystemConverter";
+import numberSystemConverter from "../../../../../../CommonJSFiles/numberSystemConverter";
 export default function KeyingchoiceTypePlaceValueChart({
   isAnswerSubmitted,
   content,

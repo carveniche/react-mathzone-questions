@@ -6,12 +6,11 @@ import { useRef, useState } from "react";
 import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { ProgressBorder } from "../../Modal2/modal2";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import ConditionOnProgressBar from "../CommonJsxComponent/ConditionOnProgressBar";
 export default function VerticalWithSymbols({
   state,
   totalRows,

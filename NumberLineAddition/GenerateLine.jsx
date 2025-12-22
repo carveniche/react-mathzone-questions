@@ -3,12 +3,12 @@ import parse from "html-react-parser";
 import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import SelectChoice from "../ChoicesType/SelectChoice/SelectChoice";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
-import { StaticMathField } from "../../ExternalPackages";
+import { StaticMathField } from "../CommonJSFiles/ExternalPackages";
 import SelectChoiceHorizontalFillUpsEquationType from "../HorizontalFillUpsEquationType/ChoiceTypeHorizontalFillUpsEquationType/SelectChoiceHorizontalFillUpsEquationType/SelectChoiceHorizontalFillUpsEquationType";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function GenerateLine({ question, meter }) {

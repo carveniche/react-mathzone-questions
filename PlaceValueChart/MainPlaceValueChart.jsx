@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import numberSystemFormat from "../../CommonJSFiles/numberSystemFormat";
+import numberSystemFormat from "../CommonJSFiles/numberSystemFormat";
 import PlaceValueChart from "./PlaceValueChart";
 // let obj = {
 //   operation: "addition",

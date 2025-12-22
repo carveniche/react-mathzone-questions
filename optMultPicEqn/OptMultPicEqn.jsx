@@ -6,10 +6,10 @@ import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import OptMultPicChoiceSelectEqn from "./OptMultPicChoiceSelectEqn";
 import parse from "html-react-parser";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import { findSelectedValue } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
+import { findSelectedValue } from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectMultipleSelect = (choices, multipicselect) => {

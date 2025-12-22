@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 export default function CompareOfImageKeyingChoiceType({
   content,
   totalRows,

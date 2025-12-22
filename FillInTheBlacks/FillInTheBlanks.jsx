@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import HtmlParser from "react-html-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import SolveButton from "../SolveButton";
-import { ProgressBorder } from "../../Modal2/modal2";
 import CompareTwoValue from "../compareTwoValue";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function FillInTheBlanks({ state, meter, choiceId }) {
   const [inputState, setInputState] = useState("");

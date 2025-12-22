@@ -11,7 +11,7 @@ import {
   collectDataAtCompileTime,
   oldAndNewData,
 } from "./CollectAnswerDataHorizontalFillUpsEquation/CollectAnswerDataHorizontalFillUpsEquation";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
 import {
   deleteKeysFromArray,
   findSelectedValue,
@@ -19,11 +19,11 @@ import {
   manupulateQuestionContent1Darray,
   manupulateQuestionContentDnd2d,
   twoDto1DArray,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import compareLatexData from "../../CommonJSFiles/compareLatexData";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import compareLatexData from "../CommonJSFiles/compareLatexData";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
 const validationForSelectChoice = (inputRef, content) => {

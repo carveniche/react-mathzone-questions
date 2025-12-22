@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useRef, useState } from "react";
 import styles from "../../../OnlineQuiz.module.css";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
-import numberSystemConverter from "../../../../../../../CommonJSFiles/numberSystemConverter";
+import numberSystemConverter from "../../../../../../CommonJSFiles/numberSystemConverter";
 export default function SelectChoicePlaceValue({
   isAnswerSubmitted,
   content,

@@ -3,8 +3,8 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import React, { useContext, useEffect, useState } from "react";
-import HtmlParserComponent from "../../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import HtmlParserComponent from "../.././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../../OnlineQuiz.module.css";
 export default function HorizontalKeyingChoiceType({

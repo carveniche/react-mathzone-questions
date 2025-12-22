@@ -4,10 +4,10 @@ import { useRef, useState } from "react";
 import styles from "../../../OnlineQuiz.module.css";
 import { number } from "prop-types";
 import HtmlParser from "react-html-parser";
-import numberSystemConverter from "../../../../CommonJSFiles/numberSystemConverter";
-import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
+import numberSystemConverter from "../../../CommonJSFiles/numberSystemConverter";
+import HtmlParserComponent from "../../.././CommonJSFiles/HtmlParserComponent";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 export default function KeyingchoiceTypePlaceValueChart({
   isAnswerSubmitted,
   content,

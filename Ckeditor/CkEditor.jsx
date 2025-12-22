@@ -1,16 +1,17 @@
 import HTMLReactParser from "html-react-parser";
 import { useEffect, useState, useRef, useContext } from "react";
-import { EditableMathField, StaticMathField } from "../../ExternalPackages";
+import { EditableMathField, StaticMathField } from "../CommonJSFiles/ExternalPackages";
 import SolveButton from "../SolveButton";
 import GenStyles from "../OnlineQuiz.module.css";
-import { ProgressBorder } from "../../Modal2/modal2";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import { CkeditorVirtualKeyboard } from "./CkEditorVirtualKeyboard/CkeditorVirtualKeyboard";
 import SelectMultipleChoice from "../MultipleChoice/SelectMultipleChoice";
-import { serializeResponse2 } from "../../CommonJSFiles/gettingResponse";
+import { serializeResponse2 } from ".././CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import compareLatexData from "../../CommonJSFiles/compareLatexData";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import compareLatexData from "../CommonJSFiles/compareLatexData";
+import ProgressBorder from "../CommonJsxComponent/ProgressBorder";
+
 
 const validateSelectChoice = (inputRef, setChoicesId, setChoices) => {
   let arr = inputRef.current;

@@ -5,7 +5,7 @@ import parse from "html-react-parser"
 import { useContext, useEffect, useState } from "react"
 
 import styled from "styled-components";
-import { ProgressBorder } from "../../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../../CommonJsxComponent/ProgressBorder";
 
 // let data = {
 //     operation: "addition",

@@ -3,7 +3,8 @@ import HtmlParser from "react-html-parser";
 import { optionSelectStaticMathField } from './HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode';
 import styles from "./OnlineQuiz.module.css";
 import parse from "html-react-parser"
-import CorrectAnswerDisplay from '../CommonJsxComponent/CorrectAnswerDisplay';
+import CorrectAnswerDisplay from './CommonJsxComponent/CorrectAnswerDisplay';
+
 function OnlineQuizSolutionModel(model) {
   let arr = model?.model;
   let obj=model?.obj

@@ -5,10 +5,10 @@ import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage
 import styles from "../../../OnlineQuiz.module.css";
 import parse from "html-react-parser";
 import { optionSelectStaticMathField } from "../../../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import { dragdropPointCordinate } from "../../../../../CommonFunction/dragdropPointCordinate";
-import { useScrollBar } from "../../../../../CommonFunction/useScrollBar";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { dragdropPointCordinate } from "../../../CommonJSFiles/dragdropPointCordinate";
 import { validateCoordiante } from "../../../ChoicesType/validateCoordinates";
+import { useScrollBar } from "../../../CommonJSFiles/useScrollBar";
 
 export default function ChoiceDNDMatchObjVertEqn({
   content,

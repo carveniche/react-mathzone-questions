@@ -1,10 +1,10 @@
 import React from "react";
 import HtmlParser from "react-html-parser";
-import { ProgressBorder } from "../../../../Modal2/modal2";
 import styles from "../../../OnlineQuiz.module.css";
 import ContentVerticalSymbols from "../../../VerticalWithSymbols/ContentVerticalSymbols";
 import DisabledQuizSolution from "../DisabledQuizSolution";
 import DisabledSelectVerticalSymbols from "./DisabledSelectVerticalSymbols";
+import ProgressBorder from "../../../CommonJsxComponent/ProgressBorder";
 export default function DisabledVerticalWithSymbols({
   state,
   totalRows,

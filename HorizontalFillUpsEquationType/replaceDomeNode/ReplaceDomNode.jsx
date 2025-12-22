@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import Draggable from "react-draggable";
-import { StaticMathField } from "../../../ExternalPackages";
 import styles from "../HorizontalFillUpsEquationType.module.css";
+import { StaticMathField } from "../../CommonJSFiles/ExternalPackages";
 export const optionSelectStaticMathField = {
   replace: (domNode) => {
     if (domNode?.attribs?.class) {

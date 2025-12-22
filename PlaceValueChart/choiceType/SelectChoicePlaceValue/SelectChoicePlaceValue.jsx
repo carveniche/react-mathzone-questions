@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useRef, useState } from "react";
 import styles from "../../../OnlineQuiz.module.css";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
-import numberSystemConverter from "../../../../CommonJSFiles/numberSystemConverter";
+import numberSystemConverter from "../../../CommonJSFiles/numberSystemConverter";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import HtmlParserComponent from "../../.././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 export default function SelectChoicePlaceValue({
   isAnswerSubmitted,
   content,

@@ -5,7 +5,7 @@ import styles from "../../../OnlineQuiz.module.css";
 import parse from "html-react-parser";
 import DsbContMatchObjVerticalEqn from "./DsbContMatchObjVerticalEqn";
 import { optionSelectStaticMathField } from "../../../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
-import { ProgressBorder } from "../../../../Modal2/modal2";
+import ProgressBorder from "../../../CommonJsxComponent/ProgressBorder";
 export default function DsbMatchObjVertEqn({
   state,
   totalRows,

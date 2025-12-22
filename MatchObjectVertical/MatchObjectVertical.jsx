@@ -5,12 +5,12 @@ import SolveButton from "../SolveButton";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import ContentMatchObjectVertical from "./ContentMatchObjectVertical";
-import { ProgressBorder } from "../../Modal2/modal2";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
 import CompareTwoValue from "../compareTwoValue";
-import { manupulateQuestionContentHorizontal } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { manupulateQuestionContentHorizontal } from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import ProgressBorder from "../CommonJsxComponent/ProgressBorder";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
   let n = arr?.length || 0;

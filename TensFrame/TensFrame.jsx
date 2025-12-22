@@ -5,13 +5,12 @@ import HtmlParser from "react-html-parser";
 import TensframeContent from "./TensFrameContent";
 import styled from "styled-components";
 import OnlineQuizSolutionModel from "../OnlineQuizSolutionModel";
-import { Modal2, ProgressBorder } from "../../Modal2/modal2";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import ConditionOnProgressBar from "../CommonJsxComponent/ConditionOnProgressBar";
 export default function TensFrame({ state, totalRows, totalColumns, meter }) {
   meter = Number(meter) || 0;
   let boxesImageRef = useRef([]);

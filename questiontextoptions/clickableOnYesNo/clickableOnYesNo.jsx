@@ -5,10 +5,10 @@ import { Pattern } from "./pattern";
 import SolveButton from "../../SolveButton";
 import HtmlParser from "react-html-parser/lib/HtmlParser";
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
-import CustomAlertBoxMathZone from "../../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../../CommonJsxComponent/ConditionOnProgressBar";
-import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
+import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../../CommonFiles/PatternMatchers/SpeakQuestionText";
+import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
 export const ClickableOnYesNo = ({ data, meter }) => {
   meter = Number(meter) || 0;
   const {

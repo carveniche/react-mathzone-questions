@@ -10,9 +10,9 @@ import {
 import {
   EditableMathField,
   StaticMathField,
-} from "../../../../ExternalPackages";
+} from "../../../CommonJSFiles/ExternalPackages";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 export default function KeyingHorizontalFillUpsEquationType({
   inputRef,
   content,

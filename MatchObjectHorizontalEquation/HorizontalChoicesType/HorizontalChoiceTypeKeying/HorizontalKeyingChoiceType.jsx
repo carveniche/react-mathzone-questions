@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import parse from "html-react-parser";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ParserComponent from "../../../../CommonJSFiles/ParserComponent";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../../../OnlineQuiz.module.css";
 import {
@@ -13,7 +12,8 @@ import {
 import {
   EditableMathField,
   StaticMathField,
-} from "../../../../ExternalPackages";
+} from "../../../CommonJSFiles/ExternalPackages";
+import ParserComponent from "../../../CommonJSFiles/ParserComponent";
 export default function HorizontalKeyingChoiceType({
   inputRef,
   content,

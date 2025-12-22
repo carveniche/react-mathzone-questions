@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../../MainOnlineQuiz/MainOnlineQuizPage";
 import { makeBond } from "../GlobalBond/MakeBond";
 import styles from "../NumberBond.module.css";

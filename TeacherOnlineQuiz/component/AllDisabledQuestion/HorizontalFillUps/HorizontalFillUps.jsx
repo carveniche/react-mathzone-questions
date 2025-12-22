@@ -3,7 +3,7 @@ import ContentHorizontalFillUps from "./ContentHorizontalFillUps";
 import { useEffect, useState, useRef } from "react";
 import styles from "../OnlineQuiz.module.css"
 import parse from "html-react-parser";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 const validationForSelectChoice=(inputRef,content)=>{
 let arr=inputRef?.current
 let n=arr?.length||0

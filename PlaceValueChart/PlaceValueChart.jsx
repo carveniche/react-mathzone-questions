@@ -7,20 +7,20 @@ import SolveButton from "../SolveButton";
 import KeyingchoiceTypePlaceValueChart from "./choiceType/Keying/KeyingchoiceTypePlaceValueChart";
 import SelectChoicePlaceValue from "./choiceType/SelectChoicePlaceValue/SelectChoicePlaceValue";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { ProgressBorder } from "../../Modal2/modal2";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
 import oneDto2D, {
   student_answer,
-} from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+} from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import {
   findSelectedValue,
   manupulateDataSelectChoice,
   manupulateJsonData,
   manupulateQuestionContentHorizontal,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import ProgressBorder from "../CommonJsxComponent/ProgressBorder";
 
 const validationForDragAndDrop = (selectChoice) => {
   let n = selectChoice.length || 0;

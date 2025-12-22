@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "./OL";
 import styles from "../OnlineQuiz.module.css";
 import parse from "html-react-parser";
-import {StaticMathField } from "../../ExternalPackages";
+import {StaticMathField } from "../CommonJSFiles/ExternalPackages";
 export default function OlAnswered({ obj }) {
   const optionSelect = {
     replace: (domNode) => {

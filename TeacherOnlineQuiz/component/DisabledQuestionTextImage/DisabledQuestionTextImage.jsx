@@ -1,10 +1,10 @@
 import React from "react";
 import HtmlParser from "react-html-parser";
-import { ProgressBorder } from "../../../../Modal2/modal2";
 import styles from "../../../OnlineQuiz.module.css";
 import ContentQuestionTextImage from "../../../QuestionTextImage/ContentQuestionTextImage";
 import DisabledQuizSolution from "../DisabledQuizSolution";
 import DisabledSelectQuestionTextImage from "./DisabledSelectQuestionTextImage";
+import ProgressBorder from "../../../CommonJsxComponent/ProgressBorder";
 export default function DisabledQuestionTextImage({ state, meter }) {
   meter = Number(meter) || 0;
   return (

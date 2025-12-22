@@ -8,7 +8,7 @@ import CkeditorAnswerRes from "./CkeditorAnswerRes";
 import CommonStudentResponse from "../../CommonJSFiles/CommonStudentResponse";
 import { ValidationContextProvider } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import newTypeQuestionChecker from "../../CommonJSFiles/newTypeQuestionChecker";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
 import oldQuestionWithNoHtmlQuestion from "../../CommonJSFiles/oldQuestionWithNoHtmlQuestion";
 import QuestionWithNoHtmlContent from "../../CommonJsxComponent/QuestionWithNoHtmlContent";
 import SkippedQuestionViewer from "./SkippedQuestionViewer";

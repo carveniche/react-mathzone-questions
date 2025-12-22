@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { useRef, useState, useEffect } from "react";
 import parse from "html-react-parser";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
 import {
   findSelectedValue,
   manupulateDataSelectChoice,
   manupulateQuestionContentHorizontal,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import CompareTwoValue from "../compareTwoValue";
 import styles from "../OnlineQuiz.module.css";

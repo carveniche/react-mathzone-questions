@@ -6,11 +6,11 @@ import styles from "../OnlineQuiz.module.css";
 import { useState, useRef } from "react";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import ConditionOnProgressBar from "../CommonJsxComponent/ConditionOnProgressBar";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
 
 export default function BlockBaseImage({ state, totalRows, meter }) {
 

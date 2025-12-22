@@ -1,6 +1,6 @@
 import HTMLReactParser from "html-react-parser";
 import React, { useContext, useEffect, useRef } from "react";
-import { StaticMathField } from "../../ExternalPackages";
+import { StaticMathField } from "../CommonJSFiles/ExternalPackages";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import SolutionMultipleChoice from "../MultipleChoice/SolutionMultipleChoice";
 import styles from "../OnlineQuiz.module.css";

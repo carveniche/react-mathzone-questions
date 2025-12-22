@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import styles from "../OnlineQuiz.module.css";
 import PlaceValueTableDragDrop from "./PlaceValueTableChoiceType/PlaceValueTableDragDrop/PlaceValueTableDragDrop";
 import PlaceValueTableSelectChoice from "./PlaceValueTableChoiceType/PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 const changeAnswerStatus=(val,setIsAnswerCorrect,setHasAnswerSubmitted)=>{
   if(val===0)
   {

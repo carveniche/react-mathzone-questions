@@ -9,10 +9,10 @@ import {
   HeaderRowPlaceValueTable,
 } from "../PlaceValueTableSelectChoice/PlaceValueTableSelectChoice";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import { useScrollBar } from "../../../../../CommonFunction/useScrollBar";
-import { dragdropPointCordinate } from "../../../../../CommonFunction/dragdropPointCordinate";
+import HtmlParserComponent from "../../.././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { useScrollBar } from "../../../CommonJSFiles/useScrollBar";
+import { dragdropPointCordinate } from "../../../CommonJSFiles/dragdropPointCordinate";
 const elementFinds = (target, xyAxis, dropState) => {
   if (xyAxis[0] == undefined) return false;
   let elem = document.elementFromPoint(xyAxis[0], xyAxis[1]);

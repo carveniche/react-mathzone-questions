@@ -5,10 +5,9 @@ import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import SelectMultipleChoice from "./SelectMultipleChoice";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { ProgressBorder } from "../../Modal2/modal2";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 export default function MultipleChoice({ state, meter, choiceId }) {
   meter = Number(meter) || 0;

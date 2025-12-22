@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useRef } from "react";
 import HtmlParser from 'react-html-parser';
-import HtmlParserComponent from '../../CommonJSFiles/HtmlParserComponent';
+import HtmlParserComponent from '.././CommonJSFiles/HtmlParserComponent';
 import { ValidationContext } from '../../MainOnlineQuiz/MainOnlineQuizPage';
 import CompareTwoValue from '../compareTwoValue';
 import styles from "../OnlineQuiz.module.css";

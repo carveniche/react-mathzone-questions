@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Draggable from "react-draggable";
 import styled from "styled-components";
-import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
-import { useScrollBar } from "../../../CommonFunction/useScrollBar";
-import HtmlParserComponent from "../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { dragdropPointCordinate } from "../CommonJSFiles/dragdropPointCordinate";
+
+import HtmlParserComponent from ".././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import styles from "../OnlineQuiz.module.css";
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
+import { useScrollBar } from "../CommonJSFiles/useScrollBar";
 
 export default function ShortDivisionDragAndDropType({
   content,

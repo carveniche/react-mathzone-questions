@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import parse from "html-react-parser";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import shuffle from "shuffle-array";
-import { EditableMathField, StaticMathField } from "../../ExternalPackages";
+import { EditableMathField, StaticMathField } from "../CommonJSFiles/ExternalPackages";
 import styled from "styled-components";
 import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { ProgressBorder } from "../../Modal2/modal2";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import ProgressBorder from "../CommonJsxComponent/ProgressBorder";
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);

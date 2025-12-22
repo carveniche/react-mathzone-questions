@@ -5,17 +5,17 @@ import styled from "styled-components";
 import parse from "html-react-parser";
 import styles from "../OnlineQuiz.module.css";
 
-import { EditableMathField, StaticMathField } from "../../ExternalPackages";
+import { EditableMathField, StaticMathField } from "../CommonJSFiles/ExternalPackages";
 import SolveButton from "../SolveButton";
-import { ProgressBorder } from "../../Modal2/modal2";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
 import HtmlParser from "react-html-parser";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { dragdropPointCordinate } from "../../../CommonFunction/dragdropPointCordinate";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { dragdropPointCordinate } from "../CommonJSFiles/dragdropPointCordinate";
 import { validateCoordiante } from "../ChoicesType/validateCoordinates";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 import React_Base_Api from "../ReactConfigApi";
+import ProgressBorder from "../CommonJsxComponent/ProgressBorder";
 
 const collectTextInputField = () => {
   let parent = document.getElementById("orcTextParent");

@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { DivBox, Grid, TextBox } from "./ORC";
 import parse from "html-react-parser";
 import styles from "../OnlineQuiz.module.css";
-import { EditableMathField, StaticMathField } from "../../../../../ExternalPackages";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
 import HtmlParser from "react-html-parser";
+import { StaticMathField } from "../../../../CommonJSFiles/ExternalPackages";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 const disabledOrcAnswered = () => {
   let parent = document.getElementById("disabledOrcAnswered");
   if (!parent) return;

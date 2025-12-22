@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRef, useState } from "react";
 import HtmlParser from "react-html-parser";
-import HtmlParserComponent from '../CommonJSFiles/HtmlParserComponent';
+import HtmlParserComponent from './CommonJSFiles/HtmlParserComponent';
 import styles from "./OnlineQuiz.module.css";
 
 function OnlineQuizQuestionContent({ content, totalRows }) {

@@ -8,11 +8,10 @@ import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import CompareDragOperatorKeyingChoiceType from "./CompareDragOperatorChoiceType/CompareDragOperatorKeyingChoiceType/CompareDragOperatorKeyingChoiceType";
 import CompareDragOperatorSelectChoice from "./CompareDragOperatorChoiceType/CompareDragOperatorSelectChoice/CompareDragOperatorSelectChoice";
-import { ProgressBorder } from "../../Modal2/modal2";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import { manupulateQuestionContent } from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
+import { manupulateQuestionContent } from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 const validationForKeyingChoiceType = (choices) => {

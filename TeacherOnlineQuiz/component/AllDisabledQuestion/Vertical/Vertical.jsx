@@ -4,8 +4,8 @@ import ContentVertical from "./ContentVertical";
 import { useState, useRef, useEffect } from "react";
 import styles from "../OnlineQuiz.module.css";
 import VerticalSelect from "./VerticalChoiceType/VerticalSelectChoice/VerticalSelectChoice";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
 import DisabledVerticalDragDrop from "./VerticalChoiceType/DisabledVerticalDragDrop/DisabledVerticalDragDrop";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 
 const validationForSelectChoice = (choices, questionContent) => {
   let val = null;

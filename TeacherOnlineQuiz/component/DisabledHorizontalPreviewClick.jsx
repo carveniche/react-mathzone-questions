@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect, useRef, useState } from "react";
 import HtmlParser from "react-html-parser";
-import { ProgressBorder } from '../../../Modal2/modal2';
 import styles from "../../OnlineQuiz.module.css";
 import DisabledHorizontalPreviewContent from './DisabledHorizontalPreviewContent';
 import DisabledOnlineQuizSelectChoiceOption from './DisabledOnlineQuizSelectChoiceOption';
+import ProgressBorder from '../../CommonJsxComponent/ProgressBorder';
 function DisabledHorizontalPreviewClick({obj,meter}) {
   const [state, setState] = useState();
   meter=Number(meter)||0

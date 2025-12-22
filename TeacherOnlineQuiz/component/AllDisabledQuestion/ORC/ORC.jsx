@@ -7,8 +7,8 @@ import styles from "../OnlineQuiz.module.css";
 import {
   EditableMathField,
   StaticMathField,
-} from "../../../../../ExternalPackages";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+} from  "../../../../CommonJSFiles/ExternalPackages";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 
 const ifElementFind = (target, xyAxis) => {
   if (xyAxis[0] == undefined) return;

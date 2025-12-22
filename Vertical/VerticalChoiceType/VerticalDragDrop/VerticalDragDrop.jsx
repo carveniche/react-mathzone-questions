@@ -3,10 +3,10 @@ import { useState } from "react";
 import styles from "../../../OnlineQuiz.module.css";
 import Draggable from "react-draggable";
 import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage";
-import HtmlParserComponent from "../../../../CommonJSFiles/HtmlParserComponent";
-import { student_answer } from "../../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import { useScrollBar } from "../../../../../CommonFunction/useScrollBar";
-import { dragdropPointCordinate } from "../../../../../CommonFunction/dragdropPointCordinate";
+import HtmlParserComponent from "../../.././CommonJSFiles/HtmlParserComponent";
+import { student_answer } from "../../../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import { useScrollBar } from "../../../CommonJSFiles/useScrollBar";
+import { dragdropPointCordinate } from "../../../CommonJSFiles/dragdropPointCordinate";
 import { validateCoordiante } from "../../../ChoicesType/validateCoordinates";
 export default function VerticalDragDrop({
   content,

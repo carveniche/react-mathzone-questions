@@ -4,8 +4,9 @@ import parse from "html-react-parser";
 import styles2 from "../OnlineQuiz.module.css";
 import DisabledNumberBondKeyingChoiceType from "./DisabledChoiceType/DisabledNumberBondKeyingChoiceType";
 import DisabledNumberBondSelctChoice from "./DisabledChoiceType/DisabledNumberBondSelctChoice";
-import { ProgressBorder } from "../../../../../Modal2/modal2";
+
 import HtmlParser from "react-html-parser";
+import ProgressBorder from "../../../../CommonJsxComponent/ProgressBorder";
 export default function DisabledNumberBond({ obj, meter }) {
   meter = Number(meter) || 0;
 

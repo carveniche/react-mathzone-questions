@@ -30,7 +30,6 @@ export default function jsonDataTesting() {
 }
 
 
-return t ;
     var data2 = {
     "status": true,
     "question_no": 1,

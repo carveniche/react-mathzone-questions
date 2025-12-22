@@ -3,7 +3,7 @@ import HtmlParser from "react-html-parser";
 import styles from "../../../OnlineQuiz.module.css";
 import ContentHorizontalNotSymbols from "../../../Horizontalnotsymbols/ContentHorizontalNotSymbols";
 import DisabledSelectChoiceHorizontalNotSymbol from "./DisabledSelectChoiceHorizontalNotSymbol";
-import { ProgressBorder } from "../../../../Modal2/modal2";
+import ProgressBorder from "../../../CommonJsxComponent/ProgressBorder";
 
 function DisabledHorizontalNotSymbols({ state, totalRows,meter }) {
 

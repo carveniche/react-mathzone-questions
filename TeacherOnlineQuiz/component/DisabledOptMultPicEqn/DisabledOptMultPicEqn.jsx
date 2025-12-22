@@ -3,8 +3,8 @@ import { useState, useRef } from "react";
 import styles from "../AllDisabledQuestion/OnlineQuiz.module.css";
 import parse from "html-react-parser";
 import DisabledOptMultPicChoiceSelectEqn from "./DisabledOptMultPicChoiceSelectEqn";
-import { ProgressBorder } from "../../../../Modal2/modal2";
 import { optionSelectStaticMathField } from "../../../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
+import ProgressBorder from "../../../CommonJsxComponent/ProgressBorder";
 
 function DisabledOptMultPicEqn({ state, totalRows, meter, response = false }) {
   meter = Number(meter) || 0;

@@ -2,9 +2,9 @@
 import styles from "./custom.module.css";
 import { useEffect, useState, useRef, useContext } from "react";
 import SingleCard from "./components/SingleCard";
-import { ProgressBorder } from "../../Modal2/modal2";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
+import ProgressBorder from "../CommonJsxComponent/ProgressBorder";
 function MemoryCardGame({data,meter,teacher}) {
   meter=Number(meter)||0
   const [cards, setCards] = useState([]);

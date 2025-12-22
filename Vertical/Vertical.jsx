@@ -6,20 +6,20 @@ import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import VerticalSelect from "./VerticalChoiceType/VerticalSelectChoice/VerticalSelectChoice";
-import { ProgressBorder } from "../../Modal2/modal2";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
 import VerticalDragDrop from "./VerticalChoiceType/VerticalDragDrop/VerticalDragDrop";
 import CompareTwoValue from "../compareTwoValue";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
+// import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
 import { validationForDragAndDrop } from "../HorizontalFillUps/HorizontalFillUps";
 import {
   findSelectedValue,
   manupulateDataSelectChoice,
   manupulateQuestionContentHorizontal,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
-import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
 
 const validationForSelectChoice = (choices, questionContent) => {
   let val = null;

@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from "react"
 import { useRef, useState } from "react";
 import HtmlParser from "react-html-parser";
 import { ValidationContext } from "../MainOnlineQuiz/MainOnlineQuizPage";
-import { Modal2, ProgressBorder } from "../Modal2/modal2";
 import ContentCountTensframeQuiz from "./ContentCountTensframeQuiz";
 import styles from "./OnlineQuiz.module.css";
 import OnlineQuizSelectChoiceOption from "./OnlineQuizSelectChoiceOption";
 import SolveButton from "./SolveButton";
+import ProgressBorder from "../../../CommonJsxComponent/ProgressBorder";
 function CountTensFramesQuiz({ state, totalRows,meter }) {
   meter=Number(meter)||0
   const [imageLoaded,setImageLoaded]=useState(false)

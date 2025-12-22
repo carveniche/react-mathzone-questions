@@ -5,20 +5,20 @@ import styles from "../OnlineQuiz.module.css";
 import SolveButton from "../SolveButton";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import { serializeResponse } from "../../CommonJSFiles/gettingResponse";
+import { serializeResponse } from ".././CommonJSFiles/gettingResponse";
 import CompareTwoValue from "../compareTwoValue";
-import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
-import acceptedConditionForAdd_Mul from "../../CommonJSFiles/acceptedConditionForAdd_Mul";
+import CustomAlertBoxMathZone from "../CommonJSFiles/CustomAlertBoxMathZone";
 import {
   findSelectedValue,
   manupulateQuestionContent,
   manupulateQuestionContentHorizontal,
-} from "../../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
+} from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import oneDto2D, {
   student_answer,
-} from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
-import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+} from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
+import ConditionOnProgressBar from"../CommonJsxComponent/ConditionOnProgressBar";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+import acceptedConditionForAdd_Mul from "../CommonJSFiles/acceptedConditionForAdd_Mul";
 const validationForSelectChoice = (inputRef, content) => {
   let arr = inputRef?.current;
   let n = arr?.length || 0;
