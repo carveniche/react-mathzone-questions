@@ -23,6 +23,7 @@ export default function MyAnswer({
   questionData,
   showSkippedQuestion,
   showExtraDom,
+  pageFrom,
 }) {
   let specailOldTypeQuestion = oldQuestionWithNoHtmlQuestion();
   let responseAnswer = {};
@@ -31,18 +32,18 @@ export default function MyAnswer({
   } catch (e) {
     responseAnswer = {};
   }
-
+ 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {typeof obj === "undefined" ? (
         <div>
-          <div className={styles.skippedQuestionTitle}>
+          {/* <div className={styles.skippedQuestionTitle}>
             <h1> {showExtraDom}Student has not answered this question.</h1>
-          </div>
+          </div> */}
           {showSkippedQuestion && <SkippedQuestionViewer obj={questionData} />}
         </div>
       ) : (
-        obj?.correct !== undefined && (
+        obj?.correct !== undefined && pageFrom !="mathZoneResultReview" && (
           <div className={styles.answerBoxContainer}>
             <AnswerBox
               // background={
@@ -90,7 +91,7 @@ export default function MyAnswer({
           </div>
         )
       )}
-      {obj &&
+      {obj && obj?.question_response ?
         (specailOldTypeQuestion?.includes(type) ? (
           <ValidationContextProvider>
             <QuestionWithNoHtmlContent
@@ -112,7 +113,24 @@ export default function MyAnswer({
           </ValidationContextProvider>
         ) : (
           <HtmlParserComponent value={obj?.question_response} />
-        ))}
+        )):
+        (typeof obj !== "undefined" && (
+          <div
+            style={{
+              // height: "100vh",
+              minHeight: "200px",   // or any meaningful height
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "20px",       // default browser font size
+              fontWeight: "bold",
+            }}
+          >
+            Student response not available.
+          </div>
+        ))
+        
+        }
     </div>
   );
 }

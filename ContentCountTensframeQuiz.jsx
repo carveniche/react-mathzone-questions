@@ -13,7 +13,7 @@ function DisplayImageCard({ images, indexs,className,totalImage,setImageLoaded,c
     }, 250 * indexs);
     return () => clearTimeout(id);
   }, []);
-  return <div className={`${className} ${className2}`}>{state}</div>;
+  return <div className={`${className} ${className2} w-[100%]`}>{state}</div>;
 }
 
 function ContentCountTensframeQuiz({ content, totalRows,setImageLoaded,studentResponseView }) {
