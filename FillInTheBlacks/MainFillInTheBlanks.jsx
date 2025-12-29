@@ -4,7 +4,7 @@ import FillInTheBlanks from "./FillInTheBlanks";
 export default function MainFillInTheBlanks({ obj, meter, choiceId }) {
   let question_data = obj?.question_data || [];
   question_data = question_data[0] || {};
-  studentAnswer = question_data?.studentAnswer;
+  // studentAnswer = question_data?.studentAnswer;
 
   let studentAnswer = question_data?.studentAnswer ?? "";
 

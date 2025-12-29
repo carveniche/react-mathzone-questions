@@ -52,7 +52,7 @@ function HorizontalNotSymbols({ state, totalRows, meter }) {
       )}
       {redAlert && !hasAnswerSubmitted && <CustomAlertBoxMathZone />}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        <div>
+        <div className="_w-full">
           <div className={styles.questionName} style={{ display: "flex" }}>
             {readQuestionText && <SpeakQuestionText readText={questionText} />}
             <div>{HtmlParser(state?.questionName)}</div>

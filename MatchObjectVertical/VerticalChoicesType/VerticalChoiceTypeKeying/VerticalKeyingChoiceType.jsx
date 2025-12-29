@@ -35,6 +35,8 @@ export default function VerticalKeyingChoiceType({
   }, []);
   inputRef.current = row;
 
+ 
+
   return (
     <>
       <table>
@@ -43,7 +45,7 @@ export default function VerticalKeyingChoiceType({
             {items?.map((item, i) =>
               item.isMissed === "false" ? (
                 <tr className={"mathzone-color-indigo"}>
-                  <td style={{ padding: 5 }}>
+                  <td style={{ padding: 5 ,display:"flex",}}>
                     {" "}
                     <div>{HtmlParser(item?.imgvalue)}</div>
                   </td>
@@ -55,7 +57,7 @@ export default function VerticalKeyingChoiceType({
                 </tr>
               ) : (
                 <tr className={"mathzone-color-indigo"}>
-                  <td style={{ padding: 5 }}>
+                  <td style={{ padding: 5 ,display:"flex",}}>
                     {" "}
                     <div>{HtmlParser(item.imgvalue)}</div>
                   </td>

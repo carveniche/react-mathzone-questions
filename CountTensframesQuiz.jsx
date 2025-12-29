@@ -65,7 +65,7 @@ function CountTensFramesQuiz({
         />
       )}
       <div id="studentAnswerResponse" style={{ display: "flex" }}>
-        <div>
+        <div className="_w-full">
           <div className={`${styles.questionName}`} style={{ display: "flex" }}>
             {readQuestionText && (
               <SpeakQuestionText readText={state?.questionName} />
