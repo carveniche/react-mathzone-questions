@@ -1293,7 +1293,7 @@ td.ldivision_left {
 }
 
 #studentAnswerResponse div {
-  white-space: pre;
+  /* white-space: pre; */
 }
 
 #studentAnswerResponse .mathzoneMultipleChoiceFlexBox {
