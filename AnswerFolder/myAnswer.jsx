@@ -28,19 +28,22 @@ export default function MyAnswer({
   let specailOldTypeQuestion = oldQuestionWithNoHtmlQuestion();
   let responseAnswer = {};
   try {
-    responseAnswer = JSON.parse(obj?.question_response);
+    responseAnswer = JSON.parse(obj?.student_response);
   } catch (e) {
     responseAnswer = {};
-  }
- 
+  } 
+  const [skippQuestionData, setSkippQuestionData] =useState({})
+ useEffect(()=>{
+  setSkippQuestionData({ question_data: [questionData] ?? {} })
+ },[questionData])
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      {typeof obj === "undefined" ? (
+      { obj?.question_status === "Not attempted" || obj?.question_status === "Skipped" ? (
         <div>
           {/* <div className={styles.skippedQuestionTitle}>
             <h1> {showExtraDom}Student has not answered this question.</h1>
           </div> */}
-          {showSkippedQuestion && <SkippedQuestionViewer obj={questionData} />}
+          {showSkippedQuestion && <SkippedQuestionViewer obj={skippQuestionData} />}
         </div>
       ) : (
         obj?.correct !== undefined && pageFrom !="mathZoneResultReview" && (
@@ -91,7 +94,7 @@ export default function MyAnswer({
           </div>
         )
       )}
-      {obj && obj?.question_response ?
+      {obj  ?
         (specailOldTypeQuestion?.includes(type) ? (
           <ValidationContextProvider>
             <QuestionWithNoHtmlContent
@@ -99,9 +102,9 @@ export default function MyAnswer({
               obj={studentResponseData}
               choicesId={
                 studentResponseData?.result_data &&
-                studentResponseData?.result_data[0]?.choice_id
+                studentResponseData?.result_data[0]?.student_answer
               }
-              studentResponse={obj?.question_response}
+              studentResponse={obj?.student_response}
             />
           </ValidationContextProvider>
         ) : newTypeQuestionChecker(type) ? (
@@ -112,9 +115,9 @@ export default function MyAnswer({
             />
           </ValidationContextProvider>
         ) : (
-          <HtmlParserComponent value={obj?.question_response} />
+          <HtmlParserComponent value={obj?.student_response} />
         )):
-        (typeof obj !== "undefined" && (
+        (obj?.student_response  !== null && (
           <div
             style={{
               // height: "100vh",

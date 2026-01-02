@@ -1,3 +1,25 @@
+.fraction {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.2em 0.4ex;
+  text-align: center;
+  font-size: 12px !important;
+  left: -4px !important;
+}
+
+.fraction>span {
+  display: block;
+  padding-top: 0.15em;
+}
+
+.fraction span.fdn {
+  border-top: thin solid black;
+}
+
+.fraction span.bar {
+  display: none;
+}
+
 /* img {
   max-width: 100%;
   max-height: 100%;
