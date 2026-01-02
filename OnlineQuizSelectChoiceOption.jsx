@@ -55,11 +55,7 @@ function OnlineQuizSelectChoiceOption({
   }, []);
 
   return (
-    <div
-      className={`${styles.flex} ${styles.flexGap2rem} ${styles.flexWrap} ${styles.boxChoices}`}
-    >
-
-
+    <>
       <SelectChoiceCommon
         type={"htmlparse"}
         choices={choiceState}
@@ -67,8 +63,7 @@ function OnlineQuizSelectChoiceOption({
         handleChoiceSelection={handleChoiceSelection}
       />
 
-
-    </div>
+    </>
   );
 }
 export default OnlineQuizSelectChoiceOption;

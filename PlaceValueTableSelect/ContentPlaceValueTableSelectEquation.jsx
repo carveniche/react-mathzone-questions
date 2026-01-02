@@ -56,7 +56,7 @@ export default function ContentPlaceValueTableSelectEquation({
     let arr = content?.map((row) =>
       row?.map((cols) => {
         if (cols?.value?.includes("\\frac") && !isFrac) setisFrac(true);
-        let item = { ...cols, [student_answer]: "" };
+        let item = { ...cols, [student_answer]: cols[student_answer] || "" };
         return item;
       })
     );
@@ -112,7 +112,6 @@ export default function ContentPlaceValueTableSelectEquation({
       numeDenomArrE[1].replaceAll(" ", "")
     )
       value = negativeFraction;
-    console.log("E", value);
     if (hasAnswerSubmitted || isStudentAnswerResponse) return;
     if (status && currentVirtualKeyBoard > -1) setCurrentVirtualKeyBoard(-1);
 
@@ -174,6 +173,7 @@ export default function ContentPlaceValueTableSelectEquation({
                 {mathQuilEditorChecker(item?.value) ? (
                   <input
                     type="text"
+                    className="para_text"
                     value={
                       isStudentAnswerResponse
                         ? item[student_answer]

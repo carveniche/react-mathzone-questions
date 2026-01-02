@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./clickableOnYesNo.module.css";
 import styles2 from "../../OnlineQuiz.module.css";
 import { Pattern } from "./pattern";
@@ -9,6 +9,7 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../../CommonFiles/PatternMatchers/SpeakQuestionText";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SelectChoiceYesNo from "./SelectChoiceYesNo";
 export const ClickableOnYesNo = ({ data, meter }) => {
   meter = Number(meter) || 0;
   const {
@@ -20,6 +21,7 @@ export const ClickableOnYesNo = ({ data, meter }) => {
     isStudentAnswerResponse,
     setQuestionWithAnswer,
     readQuestionText,
+    setCurrectAnswer
   } = useContext(ValidationContext);
 
   const handleClick = (val) => {
@@ -43,6 +45,12 @@ export const ClickableOnYesNo = ({ data, meter }) => {
     setQuestionWithAnswer({ ...data, [student_answer]: choices });
     setHasAnswerSubmitted(true);
   };
+  
+  useEffect(() => {
+    if (data.answer) {
+      setCurrectAnswer(data?.answer)
+    }
+  }, [data])
   return (
     <div>
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmit} />}
@@ -63,7 +71,9 @@ export const ClickableOnYesNo = ({ data, meter }) => {
           <div>
             <ConditionOnProgressBar meter={meter} />
           </div>
+          
           <div>
+
             <div
               style={{
                 display: "flex",
@@ -83,8 +93,12 @@ export const ClickableOnYesNo = ({ data, meter }) => {
                 );
               })}
             </div>
-            <div style={{ display: "flex", gap: "1rem" }}>
-              <div
+
+
+          <SelectChoiceYesNo onSelect={handleClick} choices={choices} studentAnswer={data[student_answer]}/>
+
+
+              {/* <div
                 className={styles.yesNoButton}
                 onClick={() => {
                   handleClick("yes");
@@ -92,7 +106,7 @@ export const ClickableOnYesNo = ({ data, meter }) => {
                 style={{
                   background:
                     isStudentAnswerResponse &&
-                    String(data[student_answer])?.trim() === "yes"
+                    String()?.trim() === "yes"
                       ? "#b9c2fc"
                       : choices == "yes"
                       ? "#b9c2fc"
@@ -100,8 +114,8 @@ export const ClickableOnYesNo = ({ data, meter }) => {
                 }}
               >
                 Yes
-              </div>
-              <div
+              </div> */}
+              {/* <div
                 className={styles.yesNoButton}
                 style={{
                   background:
@@ -117,8 +131,7 @@ export const ClickableOnYesNo = ({ data, meter }) => {
                 }}
               >
                 No
-              </div>
-            </div>
+              </div> */}
           </div>
         </div>
       </div>

@@ -102,9 +102,8 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
     readQuestionText,
   } = useContext(ValidationContext);
   const input2Ref = useRef();
-
   const validationForKeying = (newData, choices, equationObj) => {
-    console.log("this is equationtype", equationObj);
+   
     for (let key in newData) {
       if (newData[key]) {
         if (!choices[key]) return 0;
@@ -288,7 +287,6 @@ export default function PlaceValueTableEquation({ state, totalRows, meter }) {
 
   useEffect(() => {
     let arr = collectDataAtCompileTimed(state?.questionContent);
-    console.log("this is  new data ", arr);
     setNewData({ ...arr });
   }, []);
 
