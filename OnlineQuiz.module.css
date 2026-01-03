@@ -2453,6 +2453,22 @@ border-color:#FFEBEB ;
   height: auto;
   text-align: center;
 }
+.CountGridTenframesMultipleContentGrid {
+  grid-auto-rows: 60px;
+}
+.CountGridTenframesMultipleContentGrid img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.CountGridTenframesMultipleContentGrid > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .CountGridTenframesMultipleContentGrid>div {
   border: 1px solid black;
@@ -3343,11 +3359,11 @@ border-color:#FFEBEB ;
   gap: 50px;
 }
 
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
+} */
 
 .checkNumLine {
   /* width: 50px; */

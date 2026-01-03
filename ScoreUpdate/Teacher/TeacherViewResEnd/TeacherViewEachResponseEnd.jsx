@@ -9,6 +9,7 @@ export default function TeacherViewEachResponseEnd({
   type,
   timerStatus,
   questionDatas,
+  pageFrom,
 }) {
   return (
     <Modal style={{ position: "relative" }}>
@@ -17,6 +18,7 @@ export default function TeacherViewEachResponseEnd({
         type={type}
         timerStatus={timerStatus}
         studentResponseData={questionDatas}
+        pageFrom={pageFrom}
       />
     </Modal>
   );
