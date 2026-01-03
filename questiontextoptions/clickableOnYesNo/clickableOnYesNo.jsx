@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./clickableOnYesNo.module.css";
 import styles2 from "../../OnlineQuiz.module.css";
 import { Pattern } from "./pattern";
@@ -9,6 +9,7 @@ import CustomAlertBoxMathZone from "../../CommonJSFiles/CustomAlertBoxMathZone";
 import { student_answer } from "../../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../../CommonFiles/PatternMatchers/SpeakQuestionText";
 import ConditionOnProgressBar from "../../CommonJsxComponent/ConditionOnProgressBar";
+import SelectChoiceYesNo from "./SelectChoiceYesNo";
 export const ClickableOnYesNo = ({ data, meter }) => {
   meter = Number(meter) || 0;
   const {
@@ -20,6 +21,7 @@ export const ClickableOnYesNo = ({ data, meter }) => {
     isStudentAnswerResponse,
     setQuestionWithAnswer,
     readQuestionText,
+    setCurrectAnswer
   } = useContext(ValidationContext);
 
   const handleClick = (val) => {
@@ -43,6 +45,12 @@ export const ClickableOnYesNo = ({ data, meter }) => {
     setQuestionWithAnswer({ ...data, [student_answer]: choices });
     setHasAnswerSubmitted(true);
   };
+  
+  useEffect(() => {
+    if (data.answer) {
+      setCurrectAnswer(data?.answer)
+    }
+  }, [data])
   return (
     <div>
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmit} />}
@@ -63,90 +71,67 @@ export const ClickableOnYesNo = ({ data, meter }) => {
           <div>
             <ConditionOnProgressBar meter={meter} />
           </div>
-          <div style={{ width: "100%"}}>
+          
+          <div>
+
             <div
               style={{
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                border: "1px solid #ccc",
-                width: "100%",
+                flexWrap: "wrap",
+                gap: "4rem",
+                margin: "2rem 0",
               }}
             >
-              <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                  gap: "4rem",
-                  margin: "1rem 0",
-                  border: "1px solid blue",
-                }}>
-                {data.questionContent[0].map((e, i) => {
-                  return (
-                    <div className={styles.frame} key={i}>
-                      <Pattern
-                        count={data.questionContent[0][i].count}
-                        imgUrl={data.questionContent[0][i].img}
-                      />
-                    </div>
+              {data.questionContent[0].map((e, i) => {
+                return (
+                  <div className={styles.frame} key={i}>
+                    <Pattern
+                      count={data.questionContent[0][i].count}
+                      imgUrl={data.questionContent[0][i].img}
+                    />
+                  </div>
+                );
+              })}
+            </div>
 
-                  );
-                })}
-              </div>
-              <div
+
+          <SelectChoiceYesNo onSelect={handleClick} choices={choices} studentAnswer={data[student_answer]}/>
+
+
+              {/* <div
+                className={styles.yesNoButton}
+                onClick={() => {
+                  handleClick("yes");
+                }}
                 style={{
-                  display: "flex",
-                  width: "100%",
-                  gap: "4rem",              
-                  justifyContent: "space-evenly",
-                 alignItems: "center",
-                  border: "1px solid red",
+                  background:
+                    isStudentAnswerResponse &&
+                    String()?.trim() === "yes"
+                      ? "#b9c2fc"
+                      : choices == "yes"
+                      ? "#b9c2fc"
+                      : "initial",
                 }}
               >
-                <div
-
-                  className={styles.yesNoButton}
-                  onClick={() => {
-                    handleClick("yes");
-                  }}
-                  style={{
-                    background:
-                      isStudentAnswerResponse &&
-                        String(data[student_answer])?.trim() === "yes"
-                        ? "#b9c2fc"
-                        : choices == "yes"
-                          ? "#b9c2fc"
-                          : "initial",
-                  }}
-                >
-                  Yes
-                </div>
-                <div
-                  className={styles.yesNoButton}
-                  style={{
-                    background:
-                      isStudentAnswerResponse &&
-                        String(data[student_answer])?.trim() === "no"
-                        ? "#b9c2fc"
-                        : choices == "no"
-                          ? "#b9c2fc"
-                          : "initial",
-                  }}
-                  onClick={() => {
-                    handleClick("no");
-                  }}
-                >
-                  No
-                </div>
-
-              </div>
-            </div>
-            <div style={{ display: "flex", gap: "4rem", justifyContent: "space-around" }}>
-
-            </div>
+                Yes
+              </div> */}
+              {/* <div
+                className={styles.yesNoButton}
+                style={{
+                  background:
+                    isStudentAnswerResponse &&
+                    String(data[student_answer])?.trim() === "no"
+                      ? "#b9c2fc"
+                      : choices == "no"
+                      ? "#b9c2fc"
+                      : "initial",
+                }}
+                onClick={() => {
+                  handleClick("no");
+                }}
+              >
+                No
+              </div> */}
           </div>
         </div>
       </div>

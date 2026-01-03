@@ -38,7 +38,7 @@ export default function MyAnswer({
  },[questionData])
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      { obj?.question_status === "Not attempted" || obj?.question_status === "Skipped" ? (
+      { (obj?.question_status === "Not attempted" || obj?.question_status === "Skipped") && newTypeQuestionChecker(type) ? (
         <div>
           {/* <div className={styles.skippedQuestionTitle}>
             <h1> {showExtraDom}Student has not answered this question.</h1>
@@ -101,8 +101,8 @@ export default function MyAnswer({
               type={type}
               obj={studentResponseData}
               choicesId={
-                studentResponseData?.result_data &&
-                studentResponseData?.result_data[0]?.student_answer
+                studentResponseData?.question_data?.[0] &&
+                studentResponseData?.question_data?.[0]?.student_answer
               }
               studentResponse={obj?.student_response}
             />

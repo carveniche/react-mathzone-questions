@@ -27,7 +27,7 @@ export default function ContentPlaceValueTableSelect({
   useEffect(() => {
     let arr = content?.map((row) =>
       row?.map((cols) => {
-        let item = { ...cols, [student_answer]: "" };
+        let item = { ...cols, [student_answer]:cols[student_answer] || "" };
         return item;
       })
     );
@@ -38,7 +38,6 @@ export default function ContentPlaceValueTableSelect({
   const [state, setState] = useState({});
   const handleChange = (e, rows, cols) => {
 
-    console.log('row',row)
     row[rows][cols].stringLength =
       e.target.value.length > 1 ? e.target.value.length : 1;
       setRow([...row]);
@@ -52,6 +51,7 @@ export default function ContentPlaceValueTableSelect({
 
   let currentIndex = 0;
   input2Ref.current = [...rowsData];
+
   return (
     <div style={GridPlaceValueTable}>
       <div
@@ -86,6 +86,7 @@ export default function ContentPlaceValueTableSelect({
               >
                 <input
                   type="text"
+                  className="para_text"
                   value={
                     isStudentAnswerResponse
                       ? item[student_answer]

@@ -14,49 +14,50 @@ export default function SelectChoiceCommon(
 
   const {
     hasAnswerSubmitted,
-    setHasAnswerSubmitted,
-    setIsAnswerCorrect,
-    isAnswerCorrect,
-    choicesId,
-    setChoicesId,
     studentAnswerChoice,
-    setStudentAnswerChoice,
-    studentAnswerQuestion,
-    setStudentAnswerQuestion,
-    responseUrl,
-    setResponseUrl,
-    handleCurrentIdentity,
-    currentIdentity,
-    setQuestionWithAnswer,
-    questionWithAnswer,
-    handleUpdateStudentAnswerResponse,
     isStudentAnswerResponse,
-    indianAccent,
-    setIndianAccent,
-    readQuestionText,
-    setReadQuestiontext,
-    setChoices,
-    showQuizResponseAsText,
     currectAnswer,
     questionObj,
   } = useContext(ValidationContext)
+
+
+  function extractLatexFromMathQuill(htmlString) {
+    if (!htmlString || typeof htmlString !== "string") return "";
+
+    const dollarMatch = htmlString.match(/\$(.*?)\$/);
+    let latex = dollarMatch ? dollarMatch[1] : htmlString;
+
+    latex = latex.replace(/\\\\/g, "\\");
+    latex = latex.replace(/\(/g, "");
+    latex = latex.replace(/\)/g, "");
+    latex = latex.replace(/\u00A0/g, "");
+
+    return latex.trim();
+  }
+
+
 
   return (
     <>
       <div className={styles.choices_wrapper}>
         {choices?.map((item, i) => {
-          const valueTrimmed = String(item?.value).trim();
-          const studentChoiceTrimmed = String(studentAnswerChoice).trim();
-          const correctAnswerTrimmed = String(currectAnswer).trim();
-          const studentAnswerTrimmed = String(studentAnswer).trim();
-          const isSelectedTrue = isStudentAnswerResponse && correctAnswerTrimmed == item?.value;
-          const isSelected = isStudentAnswerResponse && correctAnswerTrimmed == studentAnswerTrimmed && item?.value == studentAnswerTrimmed;
-          const isSelectedFalse = isStudentAnswerResponse && correctAnswerTrimmed !== studentAnswerTrimmed && item?.value == studentAnswerTrimmed;
+
+          // const valueTrimmed = String(item?.value).trim();
+          // const studentChoiceTrimmed = String(studentAnswerChoice).trim();
+          // const correctAnswerTrimmed = String(currectAnswer).trim();
+          // const studentAnswerTrimmed = String(studentAnswer).trim();
+          const valueTrimmed = extractLatexFromMathQuill(String(item?.value).trim());
+          const studentChoiceTrimmed = extractLatexFromMathQuill(String(studentAnswerChoice).trim());
+          const correctAnswerTrimmed = extractLatexFromMathQuill(String(currectAnswer).trim());
+          const studentAnswerTrimmed = extractLatexFromMathQuill(String(studentAnswer).trim());
+          const isSelectedTrue = isStudentAnswerResponse && correctAnswerTrimmed == valueTrimmed;
+          const isSelected = isStudentAnswerResponse && correctAnswerTrimmed == studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
+          const isSelectedFalse = isStudentAnswerResponse && correctAnswerTrimmed !== studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
           const isVisible = item?.show;
           const isAnswerSubmitted = hasAnswerSubmitted;
           const isCurrentStudentAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed == studentChoiceTrimmed;
           const isThisCorrectAnswer = isAnswerSubmitted && correctAnswerTrimmed == valueTrimmed;
-          const isThisIncorrectAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed !== studentChoiceTrimmed;
+          const isThisIncorrectAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed !== studentChoiceTrimmed;  
           const classList = new Set([
             styles.choiceType,
             isSelectedFalse && styles.red,
@@ -70,6 +71,7 @@ export default function SelectChoiceCommon(
           ]);
 
           const className = Array.from(classList).filter(Boolean).join(' ');
+
           return (
 
             <div

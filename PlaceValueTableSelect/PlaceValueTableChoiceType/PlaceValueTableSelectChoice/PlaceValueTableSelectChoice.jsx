@@ -19,30 +19,31 @@ export default function ContentPlaceValueTableSelect({
   studentAnswer,
 }) {
 
-    const { hasAnswerSubmitted, setStudentAnswerChoice, isStudentAnswerResponse,setCurrectAnswer } =
+  const { hasAnswerSubmitted, setStudentAnswerChoice, isStudentAnswerResponse, setCurrectAnswer } =
     useContext(ValidationContext);
   let [choicesState, setChoicesState] = useState([]);
-  let prev = useRef(0);
+  const [prevSelect, setPrevSelect] = useState(0);
+
   useEffect(() => {
-
-      const correctMissedAnswer=  getSelectChoiceMissedValue(choices,"option");
-      console.log(correctMissedAnswer,"correctMissedAnswer")
-      setCurrectAnswer(correctMissedAnswer);
-
+    // const correctMissedAnswer = getSelectChoiceMissedValue(choices, "option");
     let arr = [];
     choices?.map((item) => {
       let obj = { ...item, show: false };
       arr.push({ ...obj });
+      if(item?.option == true || item?.option == "true") {
+        setCurrectAnswer(item?.value);
+      }
     });
     setChoicesState([...arr]);
   }, []);
 
   const handleChoiceSelection = (i) => {
     if (hasAnswerSubmitted || isStudentAnswerResponse) return;
-    choicesState[prev.current].show = false;
+    choicesState[prevSelect].show = false;
     choicesState[i].show = true;
     setChoicesState([...choicesState]);
-    prev.current = i;
+    setPrevSelect(i);
+   
     setStudentAnswerChoice(choicesState[i]?.value);
   };
   inputRef.current = [...choicesState];
@@ -53,13 +54,13 @@ export default function ContentPlaceValueTableSelect({
           className={styles.PlaceValueTableSelectTypeSelectChoiceFlexBox}
           style={HeaderRowPlaceValueTable}
         >
-       {questionHead?.map((item, i) => (
-  <div key={i}>
-    {JSON.stringify(item?.value).includes("mq-selectable") ? 
-      parse(item?.value, optionSelectStaticMathField) : 
-      <HtmlParserComponent value={item?.value} />}
-  </div>
-))}
+          {questionHead?.map((item, i) => (
+            <div key={i}>
+              {JSON.stringify(item?.value).includes("mq-selectable") ?
+                parse(item?.value, optionSelectStaticMathField) :
+                <HtmlParserComponent value={item?.value} />}
+            </div>
+          ))}
         </div>
         {content?.map((items, index) => (
           <div
@@ -69,9 +70,9 @@ export default function ContentPlaceValueTableSelect({
             {items.map((item, i) =>
               item?.isMissed !== "true" ? (
                 <div key={i}>
-                  {JSON.stringify(item?.value).includes("mq-selectable") ? 
-      parse(item?.value, optionSelectStaticMathField) : 
-      <HtmlParserComponent value={item?.value} />}
+                  {JSON.stringify(item?.value).includes("mq-selectable") ?
+                    parse(item?.value, optionSelectStaticMathField) :
+                    <HtmlParserComponent value={item?.value} />}
                 </div>
               ) : (
                 <div>

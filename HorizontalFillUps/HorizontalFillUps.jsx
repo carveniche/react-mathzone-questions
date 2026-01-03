@@ -96,6 +96,7 @@ export default function HorizontalFillUps({
   meter,
   questionType,
 }) {
+ 
   totalRows = Number(totalRows);
   totalCols = Number(totalCols);
   meter = Number(meter) || 0;

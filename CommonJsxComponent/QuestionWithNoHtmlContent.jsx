@@ -28,9 +28,9 @@ export default function QuestionWithNoHtmlContent({type,choicesId,obj,studentRes
           <DisabledTeacherCkEditor
             str={studentResponse||""}
             meter={-1}
-            choiceData={obj?.question_data[0]?.choice_data}
+            choiceData={obj?.question_data?.[0]?.choice_data}
             choiceId={choicesId}
-            upload_file_name={obj?.question_data[0]?.upload_file_name}
+            upload_file_name={obj?.question_data?.[0]?.upload_file_name}
           />
         )
     }

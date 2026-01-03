@@ -37,7 +37,7 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
       content?.map((item) => {
         
         item.row == i && temp.push(item);
-         if(item.selected){
+         if(item.selected || item.isMissed==="true"){
           setCurrectAnswer(item.value);
         }
 
@@ -65,7 +65,7 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
         <div
           className={`${styles.HorizontalPictureSelectChoiceFlexBox} mathzone-color-indigo`}
           key={index}
-          style={{gap:choiceType="horizontal_fill_ups"?5:18}}
+          style={{gap:choiceType="horizontal_fill_ups" ? 5:18}}
         >
           {items?.map((item, i) =>
             item.isMissed === "false" ? (

@@ -187,6 +187,7 @@ export default function HorizontalFillUpsEquationType({
         status,
         setRedAlert
       );
+
       if (status != 0) {
         let result = manupulateEquationTypeQuestion1D(
           state?.questionContent,
@@ -194,7 +195,7 @@ export default function HorizontalFillUpsEquationType({
           "value"
         );
         result = manupulateQuestionContent1Darray(result);
-        console.log(result);
+       
         setQuestionWithAnswer({ ...state, questionContent: result });
       }
     } else if (state?.choiceType == "selectchoice") {
@@ -211,6 +212,7 @@ export default function HorizontalFillUpsEquationType({
       }
     }
   };
+  
   useEffect(() => {
     let arr = collectDataAtCompileTime(state?.questionContent);
 

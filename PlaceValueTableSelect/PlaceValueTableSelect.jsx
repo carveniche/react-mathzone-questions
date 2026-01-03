@@ -17,6 +17,7 @@ import {
 } from "../CommonJSFiles/ManupulateJsonData/commonManupulateJsonData";
 import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
+
 const changeAnswerStatus = (
   val,
   setIsAnswerCorrect,
@@ -33,6 +34,7 @@ const changeAnswerStatus = (
   setStudentAnswerQuestion(jsonData);
   setHasAnswerSubmitted(true);
 };
+
 const ValidationForDragDrop = (content) => {
   for (let rows of content) {
     for (let items of rows) {
@@ -51,6 +53,7 @@ const ValidationForDragDrop = (content) => {
   }
   return 2;
 };
+
 const ValidationForSelectChoice = (choices) => {
   let val = null;
   for (let items of choices) {
@@ -84,7 +87,6 @@ export default function PlaceValueTableSelect({ state, totalRows, meter }) {
   const handleSubmitAnswer = () => {
     if (hasAnswerSubmitted) return;
     if (state?.choiceType == "keying") {
-      console.log("this is inputr current", inputRef.current);
 
       for (let i = 0; i < inputRef.current?.length; i++)
         if (!String(inputRef.current[i].children[0].value).trim()) {
