@@ -21,35 +21,51 @@ export default function SelectChoiceCommon(
   } = useContext(ValidationContext)
 
 
-  function extractLatexFromMathQuill(htmlString) {
-    if (!htmlString || typeof htmlString !== "string") return "";
+function extractLatexFromMathQuill(input) {
+  if (!input || typeof input !== "string") return "";
 
-    const dollarMatch = htmlString.match(/\$(.*?)\$/);
-    let latex = dollarMatch ? dollarMatch[1] : htmlString;
+  // 1. Parse HTML safely
+  const container = document.createElement("div");
+  container.innerHTML = input;
 
-    latex = latex.replace(/\\\\/g, "\\");
-    latex = latex.replace(/\(/g, "");
-    latex = latex.replace(/\)/g, "");
-    latex = latex.replace(/\u00A0/g, "");
+  // 2. Replace MathQuill spans with their LaTeX
+  container.querySelectorAll(".mq-selectable").forEach(el => {
+    const latexMatch = el.textContent.match(/\$(.*?)\$/);
+    const latex = latexMatch ? latexMatch[1] : "";
+    el.replaceWith(latex);
+  });
 
-    return latex.trim();
-  }
+  // 3. Get plain text (math + text combined)
+  let result = container.textContent || "";
 
+  // 4. Normalize
+  result = result
+    .replace(/\u00A0/g, " ")      // non-breaking spaces
+    .replace(/\s+/g, " ")         // normalize spaces
+    .replace(/×/g, "*")           // normalize multiply
+    .replace(/\\{2,}/g, "\\")     // fix escaped slashes
+    .trim();
+
+  return result;
+}
 
 
   return (
     <>
       <div className={styles.choices_wrapper}>
         {choices?.map((item, i) => {
-
-          // const valueTrimmed = String(item?.value).trim();
-          // const studentChoiceTrimmed = String(studentAnswerChoice).trim();
-          // const correctAnswerTrimmed = String(currectAnswer).trim();
-          // const studentAnswerTrimmed = String(studentAnswer).trim();
-          const valueTrimmed = extractLatexFromMathQuill(String(item?.value).trim());
-          const studentChoiceTrimmed = extractLatexFromMathQuill(String(studentAnswerChoice).trim());
-          const correctAnswerTrimmed = extractLatexFromMathQuill(String(currectAnswer).trim());
-          const studentAnswerTrimmed = extractLatexFromMathQuill(String(studentAnswer).trim());
+          const str=JSON.stringify(item)
+            // Handle MathQuill elements
+          let valueTrimmed = String(item?.value).trim();
+          let studentChoiceTrimmed = String(studentAnswerChoice).trim();
+          let correctAnswerTrimmed = String(currectAnswer).trim();
+          let studentAnswerTrimmed = String(studentAnswer).trim();
+          if(str.includes("mq-selectable")) {
+           valueTrimmed = extractLatexFromMathQuill(String(item?.value).trim());
+           studentChoiceTrimmed = extractLatexFromMathQuill(String(studentAnswerChoice).trim());
+           correctAnswerTrimmed = extractLatexFromMathQuill(String(currectAnswer).trim());
+           studentAnswerTrimmed = extractLatexFromMathQuill(String(studentAnswer).trim());
+              }
           const isSelectedTrue = isStudentAnswerResponse && correctAnswerTrimmed == valueTrimmed;
           const isSelected = isStudentAnswerResponse && correctAnswerTrimmed == studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
           const isSelectedFalse = isStudentAnswerResponse && correctAnswerTrimmed !== studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
@@ -57,7 +73,7 @@ export default function SelectChoiceCommon(
           const isAnswerSubmitted = hasAnswerSubmitted;
           const isCurrentStudentAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed == studentChoiceTrimmed;
           const isThisCorrectAnswer = isAnswerSubmitted && correctAnswerTrimmed == valueTrimmed;
-          const isThisIncorrectAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed !== studentChoiceTrimmed;  
+          const isThisIncorrectAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed !== studentChoiceTrimmed;
           const classList = new Set([
             styles.choiceType,
             isSelectedFalse && styles.red,
