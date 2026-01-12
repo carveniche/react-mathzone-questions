@@ -31,70 +31,22 @@ export default function MyAnswer({
     responseAnswer = JSON.parse(obj?.student_response);
   } catch (e) {
     responseAnswer = {};
-  } 
-  const [skippQuestionData, setSkippQuestionData] =useState({})
- useEffect(()=>{
-  setSkippQuestionData({ question_data: [questionData] ?? {} })
- },[questionData])
+  }
+  // const [skippQuestionData, setSkippQuestionData] =useState({})
+  //  useEffect(()=>{
+  //   setSkippQuestionData({ question_data: [questionData] ?? {} })
+  //  },[questionData])
+  const question_status = ["Not attempted", "Skipped"]
+
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      { (obj?.question_status === "Not attempted" || obj?.question_status === "Skipped") && newTypeQuestionChecker(type) ? (
+      {(question_status.includes(obj?.question_status)) && newTypeQuestionChecker(type) && (
         <div>
-          {/* <div className={styles.skippedQuestionTitle}>
-            <h1> {showExtraDom}Student has not answered this question.</h1>
-          </div> */}
-          {showSkippedQuestion && <SkippedQuestionViewer obj={skippQuestionData} />}
+          {studentResponseData && <SkippedQuestionViewer obj={studentResponseData} />}
         </div>
-      ) : (
-        obj?.correct !== undefined && pageFrom !="mathZoneResultReview" && (
-          <div className={styles.answerBoxContainer}>
-            <AnswerBox
-              // background={
-              //   obj?.correct == true
-              //     ? "#cceea5"
-              //     : obj?.correct == false
-              //     ? "#fae0e0"
-              //     : "initial"
-              // }
-              color={
-                obj?.correct == true
-                  ? "#6caf20"
-                  : obj?.correct == false
-                  ? "#eb5953"
-                  : "initial"
-              }
-            >
-              {obj?.correct == true
-                ? <img
-                  src={`https://d2jhdcglwxx007.cloudfront.net/correct.png`}
-                  alt="correct/incorrect"
-                />
-                : obj?.correct == false
-                ? <img
-                    src={`https://d2jhdcglwxx007.cloudfront.net/incorrect.png`}
-                    alt="correct/incorrect"
-                  />
-                : ""}
-            </AnswerBox>
-            {!timerStatus && (
-              <div className={styles.timerContainer}>
-                <div className={styles.timerCircle}>
-                  <span className={styles.timerTime} id={styles.timerDisplay}>
-                    {(() => {
-                      let mm = Math.floor((obj?.time_spent || 0) / 60);
-                      let ss = (obj?.time_spent || 0) % 60;
-                      return `${mm.toString().padStart(2, "0")}:${ss
-                        .toString()
-                        .padStart(2, "0")}`;
-                    })()}
-                  </span>
-                </div>
-              </div>
-            )}
-          </div>
-        )
       )}
-      {obj  ?
+      {obj ?
         (specailOldTypeQuestion?.includes(type) ? (
           <ValidationContextProvider>
             <QuestionWithNoHtmlContent
@@ -102,12 +54,12 @@ export default function MyAnswer({
               obj={studentResponseData}
               choicesId={
                 studentResponseData?.question_data?.[0] &&
-                studentResponseData?.question_data?.[0]?.student_answer
+                studentResponseData?.student_answer
               }
               studentResponse={obj?.student_response}
             />
           </ValidationContextProvider>
-        ) : newTypeQuestionChecker(type) ? (
+        ) : (newTypeQuestionChecker(type) && (!question_status.includes(obj?.question_status))) ? (
           <ValidationContextProvider>
             <CommonStudentResponse
               data={responseAnswer}
@@ -116,8 +68,8 @@ export default function MyAnswer({
           </ValidationContextProvider>
         ) : (
           <HtmlParserComponent value={obj?.student_response} />
-        )):
-        (obj?.student_response  !== null && (
+        )) :
+        (obj?.student_response !== null && (
           <div
             style={{
               // height: "100vh",
@@ -132,8 +84,8 @@ export default function MyAnswer({
             Student response not available.
           </div>
         ))
-        
-        }
+
+      }
     </div>
   );
 }

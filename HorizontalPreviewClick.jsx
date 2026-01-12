@@ -42,7 +42,7 @@ function HorizontalPreviewClick({ obj, meter }) {
     setStudentAnswerQuestion(jsonData);
     setShowAnswer(true);
   };
-  console.log("obj?.questionName", obj?.questionName);
+  
 
   var questionText = obj?.questionName
     .replaceAll("<span>", "")

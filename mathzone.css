@@ -19,6 +19,37 @@
 .fraction span.bar {
   display: none;
 }
+.std-size {
+  font-family: "opensans";
+  letter-spacing: 20px;
+  padding-right: 20px;
+  margin-left: 25px;
+  position: relative;
+}
+.right-spac {
+  float: right;
+  display: flex;
+  flex-wrap: wrap;
+}
+.right-spac .num1 {
+  float: left;
+}
+
+.right-spac:nth-of-type(1) .num1 {
+  padding-top: 15px;
+}
+.num1 .carry {
+  position: absolute;
+  top: -5px;
+  font-size: 11px;
+  left: 8px;
+}
+.right-spac .num1 {
+  display: inline-block;
+  padding: .5rem ;
+ 
+  position: relative;
+}
 
 /* img {
   max-width: 100%;
@@ -1315,7 +1346,7 @@ td.ldivision_left {
 }
 
 #studentAnswerResponse div {
-  /* white-space: pre; */
+  white-space: pre;
 }
 
 #studentAnswerResponse .mathzoneMultipleChoiceFlexBox {

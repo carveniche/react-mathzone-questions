@@ -25,68 +25,70 @@ import MainTensframe from '../TensFrame/MainTensFrame';
 import MainVertical from '../Vertical/MainVertical';
 import MainVerticalWithSymbols from '../VerticalWithSymbols/MainVerticalWithSymbols';
 import { ValidationContext } from '../../MainOnlineQuiz/MainOnlineQuizPage';
+import MainLongDivision from '../LongDivision/MainLongDivision';
+import MainMultipleOptionSelect from '../MultipleOptionSelect/MainMultipleOptionSelect';
 
 
-export default function CommonStudentResponse({data,type}){
-    const {handleUpdateStudentAnswerResponse}=useContext(ValidationContext)
-    useEffect(()=>{
-        handleUpdateStudentAnswerResponse(true)
-    },[])
-  
-    let questionType = {
-     
-        horizontal_fill_ups: (
-          <MainHorizontalFillUps obj={data} meter={0} />
-        ),
-        horizontal_fill_ups_multi_row: (
-          <MainHorizontalFillUps obj={data} meter={0} />
-        ),
-        horizontal: <MainHorizontal obj={data} meter={0} />,
-        vertical: <MainVertical obj={data} meter={0} />,
-        matchobjectsvertical: (<MainMatchObjectVertical obj={data} meter={0} />),
-        randomarrangementdragdrop:<MainRandomArrangmentDragDrop obj={data} meter={0} />,
-        place_value_chart: (
-          <MainPlaceValueChart obj={data} meter={0} />
-        ),
-        compare_drag_operator: (
-          <MainDragAndDrop obj={data} meter={0} />
-        ),
-        comparison_of_images: (
-          <MainDragDropImageCompare obj={data} meter={0} />
-        ),
-        matchobjectshorizontal: (
-          <MainMatchObjectHorizontal obj={data} meter={0} />
-        ),
-        base_block_images: (
-          <MainBlockBaseImage obj={data} meter={0} />
-        ),
-        horizontalnotsymbols: (
-          <MainHorizontalNotSymbols obj={data} meter={0} />
-        ),
-        options_multiple_pictures: (
-          <OptionMultiplePictureMain obj={data} meter={0} />
-        ),
-        horizontalpicture: (
-          <MainHorizontalPicture obj={data} meter={0} />
-        ),
-        place_value_table_select: (
-          <MainValueTableSelect obj={data} meter={0} />
-        ),
-        countontenframes: (
-          <MainCountOnTensframe obj={data} meter={0} />
-        ),
-        count_tenframes_multiple: (
-          <OnlineQuiz obj={data} meter={0} studentResponseView={true}/>
-        ),
-        tenframes: <MainTensframe obj={data} meter={0} />,
-        questiontextoptions: (
-        <ClickableOnPic data={data} meter={0} />),
+export default function CommonStudentResponse({ data, type }) {
+  const { handleUpdateStudentAnswerResponse } = useContext(ValidationContext)
+  useEffect(() => {
+    handleUpdateStudentAnswerResponse(true)
+  }, [])
+
+  let questionType = {
+
+    horizontal_fill_ups: (
+      <MainHorizontalFillUps obj={data} meter={0} />
+    ),
+    horizontal_fill_ups_multi_row: (
+      <MainHorizontalFillUps obj={data} meter={0} />
+    ),
+    horizontal: <MainHorizontal obj={data} meter={0} />,
+    vertical: <MainVertical obj={data} meter={0} />,
+    matchobjectsvertical: (<MainMatchObjectVertical obj={data} meter={0} />),
+    randomarrangementdragdrop: <MainRandomArrangmentDragDrop obj={data} meter={0} />,
+    place_value_chart: (
+      <MainPlaceValueChart obj={data} meter={0} />
+    ),
+    compare_drag_operator: (
+      <MainDragAndDrop obj={data} meter={0} />
+    ),
+    comparison_of_images: (
+      <MainDragDropImageCompare obj={data} meter={0} />
+    ),
+    matchobjectshorizontal: (
+      <MainMatchObjectHorizontal obj={data} meter={0} />
+    ),
+    base_block_images: (
+      <MainBlockBaseImage obj={data} meter={0} />
+    ),
+    horizontalnotsymbols: (
+      <MainHorizontalNotSymbols obj={data} meter={0} />
+    ),
+    options_multiple_pictures: (
+      <OptionMultiplePictureMain obj={data} meter={0} />
+    ),
+    horizontalpicture: (
+      <MainHorizontalPicture obj={data} meter={0} />
+    ),
+    place_value_table_select: (
+      <MainValueTableSelect obj={data} meter={0} />
+    ),
+    countontenframes: (
+      <MainCountOnTensframe obj={data} meter={0} />
+    ),
+    count_tenframes_multiple: (
+      <OnlineQuiz obj={data} meter={0} studentResponseView={true} />
+    ),
+    tenframes: <MainTensframe obj={data} meter={0} />,
+    questiontextoptions: (
+      <ClickableOnPic data={data} meter={0} />),
     verticalwithsymbols: (
       <MainVerticalWithSymbols obj={data} meter={0} />
     ),
     questiontextimages: (
       <MainQuestionTextImage obj={data} meter={0} />
-      
+
     ),
     long_multiplication: <MainVertical obj={data} meter={0} />,
     logical_table_kg: <LogicalTableKg data={data} meter={0} />,
@@ -98,8 +100,18 @@ export default function CommonStudentResponse({data,type}){
       <ClickableOnYesNo data={data} meter={0} />
     ),
     number_bond: <MainNumberBond obj={data} meter={0} />,
-       
-      };
-      return <>{questionType[type]}</>
+    long_division: (
+      <MainLongDivision obj={data} meter={0} />
+    ),
+    options_select_multiple_pictures: (
+      <MainMultipleOptionSelect
+        obj={data}
+        meter={0}
+        multipicselect={true}
+      />
+    ),
+
+  };
+  return <>{questionType[type]}</>
 
 }
