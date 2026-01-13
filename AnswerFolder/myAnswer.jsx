@@ -54,7 +54,7 @@ export default function MyAnswer({
               obj={studentResponseData}
               choicesId={
                 studentResponseData?.question_data?.[0] &&
-                studentResponseData?.student_answer
+                studentResponseData?.question_data?.[0]?.student_answer
               }
               studentResponse={obj?.student_response}
             />
