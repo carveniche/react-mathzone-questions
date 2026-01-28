@@ -115,9 +115,6 @@ export default function CommonStudentResponse({ data, type }) {
   };
 
   const SelectedComponent = questionType[type];
-  useEffect(() => {
-   console.log(type,"typetypetype")
-  }, [type])
   return <>
     {SelectedComponent ?? <UnsupportedQuestionType type={type} />}
   </>
