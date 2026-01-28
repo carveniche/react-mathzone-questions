@@ -28,14 +28,11 @@ export default function MyAnswer({
   let specailOldTypeQuestion = oldQuestionWithNoHtmlQuestion();
   let responseAnswer = {};
   try {
-    responseAnswer = JSON.parse(obj?.student_response);
+    responseAnswer = obj?.student_response ? JSON.parse(obj?.student_response): JSON.parse(obj?.question_text);
   } catch (e) {
     responseAnswer = {};
   }
-  // const [skippQuestionData, setSkippQuestionData] =useState({})
-  //  useEffect(()=>{
-  //   setSkippQuestionData({ question_data: [questionData] ?? {} })
-  //  },[questionData])
+
   const question_status = ["Not attempted", "Skipped"]
 
 

@@ -27,6 +27,8 @@ import MainVerticalWithSymbols from '../VerticalWithSymbols/MainVerticalWithSymb
 import { ValidationContext } from '../../MainOnlineQuiz/MainOnlineQuizPage';
 import MainLongDivision from '../LongDivision/MainLongDivision';
 import MainMultipleOptionSelect from '../MultipleOptionSelect/MainMultipleOptionSelect';
+import UnsupportedQuestionType from '../../UnsupportedQuestionType/UnsupportedQuestionType';
+
 
 
 export default function CommonStudentResponse({ data, type }) {
@@ -110,8 +112,14 @@ export default function CommonStudentResponse({ data, type }) {
         multipicselect={true}
       />
     ),
-
   };
-  return <>{questionType[type]}</>
+
+  const SelectedComponent = questionType[type];
+  useEffect(() => {
+   console.log(type,"typetypetype")
+  }, [type])
+  return <>
+    {SelectedComponent ?? <UnsupportedQuestionType type={type} />}
+  </>
 
 }
