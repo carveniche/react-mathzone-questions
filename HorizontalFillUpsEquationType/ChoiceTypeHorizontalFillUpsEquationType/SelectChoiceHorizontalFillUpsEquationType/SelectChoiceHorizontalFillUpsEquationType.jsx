@@ -27,7 +27,9 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
     choices?.map((item) => {
       let obj = { value: item, show: false };
       arr2.push({ ...obj });
+ 
     });
+   
 
     let arr = [];
     totalRows = Number(totalRows) || 0;
@@ -35,8 +37,9 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
     for (let i = 0; i < totalRows; i++) {
       let temp = [];
       content?.map((item) => {
-        
+       
         item.row == i && temp.push(item);
+      
          if(item.selected || item.isMissed==="true"){
           setCurrectAnswer(item.value);
         }
@@ -47,7 +50,7 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
     setRow([...arr]);
     setChoicesState([...arr2]);
   }, []);
-  
+ 
   const handleChoiceSelection = (i) => {
   
     if (hasAnswerSubmitted||isStudentAnswerResponse) return;

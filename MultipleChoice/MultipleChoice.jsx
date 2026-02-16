@@ -46,9 +46,14 @@ export default function MultipleChoice({ state, meter, choiceId }) {
     }
     setRedAlert(true);
   };
-  var questionText = state?.question_text
+  
+ let questionText = ""
+  if(state?.question_text){
+  questionText = state?.question_text
     .replaceAll("<br/>", "")
     .replaceAll("<br>", "");
+  }
+ 
   return (
     <div id="multipleChoiceStudentAnswerResponse">
       {!isStudentAnswerResponse && <SolveButton onClick={handleSubmitAnswer} />}
@@ -62,7 +67,7 @@ export default function MultipleChoice({ state, meter, choiceId }) {
             {readQuestionText && (
               <SpeakQuestionText type={"oldType"} readText={questionText} />
             )}
-            <div>{parse(state?.question_text)}</div>
+            <div>{parse(state?.question_text || "")}</div>
           </div>
           <div>
             {state?.upload_file_name?.trim() && (

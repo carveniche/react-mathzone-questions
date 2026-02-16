@@ -3440,6 +3440,8 @@ input::-webkit-inner-spin-button {
 .mapBox,
 .numMapBox {
   margin: 6px 0;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .mapBox {
@@ -3483,7 +3485,9 @@ input::-webkit-inner-spin-button {
   padding-top: 2px;
   height: 28px;
   width: 28px;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -3529,7 +3533,7 @@ input::-webkit-inner-spin-button {
   overflow-x: auto;
   overflow-y: hidden;
   /* padding: 6rem 0; 4rem 0 7rem 0 */
-  padding: 4rem 0 7rem 0;
+  padding: 2rem 0 4rem 0;
 }
 
 .selected,
@@ -3555,6 +3559,8 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 1;
+  
 }
 
 .section:hover {
