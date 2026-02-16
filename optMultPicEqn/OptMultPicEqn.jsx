@@ -12,38 +12,7 @@ import { findSelectedValue } from "../CommonJSFiles/ManupulateJsonData/commonMan
 import { student_answer } from "../CommonJSFiles/ManupulateJsonData/oneDto2D";
 import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText";
 
-const validationForSelectMultipleSelect = (choices, multipicselect) => {
-  let n = choices?.length || 0;
-  if (multipicselect) {
-    let result = 0;
-    console.log("choices to validate", choices);
-    let flagitem = true;
-    for (let i = 0; i < n; i++) {
-      if (
-        String(choices[i].show).trim() !== String(choices[i].selected).trim()
-      ) {
-        flagitem = false;
-      }
-    }
-    if (flagitem) {
-      result = 2;
-    } else {
-      result = 1;
-    }
-    return result;
-  } else {
-    for (let i = 0; i < n; i++) {
-      if (choices[i].show == true) {
-        if (
-          String(choices[i].show).trim() == String(choices[i].selected).trim()
-        )
-          return 2;
-        else return 1;
-      }
-    }
-    return 0;
-  }
-};
+
 function OptMultPicEqn({
   state,
   totalRows,
@@ -102,6 +71,7 @@ function OptMultPicEqn({
 
     return selectedValues;
   };
+
   return (
     <>
       <div>
@@ -152,4 +122,37 @@ function OptMultPicEqn({
     </>
   );
 }
+
+const validationForSelectMultipleSelect = (choices, multipicselect) => {
+  let n = choices?.length || 0;
+  if (multipicselect) {
+    let result = 0;
+    console.log("choices to validate", choices);
+    let flagitem = true;
+    for (let i = 0; i < n; i++) {
+      if (
+        String(choices[i].show).trim() !== String(choices[i].selected).trim()
+      ) {
+        flagitem = false;
+      }
+    }
+    if (flagitem) {
+      result = 2;
+    } else {
+      result = 1;
+    }
+    return result;
+  } else {
+    for (let i = 0; i < n; i++) {
+      if (choices[i].show == true) {
+        if (
+          String(choices[i].show).trim() == String(choices[i].selected).trim()
+        )
+          return 2;
+        else return 1;
+      }
+    }
+    return 0;
+  }
+};
 export default OptMultPicEqn;
