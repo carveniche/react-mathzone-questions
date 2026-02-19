@@ -4,7 +4,7 @@ import styles from "../OnlineQuiz.module.css";
 import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode";
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
-import SelectChoiceCommon from "../CommonFiles/SelectChoiceCommon";
+import MultiSelectChoiceCommon from "../CommonFiles/MultiSelectChoiceCommon";
 
 function OptMultPicChoiceSelectEqn({
   multipicselect,
@@ -21,6 +21,7 @@ function OptMultPicChoiceSelectEqn({
   useEffect(() => {
     let flag = false;
     let rows = [];
+   let temVal = []
 
     for (let i = 0; i < Number(totalRows); i++) {
       choices[i]?.map((item, j) => {
@@ -32,7 +33,8 @@ function OptMultPicChoiceSelectEqn({
           flag = true;
         }
         if (item.selected === "true" || item.selected === true) {
-          setCurrectAnswer(item.value);
+          temVal.push(item.value)
+          setCurrectAnswer(temVal);
         }
       });
     }
@@ -54,6 +56,9 @@ function OptMultPicChoiceSelectEqn({
       rows[i].show = !rows[i].show;
       prevRef.current = i;
       setRows([...rows]);
+      const selectedValues = rows.filter((item) => item.show).map((item) => item.value);
+      setStudentAnswerChoice(selectedValues)
+     
     }
   };
 
@@ -63,7 +68,7 @@ function OptMultPicChoiceSelectEqn({
     <div className="mathzone-color-indigo">
       <>
 
-        <SelectChoiceCommon
+        <MultiSelectChoiceCommon
                 choices={rows} 
                 studentAnswer={studentAnswer} 
                 handleChoiceSelection={handleChoiceSelection}

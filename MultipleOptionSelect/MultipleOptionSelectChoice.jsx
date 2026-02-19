@@ -45,7 +45,6 @@ import SpeakQuestionText from "../CommonFiles/PatternMatchers/SpeakQuestionText"
 const validationForSelectMultipleSelect = (choices) => {
   let n = choices?.length || 0;
   let result = 0;
-  console.log("choices to validate", choices);
 
   let flagitem = true;
 
@@ -103,7 +102,6 @@ function MultipleOptionSelectChoice({
 
     let value = findSelectedValuesall(inputRef?.current, "value");
 
-    console.log("this is student answer", student_answer, value);
     setQuestionWithAnswer({ ...state, [student_answer]: value });
     setShowAnswer(true);
   };
