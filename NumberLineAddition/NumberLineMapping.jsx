@@ -71,7 +71,11 @@ export default function NumberLineMapping({ question, meter }) {
     setQuestionWithAnswer({ ...question, "student_answer": studentFinalAnswer });
   }
 
-    function generateNumberLine(start, end, interval) {
+    function generateNumberLine(start, end, interval,isFraction) {
+
+      if(isFraction){
+        return fracGenerateNumberLine(start, end, interval, true);
+      }
         const decimals = getDecimalPlaces(Number(interval)); // ✅ ONLY interval
         const scale = Math.pow(10, decimals);
 
@@ -92,6 +96,40 @@ export default function NumberLineMapping({ question, meter }) {
 
         return result;
     }
+
+       function fracGenerateNumberLine(start, end, interval, isFraction) {
+        const result = [];
+
+        start = Number(start);
+        end = Number(end);
+        interval = Number(interval);
+
+        let step;
+
+        if (isFraction) {
+            step = 1 / interval;        // ✅ critical fix
+        } else {
+            step = interval;
+        }
+
+        let current = start;
+
+        while (current <= end + 0.000001) {
+            const rounded = Number(current.toFixed(6));
+
+            result.push({
+                value: rounded,
+                label: rounded.toString()
+            });
+
+            current += step;
+        }
+
+        return result;
+    }
+    
+   
+
     function isDecimalNumber(num) {
         return num % 1 !== 0;
     }
@@ -184,7 +222,7 @@ export default function NumberLineMapping({ question, meter }) {
 
          let mark = ""
         let ansLength = 0;
-    const numberLineArray = generateNumberLine(question?.start, question?.end, question?.interval)
+    const numberLineArray = generateNumberLine(question?.start, question?.end, question?.interval,question?.isFraction)
     numberLineArray.forEach(({ value, label }, index) => {
       mark = value;
       let displayVal = label;

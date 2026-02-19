@@ -193,8 +193,12 @@ export default function NumberLineKeying({ question, meter }) {
     }
 
 
+    function generateNumberLine(start, end, interval, isFraction) {
 
-    function generateNumberLine(start, end, interval) {
+
+        if (isFraction) {
+            return fracGenerateNumberLine(start, end, interval, isFraction);
+        }
         const decimals = getDecimalPlaces(Number(interval)); // ✅ ONLY interval
         const scale = Math.pow(10, decimals);
 
@@ -215,6 +219,40 @@ export default function NumberLineKeying({ question, meter }) {
 
         return result;
     }
+
+    function fracGenerateNumberLine(start, end, interval, isFraction) {
+        const result = [];
+
+        start = Number(start);
+        end = Number(end);
+        interval = Number(interval);
+
+        let step;
+
+        if (isFraction) {
+            step = 1 / interval;        // ✅ critical fix
+        } else {
+            step = interval;
+        }
+
+        let current = start;
+
+        while (current <= end + 0.000001) {
+            const rounded = Number(current.toFixed(6));
+
+            result.push({
+                value: rounded,
+                label: rounded.toString()
+            });
+
+            current += step;
+        }
+
+        return result;
+    }
+
+
+
     function isDecimalNumber(num) {
         return num % 1 !== 0;
     }
@@ -223,6 +261,7 @@ export default function NumberLineKeying({ question, meter }) {
         const str = num.toString();
         return str.includes(".") ? str.split(".")[1].length : 0;
     }
+
 
 
 
@@ -244,8 +283,9 @@ export default function NumberLineKeying({ question, meter }) {
         let mark = ""
         let ansLength = 0;
 
-        const numberLineArray = generateNumberLine(question?.start, question?.end, question?.interval)
+        const numberLineArray = generateNumberLine(question?.start, question?.end, question?.interval, question?.isFraction)
         numberLineArray.forEach(({ value, label }, index) => {
+
             mark = value;
             let displayVal = label;
 
@@ -721,38 +761,14 @@ export default function NumberLineKeying({ question, meter }) {
                                     ></div>
                                     {question.ansArray.includes(identity) ? (
                                         choiceType === "keying" ? (
-                                        <div className={styles.answerNum}>
-                                            <input
-                                                readOnly={hasAnswerSubmitted}
-                                                style={{
-                                                    width: `${startLength * 14}px`,
-                                                    display:
-                                                        mark == 0 && fracStart == 0 ? "none" : "block",
-                                                    minWidth: "25px",
-                                                    height: "30px",
-                                                    paddingTop: "5px",
-                                                    fontFamily: "GothamRnd-Book2",
-                                                    textAlign: "center",
-                                                    fontStyle: "normal",
-                                                    fontWeight: "700",
-                                                    fontSize: "18px",
-                                                }}
-                                                maxLength={startLength}
-                                                className={`answers  ansFracNums`}
-                                                id={"ansFracNum"}
-                                                type="text"
-                                            />
-                                            <div
-                                                className={styles.answerFrac}
-                                                style={{
-                                                    display: fracNum % fracInterval == 0 ? "none" : "",
-                                                }}
-                                            >
+                                            <div className={styles.answerNum}>
                                                 <input
                                                     readOnly={hasAnswerSubmitted}
                                                     style={{
-                                                        width: `${numLength * 14}px`,
-                                                        minWidth: "26px",
+                                                        width: `${startLength * 14}px`,
+                                                        display:
+                                                            mark == 0 && fracStart == 0 ? "none" : "block",
+                                                        minWidth: "25px",
                                                         height: "30px",
                                                         paddingTop: "5px",
                                                         fontFamily: "GothamRnd-Book2",
@@ -761,37 +777,61 @@ export default function NumberLineKeying({ question, meter }) {
                                                         fontWeight: "700",
                                                         fontSize: "18px",
                                                     }}
-                                                    maxLength={numLength}
-                                                    className={`answers ansFracStarts`}
-                                                    id={"ansFracStart"}
+                                                    maxLength={startLength}
+                                                    className={`answers  ansFracNums`}
+                                                    id={"ansFracNum"}
                                                     type="text"
                                                 />
-                                                <span
+                                                <div
+                                                    className={styles.answerFrac}
                                                     style={{
-                                                        border: "1px solid #858585",
-                                                        width: "-webkit-fill-available",
+                                                        display: fracNum % fracInterval == 0 ? "none" : "",
                                                     }}
-                                                ></span>
-                                                <input
-                                                    readOnly={hasAnswerSubmitted}
-                                                    style={{
-                                                        width: `${intLength * 14}px`,
-                                                        minWidth: "26px",
-                                                        height: "30px",
-                                                        paddingTop: "5px",
-                                                        fontFamily: "GothamRnd-Book2",
-                                                        textAlign: "center",
-                                                        fontStyle: "normal",
-                                                        fontWeight: "700",
-                                                        fontSize: "18px",
-                                                    }}
-                                                    maxLength={intLength}
-                                                    className={`answers ansFracInts`}
-                                                    id={"ansFracInt"}
-                                                    type="text"
-                                                />
+                                                >
+                                                    <input
+                                                        readOnly={hasAnswerSubmitted}
+                                                        style={{
+                                                            width: `${numLength * 14}px`,
+                                                            minWidth: "26px",
+                                                            height: "30px",
+                                                            paddingTop: "5px",
+                                                            fontFamily: "GothamRnd-Book2",
+                                                            textAlign: "center",
+                                                            fontStyle: "normal",
+                                                            fontWeight: "700",
+                                                            fontSize: "18px",
+                                                        }}
+                                                        maxLength={numLength}
+                                                        className={`answers ansFracStarts`}
+                                                        id={"ansFracStart"}
+                                                        type="text"
+                                                    />
+                                                    <span
+                                                        style={{
+                                                            border: "1px solid #858585",
+                                                            width: "-webkit-fill-available",
+                                                        }}
+                                                    ></span>
+                                                    <input
+                                                        readOnly={hasAnswerSubmitted}
+                                                        style={{
+                                                            width: `${intLength * 14}px`,
+                                                            minWidth: "26px",
+                                                            height: "30px",
+                                                            paddingTop: "5px",
+                                                            fontFamily: "GothamRnd-Book2",
+                                                            textAlign: "center",
+                                                            fontStyle: "normal",
+                                                            fontWeight: "700",
+                                                            fontSize: "18px",
+                                                        }}
+                                                        maxLength={intLength}
+                                                        className={`answers ansFracInts`}
+                                                        id={"ansFracInt"}
+                                                        type="text"
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
                                         ) : choiceType == "selectchoice" ? (
                                             <p className={styles.qMark}>{`?`}</p>
                                         ) : ""
@@ -890,15 +930,15 @@ export default function NumberLineKeying({ question, meter }) {
                                     data-option={index}
                                     id={idddd2}
                                     style={{
-                                         display: `${numsDisplayed ||
-                                             index == 0 ||
-                                             displayVal ==
-                                             (isDecimal
-                                                 ? Number(parseFloat(end).toFixed(1))
-                                                 : parseInt(end))
-                                             ? "block"
-                                             : "none"
-                                             }`,
+                                        display: `${numsDisplayed ||
+                                            index == 0 ||
+                                            displayVal ==
+                                            (isDecimal
+                                                ? Number(parseFloat(end).toFixed(1))
+                                                : parseInt(end))
+                                            ? "block"
+                                            : "none"
+                                            }`,
                                     }}
                                 >
                                     {displayVal}
@@ -1019,6 +1059,7 @@ export default function NumberLineKeying({ question, meter }) {
 
                         {choiceType == "selectchoice" && (
                             <SelectChoiceHorizontalFillUpsEquationType
+                                type="number_line_addition"
                                 inputRef={inputRef}
                                 content={question?.questionContent}
                                 isFraction={question.isFraction}

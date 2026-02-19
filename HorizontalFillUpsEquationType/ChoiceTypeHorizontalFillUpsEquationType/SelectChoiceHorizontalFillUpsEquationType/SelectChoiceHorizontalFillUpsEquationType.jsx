@@ -8,6 +8,7 @@ import { ValidationContext } from "../../../../MainOnlineQuiz/MainOnlineQuizPage
 import SelectChoiceCommon from "../../../CommonFiles/SelectChoiceCommon";
 
 export default function SelectChoiceHorizontalFillUpsEquationType({
+  type,
   choices,
   inputRef,
   answerHasSelected,
@@ -86,6 +87,7 @@ export default function SelectChoiceHorizontalFillUpsEquationType({
     
        <>
         <SelectChoiceCommon
+        type={type}
         choices={choicesState} 
         studentAnswer={studentAnswer} 
         handleChoiceSelection={handleChoiceSelection}

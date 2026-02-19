@@ -22,8 +22,12 @@ export default function SelectChoiceCommon(
 
 
 function extractLatexFromMathQuill(input) {
-  if (!input || typeof input !== "string") return "";
+ 
 
+  if(type  =="number_line_addition"){
+  }
+
+  if (!input || typeof input !== "string") return "";
   // 1. Parse HTML safely
   const container = document.createElement("div");
   container.innerHTML = input;
@@ -50,6 +54,23 @@ function extractLatexFromMathQuill(input) {
 }
 
 
+function normalizeMixed(value) {
+  if (!value) return "";
+
+  value = value.replace(/\$/g, "").trim();
+
+  const match = value.match(/(\d+)\s*\\frac\{(\d+)\}\{(\d+)\}/);
+
+  if (match) {
+    return `${match[1]} ${match[2]} ${match[3]}`;
+  }
+
+  return value.replace(/\s+/g, " ").trim();
+}
+
+
+
+
   return (
     <>
       <div className={styles.choices_wrapper}>
@@ -60,12 +81,30 @@ function extractLatexFromMathQuill(input) {
           let studentChoiceTrimmed = String(studentAnswerChoice).trim();
           let correctAnswerTrimmed = String(currectAnswer).trim();
           let studentAnswerTrimmed = String(studentAnswer).trim();
+          
           if(str.includes("mq-selectable")) {
            valueTrimmed = extractLatexFromMathQuill(String(item?.value).trim());
            studentChoiceTrimmed = extractLatexFromMathQuill(String(studentAnswerChoice).trim());
            correctAnswerTrimmed = extractLatexFromMathQuill(String(currectAnswer).trim());
            studentAnswerTrimmed = extractLatexFromMathQuill(String(studentAnswer).trim());
-              }
+            }
+
+          if (type === "number_line_addition") {
+
+            valueTrimmed = normalizeMixed(valueTrimmed);
+            studentChoiceTrimmed = normalizeMixed(studentChoiceTrimmed);
+            studentAnswerTrimmed = normalizeMixed(studentAnswerTrimmed);
+
+            if (Array.isArray(currectAnswer)) {
+              correctAnswerTrimmed = currectAnswer.map(normalizeMixed);
+            } else {
+              correctAnswerTrimmed = normalizeMixed(currectAnswer);
+            }
+
+          } else {
+            correctAnswerTrimmed = extractLatexFromMathQuill(String(currectAnswer).trim());
+          }
+              console.log(studentChoiceTrimmed,'studentChoiceTrimmed' ,correctAnswerTrimmed, studentAnswerTrimmed, "trimmed values");
           const isSelectedTrue = isStudentAnswerResponse && correctAnswerTrimmed == valueTrimmed;
           const isSelected = isStudentAnswerResponse && correctAnswerTrimmed == studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
           const isSelectedFalse = isStudentAnswerResponse && correctAnswerTrimmed !== studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
