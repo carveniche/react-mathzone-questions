@@ -29,6 +29,13 @@ function SelectChoiceOptionMultiplePicture({
     let rows = [];
     for (let i = 0; i < Number(totalRows); i++) {
       choices[i]?.map((item, j) => {
+
+        if (item?.value.includes("<span>") && item?.value.includes("</span>")) {
+          item.value = item.value
+            .replace(/<span[^>]*>/g, "")   // remove opening span
+            .replace(/<\/span>/g, "");     // remove closing span
+        }
+
         item.row == i + 1 &&
           item.col == j + 1 &&
           rows.push({ ...item, show: false });
@@ -59,13 +66,13 @@ function SelectChoiceOptionMultiplePicture({
 
   return (
     <>
-     
-        <SelectChoiceCommon
-          type={"htmlparse"}
-          choices={rows}
-          studentAnswer={studentAnswer}
-          handleChoiceSelection={handleChoiceSelection}
-        />
+
+      <SelectChoiceCommon
+        type={"htmlparse"}
+        choices={rows}
+        studentAnswer={studentAnswer}
+        handleChoiceSelection={handleChoiceSelection}
+      />
 
     </>
   );
