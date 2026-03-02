@@ -32,6 +32,7 @@ function OptMultPicChoiceSelectEqn({
         if (text.includes("img") && text.includes("src")) {
           flag = true;
         }
+       
         if (item.selected === "true" || item.selected === true) {
           temVal.push(item.value)
           setCurrectAnswer(temVal);
@@ -57,6 +58,7 @@ function OptMultPicChoiceSelectEqn({
       prevRef.current = i;
       setRows([...rows]);
       const selectedValues = rows.filter((item) => item.show).map((item) => item.value);
+      console.log(selectedValues,"selectedValues")
       setStudentAnswerChoice(selectedValues)
      
     }

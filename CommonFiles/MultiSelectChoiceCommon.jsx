@@ -49,7 +49,6 @@ function extractLatexFromMathQuill(input) {
   return result;
 }
 
-
   return (
     <>
       <div className={styles.choices_wrapper}>
@@ -66,24 +65,21 @@ function extractLatexFromMathQuill(input) {
            correctAnswerTrimmed = extractLatexFromMathQuill(String(currectAnswer).trim());
            studentAnswerTrimmed = extractLatexFromMathQuill(String(studentAnswer).trim());
               }
-          const isSelectedTrue = isStudentAnswerResponse && correctAnswerTrimmed == valueTrimmed;
           const isSelected = isStudentAnswerResponse && correctAnswerTrimmed == studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
           const isSelectedFalse = isStudentAnswerResponse && correctAnswerTrimmed !== studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
           const isVisible = item?.show;
           const isAnswerSubmitted = hasAnswerSubmitted;
           const isCurrentStudentAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed == studentChoiceTrimmed;
           const isThisCorrectAnswer = isAnswerSubmitted && correctAnswerTrimmed == valueTrimmed;
-          const isThisIncorrectAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed !== studentChoiceTrimmed;
+          const isThisIncorrectAnswer = item?.selected !== "true" && isAnswerSubmitted && isVisible && correctAnswerTrimmed !== studentChoiceTrimmed;
+          const correctOption = (isAnswerSubmitted && item?.selected == "true")
           const classList = new Set([
             styles.choiceType,
-            isSelectedFalse && styles.red,
-            (isSelected || isSelectedTrue) && styles.green,
+            (isSelectedFalse || isThisIncorrectAnswer) && styles.red,
+            (isSelected  || correctOption) && styles.green,
             isVisible ? styles.selectedChoiceType : styles.prevSelectionAnswerSelection,
-            isCurrentStudentAnswer && styles.green,
-            isThisIncorrectAnswer && styles.red,
-            isThisCorrectAnswer && styles.green,
+            (isCurrentStudentAnswer || isThisCorrectAnswer) && styles.green,
             (isAnswerSubmitted || isStudentAnswerResponse) && styles.notHoverClass
-
           ]);
 
           const className = Array.from(classList).filter(Boolean).join(' ');
