@@ -66,10 +66,11 @@ function extractLatexFromMathQuill(input) {
            correctAnswerTrimmed = extractLatexFromMathQuill(String(currectAnswer).trim());
            studentAnswerTrimmed = extractLatexFromMathQuill(String(studentAnswer).trim());
               }
+
           const isSelectedTrue = isStudentAnswerResponse && correctAnswerTrimmed == valueTrimmed;
           const isSelected = isStudentAnswerResponse && correctAnswerTrimmed == studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
           const isSelectedFalse = isStudentAnswerResponse && correctAnswerTrimmed !== studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
-          const isVisible = item?.show;
+          const isVisible = !isStudentAnswerResponse && item?.show;
           const isAnswerSubmitted = hasAnswerSubmitted;
           const isCurrentStudentAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed == studentChoiceTrimmed;
           const isThisCorrectAnswer = isAnswerSubmitted && correctAnswerTrimmed == valueTrimmed;
