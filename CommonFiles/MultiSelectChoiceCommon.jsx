@@ -1,122 +1,158 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { optionSelectStaticMathField } from '../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode'
+import React, { useContext } from 'react';
 import parse from "html-react-parser";
-import styled from "styled-components";
 import styles from "../CommonFiles/ModuleStyles/choices.module.css";
 import { ValidationContext } from '../../MainOnlineQuiz/MainOnlineQuizPage';
 import HtmlParser from 'react-html-parser';
-export default function MultiSelectChoiceCommon(
+import { optionSelectStaticMathField } from '../HorizontalFillUpsEquationType/replaceDomeNode/ReplaceDomNode';
 
-  { type,
-    choices,
-    studentAnswer,
-    handleChoiceSelection }) {
+export default function MultiSelectChoiceCommon({
+  type,
+  choices,
+  studentAnswer,
+  handleChoiceSelection
+}) {
 
   const {
     hasAnswerSubmitted,
     studentAnswerChoice,
     isStudentAnswerResponse,
     currectAnswer,
-    questionObj,
-  } = useContext(ValidationContext)
+  } = useContext(ValidationContext);
 
 
-function extractLatexFromMathQuill(input) {
-  if (!input || typeof input !== "string") return "";
+  function extractLatexFromMathQuill(input) {
+    if (!input || typeof input !== "string") return "";
 
-  // 1. Parse HTML safely
-  const container = document.createElement("div");
-  container.innerHTML = input;
+    const container = document.createElement("div");
+    container.innerHTML = input;
 
-  // 2. Replace MathQuill spans with their LaTeX
-  container.querySelectorAll(".mq-selectable").forEach(el => {
-    const latexMatch = el.textContent.match(/\$(.*?)\$/);
-    const latex = latexMatch ? latexMatch[1] : "";
-    el.replaceWith(latex);
-  });
+    container.querySelectorAll(".mq-selectable").forEach(el => {
+      const latexMatch = el.textContent.match(/\$(.*?)\$/);
+      const latex = latexMatch ? latexMatch[1] : "";
+      el.replaceWith(latex);
+    });
 
-  // 3. Get plain text (math + text combined)
-  let result = container.textContent || "";
+    let result = container.textContent || "";
 
-  // 4. Normalize
-  result = result
-    .replace(/\u00A0/g, " ")      // non-breaking spaces
-    .replace(/\s+/g, " ")         // normalize spaces
-    .replace(/×/g, "*")           // normalize multiply
-    .replace(/\\{2,}/g, "\\")     // fix escaped slashes
-    .trim();
+    result = result
+      .replace(/\u00A0/g, " ")
+      .replace(/\s+/g, " ")
+      .replace(/×/g, "*")
+      .replace(/\\{2,}/g, "\\")
+      .trim();
 
-  return result;
-}
+    return result;
+  }
 
   return (
-    <>
-      <div className={styles.choices_wrapper}>
-        {choices?.map((item, i) => {
-          const str=JSON.stringify(item)
-            // Handle MathQuill elements
-          let valueTrimmed = String(item?.value).trim();
-          let studentChoiceTrimmed = String(studentAnswerChoice).trim();
-          let correctAnswerTrimmed = String(currectAnswer).trim();
-          let studentAnswerTrimmed = String(studentAnswer).trim();
-          if(str.includes("mq-selectable")) {
-           valueTrimmed = extractLatexFromMathQuill(String(item?.value).trim());
-           studentChoiceTrimmed = extractLatexFromMathQuill(String(studentAnswerChoice).trim());
-           correctAnswerTrimmed = extractLatexFromMathQuill(String(currectAnswer).trim());
-           studentAnswerTrimmed = extractLatexFromMathQuill(String(studentAnswer).trim());
-              }
-          const isSelected = isStudentAnswerResponse && correctAnswerTrimmed == studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
-          const isSelectedFalse = isStudentAnswerResponse && correctAnswerTrimmed !== studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
-          const isVisible = item?.show;
-          const isAnswerSubmitted = hasAnswerSubmitted;
-          const isCurrentStudentAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed == studentChoiceTrimmed;
-          const isThisCorrectAnswer = isAnswerSubmitted && correctAnswerTrimmed == valueTrimmed;
-          const isThisIncorrectAnswer = item?.selected !== "true" && isAnswerSubmitted && isVisible && correctAnswerTrimmed !== studentChoiceTrimmed;
-          const correctOption = (isAnswerSubmitted && item?.selected == "true")
-          const classList = new Set([
-            styles.choiceType,
-            (isSelectedFalse || isThisIncorrectAnswer) && styles.red,
-            (isSelected  || correctOption) && styles.green,
-            isVisible ? styles.selectedChoiceType : styles.prevSelectionAnswerSelection,
-            (isCurrentStudentAnswer || isThisCorrectAnswer) && styles.green,
-            (isAnswerSubmitted || isStudentAnswerResponse) && styles.notHoverClass
-          ]);
+    <div className={styles.choices_wrapper}>
+      {choices?.map((item, i) => {
 
-          const className = Array.from(classList).filter(Boolean).join(' ');
+        const str = JSON.stringify(item);
 
-          return (
+        let valueTrimmed = item?.value;
+        let studentChoiceTrimmed = studentAnswerChoice;
+        let correctAnswerTrimmed = currectAnswer;
+        let studentAnswerTrimmed = studentAnswer;
 
-            <div
-              className={className}
-              key={i}
-              onClick={() => handleChoiceSelection(i)}
-            >
-              <div className={styles.choiceTypeInner}>
-                <div className={` ${styles.circle}`}>
-                  {" "}
-                  <b>{String.fromCharCode(65 + i)}</b>
-                </div>
-                <div key={i} className={styles.choice_text}>
-                  {
-                    type === "htmlparse"
-                      ? HtmlParser(item?.value)
-                      : type === "number"
-                        ? (Number(item?.value) || "?")
-                        : parse(item?.value, optionSelectStaticMathField)
-                  }
+        if (str.includes("mq-selectable")) {
 
-                </div>
+          valueTrimmed = extractLatexFromMathQuill(
+            String(item?.value).trim()
+          );
 
+          studentChoiceTrimmed = extractLatexFromMathQuill(
+            String(studentAnswerChoice).trim()
+          );
+
+          // ✅ Preserve array structure
+          if (Array.isArray(currectAnswer)) {
+            correctAnswerTrimmed = currectAnswer.map(val =>
+              extractLatexFromMathQuill(String(val).trim())
+            );
+          } else {
+            correctAnswerTrimmed = extractLatexFromMathQuill(
+              String(currectAnswer).trim()
+            );
+          }
+
+          if (Array.isArray(studentAnswer)) {
+            studentAnswerTrimmed = studentAnswer.map(val =>
+              extractLatexFromMathQuill(String(val).trim())
+            );
+          } else {
+            studentAnswerTrimmed = extractLatexFromMathQuill(
+              String(studentAnswer).trim()
+            );
+          }
+        }
+        // ✅ SAFE ARRAY CONVERSION (Minimal Fix)
+        const correctArray = Array.isArray(correctAnswerTrimmed)
+          ? correctAnswerTrimmed
+          : [correctAnswerTrimmed];
+
+        const studentArray = Array.isArray(studentAnswerTrimmed)
+          ? studentAnswerTrimmed
+          : [studentAnswerTrimmed];
+
+        const isSelectedFalse =
+          isStudentAnswerResponse &&
+          !correctArray.includes(valueTrimmed) &&
+          studentArray.includes(valueTrimmed);
+
+        const isVisible = !isStudentAnswerResponse && item?.show;
+        const isAnswerSubmitted = hasAnswerSubmitted;
+
+        const isThisIncorrectAnswer =
+          item?.selected !== "true" &&
+          isAnswerSubmitted &&
+          isVisible &&
+          !correctArray.includes(studentChoiceTrimmed);
+
+        const correctOption =
+          (isAnswerSubmitted || isStudentAnswerResponse) &&
+          item?.selected == "true";
+
+        const classList = new Set([
+          styles.choiceType,
+          (isSelectedFalse || isThisIncorrectAnswer) && styles.red,
+          correctOption && styles.green,
+          isVisible
+            ? styles.selectedChoiceType
+            : styles.prevSelectionAnswerSelection,
+          (isAnswerSubmitted || isStudentAnswerResponse) &&
+            styles.notHoverClass
+        ]);
+
+        const className = Array.from(classList)
+          .filter(Boolean)
+          .join(' ');
+
+        return (
+          <div
+            className={className}
+            key={i}
+            onClick={() => handleChoiceSelection(i)}
+          >
+            <div className={styles.choiceTypeInner}>
+              <div className={styles.circle}>
+                <b>{String.fromCharCode(65 + i)}</b>
+              </div>
+
+              <div className={styles.choice_text}>
+                {
+                  type === "htmlparse"
+                    ? HtmlParser(item?.value)
+                    : type === "number"
+                      ? (Number(item?.value) || "?")
+                      : parse(item?.value, optionSelectStaticMathField)
+                }
               </div>
 
             </div>
-
-          )
-        })}
-      </div>
-
-    </>
-  )
+          </div>
+        );
+      })}
+    </div>
+  );
 }
-
-
