@@ -1,17 +1,64 @@
 export default function jsonDataTesting() {
 
     let t = {
-    "question_data": [
-        {
-            "question_id": 152652,
-            "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"place_value_table_select\",\"rows\":\"1\",\"cols\":\"3\",\"questionName\":\"Complete the table.\",\"questionContent\":[[{\"row\":0,\"col\":0,\"value\":\"152\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":0,\"col\":1,\"value\":\"8\",\"isMissed\":\"false\",\"studentAnswer\":\"\"},{\"row\":0,\"col\":2,\"value\":\"38\",\"isMissed\":\"true\",\"studentAnswer\":\"38\"}]],\"questiontbHead\":[{\"row\":0,\"value\":\"Area of triangle (m)\"},{\"row\":1,\"value\":\"Base (m)\"},{\"row\":2,\"value\":\"Height (m)\"}],\"solution\":{\"model\":[{\"val\":\"Area of triangle = <span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}\\\\times b\\\\times h=152$</span> \"},{\"val\":\"<span class=\\\"mq-selectable\\\">$h=\\\\frac{152\\\\times2}{8}=38$</span> \"},{\"val\":\"h = 38 m\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"choices\":[],\"choiceType\":\"keying\",\"pvts_text_head\":\"\",\"upload_file_name\":\"\"}"
-,          question_type: "place_value_table_select",
-        }
-    ],
-   
-   
-}
+        "status": true,
+        "question_no": 1,
+        "total": 10,
+        "question_data": [
+            {
+                "question_id": 97543,
+                "operation": "addition",
+                "question_text": JSON.stringify({
+                    "operation": "addition",
+                    "type": "number_line_addition",
+                    "choiceType": "keying",
+                    "questionName": "Write the value of the decimal on the number line.",
+                    "start": "8",
+                    "end": "10",
+                    "interval": "0.2",
+                    "solution": {
+                        "model": [
+                            {
+                                "val": "The number has been divided into 10 parts between 8 and 10."
+                            },
+                            {
+                                "val": "Each part represents 0.2."
+                            },
+                            {
+                                "val": "So, the second division is 8.4, and the eighth division is 9.6."
+                            }
+                        ],
+                        "sidebyside": []
+                    },
+                    "numbersDisplayed": false,
+                    "isFraction": false,
+                    "ansArray": [
+                        9.6,
+                        8.4
+                    ],
+                    "upload_file_name": "",
+                    "student_answer": [
+                        45,
+                        41
+                    ]
+                }),
+                "question_type": "number_line_addition",
+                "upload_file_name": "",
+                "level": "level1",
+                "fib_text": null,
+                "fib_before_text": null,
+                "after_question_text": null,
+                "choice_data": [],
+                "orc_oprc_data": [],
+                "ol_data": []
+            }
+        ],
+        "lice_class_id": 4,
+        "tag_id": 1458,
+        "level": "level1",
+        "live_class_practice_id": null,
+        "message": "Quiz started successfully"
+    }
     return t;
 
 
