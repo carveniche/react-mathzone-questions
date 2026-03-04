@@ -5,6 +5,7 @@ import { optionSelectStaticMathField } from "../HorizontalFillUpsEquationType/re
 import parse from "html-react-parser";
 import { ValidationContext } from "../../MainOnlineQuiz/MainOnlineQuizPage";
 import MultiSelectChoiceCommon from "../CommonFiles/MultiSelectChoiceCommon";
+import SelectChoiceCommon from "../CommonFiles/SelectChoiceCommon";
 
 function OptMultPicChoiceSelectEqn({
   multipicselect,
@@ -17,11 +18,11 @@ function OptMultPicChoiceSelectEqn({
   const [flag, setFlag] = useState();
   let prevRef = useRef(0);
   const [rows, setRows] = useState([]);
-  const { isStudentAnswerResponse,setCurrectAnswer,setStudentAnswerChoice } = useContext(ValidationContext);
+  const { isStudentAnswerResponse, setCurrectAnswer, setStudentAnswerChoice } = useContext(ValidationContext);
   useEffect(() => {
     let flag = false;
     let rows = [];
-   let temVal = []
+    let temVal = []
 
     for (let i = 0; i < Number(totalRows); i++) {
       choices[i]?.map((item, j) => {
@@ -32,6 +33,7 @@ function OptMultPicChoiceSelectEqn({
         if (text.includes("img") && text.includes("src")) {
           flag = true;
         }
+
         if (item.selected === "true" || item.selected === true) {
           temVal.push(item.value)
           setCurrectAnswer(temVal);
@@ -58,21 +60,30 @@ function OptMultPicChoiceSelectEqn({
       setRows([...rows]);
       const selectedValues = rows.filter((item) => item.show).map((item) => item.value);
       setStudentAnswerChoice(selectedValues)
-     
+
     }
   };
 
- 
   inputRef.current = rows;
   return (
     <div className="mathzone-color-indigo">
       <>
 
-        <MultiSelectChoiceCommon
-                choices={rows} 
-                studentAnswer={studentAnswer} 
-                handleChoiceSelection={handleChoiceSelection}
-                />
+        {
+          !multipicselect ?
+
+            <SelectChoiceCommon
+              choices={rows}
+              studentAnswer={studentAnswer}
+              handleChoiceSelection={handleChoiceSelection}
+            />
+            :
+            <MultiSelectChoiceCommon
+              choices={rows}
+              studentAnswer={studentAnswer}
+              handleChoiceSelection={handleChoiceSelection}
+            />
+        }
 
 
       </>

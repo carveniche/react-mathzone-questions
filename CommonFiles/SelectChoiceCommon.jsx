@@ -90,7 +90,6 @@ function normalizeMixed(value) {
             }
 
           if (type === "number_line_addition") {
-
             valueTrimmed = normalizeMixed(valueTrimmed);
             studentChoiceTrimmed = normalizeMixed(studentChoiceTrimmed);
             studentAnswerTrimmed = normalizeMixed(studentAnswerTrimmed);
@@ -101,14 +100,11 @@ function normalizeMixed(value) {
               correctAnswerTrimmed = normalizeMixed(currectAnswer);
             }
 
-          } else {
-            correctAnswerTrimmed = extractLatexFromMathQuill(String(currectAnswer).trim());
           }
-              console.log(studentChoiceTrimmed,'studentChoiceTrimmed' ,correctAnswerTrimmed, studentAnswerTrimmed, "trimmed values");
           const isSelectedTrue = isStudentAnswerResponse && correctAnswerTrimmed == valueTrimmed;
           const isSelected = isStudentAnswerResponse && correctAnswerTrimmed == studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
           const isSelectedFalse = isStudentAnswerResponse && correctAnswerTrimmed !== studentAnswerTrimmed && valueTrimmed == studentAnswerTrimmed;
-          const isVisible = item?.show;
+          const isVisible = !isStudentAnswerResponse && item?.show;
           const isAnswerSubmitted = hasAnswerSubmitted;
           const isCurrentStudentAnswer = isAnswerSubmitted && isVisible && correctAnswerTrimmed == studentChoiceTrimmed;
           const isThisCorrectAnswer = isAnswerSubmitted && correctAnswerTrimmed == valueTrimmed;

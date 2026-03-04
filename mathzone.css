@@ -1405,3 +1405,14 @@ td.ldivision_left {
   -o-transform: rotate(-20deg);
   transform: rotate(-20deg);
 } 
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
