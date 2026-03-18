@@ -28,6 +28,8 @@ import { ValidationContext } from '../../MainOnlineQuiz/MainOnlineQuizPage';
 import MainLongDivision from '../LongDivision/MainLongDivision';
 import MainMultipleOptionSelect from '../MultipleOptionSelect/MainMultipleOptionSelect';
 import UnsupportedQuestionType from '../../UnsupportedQuestionType/UnsupportedQuestionType';
+import MainShortDivision from '../ShortDivision/MainShortDivision';
+import NumberLineAddition from '../NumberLineAddition/NumberLineAddition';
 
 
 
@@ -112,6 +114,12 @@ export default function CommonStudentResponse({ data, type }) {
         multipicselect={true}
       />
     ),
+    short_division: (
+      <MainShortDivision obj={data} meter={0} />
+    ),
+    number_line_addition: (
+      <NumberLineAddition obj={data} meter={0} />
+    )
   };
 
   const SelectedComponent = questionType[type];
