@@ -44,7 +44,7 @@ export default function ShortDivisionKeyingChoiceType({
   inputRef.current = row;
   let defaultBorderRef = useRef(3);
   return (
-    <div style={{ width: "fit-content" }}>
+    <div style={{ width: "fit-content", paddingBottom:"25px" }}>
       <table
         style={{ borderCollapse: "collapse",position:"relative" }}
         className={`${styles.longDivisonTable} ${styles.longDivisonkeyingTable}`}
@@ -221,7 +221,7 @@ const InlineCss = {
     height: "34px",
     textAlign: "center",
     width: "34px",
-    position:"relative",
+    // position:"relative",
     zIndex:"1",
     display:'flex',
     justifyContent:'center',
@@ -233,7 +233,7 @@ const InlineCss = {
     height: "18px",
     textAlign: "center",
     width: "18px",
-    position:"relative",
+    // position:"relative",
     zIndex:"1",
     fontSize:'15px'
   },
