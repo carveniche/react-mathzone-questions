@@ -1,6 +1,6 @@
 export default function jsonDataTesting() {
 
-    let t ={
+    let t = {
     "status": true,
     "question_no": 1,
     "total": 10,
@@ -8,8 +8,8 @@ export default function jsonDataTesting() {
         {
             "question_id": 97543,
             "operation": "addition",
-            "question_text": "{\"operation\":\"addition\",\"type\":\"options_multiple_pictures\",\"questionName\":\"A ladder is leaning against a wall at an angle of 30° with the ground. The foot of the ladder is 9 m from the wall. Find the length of ladder.\",\"row\":1,\"col\":4,\"questionContent\":[[{\"row\":1,\"col\":1,\"value\":\"<span class=\\\"mq-selectable\\\">$24$</span> m\",\"selected\":\"true\"},{\"row\":1,\"col\":2,\"value\":\"<span class=\\\"mq-selectable\\\">$12\\\\sqrt{2}$</span> m\",\"selected\":\"false\"},{\"row\":1,\"col\":3,\"value\":\"<span class=\\\"mq-selectable\\\">$6$</span> m\",\"selected\":\"false\"},{\"row\":1,\"col\":4,\"value\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{12}{\\\\sqrt{2}}$</span> m\",\"selected\":\"false\"}]],\"solution\":{\"model\":[{\"val\":\"Let the triangle formed here be RPQ, right angled at Q\"},{\"val\":\"Here, we need to find the length of ladder, that is RP.\"},{\"val\":\"<span class=\\\"mq-selectable\\\">$\\\\text{sin P}=\\\\frac{\\\\text{side opposite to P}}{\\\\text{hypotenuse}}=\\\\frac{\\\\text{RQ}}{\\\\text{RP}}$</span> \"},{\"val\":\"<span class=\\\"mq-selectable\\\">$\\\\text{sin 30°}=\\\\frac{12}{\\\\text{RP}}$</span> \"},{\"val\":\"<span class=\\\"mq-selectable\\\">$\\\\frac{1}{2}=\\\\frac{12}{\\\\text{RP}}$</span> \"},{\"val\":\"<span class=\\\"mq-selectable\\\">$\\\\text{RP}=24$</span> \"},{\"val\":\"Therefore, the length of ladder is <span class=\\\"mq-selectable\\\">$24$</span> m.\"}],\"sidebyside\":[],\"srows\":null,\"scols\":null},\"answer\":\"true\",\"readOutMathZoneText\":false,\"indianAccent\":false}",
-            "question_type": "options_multiple_pictures",
+            "question_text": "{\"operation\":\"addition\",\"type\":\"number_line_addition\",\"choiceType\":\"mapping\",\"questionName\":\"If you skip count by 100000 starting from 0, what is the 5th number?\",\"start\":\"0\",\"end\":\"600000\",\"interval\":\"100000\",\"solution\":{\"model\":[{\"val\":\"Start from 0, and add 100000 step by step:\"},{\"val\":\"0 + 100,000 = 100,000 → 1st number\"},{\"val\":\"100000 + 100000 = 200000 → 2nd number\"},{\"val\":\"200000 + 100000 = 300000 → 3rd number\"},{\"val\":\"300000 + 100000 = 400000 → 4th number\"},{\"val\":\"400000 + 100000 = 500000 → 5th number\"},{\"val\":\"So, the 5th number is 500000.\"}],\"sidebyside\":[]},\"numbersDisplayed\":false,\"isFraction\":false,\"ansArray\":[500000],\"choices\":[500000,\"600000\",\"400000\",\"100000\"],\"readOutMathZoneText\":false,\"indianAccent\":false}",
+            "question_type": "number_line_addition",
             "upload_file_name": "",
             "level": "level1",
             "fib_text": null,
