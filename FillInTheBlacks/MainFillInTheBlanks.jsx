@@ -6,7 +6,7 @@ export default function MainFillInTheBlanks({ obj, meter, choiceId }) {
   question_data = question_data[0] || {};
   // studentAnswer = question_data?.studentAnswer;
 
-  let studentAnswer =  question_data?.studentAnswer || question_data?.student_answer ;
+  let studentAnswer =  (question_data?.studentAnswer || question_data?.student_answer) ?? "" ;
 
   // --- Safe parse logic ---
   if (typeof studentAnswer === "string") {
