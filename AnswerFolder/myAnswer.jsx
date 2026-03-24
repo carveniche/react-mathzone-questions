@@ -33,10 +33,13 @@ export default function MyAnswer({
 
   try {
     let studentResponce;
-    if (studentResponseData?.question_data?.[0]?.student_response === null) {
+    const resp =
+      studentResponseData?.question_data?.[0]?.student_response;
+
+    if (resp === null || resp === undefined || resp === "") {
       studentResponce = studentResponseData?.question_data?.[0]?.question_text
     } else {
-      studentResponce = studentResponseData?.question_data?.[0]?.student_response
+      studentResponce = resp
     }
     const sRes = studentResponce
 
