@@ -30,7 +30,7 @@ export default function MyAnswer({
   let specailOldTypeQuestion = oldQuestionWithNoHtmlQuestion();
   var temp = {};
   let hasError = false;
-
+  const isOldTypeQuestion = specailOldTypeQuestion.includes(type);
   try {
     let studentResponce;
     const resp =
@@ -55,11 +55,10 @@ export default function MyAnswer({
     hasError = true;
     temp = studentResponseData;
   }
-
-  if (hasError) {
+  if (hasError && !isOldTypeQuestion) {
     return (
 
-      <UnsupportedQuestionType type={type} isFrom={"ResultReview"} />
+      <UnsupportedQuestionType type={type} isFrom={"ResultReview"} obj={obj} />
     )
   }
 
