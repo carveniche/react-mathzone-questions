@@ -58,7 +58,7 @@ export default function MyAnswer({
   if (hasError && !isOldTypeQuestion) {
     return (
 
-      <UnsupportedQuestionType type={type} isFrom={"ResultReview"} obj={obj} />
+      <UnsupportedQuestionType type={type} isFrom={"ResultReview"} obj={studentResponseData} />
     )
   }
 
