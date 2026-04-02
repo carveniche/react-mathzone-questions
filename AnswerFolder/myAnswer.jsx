@@ -31,31 +31,39 @@ export default function MyAnswer({
   var temp = {};
   let hasError = false;
   const isOldTypeQuestion = specailOldTypeQuestion.includes(type);
-  try {
-    let studentResponce;
-    const resp =
-      studentResponseData?.question_data?.[0]?.student_response;
 
-    if (resp === null || resp === undefined || resp === "") {
-      studentResponce = studentResponseData?.question_data?.[0]?.question_text
-    } else {
-      studentResponce = resp
+  if (isOldTypeQuestion) {
+    temp = studentResponseData
+  } else {
+    try {
+      let studentResponce;
+
+      const resp =
+        studentResponseData?.question_data?.[0]?.student_response;
+
+      if (resp === null || resp === undefined || resp === "") {
+        studentResponce = studentResponseData?.question_data?.[0]?.question_text
+      } else {
+        studentResponce = resp
+      }
+      const sRes = studentResponce
+
+      const parsedRes = sRes ? JSON.parse(sRes) : {};
+
+      temp = {
+        ...parsedRes,
+        upload_file_name:
+          studentResponseData?.question_data?.[0]?.upload_file_name,
+      };
+
+    } catch (e) {
+      hasError = true;
+      temp = studentResponseData;
     }
-    const sRes = studentResponce
-
-    const parsedRes = sRes ? JSON.parse(sRes) : {};
-
-    temp = {
-      ...parsedRes,
-      upload_file_name:
-        studentResponseData?.question_data?.[0]?.upload_file_name,
-    };
-
-  } catch (e) {
-    hasError = true;
-    temp = studentResponseData;
   }
-  if (hasError && !isOldTypeQuestion) {
+
+
+  if (hasError) {
     return (
 
       <UnsupportedQuestionType type={type} isFrom={"ResultReview"} obj={studentResponseData} />
