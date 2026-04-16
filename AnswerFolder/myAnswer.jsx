@@ -28,32 +28,41 @@ export default function MyAnswer({
   pageFrom,
 }) {
   let specailOldTypeQuestion = oldQuestionWithNoHtmlQuestion();
-  var temp = {};
+  
+  let temp = {};
   let hasError = false;
   const isOldTypeQuestion = specailOldTypeQuestion.includes(type);
 
   if (isOldTypeQuestion) {
-    temp = studentResponseData
+    temp = studentResponseData;
   } else {
     try {
-      let studentResponce;
+      const question = studentResponseData?.question_data?.[0];
 
-      const resp =
-        studentResponseData?.question_data?.[0]?.student_response;
+      const resp = question?.student_response;
 
-      if (resp === null || resp === undefined || resp === "") {
-        studentResponce = studentResponseData?.question_data?.[0]?.question_text
-      } else {
-        studentResponce = resp
+      let parsedResp = {};
+      let hasContent = false;
+
+      if (resp && typeof resp === "string") {
+        try {
+          parsedResp = JSON.parse(resp);
+          hasContent = Object.keys(parsedResp).length > 0;
+        } catch {
+          parsedResp = {};
+          hasContent = false;
+        }
       }
-      const sRes = studentResponce
 
-      const parsedRes = sRes ? JSON.parse(sRes) : {};
+      const finalResponse = hasContent
+        ? parsedResp
+        : question?.question_text
+          ? JSON.parse(question.question_text || "{}")
+          : {};
 
       temp = {
-        ...parsedRes,
-        upload_file_name:
-          studentResponseData?.question_data?.[0]?.upload_file_name,
+        ...finalResponse,
+        upload_file_name: question?.upload_file_name,
       };
 
     } catch (e) {
@@ -82,8 +91,10 @@ export default function MyAnswer({
 const StudentResponce = ({ type, obj, temp }) => {
   const { handleUpdateStudentAnswerResponse } = useContext(ValidationContext)
   useEffect(() => {
-    handleUpdateStudentAnswerResponse(true)
-  }, [])
+    if (typeof handleUpdateStudentAnswerResponse === "function") {
+      handleUpdateStudentAnswerResponse(true);
+    }
+  }, [handleUpdateStudentAnswerResponse]);
   return (
     <>
       < AllFile

@@ -85,6 +85,8 @@ export default function ContentHorizontalFillUpsEquationType({
     setDragState([...dragState]);
   };
   inputRef.current = [...dropState];
+
+
   return (
     <>
       {dropState?.map((items, index) => (
@@ -93,17 +95,17 @@ export default function ContentHorizontalFillUpsEquationType({
           key={index}
           style={{ marginBottom: "1rem" }}
         >
-          {items?.map((item, i) =>
-            item.isMissed !== "true" ? (
+          {items?.map((item, i) => {
+            return item.isMissed !== "true" ? (
               <div
                 className="fontColor"
                 style={{ fontSize: 16, fontWeight: "bold", gap: "1rem" }}
                 ref={(el) =>
-                  (droppableContainerRef.current[index][i] = {
-                    el,
-                    isMissed: item.isMissed === "true",
-                    show: item?.show,
-                  })
+                (droppableContainerRef.current[index][i] = {
+                  el,
+                  isMissed: item.isMissed === "true",
+                  show: item?.show,
+                })
                 }
                 key={i}
               >
@@ -116,17 +118,16 @@ export default function ContentHorizontalFillUpsEquationType({
                 value={item.value}
                 key={i}
                 style={{
-                  border: `${
-                    item.show || isStudentAnswerResponse ? 0 : 1
-                  }px dashed black`,
+                  border: `${item.show || isStudentAnswerResponse ? 0 : 1
+                    }px dashed black`,
                   minHeight: "60px",
                 }}
                 ref={(el) =>
-                  (droppableContainerRef.current[index][i] = {
-                    el,
-                    isMissed: item.isMissed === "true",
-                    show: item?.show,
-                  })
+                (droppableContainerRef.current[index][i] = {
+                  el,
+                  isMissed: item.isMissed === "true",
+                  show: item?.show,
+                })
                 }
               >
                 {(item?.show || isStudentAnswerResponse) && (
@@ -138,17 +139,16 @@ export default function ContentHorizontalFillUpsEquationType({
                   >
                     <div
                       style={{
-                        backgroundColor: `${
-                          item?.show || isStudentAnswerResponse
+                        backgroundColor: `${item?.show || isStudentAnswerResponse
                             ? "indigo"
                             : "initial"
-                        }`,
+                          }`,
                       }}
                     >
                       {parse(
                         isStudentAnswerResponse
-                          ? item[student_answer]
-                          : item?.dropVal,
+                          ? item[student_answer] || ""
+                          : item?.dropVal || "",
                         optionSelectStaticMathField
                       )}
                     </div>
@@ -156,6 +156,7 @@ export default function ContentHorizontalFillUpsEquationType({
                 )}
               </div>
             )
+          }
           )}
         </div>
       ))}
